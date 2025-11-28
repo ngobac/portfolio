@@ -1,0 +1,2563 @@
+ 
+
+<!DOCTYPE html>
+
+<html lang="en" class="scroll-smooth">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="GIS Specialist & Data Storyteller - Portfolio showcasing interactive maps, geospatial projects, and code snippets">
+
+    <title>Your Name | GIS Specialist & Data Storyteller</title>
+
+ 
+
+    <!-- Tailwind CSS CDN -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+ 
+
+    <!-- Font Awesome for Icons -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+ 
+
+    <!-- Highlight.js for Code Syntax Highlighting -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+
+ 
+
+    <!-- Google Fonts - Inter -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+ 
+
+    <script>
+
+        // Tailwind Configuration
+
+        tailwind.config = {
+
+            theme: {
+
+                extend: {
+
+                    colors: {
+
+                        'emerald': {
+
+                            50: '#ecfdf5',
+
+                            100: '#d1fae5',
+
+                            200: '#a7f3d0',
+
+                            300: '#6ee7b7',
+
+                            400: '#34d399',
+
+                            500: '#10b981',
+
+                            600: '#059669',
+
+                            700: '#047857',
+
+                            800: '#065f46',
+
+                            900: '#064e3b',
+
+                        },
+
+                    },
+
+                    fontFamily: {
+
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+
+                        'mono': ['JetBrains Mono', 'monospace'],
+
+                    },
+
+                    animation: {
+
+                        'float': 'float 6s ease-in-out infinite',
+
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+
+                    },
+
+                    keyframes: {
+
+                        float: {
+
+                            '0%, 100%': { transform: 'translateY(0px)' },
+
+                            '50%': { transform: 'translateY(-20px)' },
+
+                        },
+
+                        glow: {
+
+                            '0%': { boxShadow: '0 0 5px rgba(16, 185, 129, 0.5)' },
+
+                            '100%': { boxShadow: '0 0 20px rgba(16, 185, 129, 0.8)' },
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    </script>
+
+ 
+
+    <style>
+
+        /* Global Styles */
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+ 
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            background: linear-gradient(to bottom, #0f172a, #1e293b);
+
+            color: #e2e8f0;
+
+        }
+
+ 
+
+        /* Glassmorphism Effect */
+
+        .glass {
+
+            background: rgba(30, 41, 59, 0.7);
+
+            backdrop-filter: blur(10px);
+
+            -webkit-backdrop-filter: blur(10px);
+
+            border: 1px solid rgba(148, 163, 184, 0.1);
+
+        }
+
+ 
+
+        /* Custom Scrollbar */
+
+        ::-webkit-scrollbar {
+
+            width: 10px;
+
+        }
+
+ 
+
+        ::-webkit-scrollbar-track {
+
+            background: #1e293b;
+
+        }
+
+ 
+
+        ::-webkit-scrollbar-thumb {
+
+            background: #10b981;
+
+            border-radius: 5px;
+
+        }
+
+ 
+
+        ::-webkit-scrollbar-thumb:hover {
+
+            background: #059669;
+
+        }
+
+ 
+
+        /* Code Block Styling */
+
+        .code-container {
+
+            position: relative;
+
+        }
+
+ 
+
+        .copy-btn {
+
+            position: absolute;
+
+            top: 10px;
+
+            right: 10px;
+
+            background: rgba(16, 185, 129, 0.8);
+
+            color: white;
+
+            padding: 6px 12px;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+
+            border: none;
+
+            z-index: 10;
+
+        }
+
+ 
+
+        .copy-btn:hover {
+
+            background: rgba(16, 185, 129, 1);
+
+            transform: scale(1.05);
+
+        }
+
+ 
+
+        .copy-btn.copied {
+
+            background: #059669;
+
+        }
+
+ 
+
+        /* Responsive iframe container */
+
+        .iframe-container {
+
+            position: relative;
+
+            width: 100%;
+
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+
+            height: 0;
+
+            overflow: hidden;
+
+            background: rgba(15, 23, 42, 0.5);
+
+            border-radius: 12px;
+
+            border: 1px solid rgba(16, 185, 129, 0.3);
+
+        }
+
+ 
+
+        .iframe-container iframe {
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            border: none;
+
+            border-radius: 12px;
+
+        }
+
+ 
+
+        .iframe-loading {
+
+            position: absolute;
+
+            top: 50%;
+
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            color: #10b981;
+
+            font-size: 18px;
+
+        }
+
+ 
+
+        /* Tab Navigation */
+
+        .tab-content {
+
+            display: none;
+
+        }
+
+ 
+
+        .tab-content.active {
+
+            display: block;
+
+            animation: fadeIn 0.5s ease;
+
+        }
+
+ 
+
+        @keyframes fadeIn {
+
+            from { opacity: 0; transform: translateY(10px); }
+
+            to { opacity: 1; transform: translateY(0); }
+
+        }
+
+ 
+
+        /* Bento Grid Layout */
+
+        .bento-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+            gap: 1.5rem;
+
+        }
+
+ 
+
+        /* Smooth transitions */
+
+        .transition-all {
+
+            transition: all 0.3s ease;
+
+        }
+
+    </style>
+
+</head>
+
+ 
+
+<body class="antialiased">
+
+ 
+
+    <!-- Navigation -->
+
+    <nav class="glass fixed w-full top-0 z-50 border-b border-slate-700/50">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="flex items-center justify-between h-16">
+
+                <div class="flex items-center">
+
+                    <a href="#hero" class="text-emerald-400 font-bold text-xl flex items-center gap-2">
+
+                        <i class="fas fa-map-marked-alt"></i>
+
+                        <span>YourName</span>
+
+                    </a>
+
+                </div>
+
+                <div class="hidden md:block">
+
+                    <div class="ml-10 flex items-baseline space-x-4">
+
+                        <a href="#hero" class="nav-link text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-all">Home</a>
+
+                        <a href="#maps" class="nav-link text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-all">Maps</a>
+
+                        <a href="#codelab" class="nav-link text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-all">Code Lab</a>
+
+                        <a href="#projects" class="nav-link text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-all">Projects</a>
+
+                    </div>
+
+                </div>
+
+                <!-- Mobile Menu Button -->
+
+                <div class="md:hidden">
+
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-emerald-400">
+
+                        <i class="fas fa-bars text-xl"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Mobile Menu -->
+
+        <div id="mobile-menu" class="hidden md:hidden">
+
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-slate-900/95">
+
+                <a href="#hero" class="block text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-base font-medium">Home</a>
+
+                <a href="#maps" class="block text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-base font-medium">Maps</a>
+
+                <a href="#codelab" class="block text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-base font-medium">Code Lab</a>
+
+                <a href="#projects" class="block text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-base font-medium">Projects</a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+ 
+
+    <!-- Hero Section -->
+
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8">
+
+        <div class="max-w-7xl mx-auto w-full">
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+
+                <!-- Hero Text -->
+
+                <div class="space-y-6">
+
+                    <div class="space-y-2">
+
+                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
+
+                            Hi, I'm <span class="text-emerald-400">Your Name</span>
+
+                        </h1>
+
+                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-slate-300">
+
+                            GIS Specialist & Data Storyteller
+
+                        </h2>
+
+                    </div>
+
+ 
+
+                    <p class="text-lg text-slate-400 leading-relaxed max-w-2xl">
+
+                        I transform geospatial data into actionable insights. Passionate about creating interactive maps,
+
+                        building geospatial tools, and telling stories through data visualization. Specialized in
+
+                        forest resource management, remote sensing, and environmental analysis.
+
+                    </p>
+
+ 
+
+                    <!-- Social Links -->
+
+                    <div class="flex gap-4 pt-4">
+
+                        <a href="https://github.com/yourusername" target="_blank"
+
+                           class="glass px-6 py-3 rounded-lg hover:bg-emerald-500/20 hover:border-emerald-400 transition-all flex items-center gap-2 group">
+
+                            <i class="fab fa-github text-xl group-hover:text-emerald-400"></i>
+
+                            <span>GitHub</span>
+
+                        </a>
+
+                        <a href="https://linkedin.com/in/yourusername" target="_blank"
+
+                           class="glass px-6 py-3 rounded-lg hover:bg-emerald-500/20 hover:border-emerald-400 transition-all flex items-center gap-2 group">
+
+                            <i class="fab fa-linkedin text-xl group-hover:text-emerald-400"></i>
+
+                            <span>LinkedIn</span>
+
+                        </a>
+
+                        <a href="mailto:your.email@example.com"
+
+                           class="glass px-6 py-3 rounded-lg hover:bg-emerald-500/20 hover:border-emerald-400 transition-all flex items-center gap-2 group">
+
+                            <i class="fas fa-envelope text-xl group-hover:text-emerald-400"></i>
+
+                            <span>Email</span>
+
+                        </a>
+
+                    </div>
+
+ 
+
+                    <!-- CTA Button -->
+
+                    <div class="pt-4">
+
+                        <a href="#projects"
+
+                           class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 py-4 rounded-lg transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50">
+
+                            View My Work <i class="fas fa-arrow-right ml-2"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Hero Visual - Animated Icon -->
+
+                <div class="flex justify-center">
+
+                    <div class="relative">
+
+                        <div class="glass rounded-3xl p-12 animate-float">
+
+                            <i class="fas fa-globe-americas text-9xl text-emerald-400"></i>
+
+                        </div>
+
+                        <!-- Decorative Elements -->
+
+                        <div class="absolute -top-4 -right-4 glass rounded-full p-4 animate-pulse">
+
+                            <i class="fas fa-map-pin text-3xl text-emerald-400"></i>
+
+                        </div>
+
+                        <div class="absolute -bottom-4 -left-4 glass rounded-full p-4 animate-pulse" style="animation-delay: 1s;">
+
+                            <i class="fas fa-satellite text-3xl text-cyan-400"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+ 
+
+    <!-- Map Gallery Section -->
+
+    <section id="maps" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 to-slate-800">
+
+        <div class="max-w-7xl mx-auto">
+
+            <div class="text-center mb-16">
+
+                <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">
+
+                    <i class="fas fa-map text-emerald-400 mr-3"></i>
+
+                    Interactive Map Gallery
+
+                </h2>
+
+                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+
+                    Explore my collection of interactive maps and geospatial visualizations
+
+                </p>
+
+            </div>
+
+ 
+
+            <!-- Map Categories Tabs -->
+
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+
+                <button onclick="switchMapTab('all')"
+
+                        class="map-tab active glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-500/20 hover:border-emerald-400"
+
+                        data-tab="all">
+
+                    All Maps
+
+                </button>
+
+                <button onclick="switchMapTab('arcgis')"
+
+                        class="map-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-500/20 hover:border-emerald-400"
+
+                        data-tab="arcgis">
+
+                    ArcGIS Online
+
+                </button>
+
+                <button onclick="switchMapTab('gee')"
+
+                        class="map-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-500/20 hover:border-emerald-400"
+
+                        data-tab="gee">
+
+                    Google Earth Engine
+
+                </button>
+
+                <button onclick="switchMapTab('custom')"
+
+                        class="map-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-500/20 hover:border-emerald-400"
+
+                        data-tab="custom">
+
+                    Custom Apps
+
+                </button>
+
+            </div>
+
+ 
+
+            <!-- Map Content -->
+
+            <div id="map-all" class="tab-content active">
+
+                <div class="bento-grid">
+
+                    <!-- Map Card 1 - ArcGIS Online Example -->
+
+                    <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all">
+
+                        <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+
+                            <i class="fas fa-tree text-emerald-400"></i>
+
+                            Forest Cover Analysis
+
+                        </h3>
+
+                        <p class="text-slate-400 mb-4">Interactive map showing forest cover changes over time using satellite imagery and GIS analysis.</p>
+
+                        <div class="iframe-container">
+
+                            <div class="iframe-loading">
+
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+
+                                Loading map...
+
+                            </div>
+
+                            <!-- Replace with your actual ArcGIS Online embed URL -->
+
+                            <!-- <iframe src="YOUR_ARCGIS_ONLINE_URL"></iframe> -->
+
+                        </div>
+
+                        <div class="mt-4 flex gap-2">
+
+                            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">ArcGIS Online</span>
+
+                            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Remote Sensing</span>
+
+                        </div>
+
+                    </div>
+
+ 
+
+                    <!-- Map Card 2 - Google Earth Engine Example -->
+
+                    <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all">
+
+                        <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+
+                            <i class="fas fa-satellite-dish text-cyan-400"></i>
+
+                            NDVI Time Series
+
+                        </h3>
+
+                        <p class="text-slate-400 mb-4">Vegetation health monitoring using Google Earth Engine and Landsat imagery analysis.</p>
+
+                        <div class="iframe-container">
+
+                            <div class="iframe-loading">
+
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+
+                                Loading map...
+
+                            </div>
+
+                            <!-- Replace with your actual GEE App URL -->
+
+                            <!-- <iframe src="YOUR_GEE_APP_URL"></iframe> -->
+
+                        </div>
+
+                        <div class="mt-4 flex gap-2">
+
+                            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Google Earth Engine</span>
+
+                            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Landsat</span>
+
+                        </div>
+
+                    </div>
+
+ 
+
+                    <!-- Map Card 3 - Custom Web Map -->
+
+                    <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all">
+
+                        <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+
+                            <i class="fas fa-layer-group text-purple-400"></i>
+
+                            Land Use Classification
+
+                        </h3>
+
+                        <p class="text-slate-400 mb-4">Machine learning-based land use classification with interactive visualization.</p>
+
+                        <div class="iframe-container">
+
+                            <div class="iframe-loading">
+
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+
+                                Loading map...
+
+                            </div>
+
+                            <!-- Replace with your actual custom map URL -->
+
+                            <!-- <iframe src="YOUR_CUSTOM_MAP_URL"></iframe> -->
+
+                        </div>
+
+                        <div class="mt-4 flex gap-2">
+
+                            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Custom App</span>
+
+                            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Machine Learning</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+ 
+
+            <!-- ArcGIS Tab Content -->
+
+            <div id="map-arcgis" class="tab-content">
+
+                <div class="bento-grid">
+
+                    <div class="glass rounded-xl p-6">
+
+                        <h3 class="text-2xl font-bold text-white mb-3">Forest Cover Analysis</h3>
+
+                        <p class="text-slate-400 mb-4">ArcGIS Online-based forest monitoring application.</p>
+
+                        <div class="iframe-container">
+
+                            <div class="iframe-loading">
+
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+
+                                Loading map...
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+ 
+
+            <!-- GEE Tab Content -->
+
+            <div id="map-gee" class="tab-content">
+
+                <div class="bento-grid">
+
+                    <div class="glass rounded-xl p-6">
+
+                        <h3 class="text-2xl font-bold text-white mb-3">NDVI Time Series</h3>
+
+                        <p class="text-slate-400 mb-4">Google Earth Engine application for vegetation analysis.</p>
+
+                        <div class="iframe-container">
+
+                            <div class="iframe-loading">
+
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+
+                                Loading map...
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+ 
+
+            <!-- Custom Tab Content -->
+
+            <div id="map-custom" class="tab-content">
+
+                <div class="bento-grid">
+
+                    <div class="glass rounded-xl p-6">
+
+                        <h3 class="text-2xl font-bold text-white mb-3">Land Use Classification</h3>
+
+                        <p class="text-slate-400 mb-4">Custom web mapping application with ML integration.</p>
+
+                        <div class="iframe-container">
+
+                            <div class="iframe-loading">
+
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+
+                                Loading map...
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+ 
+
+    <!-- Code Lab Section -->
+
+    <section id="codelab" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 to-slate-900">
+
+        <div class="max-w-7xl mx-auto">
+
+            <div class="text-center mb-16">
+
+                <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">
+
+                    <i class="fas fa-code text-emerald-400 mr-3"></i>
+
+                    Code Lab
+
+                </h2>
+
+                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+
+                    Useful code snippets and tools I've developed for geospatial analysis
+
+                </p>
+
+            </div>
+
+ 
+
+            <!-- Code Category Tabs -->
+
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+
+                <button onclick="switchCodeTab('python')"
+
+                        class="code-tab active glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-500/20 hover:border-emerald-400"
+
+                        data-tab="python">
+
+                    <i class="fab fa-python mr-2"></i> Python
+
+                </button>
+
+                <button onclick="switchCodeTab('javascript')"
+
+                        class="code-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-500/20 hover:border-emerald-400"
+
+                        data-tab="javascript">
+
+                    <i class="fab fa-js-square mr-2"></i> JavaScript
+
+                </button>
+
+                <button onclick="switchCodeTab('sql')"
+
+                        class="code-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-500/20 hover:border-emerald-400"
+
+                        data-tab="sql">
+
+                    <i class="fas fa-database mr-2"></i> SQL
+
+                </button>
+
+            </div>
+
+ 
+
+            <!-- Python Code Snippets -->
+
+            <div id="code-python" class="tab-content active space-y-8">
+
+                <!-- Snippet 1: NDVI Calculation -->
+
+                <div class="glass rounded-xl p-6">
+
+                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+
+                        <i class="fas fa-leaf text-emerald-400"></i>
+
+                        Calculate NDVI from Satellite Imagery
+
+                    </h3>
+
+                    <p class="text-slate-400 mb-4">Python script using GDAL/Rasterio to calculate Normalized Difference Vegetation Index (NDVI) from multispectral imagery.</p>
+
+                    <div class="code-container">
+
+                        <button class="copy-btn" onclick="copyCode(this)">
+
+                            <i class="fas fa-copy mr-1"></i> Copy
+
+                        </button>
+
+                        <pre><code class="language-python">import rasterio
+
+import numpy as np
+
+from rasterio.plot import show
+
+import matplotlib.pyplot as plt
+
+ 
+
+def calculate_ndvi(red_band_path, nir_band_path, output_path):
+
+    """
+
+    Calculate NDVI from red and NIR bands
+
+    NDVI = (NIR - Red) / (NIR + Red)
+
+    """
+
+    # Read red and NIR bands
+
+    with rasterio.open(red_band_path) as red:
+
+        red_data = red.read(1).astype(float)
+
+        profile = red.profile
+
+ 
+
+    with rasterio.open(nir_band_path) as nir:
+
+        nir_data = nir.read(1).astype(float)
+
+ 
+
+    # Calculate NDVI
+
+    ndvi = (nir_data - red_data) / (nir_data + red_data)
+
+ 
+
+    # Handle division by zero
+
+    ndvi = np.where((nir_data + red_data) == 0, 0, ndvi)
+
+ 
+
+    # Save NDVI raster
+
+    profile.update(dtype=rasterio.float32, count=1)
+
+    with rasterio.open(output_path, 'w', **profile) as dst:
+
+        dst.write(ndvi.astype(rasterio.float32), 1)
+
+ 
+
+    print(f"NDVI calculated and saved to {output_path}")
+
+    return ndvi
+
+ 
+
+# Example usage
+
+red_band = "landsat_band4.tif"
+
+nir_band = "landsat_band5.tif"
+
+output = "ndvi_output.tif"
+
+ 
+
+ndvi_result = calculate_ndvi(red_band, nir_band, output)</code></pre>
+
+                    </div>
+
+                    <div class="mt-4 flex gap-2">
+
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Rasterio</span>
+
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Remote Sensing</span>
+
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">NumPy</span>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Snippet 2: GeoDataFrame Processing -->
+
+                <div class="glass rounded-xl p-6">
+
+                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+
+                        <i class="fas fa-map-marked-alt text-cyan-400"></i>
+
+                        Spatial Join and Analysis with GeoPandas
+
+                    </h3>
+
+                    <p class="text-slate-400 mb-4">Perform spatial join operations and calculate area statistics using GeoPandas.</p>
+
+                    <div class="code-container">
+
+                        <button class="copy-btn" onclick="copyCode(this)">
+
+                            <i class="fas fa-copy mr-1"></i> Copy
+
+                        </button>
+
+                        <pre><code class="language-python">import geopandas as gpd
+
+import pandas as pd
+
+ 
+
+def spatial_join_analysis(polygons_path, points_path):
+
+    """
+
+    Perform spatial join and calculate statistics
+
+    """
+
+    # Read spatial data
+
+    polygons = gpd.read_file(polygons_path)
+
+    points = gpd.read_file(points_path)
+
+ 
+
+    # Ensure same CRS
+
+    points = points.to_crs(polygons.crs)
+
+ 
+
+    # Spatial join: points within polygons
+
+    joined = gpd.sjoin(points, polygons, how='left', predicate='within')
+
+ 
+
+    # Calculate area in hectares
+
+    polygons['area_ha'] = polygons.geometry.area / 10000
+
+ 
+
+    # Group by polygon and count points
+
+    stats = joined.groupby('index_right').size().reset_index(name='point_count')
+
+ 
+
+    # Merge with polygon data
+
+    result = polygons.merge(stats, left_index=True, right_on='index_right', how='left')
+
+    result['point_count'].fillna(0, inplace=True)
+
+ 
+
+    # Calculate density (points per hectare)
+
+    result['density'] = result['point_count'] / result['area_ha']
+
+ 
+
+    return result
+
+ 
+
+# Example usage
+
+forest_parcels = "data/forest_parcels.shp"
+
+tree_points = "data/tree_locations.shp"
+
+ 
+
+analysis_result = spatial_join_analysis(forest_parcels, tree_points)
+
+print(analysis_result[['area_ha', 'point_count', 'density']].describe())</code></pre>
+
+                    </div>
+
+                    <div class="mt-4 flex gap-2">
+
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">GeoPandas</span>
+
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Spatial Analysis</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+ 
+
+            <!-- JavaScript Code Snippets -->
+
+            <div id="code-javascript" class="tab-content space-y-8">
+
+                <!-- Snippet 1: Leaflet Map Initialization -->
+
+                <div class="glass rounded-xl p-6">
+
+                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+
+                        <i class="fas fa-map text-emerald-400"></i>
+
+                        Interactive Map with Leaflet.js
+
+                    </h3>
+
+                    <p class="text-slate-400 mb-4">Initialize a Leaflet map with custom markers and popup interactions.</p>
+
+                    <div class="code-container">
+
+                        <button class="copy-btn" onclick="copyCode(this)">
+
+                            <i class="fas fa-copy mr-1"></i> Copy
+
+                        </button>
+
+                        <pre><code class="language-javascript">// Initialize map
+
+const map = L.map('map').setView([10.762622, 106.660172], 13);
+
+ 
+
+// Add OpenStreetMap tile layer
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+    attribution: '© OpenStreetMap contributors',
+
+    maxZoom: 19
+
+}).addTo(map);
+
+ 
+
+// Custom marker icon
+
+const customIcon = L.icon({
+
+    iconUrl: 'icons/tree-marker.png',
+
+    iconSize: [32, 32],
+
+    iconAnchor: [16, 32],
+
+    popupAnchor: [0, -32]
+
+});
+
+ 
+
+// Add GeoJSON layer with custom styling
+
+fetch('data/forest_areas.geojson')
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        L.geoJSON(data, {
+
+            style: function(feature) {
+
+                return {
+
+                    color: '#10b981',
+
+                    weight: 2,
+
+                    fillOpacity: 0.5,
+
+                    fillColor: getColor(feature.properties.density)
+
+                };
+
+            },
+
+            onEachFeature: function(feature, layer) {
+
+                const popupContent = `
+
+                    <h3>${feature.properties.name}</h3>
+
+                    <p>Area: ${feature.properties.area} ha</p>
+
+                    <p>Density: ${feature.properties.density} trees/ha</p>
+
+                `;
+
+                layer.bindPopup(popupContent);
+
+            }
+
+        }).addTo(map);
+
+    });
+
+ 
+
+// Color scale function
+
+function getColor(density) {
+
+    return density > 1000 ? '#064e3b' :
+
+           density > 500  ? '#047857' :
+
+           density > 200  ? '#10b981' :
+
+           density > 100  ? '#34d399' :
+
+                           '#a7f3d0';
+
+}</code></pre>
+
+                    </div>
+
+                    <div class="mt-4 flex gap-2">
+
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Leaflet.js</span>
+
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">GeoJSON</span>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Snippet 2: Chart.js Visualization -->
+
+                <div class="glass rounded-xl p-6">
+
+                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+
+                        <i class="fas fa-chart-line text-cyan-400"></i>
+
+                        Time Series Chart with Chart.js
+
+                    </h3>
+
+                    <p class="text-slate-400 mb-4">Create interactive time series charts for environmental data visualization.</p>
+
+                    <div class="code-container">
+
+                        <button class="copy-btn" onclick="copyCode(this)">
+
+                            <i class="fas fa-copy mr-1"></i> Copy
+
+                        </button>
+
+                        <pre><code class="language-javascript">// NDVI Time Series Chart
+
+const ctx = document.getElementById('ndviChart').getContext('2d');
+
+ 
+
+const ndviData = {
+
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+
+             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+
+    datasets: [{
+
+        label: 'NDVI Values',
+
+        data: [0.45, 0.52, 0.61, 0.68, 0.72, 0.75,
+
+               0.78, 0.76, 0.70, 0.62, 0.54, 0.48],
+
+        borderColor: '#10b981',
+
+        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+
+        fill: true,
+
+        tension: 0.4
+
+    }]
+
+};
+
+ 
+
+const config = {
+
+    type: 'line',
+
+    data: ndviData,
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+
+                labels: {
+
+                    color: '#e2e8f0'
+
+                }
+
+            },
+
+            title: {
+
+                display: true,
+
+                text: 'Monthly NDVI Variation',
+
+                color: '#e2e8f0',
+
+                font: {
+
+                    size: 16
+
+                }
+
+            }
+
+        },
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true,
+
+                max: 1,
+
+                ticks: {
+
+                    color: '#94a3b8'
+
+                },
+
+                grid: {
+
+                    color: 'rgba(148, 163, 184, 0.1)'
+
+                }
+
+            },
+
+            x: {
+
+                ticks: {
+
+                    color: '#94a3b8'
+
+                },
+
+                grid: {
+
+                    color: 'rgba(148, 163, 184, 0.1)'
+
+                }
+
+            }
+
+        }
+
+    }
+
+};
+
+ 
+
+const ndviChart = new Chart(ctx, config);</code></pre>
+
+                    </div>
+
+                    <div class="mt-4 flex gap-2">
+
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Chart.js</span>
+
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Data Viz</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+ 
+
+            <!-- SQL Code Snippets -->
+
+            <div id="code-sql" class="tab-content space-y-8">
+
+                <!-- Snippet 1: PostGIS Spatial Query -->
+
+                <div class="glass rounded-xl p-6">
+
+                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+
+                        <i class="fas fa-database text-emerald-400"></i>
+
+                        PostGIS Spatial Queries
+
+                    </h3>
+
+                    <p class="text-slate-400 mb-4">Advanced spatial queries using PostGIS for geospatial data analysis.</p>
+
+                    <div class="code-container">
+
+                        <button class="copy-btn" onclick="copyCode(this)">
+
+                            <i class="fas fa-copy mr-1"></i> Copy
+
+                        </button>
+
+                        <pre><code class="language-sql">-- Find forest parcels within 500m of water sources
+
+SELECT
+
+    f.parcel_id,
+
+    f.parcel_name,
+
+    f.forest_type,
+
+    ST_Area(f.geom) / 10000 AS area_hectares,
+
+    MIN(ST_Distance(f.geom, w.geom)) AS distance_to_water
+
+FROM
+
+    forest_parcels f
+
+CROSS JOIN
+
+    water_sources w
+
+WHERE
+
+    ST_DWithin(f.geom, w.geom, 500)  -- Within 500 meters
+
+    AND f.forest_type = 'Natural Forest'
+
+GROUP BY
+
+    f.parcel_id, f.parcel_name, f.forest_type, f.geom
+
+HAVING
+
+    ST_Area(f.geom) / 10000 > 10  -- Larger than 10 hectares
+
+ORDER BY
+
+    distance_to_water ASC;
+
+ 
+
+-- Calculate buffer zones and intersection areas
+
+WITH buffered_zones AS (
+
+    SELECT
+
+        parcel_id,
+
+        ST_Buffer(geom, 100) AS buffer_geom  -- 100m buffer
+
+    FROM
+
+        forest_parcels
+
+)
+
+SELECT
+
+    p.parcel_id,
+
+    p.parcel_name,
+
+    ST_Area(ST_Intersection(b.buffer_geom, p.geom)) / 10000 AS overlap_area_ha
+
+FROM
+
+    protected_areas p
+
+INNER JOIN
+
+    buffered_zones b ON ST_Intersects(p.geom, b.buffer_geom)
+
+WHERE
+
+    ST_Area(ST_Intersection(b.buffer_geom, p.geom)) > 0;</code></pre>
+
+                    </div>
+
+                    <div class="mt-4 flex gap-2">
+
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">PostGIS</span>
+
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">PostgreSQL</span>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Snippet 2: Aggregate Statistics -->
+
+                <div class="glass rounded-xl p-6">
+
+                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+
+                        <i class="fas fa-chart-bar text-cyan-400"></i>
+
+                        Spatial Aggregation and Statistics
+
+                    </h3>
+
+                    <p class="text-slate-400 mb-4">Calculate spatial statistics and aggregations for forest management reporting.</p>
+
+                    <div class="code-container">
+
+                        <button class="copy-btn" onclick="copyCode(this)">
+
+                            <i class="fas fa-copy mr-1"></i> Copy
+
+                        </button>
+
+                        <pre><code class="language-sql">-- Forest type distribution by province
+
+SELECT
+
+    p.province_name,
+
+    f.forest_type,
+
+    COUNT(*) AS parcel_count,
+
+    SUM(ST_Area(f.geom)) / 10000 AS total_area_ha,
+
+    AVG(ST_Area(f.geom)) / 10000 AS avg_parcel_size_ha,
+
+    ST_Union(f.geom) AS combined_geometry
+
+FROM
+
+    forest_parcels f
+
+INNER JOIN
+
+    provinces p ON ST_Within(ST_Centroid(f.geom), p.geom)
+
+GROUP BY
+
+    p.province_name, f.forest_type
+
+ORDER BY
+
+    p.province_name, total_area_ha DESC;
+
+ 
+
+-- Temporal change detection
+
+WITH forest_2020 AS (
+
+    SELECT parcel_id, ST_Area(geom) / 10000 AS area_ha
+
+    FROM forest_parcels_2020
+
+),
+
+forest_2024 AS (
+
+    SELECT parcel_id, ST_Area(geom) / 10000 AS area_ha
+
+    FROM forest_parcels_2024
+
+)
+
+SELECT
+
+    f20.parcel_id,
+
+    f20.area_ha AS area_2020,
+
+    f24.area_ha AS area_2024,
+
+    (f24.area_ha - f20.area_ha) AS change_ha,
+
+    ROUND(((f24.area_ha - f20.area_ha) / f20.area_ha * 100), 2) AS change_percent,
+
+    CASE
+
+        WHEN f24.area_ha > f20.area_ha THEN 'Gain'
+
+        WHEN f24.area_ha < f20.area_ha THEN 'Loss'
+
+        ELSE 'No Change'
+
+    END AS change_type
+
+FROM
+
+    forest_2020 f20
+
+LEFT JOIN
+
+    forest_2024 f24 ON f20.parcel_id = f24.parcel_id
+
+WHERE
+
+    ABS(f24.area_ha - f20.area_ha) > 0.5  -- Changes > 0.5 ha
+
+ORDER BY
+
+    ABS(f24.area_ha - f20.area_ha) DESC;</code></pre>
+
+                    </div>
+
+                    <div class="mt-4 flex gap-2">
+
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">SQL</span>
+
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Analytics</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+ 
+
+    <!-- Projects Section -->
+
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 to-slate-800">
+
+        <div class="max-w-7xl mx-auto">
+
+            <div class="text-center mb-16">
+
+                <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">
+
+                    <i class="fas fa-project-diagram text-emerald-400 mr-3"></i>
+
+                    Featured Projects
+
+                </h2>
+
+                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+
+                    A showcase of my recent work in GIS, remote sensing, and geospatial development
+
+                </p>
+
+            </div>
+
+ 
+
+            <!-- Projects Grid -->
+
+            <div class="bento-grid">
+
+                <!-- Project Card 1 -->
+
+                <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all transform hover:-translate-y-2">
+
+                    <div class="mb-4">
+
+                        <div class="text-4xl mb-4">
+
+                            <i class="fas fa-tree text-emerald-400"></i>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-2">Forest Change Detection System</h3>
+
+                        <p class="text-slate-400 mb-4">
+
+                            Automated forest cover change detection using Landsat time series data and machine learning
+
+                            algorithms. Achieved 92% accuracy in identifying deforestation events.
+
+                        </p>
+
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Python</span>
+
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Google Earth Engine</span>
+
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Machine Learning</span>
+
+                        <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm">TensorFlow</span>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+
+                            <i class="fab fa-github mr-1"></i> Code
+
+                        </a>
+
+                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+
+                            <i class="fas fa-external-link-alt mr-1"></i> Demo
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Project Card 2 -->
+
+                <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all transform hover:-translate-y-2">
+
+                    <div class="mb-4">
+
+                        <div class="text-4xl mb-4">
+
+                            <i class="fas fa-satellite text-cyan-400"></i>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-2">NDVI Monitoring Dashboard</h3>
+
+                        <p class="text-slate-400 mb-4">
+
+                            Real-time vegetation health monitoring dashboard using Sentinel-2 imagery.
+
+                            Provides automated alerts for vegetation stress detection.
+
+                        </p>
+
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">React</span>
+
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Leaflet</span>
+
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Flask</span>
+
+                        <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm">PostgreSQL</span>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+
+                            <i class="fab fa-github mr-1"></i> Code
+
+                        </a>
+
+                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+
+                            <i class="fas fa-external-link-alt mr-1"></i> Demo
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Project Card 3 -->
+
+                <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all transform hover:-translate-y-2">
+
+                    <div class="mb-4">
+
+                        <div class="text-4xl mb-4">
+
+                            <i class="fas fa-map-marked-alt text-purple-400"></i>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-2">Land Use Classification Tool</h3>
+
+                        <p class="text-slate-400 mb-4">
+
+                            Interactive web tool for land use/land cover classification using Random Forest algorithm.
+
+                            Supports custom training data and export to multiple formats.
+
+                        </p>
+
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Python</span>
+
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">scikit-learn</span>
+
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">GDAL</span>
+
+                        <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm">Vue.js</span>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+
+                            <i class="fab fa-github mr-1"></i> Code
+
+                        </a>
+
+                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+
+                            <i class="fas fa-external-link-alt mr-1"></i> Demo
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Project Card 4 -->
+
+                <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all transform hover:-translate-y-2">
+
+                    <div class="mb-4">
+
+                        <div class="text-4xl mb-4">
+
+                            <i class="fas fa-route text-orange-400"></i>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-2">Trail Network Optimizer</h3>
+
+                        <p class="text-slate-400 mb-4">
+
+                            Network analysis tool for optimizing forest trail systems using cost-distance analysis
+
+                            and terrain modeling. Reduces planning time by 70%.
+
+                        </p>
+
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">ArcPy</span>
+
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">NetworkX</span>
+
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">PostGIS</span>
+
+                        <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm">Streamlit</span>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+
+                            <i class="fab fa-github mr-1"></i> Code
+
+                        </a>
+
+                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+
+                            <i class="fas fa-external-link-alt mr-1"></i> Demo
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Project Card 5 -->
+
+                <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all transform hover:-translate-y-2">
+
+                    <div class="mb-4">
+
+                        <div class="text-4xl mb-4">
+
+                            <i class="fas fa-fire text-red-400"></i>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-2">Wildfire Risk Assessment Platform</h3>
+
+                        <p class="text-slate-400 mb-4">
+
+                            Web-based platform for wildfire risk assessment using multi-criteria decision analysis.
+
+                            Integrates weather data, fuel models, and topographic factors.
+
+                        </p>
+
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Django</span>
+
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Rasterio</span>
+
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">OpenLayers</span>
+
+                        <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm">Redis</span>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+
+                            <i class="fab fa-github mr-1"></i> Code
+
+                        </a>
+
+                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+
+                            <i class="fas fa-external-link-alt mr-1"></i> Demo
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Project Card 6 -->
+
+                <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all transform hover:-translate-y-2">
+
+                    <div class="mb-4">
+
+                        <div class="text-4xl mb-4">
+
+                            <i class="fas fa-cloud text-blue-400"></i>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white mb-2">Cloud-Native Geospatial Pipeline</h3>
+
+                        <p class="text-slate-400 mb-4">
+
+                            Automated ETL pipeline for processing large-scale satellite imagery on AWS.
+
+                            Processes 1TB+ of data daily with 99.9% uptime.
+
+                        </p>
+
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+
+                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">AWS Lambda</span>
+
+                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Docker</span>
+
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Terraform</span>
+
+                        <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm">S3</span>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+
+                            <i class="fab fa-github mr-1"></i> Code
+
+                        </a>
+
+                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+
+                            <i class="fas fa-file-alt mr-1"></i> Docs
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+ 
+
+    <!-- Footer -->
+
+    <footer class="glass border-t border-slate-700/50 py-12 px-4 sm:px-6 lg:px-8">
+
+        <div class="max-w-7xl mx-auto">
+
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+
+                <div>
+
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+
+                        <i class="fas fa-map-marked-alt text-emerald-400"></i>
+
+                        Your Name
+
+                    </h3>
+
+                    <p class="text-slate-400">
+
+                        GIS Specialist & Data Storyteller passionate about creating meaningful geospatial solutions.
+
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+
+                    <ul class="space-y-2">
+
+                        <li><a href="#hero" class="text-slate-400 hover:text-emerald-400 transition-all">Home</a></li>
+
+                        <li><a href="#maps" class="text-slate-400 hover:text-emerald-400 transition-all">Map Gallery</a></li>
+
+                        <li><a href="#codelab" class="text-slate-400 hover:text-emerald-400 transition-all">Code Lab</a></li>
+
+                        <li><a href="#projects" class="text-slate-400 hover:text-emerald-400 transition-all">Projects</a></li>
+
+                    </ul>
+
+                </div>
+
+                <div>
+
+                    <h3 class="text-xl font-bold text-white mb-4">Connect</h3>
+
+                    <div class="flex gap-4">
+
+                        <a href="https://github.com/yourusername" target="_blank"
+
+                           class="text-slate-400 hover:text-emerald-400 text-2xl transition-all">
+
+                            <i class="fab fa-github"></i>
+
+                        </a>
+
+                        <a href="https://linkedin.com/in/yourusername" target="_blank"
+
+                           class="text-slate-400 hover:text-emerald-400 text-2xl transition-all">
+
+                            <i class="fab fa-linkedin"></i>
+
+                        </a>
+
+                        <a href="mailto:your.email@example.com"
+
+                           class="text-slate-400 hover:text-emerald-400 text-2xl transition-all">
+
+                            <i class="fas fa-envelope"></i>
+
+                        </a>
+
+                        <a href="https://twitter.com/yourusername" target="_blank"
+
+                           class="text-slate-400 hover:text-emerald-400 text-2xl transition-all">
+
+                            <i class="fab fa-twitter"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="border-t border-slate-700/50 pt-8 text-center">
+
+                <p class="text-slate-400">
+
+                    © 2024 Your Name. Built with <i class="fas fa-heart text-emerald-400"></i> and Tailwind CSS
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+ 
+
+    <!-- JavaScript -->
+
+    <script>
+
+        // Initialize Highlight.js
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            hljs.highlightAll();
+
+        });
+
+ 
+
+        // Mobile Menu Toggle
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+
+        const mobileMenu = document.getElementById('mobile-menu');
+
+ 
+
+        mobileMenuBtn.addEventListener('click', function() {
+
+            mobileMenu.classList.toggle('hidden');
+
+        });
+
+ 
+
+        // Close mobile menu when clicking a link
+
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+
+        mobileLinks.forEach(link => {
+
+            link.addEventListener('click', function() {
+
+                mobileMenu.classList.add('hidden');
+
+            });
+
+        });
+
+ 
+
+        // Map Tab Switching
+
+        function switchMapTab(tabName) {
+
+            // Hide all map content
+
+            const mapContents = document.querySelectorAll('[id^="map-"]');
+
+            mapContents.forEach(content => {
+
+                content.classList.remove('active');
+
+            });
+
+ 
+
+            // Remove active class from all tabs
+
+            const mapTabs = document.querySelectorAll('.map-tab');
+
+            mapTabs.forEach(tab => {
+
+                tab.classList.remove('active', 'bg-emerald-500/20', 'border-emerald-400', 'text-emerald-400');
+
+            });
+
+ 
+
+            // Show selected content
+
+            const selectedContent = document.getElementById('map-' + tabName);
+
+            if (selectedContent) {
+
+                selectedContent.classList.add('active');
+
+            }
+
+ 
+
+            // Highlight active tab
+
+            const activeTab = document.querySelector(`[data-tab="${tabName}"].map-tab`);
+
+            if (activeTab) {
+
+                activeTab.classList.add('active', 'bg-emerald-500/20', 'border-emerald-400', 'text-emerald-400');
+
+            }
+
+        }
+
+ 
+
+        // Code Tab Switching
+
+        function switchCodeTab(tabName) {
+
+            // Hide all code content
+
+            const codeContents = document.querySelectorAll('[id^="code-"]');
+
+            codeContents.forEach(content => {
+
+                content.classList.remove('active');
+
+            });
+
+ 
+
+            // Remove active class from all tabs
+
+            const codeTabs = document.querySelectorAll('.code-tab');
+
+            codeTabs.forEach(tab => {
+
+                tab.classList.remove('active', 'bg-emerald-500/20', 'border-emerald-400', 'text-emerald-400');
+
+            });
+
+ 
+
+            // Show selected content
+
+            const selectedContent = document.getElementById('code-' + tabName);
+
+            if (selectedContent) {
+
+                selectedContent.classList.add('active');
+
+            }
+
+ 
+
+            // Highlight active tab
+
+            const activeTab = document.querySelector(`[data-tab="${tabName}"].code-tab`);
+
+            if (activeTab) {
+
+                activeTab.classList.add('active', 'bg-emerald-500/20', 'border-emerald-400', 'text-emerald-400');
+
+            }
+
+        }
+
+ 
+
+        // Copy Code to Clipboard
+
+        function copyCode(button) {
+
+            const codeContainer = button.parentElement;
+
+            const codeBlock = codeContainer.querySelector('code');
+
+            const textToCopy = codeBlock.innerText;
+
+ 
+
+            navigator.clipboard.writeText(textToCopy).then(function() {
+
+                // Change button text and style
+
+                const originalHTML = button.innerHTML;
+
+                button.innerHTML = '<i class="fas fa-check mr-1"></i> Copied!';
+
+                button.classList.add('copied');
+
+ 
+
+                // Reset after 2 seconds
+
+                setTimeout(function() {
+
+                    button.innerHTML = originalHTML;
+
+                    button.classList.remove('copied');
+
+                }, 2000);
+
+            }).catch(function(err) {
+
+                console.error('Failed to copy code: ', err);
+
+                button.innerHTML = '<i class="fas fa-times mr-1"></i> Error';
+
+                setTimeout(function() {
+
+                    button.innerHTML = '<i class="fas fa-copy mr-1"></i> Copy';
+
+                }, 2000);
+
+            });
+
+        }
+
+ 
+
+        // Smooth Scroll for Navigation Links
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+            anchor.addEventListener('click', function (e) {
+
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+
+                const targetElement = document.querySelector(targetId);
+
+ 
+
+                if (targetElement) {
+
+                    const navHeight = 64; // Height of fixed nav
+
+                    const targetPosition = targetElement.offsetTop - navHeight;
+
+ 
+
+                    window.scrollTo({
+
+                        top: targetPosition,
+
+                        behavior: 'smooth'
+
+                    });
+
+                }
+
+            });
+
+        });
+
+ 
+
+        // Active Navigation Highlight on Scroll
+
+        window.addEventListener('scroll', function() {
+
+            const sections = document.querySelectorAll('section[id]');
+
+            const navLinks = document.querySelectorAll('.nav-link');
+
+ 
+
+            let current = '';
+
+ 
+
+            sections.forEach(section => {
+
+                const sectionTop = section.offsetTop;
+
+                const sectionHeight = section.clientHeight;
+
+                if (pageYOffset >= (sectionTop - 100)) {
+
+                    current = section.getAttribute('id');
+
+                }
+
+            });
+
+ 
+
+            navLinks.forEach(link => {
+
+                link.classList.remove('text-emerald-400');
+
+                link.classList.add('text-slate-300');
+
+                if (link.getAttribute('href') === '#' + current) {
+
+                    link.classList.remove('text-slate-300');
+
+                    link.classList.add('text-emerald-400');
+
+                }
+
+            });
+
+        });
+
+ 
+
+        // Add loading animation to iframes
+
+        document.querySelectorAll('.iframe-container').forEach(container => {
+
+            const iframe = container.querySelector('iframe');
+
+            if (iframe) {
+
+                iframe.addEventListener('load', function() {
+
+                    const loading = container.querySelector('.iframe-loading');
+
+                    if (loading) {
+
+                        loading.style.display = 'none';
+
+                    }
+
+                });
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
