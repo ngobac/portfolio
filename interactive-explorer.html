@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Botanical Explorer | Arabidopsis thaliana</title>
+
+    <!-- Google Fonts - Serif, Sans-serif, and Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Organic, earthy color palette */
+            --sage-green: #7a9e7e;
+            --sage-green-dark: #5d7a5f;
+            --sage-green-light: #a4c4a6;
+            --deep-brown: #4a3428;
+            --terracotta: #c97154;
+            --terracotta-light: #e09176;
+            --parchment: #f4f1ea;
+            --parchment-dark: #e8e3d6;
+            --charcoal: #2d2d2d;
+            --moss-green: #8b9d83;
+            --sepia: #704214;
+
+            /* Typography */
+            --font-serif: 'EB Garamond', serif;
+            --font-sans: 'Lato', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: linear-gradient(135deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+            color: var(--charcoal);
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        /* Header with navigation */
+        .header {
+            background: linear-gradient(to bottom, rgba(122, 158, 126, 0.95), rgba(122, 158, 126, 0.85));
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--deep-brown);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--parchment);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            color: var(--parchment-dark);
+            font-style: italic;
+            margin-top: 0.25rem;
+        }
+
+        .nav-link {
+            color: var(--parchment);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            border-color: var(--parchment);
+            background: rgba(244, 241, 234, 0.1);
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 450px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        /* SVG Container */
+        .svg-container {
+            background: white;
+            border: 4px solid var(--deep-brown);
+            border-radius: 8px;
+            padding: 3rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .svg-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(122, 158, 126, 0.03) 2px,
+                    rgba(122, 158, 126, 0.03) 4px
+                );
+            pointer-events: none;
+            border-radius: 4px;
+        }
+
+        #plant-diagram {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Info Panel */
+        .info-panel {
+            background: white;
+            border: 4px solid var(--sage-green-dark);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .tab-header {
+            display: flex;
+            background: var(--sage-green);
+            border-bottom: 3px solid var(--deep-brown);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem;
+            background: transparent;
+            border: none;
+            color: var(--parchment);
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+
+        .tab-button:last-child {
+            border-right: none;
+        }
+
+        .tab-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tab-button.active {
+            background: white;
+            color: var(--sage-green-dark);
+            font-weight: 600;
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--terracotta);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 2rem;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-content h2 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--sage-green-dark);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--terracotta);
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-content h3 {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            color: var(--deep-brown);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        .tab-content p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+        }
+
+        .taxonomy-item {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: var(--parchment);
+            border-left: 3px solid var(--sage-green);
+            border-radius: 4px;
+        }
+
+        .taxonomy-label {
+            font-family: var(--font-serif);
+            font-weight: 600;
+            color: var(--deep-brown);
+        }
+
+        .taxonomy-value {
+            font-family: var(--font-mono);
+            color: var(--charcoal);
+            font-size: 0.95rem;
+        }
+
+        .morphology-section {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--parchment);
+            border-radius: 6px;
+            border: 1px solid var(--sage-green-light);
+        }
+
+        .growth-stage {
+            background: white;
+            border: 2px solid var(--sage-green);
+            border-radius: 6px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .growth-stage:hover {
+            transform: translateX(5px);
+            box-shadow: -4px 4px 0 var(--terracotta-light);
+        }
+
+        .stage-number {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--terracotta);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-name {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--sage-green-dark);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-duration {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--sepia);
+            margin-bottom: 0.75rem;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--terracotta);
+            font-weight: bold;
+        }
+
+        /* Highlighted elements */
+        .po-element {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .po-element:hover {
+            filter: brightness(1.2);
+        }
+
+        .po-element.highlighted {
+            filter: brightness(1.3) drop-shadow(0 0 8px var(--terracotta));
+        }
+
+        /* Legend */
+        .legend {
+            background: white;
+            border: 3px solid var(--deep-brown);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .legend h3 {
+            font-family: var(--font-serif);
+            color: var(--deep-brown);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            gap: 0.75rem;
+        }
+
+        .legend-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 2px solid var(--deep-brown);
+        }
+
+        .legend-label {
+            font-family: var(--font-sans);
+            color: var(--charcoal);
+        }
+
+        .legend-po {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--sepia);
+            margin-left: auto;
+        }
+
+        /* Scrollbar styling */
+        .tab-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .tab-content::-webkit-scrollbar-track {
+            background: var(--parchment);
+        }
+
+        .tab-content::-webkit-scrollbar-thumb {
+            background: var(--sage-green);
+            border-radius: 4px;
+        }
+
+        .tab-content::-webkit-scrollbar-thumb:hover {
+            background: var(--sage-green-dark);
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+                margin: 1rem auto;
+            }
+
+            .svg-container {
+                padding: 2rem;
+            }
+
+            .tab-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div>
+                <h1>Interactive Botanical Explorer</h1>
+                <p class="subtitle">Arabidopsis thaliana • Thale Cress</p>
+            </div>
+            <a href="index.html" class="nav-link">← Back to Portfolio</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div>
+            <div class="svg-container">
+                <div id="plant-diagram"></div>
+            </div>
+
+            <div class="legend">
+                <h3>Plant Structures</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #8fbc8f;"></div>
+                    <span class="legend-label">Leaf (Foliar Organ)</span>
+                    <span class="legend-po">PO_0025034</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #8b7355;"></div>
+                    <span class="legend-label">Root System</span>
+                    <span class="legend-po">PO_0009005</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #f4d03f;"></div>
+                    <span class="legend-label">Flower</span>
+                    <span class="legend-po">PO_0009046</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <div class="tab-header">
+                <button class="tab-button active" data-tab="taxonomy">Taxonomy</button>
+                <button class="tab-button" data-tab="morphology">Morphology</button>
+                <button class="tab-button" data-tab="growth">Growth Stages</button>
+            </div>
+
+            <div class="tab-content active" id="taxonomy">
+                <h2>Taxonomic Classification</h2>
+
+                <div class="taxonomy-item">
+                    <div class="taxonomy-label">Kingdom:</div>
+                    <div class="taxonomy-value">Plantae</div>
+                </div>
+                <div class="taxonomy-item">
+                    <div class="taxonomy-label">Clade:</div>
+                    <div class="taxonomy-value">Tracheophytes</div>
+                </div>
+                <div class="taxonomy-item">
+                    <div class="taxonomy-label">Clade:</div>
+                    <div class="taxonomy-value">Angiosperms</div>
+                </div>
+                <div class="taxonomy-item">
+                    <div class="taxonomy-label">Clade:</div>
+                    <div class="taxonomy-value">Eudicots</div>
+                </div>
+                <div class="taxonomy-item">
+                    <div class="taxonomy-label">Clade:</div>
+                    <div class="taxonomy-value">Rosids</div>
+                </div>
+                <div class="taxonomy-item">
+                    <div class="taxonomy-label">Order:</div>
+                    <div class="taxonomy-value">Brassicales</div>
+                </div>
+                <div class="taxonomy-item">
+                    <div class="taxonomy-label">Family:</div>
+                    <div class="taxonomy-value">Brassicaceae</div>
+                </div>
+                <div class="taxonomy-item">
+                    <div class="taxonomy-label">Genus:</div>
+                    <div class="taxonomy-value">Arabidopsis</div>
+                </div>
+                <div class="taxonomy-item">
+                    <div class="taxonomy-label">Species:</div>
+                    <div class="taxonomy-value">A. thaliana</div>
+                </div>
+
+                <h3>Scientific Significance</h3>
+                <p>
+                    <em>Arabidopsis thaliana</em>, commonly known as thale cress or mouse-ear cress, is a small flowering plant
+                    that has become the most important model organism in plant biology and genetics.
+                </p>
+                <p>
+                    First described by Johannes Thal in the Harz Mountains in the 16th century, this unassuming member of
+                    the mustard family (Brassicaceae) was chosen as a model organism due to its small genome (~125 Mb),
+                    short generation time (6 weeks), prolific seed production, and ease of cultivation in laboratory settings.
+                </p>
+                <p>
+                    In 2000, <em>A. thaliana</em> became the first plant to have its entire genome sequenced, revealing
+                    approximately 27,000 protein-coding genes. This milestone revolutionized our understanding of plant
+                    molecular biology, development, and evolution.
+                </p>
+
+                <h3>Ecological Distribution</h3>
+                <p>
+                    Native to Europe, Asia, and northwestern Africa, <em>A. thaliana</em> has naturalized across temperate
+                    regions worldwide. It thrives in disturbed habitats, roadsides, and waste areas, demonstrating remarkable
+                    adaptability to various environmental conditions.
+                </p>
+            </div>
+
+            <div class="tab-content" id="morphology">
+                <h2>Morphological Features</h2>
+
+                <div class="morphology-section">
+                    <h3>Root System (PO_0009005)</h3>
+                    <p>
+                        The root system of <em>Arabidopsis</em> consists of a primary taproot with lateral root branches.
+                        The primary root emerges from the embryonic radicle and grows vertically downward (positive gravitropism).
+                    </p>
+                    <ul>
+                        <li><strong>Primary Root:</strong> Typically reaches 5-8 cm in laboratory conditions</li>
+                        <li><strong>Lateral Roots:</strong> Branch from the pericycle tissue at regular intervals</li>
+                        <li><strong>Root Hairs:</strong> Single-cell extensions that increase surface area for water and nutrient absorption</li>
+                        <li><strong>Root Cap:</strong> Protective structure at the root apex containing statocytes for gravity sensing</li>
+                    </ul>
+                    <p>
+                        The root architecture is highly plastic, responding to soil nutrients, water availability, and mechanical impedance.
+                        Root development has been extensively characterized, making it an excellent system for studying cell division,
+                        elongation, and differentiation.
+                    </p>
+                </div>
+
+                <div class="morphology-section">
+                    <h3>Leaves (PO_0025034)</h3>
+                    <p>
+                        <em>Arabidopsis</em> exhibits heteroblasty—producing morphologically distinct juvenile and adult leaves.
+                        The leaves are arranged in a rosette pattern during the vegetative phase.
+                    </p>
+                    <ul>
+                        <li><strong>Cotyledons:</strong> Two embryonic seed leaves, oval-shaped, emerge upon germination</li>
+                        <li><strong>Juvenile Leaves:</strong> Round with smooth margins, lack trichomes on upper surface</li>
+                        <li><strong>Adult Leaves:</strong> Elongated with serrated margins, presence of abaxial and adaxial trichomes</li>
+                        <li><strong>Cauline Leaves:</strong> Smaller leaves on the flowering stem, sessile with clasping bases</li>
+                    </ul>
+                    <p>
+                        Leaf size typically ranges from 0.5-2 cm in length. The transition from juvenile to adult leaf identity is
+                        controlled by microRNAs and transcription factors, representing a well-studied developmental phase change.
+                    </p>
+                </div>
+
+                <div class="morphology-section">
+                    <h3>Flowers (PO_0009046)</h3>
+                    <p>
+                        The flower is a perfect example of the typical eudicot arrangement with four distinct whorls organized
+                        in a cruciform pattern characteristic of Brassicaceae.
+                    </p>
+                    <ul>
+                        <li><strong>Sepals:</strong> 4 green sepals in two whorls (whorl 1)</li>
+                        <li><strong>Petals:</strong> 4 white petals arranged in a cross pattern (whorl 2)</li>
+                        <li><strong>Stamens:</strong> 6 stamens—4 long (median) and 2 short (lateral) (whorls 3)</li>
+                        <li><strong>Carpels:</strong> 2 fused carpels forming a superior ovary (whorl 4)</li>
+                    </ul>
+                    <p>
+                        Flowers are approximately 2-3 mm in diameter and are produced in racemose inflorescences. The ABC model
+                        of flower development was largely elucidated through genetic studies in <em>Arabidopsis</em>, identifying
+                        homeotic genes that specify organ identity in each whorl.
+                    </p>
+                </div>
+
+                <div class="morphology-section">
+                    <h3>Siliques (Fruit)</h3>
+                    <p>
+                        Following successful pollination, the ovary develops into a silique—an elongated, two-chambered fruit
+                        characteristic of the Brassicaceae family.
+                    </p>
+                    <ul>
+                        <li>Length: 10-15 mm</li>
+                        <li>Contains 40-60 seeds arranged in two rows</li>
+                        <li>Dehiscent fruit that splits along two sutures at maturity</li>
+                        <li>Seeds are dispersed explosively when the valves detach</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tab-content" id="growth">
+                <h2>Life Cycle & Development</h2>
+
+                <div class="growth-stage">
+                    <div class="stage-number">1</div>
+                    <div class="stage-name">Seed Germination</div>
+                    <div class="stage-duration">Days 0-3</div>
+                    <p>
+                        Germination begins with imbibition (water uptake), followed by radicle emergence. Seeds require
+                        stratification (cold treatment at 4°C for 2-4 days) to break dormancy and synchronize germination.
+                    </p>
+                    <ul>
+                        <li>Seed coat rupture occurs within 24-48 hours under optimal conditions</li>
+                        <li>Primary root (radicle) emerges first, growing downward</li>
+                        <li>Hypocotyl elongates, pulling cotyledons above soil surface</li>
+                        <li>Light triggers photomorphogenesis—hypocotyl elongation slows, cotyledons expand and green</li>
+                    </ul>
+                </div>
+
+                <div class="growth-stage">
+                    <div class="stage-number">2</div>
+                    <div class="stage-name">Vegetative Growth</div>
+                    <div class="stage-duration">Days 3-21 (long days) or Days 3-35 (short days)</div>
+                    <p>
+                        The vegetative phase is characterized by rosette formation—leaves develop from the shoot apical
+                        meristem in a spiral phyllotactic pattern without stem elongation.
+                    </p>
+                    <ul>
+                        <li>Cotyledons photosynthesize and provide initial nutrients</li>
+                        <li>True leaves emerge sequentially from the apical meristem</li>
+                        <li>Juvenile-to-adult vegetative phase transition occurs around leaf 5-8</li>
+                        <li>Root system develops lateral branches, establishing nutrient uptake network</li>
+                        <li>Vegetative phase duration depends on photoperiod—<em>Arabidopsis</em> is a facultative long-day plant</li>
+                    </ul>
+                </div>
+
+                <div class="growth-stage">
+                    <div class="stage-number">3</div>
+                    <div class="stage-name">Flowering Transition</div>
+                    <div class="stage-duration">Days 14-28 (varies by ecotype and photoperiod)</div>
+                    <p>
+                        Floral induction represents a critical developmental transition where the vegetative shoot apical
+                        meristem converts to an inflorescence meristem, irreversibly committing to reproductive development.
+                    </p>
+                    <ul>
+                        <li>Integration of environmental signals (photoperiod, vernalization) and endogenous factors (age, hormones)</li>
+                        <li>Upregulation of floral integrator genes (<em>FT</em>, <em>SOC1</em>, <em>LFY</em>)</li>
+                        <li>Bolting—rapid elongation of the primary inflorescence stem</li>
+                        <li>Conversion of shoot apical meristem to inflorescence meristem</li>
+                    </ul>
+                </div>
+
+                <div class="growth-stage">
+                    <div class="stage-number">4</div>
+                    <div class="stage-name">Flowering & Pollination</div>
+                    <div class="stage-duration">Days 21-35</div>
+                    <p>
+                        Flowers develop acropetally (from bottom to top) on the main stem and secondary branches.
+                        <em>Arabidopsis</em> is predominantly self-pollinating (autogamous).
+                    </p>
+                    <ul>
+                        <li>Flower buds form from floral meristems in a spiral pattern</li>
+                        <li>Each flower takes approximately 3-4 days from initiation to anthesis (opening)</li>
+                        <li>Stamens dehisce (release pollen) shortly before or at flower opening</li>
+                        <li>Self-pollination occurs as stamens contact the stigma</li>
+                        <li>Cross-pollination rate is typically less than 1% in natural populations</li>
+                    </ul>
+                </div>
+
+                <div class="growth-stage">
+                    <div class="stage-number">5</div>
+                    <div class="stage-name">Silique Development</div>
+                    <div class="stage-duration">Days 25-40</div>
+                    <p>
+                        Following fertilization, the ovary develops into a silique while the embryos develop within the seeds.
+                    </p>
+                    <ul>
+                        <li>Silique elongation occurs over 7-10 days post-fertilization</li>
+                        <li>Embryogenesis progresses through defined stages (globular, heart, torpedo, bent cotyledon)</li>
+                        <li>Seeds accumulate storage reserves (proteins, lipids)</li>
+                        <li>Seeds undergo maturation drying, entering dormancy</li>
+                        <li>Siliques turn from green to brown as they mature and desiccate</li>
+                    </ul>
+                </div>
+
+                <div class="growth-stage">
+                    <div class="stage-number">6</div>
+                    <div class="stage-name">Senescence & Seed Dispersal</div>
+                    <div class="stage-duration">Days 35-42</div>
+                    <p>
+                        Plant senescence is a programmed developmental process involving nutrient remobilization and
+                        controlled cell death, culminating in seed dispersal.
+                    </p>
+                    <ul>
+                        <li>Rosette leaves undergo senescence, yellowing as chlorophyll degrades</li>
+                        <li>Nutrients are remobilized from senescing tissues to developing seeds</li>
+                        <li>Mature siliques dehisce explosively, dispersing seeds within a radius of several centimeters</li>
+                        <li>Seeds remain viable for years when stored properly (dry, cool conditions)</li>
+                        <li>Total life cycle: 6 weeks under optimal long-day conditions (16h light/8h dark, 22°C)</li>
+                    </ul>
+                </div>
+
+                <h3>Environmental Influences</h3>
+                <p>
+                    The timing of developmental transitions is highly responsive to environmental cues, allowing
+                    <em>Arabidopsis</em> to optimize reproductive success:
+                </p>
+                <ul>
+                    <li><strong>Photoperiod:</strong> Long days (>14h light) accelerate flowering via the photoperiod pathway</li>
+                    <li><strong>Vernalization:</strong> Prolonged cold exposure (4-6 weeks at 4°C) promotes flowering in winter-annual ecotypes</li>
+                    <li><strong>Temperature:</strong> Warm ambient temperatures (27-29°C) accelerate flowering independent of photoperiod</li>
+                    <li><strong>Nutrient Availability:</strong> Nitrogen and phosphorus availability influence growth rate and flowering time</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sound feedback system using Web Audio API
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playOrganicSound(type) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            // Organic, natural sound parameters
+            switch(type) {
+                case 'rustle':
+                    // Soft rustling sound
+                    oscillator.type = 'sawtooth';
+                    oscillator.frequency.setValueAtTime(120, audioContext.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + 0.1);
+                    gainNode.gain.setValueAtTime(0.03, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                    break;
+                case 'snap':
+                    // Crisp snapping sound
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.05);
+                    gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
+                    break;
+                case 'hover':
+                    // Gentle hover sound
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+                    gainNode.gain.setValueAtTime(0.02, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.08);
+                    break;
+            }
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.15);
+        }
+
+        // Load and fix SVG
+        async function loadPlantSVG() {
+            const svgUrl = 'https://raw.githubusercontent.com/ebi-gene-expression-group/anatomogram/master/src/svg/arabidopsis_thaliana.svg';
+
+            try {
+                const response = await fetch(svgUrl);
+                const svgText = await response.text();
+
+                // Parse SVG
+                const parser = new DOMParser();
+                const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
+                const svgElement = svgDoc.querySelector('svg');
+
+                // Critical: Remove visibility:hidden and apply default fills/strokes
+                svgElement.style.visibility = 'visible';
+                svgElement.style.display = 'block';
+
+                // Set proper dimensions for display
+                svgElement.setAttribute('width', '400');
+                svgElement.setAttribute('height', 'auto');
+
+                // Apply default styling to all paths and elements
+                const allElements = svgElement.querySelectorAll('*');
+                allElements.forEach(element => {
+                    // Remove default invisible styling
+                    if (element.style.fill === 'none') {
+                        element.style.fill = '';
+                    }
+                    if (element.style.stroke === 'none') {
+                        element.style.stroke = '';
+                    }
+
+                    // Apply organic colors based on PO IDs
+                    const poId = element.id || element.getAttribute('id');
+
+                    if (poId) {
+                        element.classList.add('po-element');
+
+                        // Color coding based on plant parts
+                        if (poId.includes('PO_0025034') || poId.toLowerCase().includes('leaf')) {
+                            // Leaves - sage green
+                            element.style.fill = '#8fbc8f';
+                            element.style.stroke = '#5d7a5f';
+                            element.style.strokeWidth = '1.5';
+                        } else if (poId.includes('PO_0009005') || poId.toLowerCase().includes('root')) {
+                            // Roots - earth brown
+                            element.style.fill = '#8b7355';
+                            element.style.stroke = '#6b5939';
+                            element.style.strokeWidth = '1.5';
+                        } else if (poId.includes('PO_0009046') || poId.toLowerCase().includes('flower')) {
+                            // Flowers - soft yellow
+                            element.style.fill = '#f4d03f';
+                            element.style.stroke = '#d4a404';
+                            element.style.strokeWidth = '1.5';
+                        }
+
+                        // Add interactivity
+                        element.addEventListener('mouseenter', () => {
+                            element.classList.add('highlighted');
+                            playOrganicSound('hover');
+                        });
+
+                        element.addEventListener('mouseleave', () => {
+                            element.classList.remove('highlighted');
+                        });
+
+                        element.addEventListener('click', () => {
+                            playOrganicSound('snap');
+                            console.log('Plant Ontology ID:', poId);
+                        });
+                    }
+                });
+
+                // Also apply default colors to elements without IDs
+                svgElement.querySelectorAll('path, circle, rect, polygon').forEach(element => {
+                    if (!element.id && !element.hasAttribute('id')) {
+                        // Default plant green
+                        if (!element.style.fill || element.style.fill === 'none') {
+                            element.style.fill = '#7a9e7e';
+                        }
+                        if (!element.style.stroke || element.style.stroke === 'none') {
+                            element.style.stroke = '#5d7a5f';
+                            element.style.strokeWidth = '1';
+                        }
+                    }
+                });
+
+                // Insert into container
+                const container = document.getElementById('plant-diagram');
+                container.innerHTML = '';
+                container.appendChild(svgElement);
+
+                console.log('SVG loaded successfully with', allElements.length, 'elements');
+
+            } catch (error) {
+                console.error('Error loading SVG:', error);
+                document.getElementById('plant-diagram').innerHTML =
+                    '<p style="color: var(--terracotta); text-align: center;">Error loading botanical diagram. Please check your connection.</p>';
+            }
+        }
+
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                playOrganicSound('rustle');
+
+                // Remove active class from all
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked tab
+                button.classList.add('active');
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Load SVG on page load
+        window.addEventListener('DOMContentLoaded', loadPlantSVG);
+    </script>
+</body>
+</html>
