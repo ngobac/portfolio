@@ -432,11 +432,23 @@
         <div class="nav-container">
             <div>
                 <h1>Interactive Botanical Explorer</h1>
-                <p class="subtitle">Arabidopsis thaliana • Thale Cress</p>
+                <p class="subtitle" id="plant-subtitle">Select a plant species</p>
             </div>
             <a href="index.html" class="nav-link">← Back to Portfolio</a>
         </div>
     </header>
+
+    <!-- Plant Selector -->
+    <div style="max-width: 1400px; margin: 1.5rem auto; padding: 0 2rem;">
+        <div style="background: white; border: 3px solid var(--sage-green-dark); border-radius: 8px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+            <label for="plant-select" style="font-family: var(--font-serif); font-size: 1.2rem; color: var(--deep-brown); margin-right: 1rem; font-weight: 600;">Choose Plant Species:</label>
+            <select id="plant-select" style="font-family: var(--font-sans); font-size: 1rem; padding: 0.75rem 1.5rem; border: 2px solid var(--sage-green); border-radius: 6px; background: var(--parchment); color: var(--charcoal); cursor: pointer; min-width: 300px;">
+                <option value="rose">Rosa (Rose / Hoa Hồng)</option>
+                <option value="mangrove">Rhizophora apiculata (Mangrove / Đước Đôi)</option>
+                <option value="rubber">Hevea brasiliensis (Rubber Tree / Cây Cao Su)</option>
+            </select>
+        </div>
+    </div>
 
     <div class="container">
         <div>
@@ -444,22 +456,10 @@
                 <div id="plant-diagram"></div>
             </div>
 
-            <div class="legend">
+            <div class="legend" id="plant-legend">
                 <h3>Plant Structures</h3>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #8fbc8f;"></div>
-                    <span class="legend-label">Leaf (Foliar Organ)</span>
-                    <span class="legend-po">PO_0025034</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #8b7355;"></div>
-                    <span class="legend-label">Root System</span>
-                    <span class="legend-po">PO_0009005</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #f4d03f;"></div>
-                    <span class="legend-label">Flower</span>
-                    <span class="legend-po">PO_0009046</span>
+                <div id="legend-content">
+                    <!-- Legend will be populated dynamically -->
                 </div>
             </div>
         </div>
@@ -472,261 +472,451 @@
             </div>
 
             <div class="tab-content active" id="taxonomy">
-                <h2>Taxonomic Classification</h2>
-
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Kingdom:</div>
-                    <div class="taxonomy-value">Plantae</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Clade:</div>
-                    <div class="taxonomy-value">Tracheophytes</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Clade:</div>
-                    <div class="taxonomy-value">Angiosperms</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Clade:</div>
-                    <div class="taxonomy-value">Eudicots</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Clade:</div>
-                    <div class="taxonomy-value">Rosids</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Order:</div>
-                    <div class="taxonomy-value">Brassicales</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Family:</div>
-                    <div class="taxonomy-value">Brassicaceae</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Genus:</div>
-                    <div class="taxonomy-value">Arabidopsis</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Species:</div>
-                    <div class="taxonomy-value">A. thaliana</div>
-                </div>
-
-                <h3>Scientific Significance</h3>
-                <p>
-                    <em>Arabidopsis thaliana</em>, commonly known as thale cress or mouse-ear cress, is a small flowering plant
-                    that has become the most important model organism in plant biology and genetics.
-                </p>
-                <p>
-                    First described by Johannes Thal in the Harz Mountains in the 16th century, this unassuming member of
-                    the mustard family (Brassicaceae) was chosen as a model organism due to its small genome (~125 Mb),
-                    short generation time (6 weeks), prolific seed production, and ease of cultivation in laboratory settings.
-                </p>
-                <p>
-                    In 2000, <em>A. thaliana</em> became the first plant to have its entire genome sequenced, revealing
-                    approximately 27,000 protein-coding genes. This milestone revolutionized our understanding of plant
-                    molecular biology, development, and evolution.
-                </p>
-
-                <h3>Ecological Distribution</h3>
-                <p>
-                    Native to Europe, Asia, and northwestern Africa, <em>A. thaliana</em> has naturalized across temperate
-                    regions worldwide. It thrives in disturbed habitats, roadsides, and waste areas, demonstrating remarkable
-                    adaptability to various environmental conditions.
-                </p>
+                <!-- Content will be populated dynamically -->
             </div>
 
             <div class="tab-content" id="morphology">
-                <h2>Morphological Features</h2>
-
-                <div class="morphology-section">
-                    <h3>Root System (PO_0009005)</h3>
-                    <p>
-                        The root system of <em>Arabidopsis</em> consists of a primary taproot with lateral root branches.
-                        The primary root emerges from the embryonic radicle and grows vertically downward (positive gravitropism).
-                    </p>
-                    <ul>
-                        <li><strong>Primary Root:</strong> Typically reaches 5-8 cm in laboratory conditions</li>
-                        <li><strong>Lateral Roots:</strong> Branch from the pericycle tissue at regular intervals</li>
-                        <li><strong>Root Hairs:</strong> Single-cell extensions that increase surface area for water and nutrient absorption</li>
-                        <li><strong>Root Cap:</strong> Protective structure at the root apex containing statocytes for gravity sensing</li>
-                    </ul>
-                    <p>
-                        The root architecture is highly plastic, responding to soil nutrients, water availability, and mechanical impedance.
-                        Root development has been extensively characterized, making it an excellent system for studying cell division,
-                        elongation, and differentiation.
-                    </p>
-                </div>
-
-                <div class="morphology-section">
-                    <h3>Leaves (PO_0025034)</h3>
-                    <p>
-                        <em>Arabidopsis</em> exhibits heteroblasty—producing morphologically distinct juvenile and adult leaves.
-                        The leaves are arranged in a rosette pattern during the vegetative phase.
-                    </p>
-                    <ul>
-                        <li><strong>Cotyledons:</strong> Two embryonic seed leaves, oval-shaped, emerge upon germination</li>
-                        <li><strong>Juvenile Leaves:</strong> Round with smooth margins, lack trichomes on upper surface</li>
-                        <li><strong>Adult Leaves:</strong> Elongated with serrated margins, presence of abaxial and adaxial trichomes</li>
-                        <li><strong>Cauline Leaves:</strong> Smaller leaves on the flowering stem, sessile with clasping bases</li>
-                    </ul>
-                    <p>
-                        Leaf size typically ranges from 0.5-2 cm in length. The transition from juvenile to adult leaf identity is
-                        controlled by microRNAs and transcription factors, representing a well-studied developmental phase change.
-                    </p>
-                </div>
-
-                <div class="morphology-section">
-                    <h3>Flowers (PO_0009046)</h3>
-                    <p>
-                        The flower is a perfect example of the typical eudicot arrangement with four distinct whorls organized
-                        in a cruciform pattern characteristic of Brassicaceae.
-                    </p>
-                    <ul>
-                        <li><strong>Sepals:</strong> 4 green sepals in two whorls (whorl 1)</li>
-                        <li><strong>Petals:</strong> 4 white petals arranged in a cross pattern (whorl 2)</li>
-                        <li><strong>Stamens:</strong> 6 stamens—4 long (median) and 2 short (lateral) (whorls 3)</li>
-                        <li><strong>Carpels:</strong> 2 fused carpels forming a superior ovary (whorl 4)</li>
-                    </ul>
-                    <p>
-                        Flowers are approximately 2-3 mm in diameter and are produced in racemose inflorescences. The ABC model
-                        of flower development was largely elucidated through genetic studies in <em>Arabidopsis</em>, identifying
-                        homeotic genes that specify organ identity in each whorl.
-                    </p>
-                </div>
-
-                <div class="morphology-section">
-                    <h3>Siliques (Fruit)</h3>
-                    <p>
-                        Following successful pollination, the ovary develops into a silique—an elongated, two-chambered fruit
-                        characteristic of the Brassicaceae family.
-                    </p>
-                    <ul>
-                        <li>Length: 10-15 mm</li>
-                        <li>Contains 40-60 seeds arranged in two rows</li>
-                        <li>Dehiscent fruit that splits along two sutures at maturity</li>
-                        <li>Seeds are dispersed explosively when the valves detach</li>
-                    </ul>
-                </div>
+                <!-- Content will be populated dynamically -->
             </div>
 
             <div class="tab-content" id="growth">
-                <h2>Life Cycle & Development</h2>
-
-                <div class="growth-stage">
-                    <div class="stage-number">1</div>
-                    <div class="stage-name">Seed Germination</div>
-                    <div class="stage-duration">Days 0-3</div>
-                    <p>
-                        Germination begins with imbibition (water uptake), followed by radicle emergence. Seeds require
-                        stratification (cold treatment at 4°C for 2-4 days) to break dormancy and synchronize germination.
-                    </p>
-                    <ul>
-                        <li>Seed coat rupture occurs within 24-48 hours under optimal conditions</li>
-                        <li>Primary root (radicle) emerges first, growing downward</li>
-                        <li>Hypocotyl elongates, pulling cotyledons above soil surface</li>
-                        <li>Light triggers photomorphogenesis—hypocotyl elongation slows, cotyledons expand and green</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">2</div>
-                    <div class="stage-name">Vegetative Growth</div>
-                    <div class="stage-duration">Days 3-21 (long days) or Days 3-35 (short days)</div>
-                    <p>
-                        The vegetative phase is characterized by rosette formation—leaves develop from the shoot apical
-                        meristem in a spiral phyllotactic pattern without stem elongation.
-                    </p>
-                    <ul>
-                        <li>Cotyledons photosynthesize and provide initial nutrients</li>
-                        <li>True leaves emerge sequentially from the apical meristem</li>
-                        <li>Juvenile-to-adult vegetative phase transition occurs around leaf 5-8</li>
-                        <li>Root system develops lateral branches, establishing nutrient uptake network</li>
-                        <li>Vegetative phase duration depends on photoperiod—<em>Arabidopsis</em> is a facultative long-day plant</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">3</div>
-                    <div class="stage-name">Flowering Transition</div>
-                    <div class="stage-duration">Days 14-28 (varies by ecotype and photoperiod)</div>
-                    <p>
-                        Floral induction represents a critical developmental transition where the vegetative shoot apical
-                        meristem converts to an inflorescence meristem, irreversibly committing to reproductive development.
-                    </p>
-                    <ul>
-                        <li>Integration of environmental signals (photoperiod, vernalization) and endogenous factors (age, hormones)</li>
-                        <li>Upregulation of floral integrator genes (<em>FT</em>, <em>SOC1</em>, <em>LFY</em>)</li>
-                        <li>Bolting—rapid elongation of the primary inflorescence stem</li>
-                        <li>Conversion of shoot apical meristem to inflorescence meristem</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">4</div>
-                    <div class="stage-name">Flowering & Pollination</div>
-                    <div class="stage-duration">Days 21-35</div>
-                    <p>
-                        Flowers develop acropetally (from bottom to top) on the main stem and secondary branches.
-                        <em>Arabidopsis</em> is predominantly self-pollinating (autogamous).
-                    </p>
-                    <ul>
-                        <li>Flower buds form from floral meristems in a spiral pattern</li>
-                        <li>Each flower takes approximately 3-4 days from initiation to anthesis (opening)</li>
-                        <li>Stamens dehisce (release pollen) shortly before or at flower opening</li>
-                        <li>Self-pollination occurs as stamens contact the stigma</li>
-                        <li>Cross-pollination rate is typically less than 1% in natural populations</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">5</div>
-                    <div class="stage-name">Silique Development</div>
-                    <div class="stage-duration">Days 25-40</div>
-                    <p>
-                        Following fertilization, the ovary develops into a silique while the embryos develop within the seeds.
-                    </p>
-                    <ul>
-                        <li>Silique elongation occurs over 7-10 days post-fertilization</li>
-                        <li>Embryogenesis progresses through defined stages (globular, heart, torpedo, bent cotyledon)</li>
-                        <li>Seeds accumulate storage reserves (proteins, lipids)</li>
-                        <li>Seeds undergo maturation drying, entering dormancy</li>
-                        <li>Siliques turn from green to brown as they mature and desiccate</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">6</div>
-                    <div class="stage-name">Senescence & Seed Dispersal</div>
-                    <div class="stage-duration">Days 35-42</div>
-                    <p>
-                        Plant senescence is a programmed developmental process involving nutrient remobilization and
-                        controlled cell death, culminating in seed dispersal.
-                    </p>
-                    <ul>
-                        <li>Rosette leaves undergo senescence, yellowing as chlorophyll degrades</li>
-                        <li>Nutrients are remobilized from senescing tissues to developing seeds</li>
-                        <li>Mature siliques dehisce explosively, dispersing seeds within a radius of several centimeters</li>
-                        <li>Seeds remain viable for years when stored properly (dry, cool conditions)</li>
-                        <li>Total life cycle: 6 weeks under optimal long-day conditions (16h light/8h dark, 22°C)</li>
-                    </ul>
-                </div>
-
-                <h3>Environmental Influences</h3>
-                <p>
-                    The timing of developmental transitions is highly responsive to environmental cues, allowing
-                    <em>Arabidopsis</em> to optimize reproductive success:
-                </p>
-                <ul>
-                    <li><strong>Photoperiod:</strong> Long days (>14h light) accelerate flowering via the photoperiod pathway</li>
-                    <li><strong>Vernalization:</strong> Prolonged cold exposure (4-6 weeks at 4°C) promotes flowering in winter-annual ecotypes</li>
-                    <li><strong>Temperature:</strong> Warm ambient temperatures (27-29°C) accelerate flowering independent of photoperiod</li>
-                    <li><strong>Nutrient Availability:</strong> Nitrogen and phosphorus availability influence growth rate and flowering time</li>
-                </ul>
+                <!-- Content will be populated dynamically -->
             </div>
         </div>
     </div>
 
     <script>
+        // Plant database
+        const plantData = {
+            rose: {
+                scientificName: 'Rosa',
+                commonName: 'Rose / Hoa Hồng',
+                svgFile: 'rose_diagram.svg',
+                subtitle: 'Rosa • Rose / Hoa Hồng',
+                legend: [
+                    { color: '#e74c3c', label: 'Flower (Petals)', code: 'Rose Flower' },
+                    { color: '#27ae60', label: 'Compound Leaves', code: 'Pinnate Leaves' },
+                    { color: '#2ecc71', label: 'Stem', code: 'With Thorns' },
+                    { color: '#8b7355', label: 'Root System', code: 'Taproot' }
+                ],
+                taxonomy: [
+                    { label: 'Kingdom', value: 'Plantae' },
+                    { label: 'Clade', value: 'Angiosperms' },
+                    { label: 'Clade', value: 'Eudicots' },
+                    { label: 'Clade', value: 'Rosids' },
+                    { label: 'Order', value: 'Rosales' },
+                    { label: 'Family', value: 'Rosaceae' },
+                    { label: 'Subfamily', value: 'Rosoideae' },
+                    { label: 'Genus', value: 'Rosa' }
+                ],
+                significance: `Roses are among the most beloved and cultivated flowering plants worldwide. With over 300 species and thousands of cultivars, roses have been symbols of love, beauty, and passion across cultures for millennia. They are valued not only for their spectacular flowers but also for their fragrance, which is used in perfumery and aromatherapy.`,
+                distribution: `Wild roses are native to temperate regions of the Northern Hemisphere, including Asia, Europe, North America, and Northwest Africa. Cultivated roses are now grown worldwide in gardens, parks, and commercial nurseries. Different species have adapted to various climates, from cold-hardy rugosa roses to heat-tolerant tea roses.`,
+                morphology: [
+                    {
+                        title: 'Flowers',
+                        description: 'Rose flowers exhibit remarkable diversity in form, size, and color. The classic rose flower consists of multiple layers of petals arranged in a spiral pattern.',
+                        features: [
+                            '<strong>Petals:</strong> Typically 5 petals in wild species; cultivated varieties can have dozens of petals in layered arrangements',
+                            '<strong>Colors:</strong> Range from white, yellow, pink, red, to purple and even multicolored varieties',
+                            '<strong>Fragrance:</strong> Many roses produce essential oils with distinctive sweet scents',
+                            '<strong>Size:</strong> Varies from miniature roses (< 2 cm) to hybrid tea roses (> 10 cm diameter)'
+                        ]
+                    },
+                    {
+                        title: 'Leaves',
+                        description: 'Roses have compound pinnate leaves, typically with 5-9 leaflets (odd number) arranged along a central rachis.',
+                        features: [
+                            '<strong>Leaflet Shape:</strong> Ovate to elliptical with serrated (toothed) margins',
+                            '<strong>Surface:</strong> Usually dark green, glossy or matte depending on variety',
+                            '<strong>Stipules:</strong> Present at the base of the petiole, often fused to the stem',
+                            '<strong>Arrangement:</strong> Alternate along the stem'
+                        ]
+                    },
+                    {
+                        title: 'Stems & Thorns',
+                        description: 'Rose stems are characteristically armed with prickles (commonly called thorns), though some varieties are thornless.',
+                        features: [
+                            '<strong>Prickles:</strong> Sharp, curved outgrowths that protect from herbivores',
+                            '<strong>Stem Structure:</strong> Woody, can be erect, climbing, or trailing',
+                            '<strong>Color:</strong> Green when young, turning brown and woody with age',
+                            '<strong>Height:</strong> Varies from miniature (30 cm) to climbing varieties (> 6 meters)'
+                        ]
+                    },
+                    {
+                        title: 'Root System',
+                        description: 'Roses develop a fibrous to taproot system, with many varieties being grafted onto rootstocks.',
+                        features: [
+                            '<strong>Structure:</strong> Deep taproot with extensive lateral roots',
+                            '<strong>Depth:</strong> Can reach 1-2 meters in mature plants',
+                            '<strong>Grafting:</strong> Most cultivated roses are grafted onto hardy rootstock',
+                            '<strong>Function:</strong> Efficient water and nutrient uptake'
+                        ]
+                    }
+                ],
+                growth: [
+                    {
+                        number: '1',
+                        name: 'Planting & Establishment',
+                        duration: 'Weeks 1-4',
+                        description: 'Roses can be propagated from seeds, cuttings, or grafted plants. Most commercial roses are grafted.',
+                        stages: [
+                            'Bare-root or containerized plants are planted in well-draining soil',
+                            'Root system establishes and begins to spread',
+                            'First shoots emerge from buds on the canes',
+                            'Regular watering is critical during establishment'
+                        ]
+                    },
+                    {
+                        number: '2',
+                        name: 'Vegetative Growth',
+                        duration: 'Spring - Summer (3-4 months)',
+                        description: 'Active growth phase with rapid production of new canes, leaves, and stems.',
+                        stages: [
+                            'New canes grow from the base (basal breaks)',
+                            'Leaves develop along the canes in alternating pattern',
+                            'Plant focuses on building strong structure',
+                            'Photosynthesis drives carbohydrate production and storage'
+                        ]
+                    },
+                    {
+                        number: '3',
+                        name: 'Flowering',
+                        duration: 'Late Spring - Fall (varies by climate)',
+                        description: 'Flower buds form at the tips of new growth and develop into blooms.',
+                        stages: [
+                            'Flower buds (rose hips precursors) form at stem terminals',
+                            'Buds swell and sepals begin to open',
+                            'Petals unfurl in spiral pattern, revealing stamens and pistils',
+                            'Peak bloom lasts 3-7 days depending on temperature and variety',
+                            'Repeat-flowering varieties produce multiple flushes per season'
+                        ]
+                    },
+                    {
+                        number: '4',
+                        name: 'Pollination & Hip Formation',
+                        duration: 'After flowering',
+                        description: 'Following pollination, rose hips (fruit) develop containing seeds.',
+                        stages: [
+                            'Insects (bees, butterflies) or wind pollinate flowers',
+                            'Petals drop after pollination',
+                            'Ovary swells and develops into rose hip',
+                            'Hips ripen, turning red, orange, or black',
+                            'Each hip contains multiple seeds (achenes)'
+                        ]
+                    },
+                    {
+                        number: '5',
+                        name: 'Dormancy',
+                        duration: 'Winter (in temperate climates)',
+                        description: 'Roses enter dormancy in response to cold temperatures and shorter days.',
+                        stages: [
+                            'Growth slows as temperatures drop and daylight decreases',
+                            'Leaves may drop in deciduous varieties',
+                            'Plant stores carbohydrates in roots and canes',
+                            'Canes harden off for winter protection',
+                            'Minimal metabolic activity until spring'
+                        ]
+                    }
+                ],
+                environment: [
+                    { factor: 'Sunlight', requirement: 'Full sun (6-8 hours daily) for best flowering' },
+                    { factor: 'Soil', requirement: 'Well-draining, slightly acidic to neutral (pH 6.0-7.0), rich in organic matter' },
+                    { factor: 'Water', requirement: 'Consistent moisture, 1-2 inches per week; avoid overhead watering to prevent disease' },
+                    { factor: 'Temperature', requirement: 'Most varieties hardy in zones 5-9; some tolerate extremes' },
+                    { factor: 'Fertilization', requirement: 'Regular feeding during growing season with balanced or rose-specific fertilizer' }
+                ]
+            },
+            mangrove: {
+                scientificName: 'Rhizophora apiculata',
+                commonName: 'Mangrove / Đước Đôi',
+                svgFile: 'mangrove_diagram.svg',
+                subtitle: 'Rhizophora apiculata • Mangrove / Đước Đôi',
+                legend: [
+                    { color: '#228b22', label: 'Leathery Leaves', code: 'Salt-tolerant' },
+                    { color: '#654321', label: 'Trunk', code: 'Mangrove Wood' },
+                    { color: '#8b6f47', label: 'Prop/Stilt Roots', code: 'Aerial Support' },
+                    { color: '#5d4e37', label: 'Underground Roots', code: 'Anchor System' }
+                ],
+                taxonomy: [
+                    { label: 'Kingdom', value: 'Plantae' },
+                    { label: 'Clade', value: 'Angiosperms' },
+                    { label: 'Clade', value: 'Eudicots' },
+                    { label: 'Clade', value: 'Rosids' },
+                    { label: 'Order', value: 'Malpighiales' },
+                    { label: 'Family', value: 'Rhizophoraceae' },
+                    { label: 'Genus', value: 'Rhizophora' },
+                    { label: 'Species', value: 'R. apiculata' }
+                ],
+                significance: `Rhizophora apiculata is a true mangrove species found in coastal intertidal zones of the Indo-Pacific region. It plays a crucial ecological role in coastal protection, providing habitat for marine life, filtering water, sequestering carbon, and stabilizing shorelines against erosion and storm surges. Mangrove forests are among the most productive ecosystems on Earth.`,
+                distribution: `Native to tropical and subtropical coastlines of the Indo-Pacific region, from East Africa through South and Southeast Asia to Australia and the Pacific Islands. Thrives in saline, waterlogged soils of estuaries, lagoons, and tidal mudflats. Found in Vietnam's Mekong Delta, Malaysian coastlines, and throughout Indonesia.`,
+                morphology: [
+                    {
+                        title: 'Prop/Stilt Roots',
+                        description: 'The most distinctive feature of Rhizophora species is their extensive system of arching prop roots that provide stability in soft, muddy substrates.',
+                        features: [
+                            '<strong>Structure:</strong> Adventitious roots emerging from the trunk and branches, arching downward into the mud',
+                            '<strong>Function:</strong> Provide structural support in unstable sediments, resist wave action and tidal forces',
+                            '<strong>Gas Exchange:</strong> Contain lenticels (pores) for oxygen uptake in anaerobic soils',
+                            '<strong>Development:</strong> New prop roots continuously form as the tree grows, creating a dense root network'
+                        ]
+                    },
+                    {
+                        title: 'Leaves',
+                        description: 'Mangrove leaves are specially adapted to cope with high salinity and water stress.',
+                        features: [
+                            '<strong>Morphology:</strong> Elliptical, leathery, and thick with entire margins',
+                            '<strong>Size:</strong> 7-15 cm long, 3-6 cm wide',
+                            '<strong>Adaptations:</strong> Thick cuticle reduces water loss; salt-excreting glands on leaf surface',
+                            '<strong>Arrangement:</strong> Opposite arrangement on branches',
+                            '<strong>Color:</strong> Dark green, glossy upper surface'
+                        ]
+                    },
+                    {
+                        title: 'Viviparous Seedlings (Propagules)',
+                        description: 'Rhizophora exhibits vivipary—seeds germinate while still attached to the parent tree, developing into torpedo-shaped propagules.',
+                        features: [
+                            '<strong>Development:</strong> Embryo grows within the fruit still on the tree',
+                            '<strong>Size:</strong> Propagules can reach 20-40 cm in length',
+                            '<strong>Dispersal:</strong> Propagules drop into water and float until finding suitable substrate',
+                            '<strong>Establishment:</strong> Pointed tip anchors in mud, and roots develop rapidly',
+                            '<strong>Survival:</strong> Propagules can survive floating for weeks to months, enabling long-distance dispersal'
+                        ]
+                    },
+                    {
+                        title: 'Pneumatophores & Root System',
+                        description: 'In addition to prop roots, mangroves have specialized breathing roots and underground networks.',
+                        features: [
+                            '<strong>Pneumatophores:</strong> Small vertical projections from horizontal roots that protrude above water for gas exchange',
+                            '<strong>Cable Roots:</strong> Horizontal roots spreading through substrate',
+                            '<strong>Anchor Roots:</strong> Deep penetrating roots for stability',
+                            '<strong>Lenticels:</strong> Pores on root surfaces allowing oxygen diffusion to submerged tissues'
+                        ]
+                    }
+                ],
+                growth: [
+                    {
+                        number: '1',
+                        name: 'Propagule Development',
+                        duration: '6-12 months',
+                        description: 'Unique viviparous reproduction where seedlings develop while attached to parent tree.',
+                        stages: [
+                            'Flowers are pollinated (wind or insect)',
+                            'Embryo develops within fruit still on the tree',
+                            'Hypocotyl elongates, forming a cigar-shaped propagule',
+                            'Propagule grows to 20-40 cm, developing chlorophyll',
+                            'Mature propagule detaches and drops into water or mud'
+                        ]
+                    },
+                    {
+                        number: '2',
+                        name: 'Dispersal & Establishment',
+                        duration: 'Days to months',
+                        description: 'Propagules float and disperse via tides and currents until finding suitable substrate.',
+                        stages: [
+                            'Propagule floats horizontally in water, buoyant for weeks',
+                            'Gradually becomes waterlogged and shifts to vertical orientation',
+                            'Pointed tip embeds in muddy substrate during low tide',
+                            'Root primordial cells activate and roots emerge within 24-48 hours',
+                            'Rapid root growth anchors the seedling'
+                        ]
+                    },
+                    {
+                        number: '3',
+                        name: 'Seedling Growth',
+                        duration: '1-3 years',
+                        description: 'Young mangrove develops first true leaves and begins forming prop roots.',
+                        stages: [
+                            'Cotyledons (seed leaves) emerge and photosynthesize',
+                            'First true leaves develop in opposite pairs',
+                            'Primary root system establishes in substrate',
+                            'First adventitious prop roots begin forming from lower stem',
+                            'Height increases to 0.5-2 meters'
+                        ]
+                    },
+                    {
+                        number: '4',
+                        name: 'Juvenile Tree Development',
+                        duration: '3-10 years',
+                        description: 'Rapid vertical and lateral growth with extensive prop root formation.',
+                        stages: [
+                            'Trunk diameter and height increase significantly',
+                            'Multiple tiers of prop roots form, creating stable architecture',
+                            'Canopy expands with branching pattern',
+                            'Tree reaches 3-8 meters in height',
+                            'Salt-exclusion mechanisms fully functional in roots'
+                        ]
+                    },
+                    {
+                        number: '5',
+                        name: 'Mature Reproductive Tree',
+                        duration: '10+ years to 100+ years',
+                        description: 'Mature mangroves begin flowering and producing propagules, contributing to forest regeneration.',
+                        stages: [
+                            'First flowering typically occurs at 5-7 years of age',
+                            'Tree reaches mature height of 10-25 meters (can exceed 30m in optimal conditions)',
+                            'Produces flowers and propagules annually or biannually',
+                            'Extensive root system stabilizes large area of sediment',
+                            'Tree can live 100+ years, continuously growing and reproducing'
+                        ]
+                    }
+                ],
+                environment: [
+                    { factor: 'Salinity', requirement: 'Highly salt-tolerant; thrives in brackish to full seawater (up to 35 ppt)' },
+                    { factor: 'Water', requirement: 'Intertidal zone; submerged during high tide, exposed during low tide' },
+                    { factor: 'Substrate', requirement: 'Soft, muddy, anaerobic sediments rich in organic matter' },
+                    { factor: 'Temperature', requirement: 'Tropical to subtropical; 20-35°C optimal; frost-sensitive' },
+                    { factor: 'Tidal Range', requirement: 'Requires regular tidal inundation; adapted to daily flood/exposure cycles' }
+                ]
+            },
+            rubber: {
+                scientificName: 'Hevea brasiliensis',
+                commonName: 'Rubber Tree / Cây Cao Su',
+                svgFile: 'rubber_tree_diagram.svg',
+                subtitle: 'Hevea brasiliensis • Rubber Tree / Cây Cao Su',
+                legend: [
+                    { color: '#2ecc71', label: 'Palmate Compound Leaves', code: '3-5 Leaflets' },
+                    { color: '#8b7355', label: 'Trunk with Latex', code: 'Source of Natural Rubber' },
+                    { color: '#6b5939', label: 'Root System', code: 'Deep Taproot' },
+                    { color: '#f8f9f9', label: 'Latex (Sap)', code: 'Commercial Rubber Source' }
+                ],
+                taxonomy: [
+                    { label: 'Kingdom', value: 'Plantae' },
+                    { label: 'Clade', value: 'Angiosperms' },
+                    { label: 'Clade', value: 'Eudicots' },
+                    { label: 'Clade', value: 'Rosids' },
+                    { label: 'Order', value: 'Malpighiales' },
+                    { label: 'Family', value: 'Euphorbiaceae' },
+                    { label: 'Genus', value: 'Hevea' },
+                    { label: 'Species', value: 'H. brasiliensis' }
+                ],
+                significance: `Hevea brasiliensis is the primary commercial source of natural rubber (latex), one of the most important industrial raw materials. Natural rubber is essential for manufacturing tires, medical gloves, adhesives, and thousands of other products. The rubber industry supports millions of livelihoods, particularly in Southeast Asia, which produces over 90% of the world's natural rubber.`,
+                distribution: `Native to the Amazon rainforest of Brazil, Bolivia, Peru, Colombia, Venezuela, and the Guianas. Introduced to Southeast Asia in the 1870s, where it now thrives in large plantations across Thailand, Indonesia, Vietnam, Malaysia, and India. Requires tropical climate with high rainfall and warm temperatures year-round.`,
+                morphology: [
+                    {
+                        title: 'Latex System',
+                        description: 'The latex system is the defining feature of rubber trees, consisting of specialized cells (laticifers) that produce and store milky latex sap.',
+                        features: [
+                            '<strong>Laticifers:</strong> Specialized tubelike cells arranged in concentric rings in the bark',
+                            '<strong>Latex Composition:</strong> 30-40% rubber polymer (polyisoprene), 55-65% water, plus proteins, sugars, and minerals',
+                            '<strong>Tapping:</strong> Bark is cut in a herringbone pattern to allow latex to flow out',
+                            '<strong>Regeneration:</strong> Latex-producing cells regenerate, allowing repeated tapping for 25-30 years',
+                            '<strong>Yield:</strong> Mature tree produces 2-3 kg of dry rubber per year'
+                        ]
+                    },
+                    {
+                        title: 'Leaves',
+                        description: 'Rubber tree leaves are trifoliate (3-leaflet) compound leaves arranged alternately on branches.',
+                        features: [
+                            '<strong>Structure:</strong> Three elliptical leaflets on a common petiole',
+                            '<strong>Size:</strong> Each leaflet 8-20 cm long, 3-10 cm wide',
+                            '<strong>Texture:</strong> Smooth, glossy, dark green upper surface; paler beneath',
+                            '<strong>New Growth:</strong> Young leaves are reddish-bronze before turning green',
+                            '<strong>Arrangement:</strong> Spiral (alternate) phyllotaxis on branches'
+                        ]
+                    },
+                    {
+                        title: 'Trunk & Bark',
+                        description: 'The trunk contains the valuable latex system and can grow quite large in mature plantations.',
+                        features: [
+                            '<strong>Height:</strong> 20-30 meters in mature trees',
+                            '<strong>Diameter:</strong> 30-60 cm at breast height in tappable trees',
+                            '<strong>Bark:</strong> Smooth when young, becoming rougher and fissured with age',
+                            '<strong>Tapping Panel:</strong> Section of bark regularly renewed for latex extraction',
+                            '<strong>Color:</strong> Grayish-brown outer bark; inner bark releases white latex when cut'
+                        ]
+                    },
+                    {
+                        title: 'Root System & Fruit',
+                        description: 'Deep root system and trilocular capsule fruits containing large seeds.',
+                        features: [
+                            '<strong>Roots:</strong> Deep taproot extending 2-3 meters, extensive lateral roots',
+                            '<strong>Fruit:</strong> Trilocular capsule, 3-5 cm diameter, explosively dehiscent',
+                            '<strong>Seeds:</strong> Large (2-3 cm), mottled brown, oval-shaped, 3 per fruit',
+                            '<strong>Dispersal:</strong> Capsules explode when ripe, propelling seeds several meters',
+                            '<strong>Oil Content:</strong> Seeds contain 40-50% oil (used for biodiesel and other products)'
+                        ]
+                    }
+                ],
+                growth: [
+                    {
+                        number: '1',
+                        name: 'Seed Germination & Seedling',
+                        duration: '1-2 weeks (germination); 1-2 years (nursery)',
+                        description: 'Rubber trees are typically grown from seeds in nurseries before field planting.',
+                        stages: [
+                            'Fresh seeds germinate within 7-14 days (seeds lose viability quickly)',
+                            'Radicle emerges first, followed by hypocotyl',
+                            'Cotyledons emerge and first true leaves develop',
+                            'Seedlings grow in nursery for 12-18 months',
+                            'Budding/grafting is performed to ensure high-yielding clones'
+                        ]
+                    },
+                    {
+                        number: '2',
+                        name: 'Immature Phase',
+                        duration: 'Years 1-5 (after field planting)',
+                        description: 'Young trees establish in plantation and focus on vegetative growth.',
+                        stages: [
+                            'Grafted plants are transplanted to plantation at 1-2 years old',
+                            'Rapid vegetative growth: 1-2 meters of height gain per year',
+                            'Root system establishes deeply in soil',
+                            'Canopy develops with characteristic trifoliate leaves',
+                            'Trees reach 4-6 meters by year 5',
+                            'Latex system is developing but not yet tappable'
+                        ]
+                    },
+                    {
+                        number: '3',
+                        name: 'Immature to Tappable',
+                        duration: 'Years 5-7',
+                        description: 'Trees reach the size and maturity required for latex tapping to begin.',
+                        stages: [
+                            'Trunk circumference reaches 45-50 cm at 1 meter height',
+                            'Bark thickness adequate for tapping (6-8 mm)',
+                            'Latex system fully developed with mature laticifers',
+                            'Trees reach 8-12 meters in height',
+                            'First tapping typically begins in year 6-7'
+                        ]
+                    },
+                    {
+                        number: '4',
+                        name: 'Productive Tapping Period',
+                        duration: 'Years 7-32 (approximately 25 years of tapping)',
+                        description: 'Mature trees are regularly tapped for latex production.',
+                        stages: [
+                            'Tapping begins: bark cut in downward spiral at 30° angle',
+                            'Latex flows for 2-3 hours per tapping session',
+                            'Tapping frequency: every 2-4 days, depending on clone and conditions',
+                            'Annual yield increases for first 10-15 years of tapping',
+                            'Peak production at 15-20 years of age: 2-3 kg dry rubber/tree/year',
+                            'Trees continue growing taller (20-30 meters) during productive phase'
+                        ]
+                    },
+                    {
+                        number: '5',
+                        name: 'Senescence & Replanting',
+                        duration: 'Year 30-35+',
+                        description: 'Trees become economically unproductive and are replaced with new planting.',
+                        stages: [
+                            'Latex production declines as bark regeneration slows',
+                            'Tapping becomes increasingly difficult',
+                            'Trees are felled and removed from plantation',
+                            'Wood is used for furniture, construction, or fuel',
+                            'New seedlings/grafts are planted to restart the cycle',
+                            'Some trees left unharvested can live 100+ years'
+                        ]
+                    }
+                ],
+                environment: [
+                    { factor: 'Climate', requirement: 'Tropical; 24-28°C year-round; cannot tolerate frost' },
+                    { factor: 'Rainfall', requirement: '2000-4000 mm annually, well-distributed (no long dry season)' },
+                    { factor: 'Soil', requirement: 'Deep, well-drained, slightly acidic (pH 5-6); loamy or clay loam preferred' },
+                    { factor: 'Elevation', requirement: 'Sea level to 600 meters; optimal below 300 meters' },
+                    { factor: 'Humidity', requirement: 'High atmospheric humidity (>80%) for best latex production' }
+                ]
+            }
+        };
+
         // Sound feedback system using Web Audio API
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -768,9 +958,87 @@
             oscillator.stop(audioContext.currentTime + 0.15);
         }
 
+        // Populate plant content
+        function populatePlantContent(plantKey) {
+            const plant = plantData[plantKey];
+
+            // Update subtitle
+            document.getElementById('plant-subtitle').textContent = plant.subtitle;
+
+            // Update legend
+            const legendContent = document.getElementById('legend-content');
+            legendContent.innerHTML = plant.legend.map(item => `
+                <div class="legend-item">
+                    <div class="legend-color" style="background: ${item.color};"></div>
+                    <span class="legend-label">${item.label}</span>
+                    <span class="legend-po">${item.code}</span>
+                </div>
+            `).join('');
+
+            // Update taxonomy tab
+            const taxonomyTab = document.getElementById('taxonomy');
+            taxonomyTab.innerHTML = `
+                <h2>Taxonomic Classification</h2>
+                ${plant.taxonomy.map(item => `
+                    <div class="taxonomy-item">
+                        <div class="taxonomy-label">${item.label}:</div>
+                        <div class="taxonomy-value">${item.value}</div>
+                    </div>
+                `).join('')}
+
+                <h3>Scientific Significance</h3>
+                <p>${plant.significance}</p>
+
+                <h3>Distribution</h3>
+                <p>${plant.distribution}</p>
+            `;
+
+            // Update morphology tab
+            const morphologyTab = document.getElementById('morphology');
+            morphologyTab.innerHTML = `
+                <h2>Morphological Features</h2>
+                ${plant.morphology.map(section => `
+                    <div class="morphology-section">
+                        <h3>${section.title}</h3>
+                        <p>${section.description}</p>
+                        <ul>
+                            ${section.features.map(feature => `<li>${feature}</li>`).join('')}
+                        </ul>
+                    </div>
+                `).join('')}
+            `;
+
+            // Update growth tab
+            const growthTab = document.getElementById('growth');
+            growthTab.innerHTML = `
+                <h2>Life Cycle & Development</h2>
+                ${plant.growth.map(stage => `
+                    <div class="growth-stage">
+                        <div class="stage-number">${stage.number}</div>
+                        <div class="stage-name">${stage.name}</div>
+                        <div class="stage-duration">${stage.duration}</div>
+                        <p>${stage.description}</p>
+                        <ul>
+                            ${stage.stages.map(s => `<li>${s}</li>`).join('')}
+                        </ul>
+                    </div>
+                `).join('')}
+
+                ${plant.environment ? `
+                    <h3>Environmental Requirements</h3>
+                    <ul>
+                        ${plant.environment.map(env => `
+                            <li><strong>${env.factor}:</strong> ${env.requirement}</li>
+                        `).join('')}
+                    </ul>
+                ` : ''}
+            `;
+        }
+
         // Load and fix SVG
-        async function loadPlantSVG() {
-            const svgUrl = 'arabidopsis_diagram.svg';
+        async function loadPlantSVG(plantKey = 'rose') {
+            const plant = plantData[plantKey];
+            const svgUrl = plant.svgFile;
 
             try {
                 const response = await fetch(svgUrl);
@@ -891,8 +1159,20 @@
             });
         });
 
-        // Load SVG on page load
-        window.addEventListener('DOMContentLoaded', loadPlantSVG);
+        // Plant selector change handler
+        document.getElementById('plant-select').addEventListener('change', function() {
+            const plantKey = this.value;
+            playOrganicSound('snap');
+            loadPlantSVG(plantKey);
+            populatePlantContent(plantKey);
+        });
+
+        // Load default plant (rose) on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const defaultPlant = 'rose';
+            populatePlantContent(defaultPlant);
+            loadPlantSVG(defaultPlant);
+        });
     </script>
 </body>
 </html>

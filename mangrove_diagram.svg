@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" width="400" height="600">
+  <defs>
+    <style>
+      .mangrove-leaf { fill: #228b22; stroke: #1a6b1a; stroke-width: 1.5; }
+      .mangrove-trunk { fill: #654321; stroke: #4a3219; stroke-width: 2; }
+      .mangrove-prop-root { fill: #8b6f47; stroke: #6b5939; stroke-width: 2; }
+      .mangrove-root { fill: #5d4e37; stroke: #4a3f2e; stroke-width: 1.5; }
+      .water { fill: #3498db; opacity: 0.3; }
+    </style>
+
+    <linearGradient id="trunkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b6f47;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#654321;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4a3219;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Water level -->
+  <rect class="water" x="0" y="480" width="400" height="120"/>
+  <line x1="0" y1="480" x2="400" y2="480" stroke="#2874a6" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- Underground Root System -->
+  <g id="underground_roots" opacity="0.7">
+    <path class="mangrove-root" d="M 200 520 Q 180 540, 160 560" stroke-width="5"/>
+    <path class="mangrove-root" d="M 200 520 Q 220 540, 240 560" stroke-width="5"/>
+    <path class="mangrove-root" d="M 200 525 Q 190 550, 170 580" stroke-width="4"/>
+    <path class="mangrove-root" d="M 200 525 Q 210 550, 230 580" stroke-width="4"/>
+
+    <!-- Fine roots -->
+    <path class="mangrove-root" d="M 160 560 L 145 575" stroke-width="2"/>
+    <path class="mangrove-root" d="M 240 560 L 255 575" stroke-width="2"/>
+  </g>
+
+  <!-- Prop/Stilt Roots (characteristic of mangroves) -->
+  <g id="prop_roots">
+    <!-- Left prop roots -->
+    <path class="mangrove-prop-root" d="M 195 300 Q 150 380, 140 480 L 145 520" stroke-linecap="round"/>
+    <path class="mangrove-prop-root" d="M 192 320 Q 160 400, 155 480 L 160 520" stroke-linecap="round"/>
+    <path class="mangrove-prop-root" d="M 190 280 Q 130 360, 120 480 L 125 520" stroke-linecap="round"/>
+
+    <!-- Right prop roots -->
+    <path class="mangrove-prop-root" d="M 205 300 Q 250 380, 260 480 L 255 520" stroke-linecap="round"/>
+    <path class="mangrove-prop-root" d="M 208 320 Q 240 400, 245 480 L 240 520" stroke-linecap="round"/>
+    <path class="mangrove-prop-root" d="M 210 280 Q 270 360, 280 480 L 275 520" stroke-linecap="round"/>
+
+    <!-- Center support roots -->
+    <path class="mangrove-prop-root" d="M 198 340 Q 185 410, 180 480 L 185 520" stroke-linecap="round"/>
+    <path class="mangrove-prop-root" d="M 202 340 Q 215 410, 220 480 L 215 520" stroke-linecap="round"/>
+  </g>
+
+  <!-- Main Trunk -->
+  <g id="trunk">
+    <rect fill="url(#trunkGradient)" stroke="#4a3219" stroke-width="2" x="190" y="150" width="20" height="200" rx="5"/>
+
+    <!-- Trunk texture (bark) -->
+    <line x1="192" y1="180" x2="208" y2="185" stroke="#4a3219" stroke-width="1" opacity="0.5"/>
+    <line x1="192" y1="220" x2="208" y2="225" stroke="#4a3219" stroke-width="1" opacity="0.5"/>
+    <line x1="192" y1="260" x2="208" y2="265" stroke="#4a3219" stroke-width="1" opacity="0.5"/>
+    <line x1="192" y1="300" x2="208" y2="305" stroke="#4a3219" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <!-- Branches -->
+  <g id="branches">
+    <!-- Main branches -->
+    <path class="mangrove-trunk" d="M 200 150 Q 170 130, 150 120" stroke-width="8" stroke-linecap="round"/>
+    <path class="mangrove-trunk" d="M 200 150 Q 230 130, 250 120" stroke-width="8" stroke-linecap="round"/>
+    <path class="mangrove-trunk" d="M 200 160 Q 160 145, 140 140" stroke-width="6" stroke-linecap="round"/>
+    <path class="mangrove-trunk" d="M 200 160 Q 240 145, 260 140" stroke-width="6" stroke-linecap="round"/>
+
+    <!-- Secondary branches -->
+    <path class="mangrove-trunk" d="M 150 120 Q 130 110, 120 105" stroke-width="5" stroke-linecap="round"/>
+    <path class="mangrove-trunk" d="M 250 120 Q 270 110, 280 105" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Leaves (elliptical, leathery) -->
+  <g id="leaves">
+    <!-- Left branch cluster -->
+    <g transform="translate(120, 105)">
+      <ellipse class="mangrove-leaf" cx="-15" cy="-5" rx="18" ry="10" transform="rotate(-20)"/>
+      <ellipse class="mangrove-leaf" cx="-10" cy="5" rx="18" ry="10" transform="rotate(-10)"/>
+      <ellipse class="mangrove-leaf" cx="-20" cy="10" rx="18" ry="10" transform="rotate(-30)"/>
+      <ellipse class="mangrove-leaf" cx="-5" cy="15" rx="18" ry="10" transform="rotate(10)"/>
+      <ellipse class="mangrove-leaf" cx="-25" cy="0" rx="18" ry="10" transform="rotate(-40)"/>
+      <ellipse class="mangrove-leaf" cx="0" cy="-10" rx="18" ry="10" transform="rotate(5)"/>
+    </g>
+
+    <!-- Right branch cluster -->
+    <g transform="translate(280, 105)">
+      <ellipse class="mangrove-leaf" cx="15" cy="-5" rx="18" ry="10" transform="rotate(20)"/>
+      <ellipse class="mangrove-leaf" cx="10" cy="5" rx="18" ry="10" transform="rotate(10)"/>
+      <ellipse class="mangrove-leaf" cx="20" cy="10" rx="18" ry="10" transform="rotate(30)"/>
+      <ellipse class="mangrove-leaf" cx="5" cy="15" rx="18" ry="10" transform="rotate(-10)"/>
+      <ellipse class="mangrove-leaf" cx="25" cy="0" rx="18" ry="10" transform="rotate(40)"/>
+      <ellipse class="mangrove-leaf" cx="0" cy="-10" rx="18" ry="10" transform="rotate(-5)"/>
+    </g>
+
+    <!-- Center left cluster -->
+    <g transform="translate(140, 140)">
+      <ellipse class="mangrove-leaf" cx="-12" cy="0" rx="18" ry="10" transform="rotate(-15)"/>
+      <ellipse class="mangrove-leaf" cx="-8" cy="10" rx="18" ry="10" transform="rotate(-5)"/>
+      <ellipse class="mangrove-leaf" cx="-18" cy="8" rx="18" ry="10" transform="rotate(-25)"/>
+      <ellipse class="mangrove-leaf" cx="-4" cy="18" rx="18" ry="10" transform="rotate(5)"/>
+    </g>
+
+    <!-- Center right cluster -->
+    <g transform="translate(260, 140)">
+      <ellipse class="mangrove-leaf" cx="12" cy="0" rx="18" ry="10" transform="rotate(15)"/>
+      <ellipse class="mangrove-leaf" cx="8" cy="10" rx="18" ry="10" transform="rotate(5)"/>
+      <ellipse class="mangrove-leaf" cx="18" cy="8" rx="18" ry="10" transform="rotate(25)"/>
+      <ellipse class="mangrove-leaf" cx="4" cy="18" rx="18" ry="10" transform="rotate(-5)"/>
+    </g>
+
+    <!-- Top center cluster -->
+    <g transform="translate(150, 120)">
+      <ellipse class="mangrove-leaf" cx="0" cy="-8" rx="18" ry="10"/>
+      <ellipse class="mangrove-leaf" cx="-10" cy="-12" rx="18" ry="10" transform="rotate(-20)"/>
+      <ellipse class="mangrove-leaf" cx="10" cy="-12" rx="18" ry="10" transform="rotate(20)"/>
+    </g>
+
+    <g transform="translate(250, 120)">
+      <ellipse class="mangrove-leaf" cx="0" cy="-8" rx="18" ry="10"/>
+      <ellipse class="mangrove-leaf" cx="-10" cy="-12" rx="18" ry="10" transform="rotate(-20)"/>
+      <ellipse class="mangrove-leaf" cx="10" cy="-12" rx="18" ry="10" transform="rotate(20)"/>
+    </g>
+  </g>
+
+  <!-- Viviparous seedlings (propagules) hanging from branches -->
+  <g id="propagules">
+    <ellipse fill="#6b8e23" stroke="#556b2f" cx="145" cy="150" rx="4" ry="15"/>
+    <ellipse fill="#6b8e23" stroke="#556b2f" cx="255" cy="150" rx="4" ry="15"/>
+    <ellipse fill="#6b8e23" stroke="#556b2f" cx="135" cy="145" rx="4" ry="18"/>
+    <ellipse fill="#6b8e23" stroke="#556b2f" cx="265" cy="145" rx="4" ry="18"/>
+  </g>
+
+  <!-- Pneumatophores (breathing roots - small vertical projections) -->
+  <g id="pneumatophores">
+    <rect fill="#8b6f47" stroke="#6b5939" x="130" y="470" width="4" height="15" rx="2"/>
+    <rect fill="#8b6f47" stroke="#6b5939" x="150" y="475" width="4" height="12" rx="2"/>
+    <rect fill="#8b6f47" stroke="#6b5939" x="170" y="472" width="4" height="14" rx="2"/>
+    <rect fill="#8b6f47" stroke="#6b5939" x="230" y="472" width="4" height="14" rx="2"/>
+    <rect fill="#8b6f47" stroke="#6b5939" x="250" y="475" width="4" height="12" rx="2"/>
+    <rect fill="#8b6f47" stroke="#6b5939" x="270" y="470" width="4" height="15" rx="2"/>
+  </g>
+
+  <!-- Labels -->
+  <text x="200" y="30" font-family="Arial" font-size="14" fill="#228b22" text-anchor="middle" font-weight="bold">Rhizophora apiculata</text>
+  <text x="200" y="50" font-family="Arial" font-size="11" fill="#1a6b1a" text-anchor="middle" font-style="italic">(Mangrove)</text>
+  <text x="50" y="475" font-family="Arial" font-size="10" fill="#2874a6" font-style="italic">Water Level</text>
+</svg>
