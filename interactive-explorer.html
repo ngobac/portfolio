@@ -770,10 +770,13 @@
 
         // Load and fix SVG
         async function loadPlantSVG() {
-            const svgUrl = 'https://raw.githubusercontent.com/ebi-gene-expression-group/anatomogram/master/src/svg/arabidopsis_thaliana.svg';
+            const svgUrl = 'arabidopsis_diagram.svg';
 
             try {
                 const response = await fetch(svgUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 const svgText = await response.text();
 
                 // Parse SVG
