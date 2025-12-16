@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" width="400" height="600">
+  <defs>
+    <style>
+      .leaf { fill: #8fbc8f; stroke: #5d7a5f; stroke-width: 1.5; }
+      .root { fill: #8b7355; stroke: #6b5939; stroke-width: 1.5; }
+      .flower { fill: #f4d03f; stroke: #d4a404; stroke-width: 1.5; }
+      .stem { fill: #7a9e7e; stroke: #5d7a5f; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <!-- Root System (PO_0009005) -->
+  <g id="PO_0009005" class="root">
+    <!-- Primary root -->
+    <rect x="195" y="400" width="10" height="150" rx="5"/>
+    <!-- Lateral roots -->
+    <line x1="200" y1="450" x2="170" y2="480" stroke="#8b7355" stroke-width="6" stroke-linecap="round"/>
+    <line x1="200" y1="470" x2="230" y2="500" stroke="#8b7355" stroke-width="6" stroke-linecap="round"/>
+    <line x1="200" y1="490" x2="165" y2="520" stroke="#8b7355" stroke-width="6" stroke-linecap="round"/>
+    <line x1="200" y1="510" x2="235" y2="535" stroke="#8b7355" stroke-width="6" stroke-linecap="round"/>
+    <!-- Root hairs (fine details) -->
+    <line x1="170" y1="480" x2="160" y2="490" stroke="#6b5939" stroke-width="2"/>
+    <line x1="230" y1="500" x2="240" y2="510" stroke="#6b5939" stroke-width="2"/>
+    <line x1="165" y1="520" x2="155" y2="530" stroke="#6b5939" stroke-width="2"/>
+  </g>
+
+  <!-- Stem -->
+  <g class="stem">
+    <rect x="195" y="100" width="10" height="300" rx="3"/>
+  </g>
+
+  <!-- Rosette Leaves at base (PO_0025034) -->
+  <g id="PO_0025034_rosette">
+    <!-- Leaf 1 - bottom left -->
+    <ellipse class="leaf" cx="150" cy="380" rx="45" ry="25" transform="rotate(-30 150 380)"/>
+    <!-- Leaf 2 - bottom right -->
+    <ellipse class="leaf" cx="250" cy="380" rx="45" ry="25" transform="rotate(30 250 380)"/>
+    <!-- Leaf 3 - left -->
+    <ellipse class="leaf" cx="130" cy="350" rx="50" ry="28" transform="rotate(-45 130 350)"/>
+    <!-- Leaf 4 - right -->
+    <ellipse class="leaf" cx="270" cy="350" rx="50" ry="28" transform="rotate(45 270 350)"/>
+    <!-- Leaf 5 - top left -->
+    <ellipse class="leaf" cx="140" cy="320" rx="48" ry="26" transform="rotate(-60 140 320)"/>
+    <!-- Leaf 6 - top right -->
+    <ellipse class="leaf" cx="260" cy="320" rx="48" ry="26" transform="rotate(60 260 320)"/>
+
+    <!-- Leaf veins (detail) -->
+    <line x1="150" y1="380" x2="130" y2="380" stroke="#5d7a5f" stroke-width="1"/>
+    <line x1="250" y1="380" x2="270" y2="380" stroke="#5d7a5f" stroke-width="1"/>
+  </g>
+
+  <!-- Cauline leaves on stem (PO_0025034) -->
+  <g id="PO_0025034_cauline">
+    <!-- Small stem leaves -->
+    <ellipse class="leaf" cx="170" cy="280" rx="25" ry="15" transform="rotate(-20 170 280)"/>
+    <ellipse class="leaf" cx="230" cy="240" rx="25" ry="15" transform="rotate(20 230 240)"/>
+    <ellipse class="leaf" cx="170" cy="200" rx="22" ry="13" transform="rotate(-15 170 200)"/>
+  </g>
+
+  <!-- Flowers (PO_0009046) - Inflorescence -->
+  <g id="PO_0009046">
+    <!-- Flower 1 - top -->
+    <g transform="translate(200, 70)">
+      <circle class="flower" cx="0" cy="0" r="12"/>
+      <!-- Petals -->
+      <circle cx="-8" cy="0" r="6" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="8" cy="0" r="6" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="0" cy="-8" r="6" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="0" cy="8" r="6" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <!-- Center -->
+      <circle cx="0" cy="0" r="3" fill="#f4d03f"/>
+    </g>
+
+    <!-- Flower 2 -->
+    <g transform="translate(180, 100)">
+      <circle class="flower" cx="0" cy="0" r="10"/>
+      <circle cx="-7" cy="0" r="5" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="7" cy="0" r="5" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="0" cy="-7" r="5" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="0" cy="7" r="5" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="0" cy="0" r="2.5" fill="#f4d03f"/>
+    </g>
+
+    <!-- Flower 3 -->
+    <g transform="translate(220, 105)">
+      <circle class="flower" cx="0" cy="0" r="10"/>
+      <circle cx="-7" cy="0" r="5" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="7" cy="0" r="5" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="0" cy="-7" r="5" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="0" cy="7" r="5" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="0" cy="0" r="2.5" fill="#f4d03f"/>
+    </g>
+
+    <!-- Flower 4 - bud -->
+    <g transform="translate(195, 130)">
+      <circle class="flower" cx="0" cy="0" r="8"/>
+      <circle cx="-5" cy="0" r="4" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="5" cy="0" r="4" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="0" cy="-5" r="4" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="0" cy="5" r="4" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+    </g>
+
+    <!-- Flower 5 - bud -->
+    <g transform="translate(210, 135)">
+      <circle class="flower" cx="0" cy="0" r="8"/>
+      <circle cx="-5" cy="0" r="4" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="5" cy="0" r="4" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="0" cy="-5" r="4" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+      <circle cx="0" cy="5" r="4" fill="#fff" stroke="#d4a404" stroke-width="1"/>
+    </g>
+
+    <!-- Siliques (developing seed pods) -->
+    <rect class="leaf" x="185" y="155" width="4" height="25" rx="2" fill="#a4c4a6"/>
+    <rect class="leaf" x="205" y="160" width="4" height="22" rx="2" fill="#a4c4a6"/>
+  </g>
+
+  <!-- Labels (optional, for educational value) -->
+  <text x="200" y="40" font-family="Arial" font-size="12" fill="#5d7a5f" text-anchor="middle" font-weight="bold">Inflorescence</text>
+  <text x="85" y="350" font-family="Arial" font-size="11" fill="#5d7a5f" text-anchor="end">Rosette</text>
+  <text x="200" y="575" font-family="Arial" font-size="11" fill="#6b5939" text-anchor="middle">Root System</text>
+</svg>
