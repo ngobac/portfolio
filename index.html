@@ -156,9 +156,9 @@
 
             font-family: 'Inter', sans-serif;
 
-            background: linear-gradient(to bottom, #0f172a, #1e293b);
+            background: #f8fafc;
 
-            color: #e2e8f0;
+            color: #1e293b;
 
         }
 
@@ -168,13 +168,13 @@
 
         .glass {
 
-            background: rgba(30, 41, 59, 0.7);
+            background: rgba(255, 255, 255, 0.95);
 
             backdrop-filter: blur(10px);
 
             -webkit-backdrop-filter: blur(10px);
 
-            border: 1px solid rgba(148, 163, 184, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 
         }
 
@@ -192,7 +192,7 @@
 
         ::-webkit-scrollbar-track {
 
-            background: #1e293b;
+            background: #e2e8f0;
 
         }
 
@@ -288,7 +288,7 @@
 
             overflow: hidden;
 
-            background: rgba(15, 23, 42, 0.5);
+            background: #f0fdf4;
 
             border-radius: 12px;
 
@@ -400,7 +400,7 @@
 
     <!-- Navigation -->
 
-    <nav class="glass fixed w-full top-0 z-50 border-b border-slate-700/50">
+    <nav class="glass fixed w-full top-0 z-50 border-b border-gray-200">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -408,7 +408,7 @@
 
                 <div class="flex items-center">
 
-                    <a href="#hero" class="text-emerald-400 font-bold text-xl flex items-center gap-2">
+                    <a href="#hero" class="text-emerald-600 font-bold text-xl flex items-center gap-2">
 
                         <i class="fas fa-map-marked-alt"></i>
 
@@ -422,15 +422,17 @@
 
                     <div class="ml-10 flex items-baseline space-x-4">
 
-                        <a href="#hero" class="nav-link text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-all">Home</a>
+                        <a href="#hero" class="nav-link text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-all">Home</a>
 
-                        <a href="#maps" class="nav-link text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-all">Maps</a>
+                        <a href="#gallery" class="nav-link text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-all">Gallery</a>
 
-                        <a href="#codelab" class="nav-link text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-all">Code Lab</a>
+                        <a href="#maps" class="nav-link text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-all">Maps</a>
 
-                        <a href="#projects" class="nav-link text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-all">Projects</a>
+                        <a href="#codelab" class="nav-link text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-all">Code Lab</a>
 
-                        <a href="interactive-explorer.html" class="nav-link text-emerald-400 hover:text-emerald-300 px-3 py-2 rounded-md text-sm font-medium transition-all border border-emerald-400/30">🌿 Explorer</a>
+                        <a href="#projects" class="nav-link text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-all">Projects</a>
+
+                        <a href="interactive-explorer.html" class="nav-link text-emerald-600 hover:text-emerald-700 px-3 py-2 rounded-md text-sm font-medium transition-all border border-emerald-500/30">🌿 Explorer</a>
 
                     </div>
 
@@ -440,7 +442,7 @@
 
                 <div class="md:hidden">
 
-                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-emerald-400">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-emerald-600">
 
                         <i class="fas fa-bars text-xl"></i>
 
@@ -456,17 +458,19 @@
 
         <div id="mobile-menu" class="hidden md:hidden">
 
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-slate-900/95">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95">
 
-                <a href="#hero" class="block text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#hero" class="block text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-base font-medium">Home</a>
 
-                <a href="#maps" class="block text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-base font-medium">Maps</a>
+                <a href="#gallery" class="block text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-base font-medium">Gallery</a>
 
-                <a href="#codelab" class="block text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-base font-medium">Code Lab</a>
+                <a href="#maps" class="block text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-base font-medium">Maps</a>
 
-                <a href="#projects" class="block text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                <a href="#codelab" class="block text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-base font-medium">Code Lab</a>
 
-                <a href="interactive-explorer.html" class="block text-emerald-400 hover:text-emerald-300 px-3 py-2 rounded-md text-base font-medium border border-emerald-400/30">🌿 Interactive Explorer</a>
+                <a href="#projects" class="block text-gray-600 hover:text-emerald-600 px-3 py-2 rounded-md text-base font-medium">Projects</a>
+
+                <a href="interactive-explorer.html" class="block text-emerald-600 hover:text-emerald-700 px-3 py-2 rounded-md text-base font-medium border border-emerald-500/30">🌿 Interactive Explorer</a>
 
             </div>
 
@@ -478,7 +482,7 @@
 
     <!-- Hero Section -->
 
-    <section id="hero" class="min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8">
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8 bg-white">
 
         <div class="max-w-7xl mx-auto w-full">
 
@@ -490,13 +494,13 @@
 
                     <div class="space-y-2">
 
-                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
 
-                            Hi, I'm <span class="text-emerald-400">Bac Ngo</span>
+                            Hi, I'm <span class="text-emerald-600">Bac Ngo</span>
 
                         </h1>
 
-                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-slate-300">
+                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-600">
 
                             GIS & Forestry
 
@@ -506,7 +510,7 @@
 
  
 
-                    <p class="text-lg text-slate-400 leading-relaxed max-w-2xl">
+                    <p class="text-lg text-gray-500 leading-relaxed max-w-2xl">
 
                         Specializing in forest management and environmental analysis, I transform geospatial 
                         data into actionable insights. I am passionate about building tools and telling stories
@@ -526,9 +530,9 @@
 
                         <a href="https://github.com/ngobac" target="_blank"
 
-                           class="glass px-6 py-3 rounded-lg hover:bg-emerald-500/20 hover:border-emerald-400 transition-all flex items-center gap-2 group">
+                           class="glass px-6 py-3 rounded-lg hover:bg-emerald-50 hover:border-emerald-500 transition-all flex items-center gap-2 group">
 
-                            <i class="fab fa-github text-xl group-hover:text-emerald-400"></i>
+                            <i class="fab fa-github text-xl group-hover:text-emerald-600"></i>
 
                             <span>GitHub</span>
 
@@ -536,9 +540,9 @@
 
                         <a href="https://linkedin.com/in/bacngo7877" target="_blank"
 
-                           class="glass px-6 py-3 rounded-lg hover:bg-emerald-500/20 hover:border-emerald-400 transition-all flex items-center gap-2 group">
+                           class="glass px-6 py-3 rounded-lg hover:bg-emerald-50 hover:border-emerald-500 transition-all flex items-center gap-2 group">
 
-                            <i class="fab fa-linkedin text-xl group-hover:text-emerald-400"></i>
+                            <i class="fab fa-linkedin text-xl group-hover:text-emerald-600"></i>
 
                             <span>LinkedIn</span>
 
@@ -546,9 +550,9 @@
 
                         <a href="mailto:bacngo7877@gmail.com"
 
-                           class="glass px-6 py-3 rounded-lg hover:bg-emerald-500/20 hover:border-emerald-400 transition-all flex items-center gap-2 group">
+                           class="glass px-6 py-3 rounded-lg hover:bg-emerald-50 hover:border-emerald-500 transition-all flex items-center gap-2 group">
 
-                            <i class="fas fa-envelope text-xl group-hover:text-emerald-400"></i>
+                            <i class="fas fa-envelope text-xl group-hover:text-emerald-600"></i>
 
                             <span>Email</span>
 
@@ -564,7 +568,7 @@
 
                         <a href="#projects"
 
-                           class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 py-4 rounded-lg transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50">
+                           class="inline-block bg-emerald-500 hover:bg-emerald-600 text-gray-900 font-semibold px-8 py-4 rounded-lg transition-all transform hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50">
 
                             View My Work <i class="fas fa-arrow-right ml-2"></i>
 
@@ -576,30 +580,31 @@
 
  
 
-                <!-- Hero Visual - Animated Icon -->
+                <!-- Hero Visual - Profile Photo -->
 
                 <div class="flex justify-center">
-
                     <div class="relative">
 
-                        <div class="glass rounded-3xl p-12 animate-float">
-
-                            <i class="fas fa-globe-americas text-9xl text-emerald-400"></i>
-
+                        <!-- Profile Photo - replace images/profile.jpg with your actual photo -->
+                        <div class="relative w-72 h-72 sm:w-80 sm:h-80 rounded-3xl overflow-hidden shadow-2xl border-4 border-emerald-100 animate-float">
+                            <img src="images/profile.jpg" alt="Bac Ngo - GIS Specialist"
+                                 class="w-full h-full object-cover"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="absolute inset-0 bg-gradient-to-br from-emerald-50 to-emerald-100 flex-col items-center justify-center"
+                                 style="display:flex;">
+                                <i class="fas fa-user text-7xl text-emerald-300 mb-3"></i>
+                                <p class="text-emerald-600 font-semibold text-sm text-center px-4">Your Photo Here</p>
+                                <p class="text-emerald-400 text-xs mt-1 font-mono">images/profile.jpg</p>
+                            </div>
                         </div>
 
-                        <!-- Decorative Elements -->
-
-                        <div class="absolute -top-4 -right-4 glass rounded-full p-4 animate-pulse">
-
-                            <i class="fas fa-map-pin text-3xl text-emerald-400"></i>
-
+                        <!-- Decorative Badges -->
+                        <div class="absolute -top-4 -right-4 glass rounded-full p-4 animate-pulse shadow-lg">
+                            <i class="fas fa-map-pin text-3xl text-emerald-600"></i>
                         </div>
 
-                        <div class="absolute -bottom-4 -left-4 glass rounded-full p-4 animate-pulse" style="animation-delay: 1s;">
-
-                            <i class="fas fa-satellite text-3xl text-cyan-400"></i>
-
+                        <div class="absolute -bottom-4 -left-4 glass rounded-full p-4 animate-pulse shadow-lg" style="animation-delay: 1s;">
+                            <i class="fas fa-satellite text-3xl text-cyan-700"></i>
                         </div>
 
                     </div>
@@ -614,23 +619,163 @@
 
  
 
+
+    <!-- Professional Gallery Section -->
+    <section id="gallery" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-2 bg-emerald-100 text-emerald-700 text-sm font-semibold rounded-full mb-4 tracking-wide uppercase">In The Field</span>
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+                    <i class="fas fa-images text-emerald-600 mr-3"></i>
+                    Professional Gallery
+                </h2>
+                <p class="text-xl text-gray-500 max-w-3xl mx-auto">
+                    Moments from fieldwork, GIS projects, and environmental research activities
+                </p>
+            </div>
+
+            <!-- Gallery Grid: 3 columns -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+
+                <!-- Photo 1: Field Work -->
+                <div class="group relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" style="aspect-ratio:4/3;">
+                    <img src="images/field-work.jpg" alt="Field Work"
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none';">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-emerald-50 to-emerald-100">
+                        <i class="fas fa-tree text-5xl text-emerald-400 mb-3"></i>
+                        <p class="font-semibold text-gray-700 text-sm">Field Work</p>
+                        <p class="text-xs text-gray-400 mt-1 font-mono">images/field-work.jpg</p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <p class="text-white font-semibold text-sm">Forest Field Survey</p>
+                        <p class="text-white/80 text-xs">On-site data collection & sampling</p>
+                    </div>
+                </div>
+
+                <!-- Photo 2: Drone/UAV -->
+                <div class="group relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" style="aspect-ratio:4/3;">
+                    <img src="images/drone-work.jpg" alt="Drone Work"
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none';">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-cyan-50 to-cyan-100">
+                        <i class="fas fa-helicopter text-5xl text-cyan-500 mb-3"></i>
+                        <p class="font-semibold text-gray-700 text-sm">UAV / Drone Operations</p>
+                        <p class="text-xs text-gray-400 mt-1 font-mono">images/drone-work.jpg</p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <p class="text-white font-semibold text-sm">Mavic 3M Drone Operations</p>
+                        <p class="text-white/80 text-xs">Multispectral image data collection</p>
+                    </div>
+                </div>
+
+                <!-- Photo 3: GIS / Office -->
+                <div class="group relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" style="aspect-ratio:4/3;">
+                    <img src="images/gis-work.jpg" alt="GIS Work"
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none';">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 to-purple-100">
+                        <i class="fas fa-map text-5xl text-purple-400 mb-3"></i>
+                        <p class="font-semibold text-gray-700 text-sm">GIS Analysis</p>
+                        <p class="text-xs text-gray-400 mt-1 font-mono">images/gis-work.jpg</p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <p class="text-white font-semibold text-sm">GIS & Remote Sensing Analysis</p>
+                        <p class="text-white/80 text-xs">ArcGIS Pro & Google Earth Engine</p>
+                    </div>
+                </div>
+
+                <!-- Photo 4: Mangrove Project -->
+                <div class="group relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" style="aspect-ratio:4/3;">
+                    <img src="images/mangrove.jpg" alt="Mangrove Project"
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none';">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-green-100">
+                        <i class="fas fa-seedling text-5xl text-green-500 mb-3"></i>
+                        <p class="font-semibold text-gray-700 text-sm">Mangrove Project</p>
+                        <p class="text-xs text-gray-400 mt-1 font-mono">images/mangrove.jpg</p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <p class="text-white font-semibold text-sm">Mangrove Planting & Monitoring</p>
+                        <p class="text-white/80 text-xs">Biomass & carbon stock analysis</p>
+                    </div>
+                </div>
+
+                <!-- Photo 5: Team / Community -->
+                <div class="group relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" style="aspect-ratio:4/3;">
+                    <img src="images/team.jpg" alt="Team Work"
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none';">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-orange-50 to-orange-100">
+                        <i class="fas fa-users text-5xl text-orange-400 mb-3"></i>
+                        <p class="font-semibold text-gray-700 text-sm">Team & Community</p>
+                        <p class="text-xs text-gray-400 mt-1 font-mono">images/team.jpg</p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <p class="text-white font-semibold text-sm">Team Collaboration</p>
+                        <p class="text-white/80 text-xs">Community engagement & fieldwork</p>
+                    </div>
+                </div>
+
+                <!-- Photo 6: Laboratory -->
+                <div class="group relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" style="aspect-ratio:4/3;">
+                    <img src="images/lab-analysis.jpg" alt="Lab Analysis"
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none';">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100">
+                        <i class="fas fa-flask text-5xl text-blue-400 mb-3"></i>
+                        <p class="font-semibold text-gray-700 text-sm">Lab Analysis</p>
+                        <p class="text-xs text-gray-400 mt-1 font-mono">images/lab-analysis.jpg</p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <p class="text-white font-semibold text-sm">TOC Laboratory Analysis</p>
+                        <p class="text-white/80 text-xs">Soil & biomass sample processing</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Instructions Note -->
+            <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 flex items-start gap-4">
+                <i class="fas fa-info-circle text-emerald-600 text-xl mt-0.5 flex-shrink-0"></i>
+                <div>
+                    <p class="font-semibold text-emerald-800 mb-2">Cách thêm ảnh nghề nghiệp của bạn</p>
+                    <p class="text-emerald-700 text-sm leading-relaxed">
+                        Tạo thư mục <code class="bg-white border border-emerald-200 px-1.5 py-0.5 rounded font-mono text-xs text-emerald-800">images/</code> trong portfolio và upload ảnh với các tên tương ứng:
+                        <code class="bg-white border border-emerald-200 px-1 py-0.5 rounded font-mono text-xs text-emerald-800">profile.jpg</code>,
+                        <code class="bg-white border border-emerald-200 px-1 py-0.5 rounded font-mono text-xs text-emerald-800">field-work.jpg</code>,
+                        <code class="bg-white border border-emerald-200 px-1 py-0.5 rounded font-mono text-xs text-emerald-800">drone-work.jpg</code>,
+                        <code class="bg-white border border-emerald-200 px-1 py-0.5 rounded font-mono text-xs text-emerald-800">gis-work.jpg</code>,
+                        <code class="bg-white border border-emerald-200 px-1 py-0.5 rounded font-mono text-xs text-emerald-800">mangrove.jpg</code>,
+                        <code class="bg-white border border-emerald-200 px-1 py-0.5 rounded font-mono text-xs text-emerald-800">team.jpg</code>,
+                        <code class="bg-white border border-emerald-200 px-1 py-0.5 rounded font-mono text-xs text-emerald-800">lab-analysis.jpg</code>.
+                        Ảnh sẽ tự động hiển thị thay thế placeholder màu.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
     <!-- Map Gallery Section -->
 
-    <section id="maps" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 to-slate-800">
+    <section id="maps" class="py-20 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100">
 
         <div class="max-w-7xl mx-auto">
 
             <div class="text-center mb-16">
 
-                <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">
+                <span class="inline-block px-4 py-2 bg-emerald-100 text-emerald-700 text-sm font-semibold rounded-full mb-4 tracking-wide uppercase">Geospatial Work</span>
 
-                    <i class="fas fa-map text-emerald-400 mr-3"></i>
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+
+                    <i class="fas fa-map text-emerald-600 mr-3"></i>
 
                     Interactive Map Gallery
 
                 </h2>
 
-                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+                <p class="text-xl text-gray-500 max-w-3xl mx-auto">
 
                     Explore my collection of interactive maps and geospatial visualizations
 
@@ -646,7 +791,7 @@
 
                 <button onclick="switchMapTab('all')"
 
-                        class="map-tab active glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-500/20 hover:border-emerald-400"
+                        class="map-tab active glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-50 hover:border-emerald-500 bg-emerald-100 border-emerald-500 text-emerald-600"
 
                         data-tab="all">
 
@@ -656,7 +801,7 @@
 
                 <button onclick="switchMapTab('arcgis')"
 
-                        class="map-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-500/20 hover:border-emerald-400"
+                        class="map-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-50 hover:border-emerald-500"
 
                         data-tab="arcgis">
 
@@ -666,7 +811,7 @@
 
                 <button onclick="switchMapTab('gee')"
 
-                        class="map-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-500/20 hover:border-emerald-400"
+                        class="map-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-50 hover:border-emerald-500"
 
                         data-tab="gee">
 
@@ -676,7 +821,7 @@
 
                 <button onclick="switchMapTab('custom')"
 
-                        class="map-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-500/20 hover:border-emerald-400"
+                        class="map-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-50 hover:border-emerald-500"
 
                         data-tab="custom">
 
@@ -696,17 +841,17 @@
 
                     <!-- Map Card 1 - ArcGIS Online Example -->
 
-                    <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all">
+                    <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all">
 
-                        <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
 
-                            <i class="fas fa-tree text-emerald-400"></i>
+                            <i class="fas fa-tree text-emerald-600"></i>
 
                             Scene Map
 
                         </h3>
 
-                        <p class="text-slate-400 mb-4"></p>
+                        <p class="text-gray-500 mb-4"></p>
 
                         <div class="iframe-container">
 
@@ -726,9 +871,9 @@
 
                         <div class="mt-4 flex gap-2">
 
-                            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">ArcGIS Online</span>
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">ArcGIS Online</span>
 
-                            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Remote Sensing</span>
+                            <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">Remote Sensing</span>
 
                         </div>
 
@@ -738,17 +883,17 @@
 
                     <!-- Map Card 2 - Google Earth Engine Example -->
 
-                    <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all">
+                    <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all">
 
-                        <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
 
-                            <i class="fas fa-satellite-dish text-cyan-400"></i>
+                            <i class="fas fa-satellite-dish text-cyan-700"></i>
 
                             Google Earth Engine App
 
                         </h3>
 
-                        <p class="text-slate-400 mb-4">Upload Geojson and compare between Sentinel 2A vs Hansen Global Forest Loss</p>
+                        <p class="text-gray-500 mb-4">Upload Geojson and compare between Sentinel 2A vs Hansen Global Forest Loss</p>
 
                         <div class="iframe-container">
 
@@ -768,9 +913,9 @@
 
                         <div class="mt-4 flex gap-2">
 
-                            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Google Earth Engine</span>
+                            <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">Google Earth Engine</span>
 
-                            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Sentinel</span>
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">Sentinel</span>
 
                         </div>
 
@@ -780,17 +925,17 @@
 
                     <!-- Map Card 3 - Custom Web Map -->
 
-                    <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all">
+                    <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all">
 
-                        <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
 
-                            <i class="fas fa-layer-group text-purple-400"></i>
+                            <i class="fas fa-layer-group text-purple-700"></i>
 
                             Google My Maps
 
                         </h3>
 
-                        <p class="text-slate-400 mb-4"></p>
+                        <p class="text-gray-500 mb-4"></p>
 
                         <div class="iframe-container">
 
@@ -810,9 +955,9 @@
 
                         <div class="mt-4 flex gap-2">
 
-                            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Google</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Google</span>
 
-                            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">MyMaps</span>
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">MyMaps</span>
 
                         </div>
 
@@ -832,9 +977,9 @@
 
                     <div class="glass rounded-xl p-6">
 
-                        <h3 class="text-2xl font-bold text-white mb-3">Scene Map</h3>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Scene Map</h3>
 
-                        <p class="text-slate-400 mb-4"></p>
+                        <p class="text-gray-500 mb-4"></p>
 
                         <div class="iframe-container">
 
@@ -864,9 +1009,9 @@
 
                     <div class="glass rounded-xl p-6">
 
-                        <h3 class="text-2xl font-bold text-white mb-3">Google Earth Engine App</h3>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Google Earth Engine App</h3>
 
-                        <p class="text-slate-400 mb-4">Upload Geojson and compare between Sentinel 2A vs Hansen Global Forest Loss</p>
+                        <p class="text-gray-500 mb-4">Upload Geojson and compare between Sentinel 2A vs Hansen Global Forest Loss</p>
 
                         <div class="iframe-container">
 
@@ -896,9 +1041,9 @@
 
                     <div class="glass rounded-xl p-6">
 
-                        <h3 class="text-2xl font-bold text-white mb-3">Google My Maps</h3>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Google My Maps</h3>
 
-                        <p class="text-slate-400 mb-4"></p>
+                        <p class="text-gray-500 mb-4"></p>
 
                         <div class="iframe-container">
 
@@ -926,21 +1071,23 @@
 
     <!-- Code Lab Section -->
 
-    <section id="codelab" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 to-slate-900">
+    <section id="codelab" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 border-t border-gray-100">
 
         <div class="max-w-7xl mx-auto">
 
             <div class="text-center mb-16">
 
-                <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">
+                <span class="inline-block px-4 py-2 bg-emerald-100 text-emerald-700 text-sm font-semibold rounded-full mb-4 tracking-wide uppercase">Scripts & Tools</span>
 
-                    <i class="fas fa-code text-emerald-400 mr-3"></i>
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+
+                    <i class="fas fa-code text-emerald-600 mr-3"></i>
 
                     Code Lab
 
                 </h2>
 
-                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+                <p class="text-xl text-gray-500 max-w-3xl mx-auto">
 
                     Useful code snippets and tools I've developed for geospatial analysis
 
@@ -956,7 +1103,7 @@
 
                 <button onclick="switchCodeTab('python')"
 
-                        class="code-tab active glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-500/20 hover:border-emerald-400"
+                        class="code-tab active glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-50 hover:border-emerald-500 bg-emerald-100 border-emerald-500 text-emerald-600"
 
                         data-tab="python">
 
@@ -966,7 +1113,7 @@
 
                 <button onclick="switchCodeTab('javascript')"
 
-                        class="code-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-500/20 hover:border-emerald-400"
+                        class="code-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-50 hover:border-emerald-500"
 
                         data-tab="javascript">
 
@@ -976,7 +1123,7 @@
 
                 <button onclick="switchCodeTab('sql')"
 
-                        class="code-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-500/20 hover:border-emerald-400"
+                        class="code-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-50 hover:border-emerald-500"
 
                         data-tab="sql">
 
@@ -996,15 +1143,15 @@
 
                 <div class="glass rounded-xl p-6">
 
-                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
 
-                        <i class="fas fa-leaf text-emerald-400"></i>
+                        <i class="fas fa-leaf text-emerald-600"></i>
 
                         Automatically get Global Forest Watch link
 
                     </h3>
 
-                    <p class="text-slate-400 mb-4">Python script using Selenium to automate geojson upload and get Global Forest Watch link.</p>
+                    <p class="text-gray-500 mb-4">Python script using Selenium to automate geojson upload and get Global Forest Watch link.</p>
 
                     <div class="code-container">
 
@@ -1667,11 +1814,11 @@ GFWAutomator = GFWAutomatorOptimized
 
                     <div class="mt-4 flex gap-2">
 
-                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Selenium</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">Selenium</span>
 
-                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">ChromeDriver</span>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">ChromeDriver</span>
 
-                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Python</span>
 
                     </div>
 
@@ -1683,15 +1830,15 @@ GFWAutomator = GFWAutomatorOptimized
 
                 <div class="glass rounded-xl p-6">
 
-                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
 
-                        <i class="fas fa-map-marked-alt text-cyan-400"></i>
+                        <i class="fas fa-map-marked-alt text-cyan-700"></i>
 
                         Computer Vision
 
                     </h3>
 
-                    <p class="text-slate-400 mb-4">Camera AI with YOLO Ultralytics Code sample</p>
+                    <p class="text-gray-500 mb-4">Camera AI with YOLO Ultralytics Code sample</p>
 
                     <div class="code-container">
 
@@ -1708,11 +1855,11 @@ GFWAutomator = GFWAutomatorOptimized
 
                     <div class="mt-4 flex gap-2">
 
-                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">DL</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">DL</span>
 
-                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">CV</span>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">CV</span>
 
-                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">AI</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">AI</span>
 
                     </div>
 
@@ -1730,15 +1877,15 @@ GFWAutomator = GFWAutomatorOptimized
 
                 <div class="glass rounded-xl p-6">
 
-                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
 
-                        <i class="fas fa-map text-emerald-400"></i>
+                        <i class="fas fa-map text-emerald-600"></i>
 
                         Visualizing geojson and Hansen's deforestation data
 
                     </h3>
 
-                    <p class="text-slate-400 mb-4">Visual comparison of data according to the latest Sentinel 2A image and detected deforestation areas</p>
+                    <p class="text-gray-500 mb-4">Visual comparison of data according to the latest Sentinel 2A image and detected deforestation areas</p>
 
                     <div class="code-container">
 
@@ -2315,9 +2462,9 @@ app.boot();
 
                     <div class="mt-4 flex gap-2">
 
-                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">GEE</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">GEE</span>
 
-                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">GeoJSON</span>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">GeoJSON</span>
 
                     </div>
 
@@ -2329,15 +2476,15 @@ app.boot();
 
                 <div class="glass rounded-xl p-6">
 
-                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
 
-                        <i class="fas fa-chart-line text-cyan-400"></i>
+                        <i class="fas fa-chart-line text-cyan-700"></i>
 
                         Rubber tree disease warning map with GEE
 
                     </h3>
 
-                    <p class="text-slate-400 mb-4">Create Rubber tree disease warning map.</p>
+                    <p class="text-gray-500 mb-4">Create Rubber tree disease warning map.</p>
 
                     <div class="code-container">
 
@@ -2355,9 +2502,9 @@ app.boot();
 
                     <div class="mt-4 flex gap-2">
 
-                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">GEE</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">GEE</span>
 
-                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Remote Sensing</span>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">Remote Sensing</span>
 
                     </div>
 
@@ -2375,15 +2522,15 @@ app.boot();
 
                 <div class="glass rounded-xl p-6">
 
-                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
 
-                        <i class="fas fa-database text-emerald-400"></i>
+                        <i class="fas fa-database text-emerald-600"></i>
 
                         SQL Superbase for AI Chatbot
 
                     </h3>
 
-                    <p class="text-slate-400 mb-4">SQL in vector database.</p>
+                    <p class="text-gray-500 mb-4">SQL in vector database.</p>
 
                     <div class="code-container">
 
@@ -2399,9 +2546,9 @@ app.boot();
 
                     <div class="mt-4 flex gap-2">
 
-                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">VDB</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">VDB</span>
 
-                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">PostgreSQL</span>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">PostgreSQL</span>
 
                     </div>
 
@@ -2413,15 +2560,15 @@ app.boot();
 
                 <div class="glass rounded-xl p-6">
 
-                    <h3 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
 
-                        <i class="fas fa-chart-bar text-cyan-400"></i>
+                        <i class="fas fa-chart-bar text-cyan-700"></i>
 
                         Spatial Aggregation and Statistics
 
                     </h3>
 
-                    <p class="text-slate-400 mb-4">Calculate spatial statistics and aggregations for forest management reporting.</p>
+                    <p class="text-gray-500 mb-4">Calculate spatial statistics and aggregations for forest management reporting.</p>
 
                     <div class="code-container">
 
@@ -2437,9 +2584,9 @@ app.boot();
 
                     <div class="mt-4 flex gap-2">
 
-                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">SQL</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">SQL</span>
 
-                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Analytics</span>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">Analytics</span>
 
                     </div>
 
@@ -2455,21 +2602,23 @@ app.boot();
 
     <!-- Projects Section -->
 
-    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 to-slate-800">
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100">
 
         <div class="max-w-7xl mx-auto">
 
             <div class="text-center mb-16">
 
-                <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">
+                <span class="inline-block px-4 py-2 bg-emerald-100 text-emerald-700 text-sm font-semibold rounded-full mb-4 tracking-wide uppercase">Portfolio</span>
 
-                    <i class="fas fa-project-diagram text-emerald-400 mr-3"></i>
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+
+                    <i class="fas fa-project-diagram text-emerald-600 mr-3"></i>
 
                     Featured Projects
 
                 </h2>
 
-                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+                <p class="text-xl text-gray-500 max-w-3xl mx-auto">
 
                     A showcase of my recent work in GIS, remote sensing, and geospatial development
 
@@ -2485,19 +2634,19 @@ app.boot();
 
                 <!-- Project Card 1 -->
 
-                <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all transform hover:-translate-y-2">
+                <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all transform hover:-translate-y-2">
 
                     <div class="mb-4">
 
                         <div class="text-4xl mb-4">
 
-                            <i class="fas fa-tree text-emerald-400"></i>
+                            <i class="fas fa-tree text-emerald-600"></i>
 
                         </div>
 
-                        <h3 class="text-2xl font-bold text-white mb-2">Forest Change Detection System</h3>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Forest Change Detection System</h3>
 
-                        <p class="text-slate-400 mb-4">
+                        <p class="text-gray-500 mb-4">
 
                             Using Planet and ArcGIS Pro images to analyze images at 02 points in time to identify
 
@@ -2509,25 +2658,25 @@ app.boot();
 
                     <div class="flex flex-wrap gap-2 mb-4">
 
-                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Planet</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">Planet</span>
 
-                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">ArcGIS</span>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">ArcGIS</span>
 
-                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Machine Learning</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Machine Learning</span>
 
-                        <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm">ArcPy</span>
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">ArcPy</span>
 
                     </div>
 
                     <div class="flex gap-3">
 
-                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
 
                             <i class="fab fa-github mr-1"></i> Docs
 
                         </a>
 
-                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
 
                             <i class="fas fa-external-link-alt mr-1"></i> Demo
 
@@ -2541,19 +2690,19 @@ app.boot();
 
                 <!-- Project Card 2 -->
 
-                <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all transform hover:-translate-y-2">
+                <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all transform hover:-translate-y-2">
 
                     <div class="mb-4">
 
                         <div class="text-4xl mb-4">
 
-                            <i class="fas fa-satellite text-cyan-400"></i>
+                            <i class="fas fa-satellite text-cyan-700"></i>
 
                         </div>
 
-                        <h3 class="text-2xl font-bold text-white mb-2">Processing, working with Mavic 3M drone images</h3>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Processing, working with Mavic 3M drone images</h3>
 
-                        <p class="text-slate-400 mb-4">
+                        <p class="text-gray-500 mb-4">
 
                             Survey, plan flight routes, set up parameters to collect multispectral image data.
 
@@ -2565,25 +2714,25 @@ app.boot();
 
                     <div class="flex flex-wrap gap-2 mb-4">
 
-                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">UAV</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">UAV</span>
 
-                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">ArcGIS</span>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">ArcGIS</span>
 
-                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Mavic3M</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Mavic3M</span>
 
-                        <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm">Carbon</span>
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">Carbon</span>
 
                     </div>
 
                     <div class="flex gap-3">
 
-                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
 
                             <i class="fab fa-github mr-1"></i> Code
 
                         </a>
 
-                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
 
                             <i class="fas fa-external-link-alt mr-1"></i> Demo
 
@@ -2597,19 +2746,19 @@ app.boot();
 
                 <!-- Project Card 3 -->
 
-                <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all transform hover:-translate-y-2">
+                <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all transform hover:-translate-y-2">
 
                     <div class="mb-4">
 
                         <div class="text-4xl mb-4">
 
-                            <i class="fas fa-map-marked-alt text-purple-400"></i>
+                            <i class="fas fa-map-marked-alt text-purple-700"></i>
 
                         </div>
 
-                        <h3 class="text-2xl font-bold text-white mb-2">Normalize Geojson data</h3>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Normalize Geojson data</h3>
 
-                        <p class="text-slate-400 mb-4">
+                        <p class="text-gray-500 mb-4">
 
                             Using GIS software and Python to detect.
 
@@ -2621,25 +2770,25 @@ app.boot();
 
                     <div class="flex flex-wrap gap-2 mb-4">
 
-                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">Python</span>
 
-                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">ArcPy</span>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">ArcPy</span>
 
-                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">GDAL</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">GDAL</span>
 
-                        <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm">ArcGIS</span>
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">ArcGIS</span>
 
                     </div>
 
                     <div class="flex gap-3">
 
-                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
 
                             <i class="fab fa-github mr-1"></i> Code
 
                         </a>
 
-                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
 
                             <i class="fas fa-external-link-alt mr-1"></i> Demo
 
@@ -2653,19 +2802,19 @@ app.boot();
 
                 <!-- Project Card 4 -->
 
-                <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all transform hover:-translate-y-2">
+                <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all transform hover:-translate-y-2">
 
                     <div class="mb-4">
 
                         <div class="text-4xl mb-4">
 
-                            <i class="fas fa-route text-orange-400"></i>
+                            <i class="fas fa-route text-orange-700"></i>
 
                         </div>
 
-                        <h3 class="text-2xl font-bold text-white mb-2">Coordination of Mangrove Planting Project</h3>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Coordination of Mangrove Planting Project</h3>
 
-                        <p class="text-slate-400 mb-4">
+                        <p class="text-gray-500 mb-4">
 
                             Use Survey123 XLS Form, Field Maps, ArcGIS Online
 
@@ -2677,25 +2826,25 @@ app.boot();
 
                     <div class="flex flex-wrap gap-2 mb-4">
 
-                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Survey123</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">Survey123</span>
 
-                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">FieldMapsX</span>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">FieldMapsX</span>
 
-                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">ESRI</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">ESRI</span>
 
-                        <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm">Mangrove</span>
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">Mangrove</span>
 
                     </div>
 
                     <div class="flex gap-3">
 
-                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
 
                             <i class="fab fa-github mr-1"></i> Code
 
                         </a>
 
-                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
 
                             <i class="fas fa-external-link-alt mr-1"></i> Demo
 
@@ -2709,19 +2858,19 @@ app.boot();
 
                 <!-- Project Card 5 -->
 
-                <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all transform hover:-translate-y-2">
+                <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all transform hover:-translate-y-2">
 
                     <div class="mb-4">
 
                         <div class="text-4xl mb-4">
 
-                            <i class="fas fa-fire text-red-400"></i>
+                            <i class="fas fa-fire text-red-700"></i>
 
                         </div>
 
-                        <h3 class="text-2xl font-bold text-white mb-2">Mangrove tree analysis to calculate biomass and carbon accumulation.</h3>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Mangrove tree analysis to calculate biomass and carbon accumulation.</h3>
 
-                        <p class="text-slate-400 mb-4">
+                        <p class="text-gray-500 mb-4">
 
                             Select plots, collect field samples, preserve samples
 
@@ -2733,25 +2882,25 @@ app.boot();
 
                     <div class="flex flex-wrap gap-2 mb-4">
 
-                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Carbon</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">Carbon</span>
 
-                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">TOC</span>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">TOC</span>
 
-                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Avicenniaalba</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Avicenniaalba</span>
 
-                        <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm">Mangrove</span>
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">Mangrove</span>
 
                     </div>
 
                     <div class="flex gap-3">
 
-                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
 
                             <i class="fab fa-github mr-1"></i> Code
 
                         </a>
 
-                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
 
                             <i class="fas fa-external-link-alt mr-1"></i> Demo
 
@@ -2765,19 +2914,19 @@ app.boot();
 
                 <!-- Project Card 6 -->
 
-                <div class="glass rounded-xl p-6 hover:border-emerald-400 transition-all transform hover:-translate-y-2">
+                <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all transform hover:-translate-y-2">
 
                     <div class="mb-4">
 
                         <div class="text-4xl mb-4">
 
-                            <i class="fas fa-cloud text-blue-400"></i>
+                            <i class="fas fa-cloud text-blue-700"></i>
 
                         </div>
 
-                        <h3 class="text-2xl font-bold text-white mb-2">Create apps to process and automate repetitive tasks using AI Coding</h3>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Create apps to process and automate repetitive tasks using AI Coding</h3>
 
-                        <p class="text-slate-400 mb-4">
+                        <p class="text-gray-500 mb-4">
 
                             Use Python to automate tasks like downloading and getting the link to share each geojson
 
@@ -2789,25 +2938,25 @@ app.boot();
 
                     <div class="flex flex-wrap gap-2 mb-4">
 
-                        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">Python</span>
 
-                        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">Portable</span>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">Portable</span>
 
-                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Winpython</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Winpython</span>
 
-                        <span class="px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full text-sm">AI</span>
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">AI</span>
 
                     </div>
 
                     <div class="flex gap-3">
 
-                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
 
                             <i class="fab fa-github mr-1"></i> Code
 
                         </a>
 
-                        <a href="#" class="text-emerald-400 hover:text-emerald-300 transition-all">
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
 
                             <i class="fas fa-file-alt mr-1"></i> Docs
 
@@ -2827,7 +2976,7 @@ app.boot();
 
     <!-- Footer -->
 
-    <footer class="glass border-t border-slate-700/50 py-12 px-4 sm:px-6 lg:px-8">
+    <footer class="bg-gray-900 border-t border-gray-800 py-12 px-4 sm:px-6 lg:px-8">
 
         <div class="max-w-7xl mx-auto">
 
@@ -2843,7 +2992,7 @@ app.boot();
 
                     </h3>
 
-                    <p class="text-slate-400">
+                    <p class="text-gray-400">
 
                         GIS & Forestry.
 
@@ -2857,13 +3006,15 @@ app.boot();
 
                     <ul class="space-y-2">
 
-                        <li><a href="#hero" class="text-slate-400 hover:text-emerald-400 transition-all">Home</a></li>
+                        <li><a href="#hero" class="text-gray-400 hover:text-emerald-400 transition-all">Home</a></li>
 
-                        <li><a href="#maps" class="text-slate-400 hover:text-emerald-400 transition-all">Map Gallery</a></li>
+                        <li><a href="#gallery" class="text-gray-400 hover:text-emerald-400 transition-all">Gallery</a></li>
 
-                        <li><a href="#codelab" class="text-slate-400 hover:text-emerald-400 transition-all">Code Lab</a></li>
+                        <li><a href="#maps" class="text-gray-400 hover:text-emerald-400 transition-all">Map Gallery</a></li>
 
-                        <li><a href="#projects" class="text-slate-400 hover:text-emerald-400 transition-all">Projects</a></li>
+                        <li><a href="#codelab" class="text-gray-400 hover:text-emerald-400 transition-all">Code Lab</a></li>
+
+                        <li><a href="#projects" class="text-gray-400 hover:text-emerald-400 transition-all">Projects</a></li>
 
                     </ul>
 
@@ -2877,7 +3028,7 @@ app.boot();
 
                         <a href="https://github.com/ngobac" target="_blank"
 
-                           class="text-slate-400 hover:text-emerald-400 text-2xl transition-all">
+                           class="text-gray-400 hover:text-emerald-400 text-2xl transition-all">
 
                             <i class="fab fa-github"></i>
 
@@ -2885,7 +3036,7 @@ app.boot();
 
                         <a href="https://linkedin.com/in/bacngo7877" target="_blank"
 
-                           class="text-slate-400 hover:text-emerald-400 text-2xl transition-all">
+                           class="text-gray-400 hover:text-emerald-400 text-2xl transition-all">
 
                             <i class="fab fa-linkedin"></i>
 
@@ -2893,7 +3044,7 @@ app.boot();
 
                         <a href="mailto:bacngo7877@gmail.com"
 
-                           class="text-slate-400 hover:text-emerald-400 text-2xl transition-all">
+                           class="text-gray-400 hover:text-emerald-400 text-2xl transition-all">
 
                             <i class="fas fa-envelope"></i>
 
@@ -2901,7 +3052,7 @@ app.boot();
 
                         <a href="https://twitter.com/" target="_blank"
 
-                           class="text-slate-400 hover:text-emerald-400 text-2xl transition-all">
+                           class="text-gray-400 hover:text-emerald-400 text-2xl transition-all">
 
                             <i class="fab fa-twitter"></i>
 
@@ -2913,9 +3064,9 @@ app.boot();
 
             </div>
 
-            <div class="border-t border-slate-700/50 pt-8 text-center">
+            <div class="border-t border-gray-800 pt-8 text-center">
 
-                <p class="text-slate-400">
+                <p class="text-gray-500">
 
                     © 2025 Bac Ngo. Built with <i class="fas fa-heart text-emerald-400"></i> Claude AI
 
@@ -2997,7 +3148,7 @@ app.boot();
 
             mapTabs.forEach(tab => {
 
-                tab.classList.remove('active', 'bg-emerald-500/20', 'border-emerald-400', 'text-emerald-400');
+                tab.classList.remove('active', 'bg-emerald-100', 'border-emerald-500', 'text-emerald-600');
 
             });
 
@@ -3021,7 +3172,7 @@ app.boot();
 
             if (activeTab) {
 
-                activeTab.classList.add('active', 'bg-emerald-500/20', 'border-emerald-400', 'text-emerald-400');
+                activeTab.classList.add('active', 'bg-emerald-100', 'border-emerald-500', 'text-emerald-600');
 
             }
 
@@ -3051,7 +3202,7 @@ app.boot();
 
             codeTabs.forEach(tab => {
 
-                tab.classList.remove('active', 'bg-emerald-500/20', 'border-emerald-400', 'text-emerald-400');
+                tab.classList.remove('active', 'bg-emerald-100', 'border-emerald-500', 'text-emerald-600');
 
             });
 
@@ -3075,7 +3226,7 @@ app.boot();
 
             if (activeTab) {
 
-                activeTab.classList.add('active', 'bg-emerald-500/20', 'border-emerald-400', 'text-emerald-400');
+                activeTab.classList.add('active', 'bg-emerald-100', 'border-emerald-500', 'text-emerald-600');
 
             }
 
@@ -3205,15 +3356,15 @@ app.boot();
 
             navLinks.forEach(link => {
 
-                link.classList.remove('text-emerald-400');
+                link.classList.remove('text-emerald-600');
 
-                link.classList.add('text-slate-300');
+                link.classList.add('text-gray-600');
 
                 if (link.getAttribute('href') === '#' + current) {
 
-                    link.classList.remove('text-slate-300');
+                    link.classList.remove('text-gray-600');
 
-                    link.classList.add('text-emerald-400');
+                    link.classList.add('text-emerald-600');
 
                 }
 
