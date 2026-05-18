@@ -1,898 +1,1104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Botanical Explorer | Arabidopsis thaliana</title>
-
-    <!-- Google Fonts - Serif, Sans-serif, and Mono -->
+    <title>Khám Phá Cây Thông Ba Lá | Pinus kesiya</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            /* Organic, earthy color palette */
-            --sage-green: #7a9e7e;
-            --sage-green-dark: #5d7a5f;
-            --sage-green-light: #a4c4a6;
-            --deep-brown: #4a3428;
-            --terracotta: #c97154;
-            --terracotta-light: #e09176;
-            --parchment: #f4f1ea;
-            --parchment-dark: #e8e3d6;
-            --charcoal: #2d2d2d;
-            --moss-green: #8b9d83;
-            --sepia: #704214;
-
-            /* Typography */
+            --brown-dark:   #4a2c0a;
+            --brown-mid:    #7c4a1e;
+            --brown-light:  #a0652a;
+            --bark-red:     #8b3a1a;
+            --needle-dark:  #1a5c2a;
+            --needle-mid:   #2a7a3a;
+            --needle-light: #3d9e4e;
+            --cone-brown:   #7a5010;
+            --root-dark:    #5c3a10;
+            --root-mid:     #7a5020;
+            --earth-top:    #6b4c1a;
+            --earth-deep:   #3d2408;
+            --sky-top:      #c8e6f5;
+            --sky-bottom:   #e8f5ee;
+            --parchment:    #f5f0e8;
+            --parchment-dk: #e8e0cc;
+            --sage:         #7a9e7e;
+            --sage-dark:    #5d7a5f;
+            --terracotta:   #c97154;
+            --charcoal:     #2d2d2d;
+            --gold-glow:    rgba(255, 200, 50, 0.7);
             --font-serif: 'EB Garamond', serif;
-            --font-sans: 'Lato', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
+            --font-sans:  'Lato', sans-serif;
+            --font-mono:  'JetBrains Mono', monospace;
         }
 
         body {
             font-family: var(--font-sans);
-            background: linear-gradient(135deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+            background: linear-gradient(135deg, var(--parchment) 0%, var(--parchment-dk) 100%);
             color: var(--charcoal);
             min-height: 100vh;
             background-attachment: fixed;
         }
 
-        /* Header with navigation */
+        /* ── Header ── */
         .header {
-            background: linear-gradient(to bottom, rgba(122, 158, 126, 0.95), rgba(122, 158, 126, 0.85));
+            background: linear-gradient(to bottom, rgba(122,158,126,0.96), rgba(90,120,92,0.92));
             backdrop-filter: blur(10px);
-            border-bottom: 3px solid var(--deep-brown);
-            padding: 1.5rem 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid var(--brown-dark);
+            padding: 1.4rem 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
-
         .nav-container {
-            max-width: 1400px;
+            max-width: 1440px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
-
         h1 {
             font-family: var(--font-serif);
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: var(--parchment);
             font-weight: 600;
-            letter-spacing: 0.02em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
         }
-
         .subtitle {
             font-family: var(--font-serif);
-            font-size: 1rem;
-            color: var(--parchment-dark);
             font-style: italic;
-            margin-top: 0.25rem;
+            font-size: 1rem;
+            color: var(--parchment-dk);
+            margin-top: 0.2rem;
         }
-
         .nav-link {
             color: var(--parchment);
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border: 2px solid transparent;
+            padding: 0.45rem 1rem;
+            border: 2px solid rgba(244,241,234,0.5);
             border-radius: 4px;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             font-weight: 500;
+            font-size: 0.95rem;
         }
+        .nav-link:hover { border-color: var(--parchment); background: rgba(244,241,234,0.12); }
 
-        .nav-link:hover {
-            border-color: var(--parchment);
-            background: rgba(244, 241, 234, 0.1);
-        }
-
-        /* Main container */
+        /* ── Layout ── */
         .container {
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 2rem;
+            max-width: 1440px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
             display: grid;
-            grid-template-columns: 1fr 450px;
-            gap: 2rem;
+            grid-template-columns: 1fr 460px;
+            gap: 1.5rem;
             align-items: start;
         }
+        @media (max-width: 1100px) { .container { grid-template-columns: 1fr; } }
 
-        /* SVG Container */
-        .svg-container {
+        /* ── SVG Panel ── */
+        .svg-wrapper {
             background: white;
-            border: 4px solid var(--deep-brown);
-            border-radius: 8px;
-            padding: 3rem;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border: 3px solid var(--brown-dark);
+            border-radius: 10px;
+            padding: 0;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.14);
+            overflow: hidden;
             position: relative;
-            min-height: 600px;
+        }
+        .svg-title-bar {
+            background: var(--brown-dark);
+            color: var(--parchment);
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            padding: 0.55rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .svg-title-bar span { font-style: italic; opacity: 0.75; font-size: 0.88rem; }
+        #tree-svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            cursor: default;
+        }
+
+        /* ── Part click areas ── */
+        .tree-part {
+            cursor: pointer;
+            transition: filter 0.25s ease, opacity 0.25s ease;
+        }
+        .tree-part:hover { filter: brightness(1.18) saturate(1.25); }
+        .tree-part.active {
+            filter: brightness(1.22) saturate(1.3) drop-shadow(0 0 10px var(--gold-glow));
+        }
+        .tree-part.dimmed { opacity: 0.35; filter: saturate(0.5); }
+
+        /* ── Info Panel ── */
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Selected part card */
+        .part-card {
+            background: white;
+            border: 3px solid var(--sage-dark);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            transition: border-color 0.3s;
+        }
+        .part-card-header {
+            padding: 1rem 1.2rem 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            border-bottom: 2px solid var(--parchment-dk);
+        }
+        .part-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
         }
-
-        .svg-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(122, 158, 126, 0.03) 2px,
-                    rgba(122, 158, 126, 0.03) 4px
-                );
-            pointer-events: none;
-            border-radius: 4px;
+        .part-card-title { flex: 1; }
+        .part-card-title h2 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--brown-dark);
+            margin-bottom: 0.1rem;
         }
-
-        #plant-diagram {
-            max-width: 100%;
-            height: auto;
-            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));
+        .part-card-title p {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--sage-dark);
+        }
+        .part-card-body { padding: 1rem 1.2rem; }
+        .part-card-body p {
+            font-size: 0.92rem;
+            line-height: 1.75;
+            color: #444;
+            margin-bottom: 0.7rem;
+        }
+        .fact-list { list-style: none; padding: 0; margin-bottom: 0.6rem; }
+        .fact-list li {
             position: relative;
-            z-index: 1;
+            padding-left: 1.4rem;
+            margin-bottom: 0.45rem;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: #444;
         }
+        .fact-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--terracotta);
+        }
+        .stat-row {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-top: 0.6rem;
+        }
+        .stat-chip {
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            font-family: var(--font-mono);
+        }
+        .hint-text {
+            text-align: center;
+            padding: 2.2rem 1rem;
+            color: #888;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.05rem;
+        }
+        .hint-text .arrow { font-size: 1.8rem; display: block; margin-bottom: 0.5rem; opacity: 0.4; }
 
-        /* Info Panel */
-        .info-panel {
+        /* ── Tabs ── */
+        .tabs-panel {
             background: white;
-            border: 4px solid var(--sage-green-dark);
-            border-radius: 8px;
+            border: 3px solid var(--sage-dark);
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
         }
-
         .tab-header {
             display: flex;
-            background: var(--sage-green);
-            border-bottom: 3px solid var(--deep-brown);
+            background: var(--sage);
+            border-bottom: 2px solid var(--brown-dark);
+            overflow-x: auto;
         }
-
-        .tab-button {
+        .tab-btn {
             flex: 1;
-            padding: 1rem;
+            min-width: 80px;
+            padding: 0.75rem 0.5rem;
             background: transparent;
             border: none;
             color: var(--parchment);
             font-family: var(--font-serif);
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border-right: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
+            transition: all 0.25s;
+            border-right: 1px solid rgba(255,255,255,0.18);
+            white-space: nowrap;
         }
-
-        .tab-button:last-child {
-            border-right: none;
+        .tab-btn:last-child { border-right: none; }
+        .tab-btn:hover { background: rgba(255,255,255,0.12); }
+        .tab-btn.active { background: white; color: var(--sage-dark); font-weight: 700; }
+        .tab-content { display: none; padding: 1.2rem 1.4rem; max-height: 340px; overflow-y: auto; }
+        .tab-content.active { display: block; animation: fadeUp 0.3s ease; }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
-
-        .tab-button:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .tab-button.active {
-            background: white;
-            color: var(--sage-green-dark);
-            font-weight: 600;
-        }
-
-        .tab-button.active::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--terracotta);
-        }
-
-        .tab-content {
-            display: none;
-            padding: 2rem;
-            max-height: 600px;
-            overflow-y: auto;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .tab-content h2 {
-            font-family: var(--font-serif);
-            font-size: 1.8rem;
-            color: var(--sage-green-dark);
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--terracotta);
-            padding-bottom: 0.5rem;
-        }
-
         .tab-content h3 {
             font-family: var(--font-serif);
-            font-size: 1.3rem;
-            color: var(--deep-brown);
-            margin: 1.5rem 0 0.75rem;
+            font-size: 1.1rem;
+            color: var(--brown-dark);
+            margin: 0.9rem 0 0.4rem;
+            border-left: 3px solid var(--terracotta);
+            padding-left: 0.5rem;
         }
-
-        .tab-content p {
-            line-height: 1.8;
-            margin-bottom: 1rem;
-            color: var(--charcoal);
-        }
-
-        .taxonomy-item {
-            display: grid;
-            grid-template-columns: 140px 1fr;
-            gap: 1rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: var(--parchment);
-            border-left: 3px solid var(--sage-green);
-            border-radius: 4px;
-        }
-
-        .taxonomy-label {
-            font-family: var(--font-serif);
-            font-weight: 600;
-            color: var(--deep-brown);
-        }
-
-        .taxonomy-value {
-            font-family: var(--font-mono);
-            color: var(--charcoal);
-            font-size: 0.95rem;
-        }
-
-        .morphology-section {
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: var(--parchment);
-            border-radius: 6px;
-            border: 1px solid var(--sage-green-light);
-        }
-
-        .growth-stage {
-            background: white;
-            border: 2px solid var(--sage-green);
-            border-radius: 6px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .growth-stage:hover {
-            transform: translateX(5px);
-            box-shadow: -4px 4px 0 var(--terracotta-light);
-        }
-
-        .stage-number {
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            color: var(--terracotta);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .stage-name {
-            font-family: var(--font-serif);
-            font-size: 1.2rem;
-            color: var(--sage-green-dark);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .stage-duration {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--sepia);
-            margin-bottom: 0.75rem;
-        }
-
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        ul li {
+        .tab-content h3:first-child { margin-top: 0; }
+        .tab-content p { font-size: 0.87rem; line-height: 1.7; color: #444; margin-bottom: 0.5rem; }
+        .tab-content ul { list-style: none; padding: 0; }
+        .tab-content ul li {
             position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
+            padding-left: 1.3rem;
+            margin-bottom: 0.35rem;
+            font-size: 0.86rem;
             line-height: 1.6;
+            color: #444;
         }
+        .tab-content ul li::before { content: '→'; position: absolute; left: 0; color: var(--terracotta); font-weight: bold; }
+        .tab-content::-webkit-scrollbar { width: 6px; }
+        .tab-content::-webkit-scrollbar-track { background: var(--parchment); }
+        .tab-content::-webkit-scrollbar-thumb { background: var(--sage); border-radius: 3px; }
 
-        ul li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--terracotta);
-            font-weight: bold;
-        }
-
-        /* Highlighted elements */
-        .po-element {
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .po-element:hover {
-            filter: brightness(1.2);
-        }
-
-        .po-element.highlighted {
-            filter: brightness(1.3) drop-shadow(0 0 8px var(--terracotta));
-        }
-
-        /* Legend */
+        /* ── Legend ── */
         .legend {
             background: white;
-            border: 3px solid var(--deep-brown);
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin-top: 2rem;
+            border: 2px solid var(--brown-dark);
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            margin-top: 0.75rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem 1rem;
         }
-
-        .legend h3 {
-            font-family: var(--font-serif);
-            color: var(--deep-brown);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
         .legend-item {
             display: flex;
             align-items: center;
-            margin-bottom: 0.75rem;
-            gap: 0.75rem;
+            gap: 0.55rem;
+            cursor: pointer;
+            padding: 0.3rem 0.4rem;
+            border-radius: 5px;
+            transition: background 0.2s;
         }
-
-        .legend-color {
-            width: 24px;
-            height: 24px;
-            border-radius: 4px;
-            border: 2px solid var(--deep-brown);
+        .legend-item:hover { background: var(--parchment); }
+        .legend-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,0,0,0.2);
+            flex-shrink: 0;
         }
-
-        .legend-label {
-            font-family: var(--font-sans);
-            color: var(--charcoal);
-        }
-
-        .legend-po {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--sepia);
-            margin-left: auto;
-        }
-
-        /* Scrollbar styling */
-        .tab-content::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .tab-content::-webkit-scrollbar-track {
-            background: var(--parchment);
-        }
-
-        .tab-content::-webkit-scrollbar-thumb {
-            background: var(--sage-green);
-            border-radius: 4px;
-        }
-
-        .tab-content::-webkit-scrollbar-thumb:hover {
-            background: var(--sage-green-dark);
-        }
-
-        /* Responsive design */
-        @media (max-width: 1024px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .container {
-                padding: 0 1rem;
-                margin: 1rem auto;
-            }
-
-            .svg-container {
-                padding: 2rem;
-            }
-
-            .tab-content {
-                padding: 1.5rem;
-            }
-        }
+        .legend-label { font-size: 0.84rem; font-weight: 600; color: var(--charcoal); }
+        .legend-sub { font-size: 0.72rem; color: #888; font-style: italic; }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="nav-container">
-            <div>
-                <h1>Interactive Botanical Explorer</h1>
-                <p class="subtitle">Arabidopsis thaliana • Thale Cress</p>
-            </div>
-            <a href="index.html" class="nav-link">← Back to Portfolio</a>
-        </div>
-    </header>
 
-    <div class="container">
+<header class="header">
+    <div class="nav-container">
         <div>
-            <div class="svg-container">
-                <div id="plant-diagram"></div>
+            <h1>🌲 Khám Phá Kiến Trúc Cây Thân Gỗ</h1>
+            <p class="subtitle">Pinus kesiya Royle ex Gordon &nbsp;•&nbsp; Thông Ba Lá &nbsp;•&nbsp; Nhấp vào từng bộ phận để khám phá</p>
+        </div>
+        <a href="index.html" class="nav-link">← Về Portfolio</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- LEFT: SVG + Legend -->
+    <div>
+        <div class="svg-wrapper">
+            <div class="svg-title-bar">
+                🌲 Pinus kesiya — Thông Ba Lá <span>Đà Lạt / Tây Nguyên · Việt Nam</span>
             </div>
 
-            <div class="legend">
-                <h3>Plant Structures</h3>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #8fbc8f;"></div>
-                    <span class="legend-label">Leaf (Foliar Organ)</span>
-                    <span class="legend-po">PO_0025034</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #8b7355;"></div>
-                    <span class="legend-label">Root System</span>
-                    <span class="legend-po">PO_0009005</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #f4d03f;"></div>
-                    <span class="legend-label">Flower</span>
-                    <span class="legend-po">PO_0009046</span>
-                </div>
-            </div>
+            <!-- ════════════ TREE SVG ════════════ -->
+            <svg id="tree-svg" viewBox="0 0 520 680" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <!-- Sky gradient -->
+                    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%"   stop-color="#b8ddf0"/>
+                        <stop offset="100%" stop-color="#d8f0e0"/>
+                    </linearGradient>
+                    <!-- Ground gradient -->
+                    <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%"   stop-color="#7a5a28"/>
+                        <stop offset="40%"  stop-color="#5c3e14"/>
+                        <stop offset="100%" stop-color="#2e1a06"/>
+                    </linearGradient>
+                    <!-- Trunk gradient -->
+                    <linearGradient id="trunkGrad" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%"   stop-color="#6b3210"/>
+                        <stop offset="35%"  stop-color="#9a5428"/>
+                        <stop offset="65%"  stop-color="#8a4820"/>
+                        <stop offset="100%" stop-color="#5a2808"/>
+                    </linearGradient>
+                    <!-- Needle gradient -->
+                    <linearGradient id="needleGrad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%"   stop-color="#1a6030"/>
+                        <stop offset="100%" stop-color="#3aaa5a"/>
+                    </linearGradient>
+                    <!-- Root gradient -->
+                    <linearGradient id="rootGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%"   stop-color="#7a5020"/>
+                        <stop offset="100%" stop-color="#4a2c08"/>
+                    </linearGradient>
+                    <!-- Glow filter for active state -->
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="4" result="blur"/>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                    <!-- Bark texture pattern -->
+                    <pattern id="barkPat" x="0" y="0" width="8" height="14" patternUnits="userSpaceOnUse">
+                        <rect width="8" height="14" fill="#8a4820"/>
+                        <line x1="0" y1="4" x2="8" y2="5" stroke="#6b3210" stroke-width="0.8" opacity="0.6"/>
+                        <line x1="0" y1="9" x2="8" y2="8" stroke="#6b3210" stroke-width="0.6" opacity="0.4"/>
+                    </pattern>
+                </defs>
+
+                <!-- ── Background ── -->
+                <rect width="520" height="680" fill="url(#skyGrad)"/>
+
+                <!-- Background hills (atmosphere) -->
+                <ellipse cx="80"  cy="430" rx="160" ry="40" fill="#a8c890" opacity="0.35"/>
+                <ellipse cx="440" cy="430" rx="140" ry="35" fill="#9abe84" opacity="0.30"/>
+
+                <!-- Sun -->
+                <circle cx="460" cy="55" r="32" fill="#ffe080" opacity="0.6"/>
+                <circle cx="460" cy="55" r="24" fill="#ffd040" opacity="0.5"/>
+
+                <!-- Ground surface -->
+                <rect y="420" width="520" height="260" fill="url(#groundGrad)"/>
+                <!-- Ground top strip (grass/litter layer) -->
+                <ellipse cx="260" cy="420" rx="260" ry="14" fill="#8a6e30" opacity="0.7"/>
+                <ellipse cx="260" cy="420" rx="240" ry="9"  fill="#a08040" opacity="0.5"/>
+
+                <!-- Ground texture lines -->
+                <path d="M 20,435 Q 130,428 260,432 Q 390,436 500,430" stroke="#6a4c18" stroke-width="1" fill="none" opacity="0.4"/>
+                <path d="M 40,450 Q 150,444 270,448 Q 380,452 490,446" stroke="#5a3e14" stroke-width="0.8" fill="none" opacity="0.3"/>
+
+                <!-- ════ ROOTS GROUP ════ -->
+                <g id="part-roots" class="tree-part" data-part="roots" data-label="Hệ Rễ">
+
+                    <!-- Main taproot -->
+                    <path d="M 260,422 Q 258,470 256,520 Q 254,560 252,600 Q 251,630 250,655"
+                          stroke="url(#rootGrad)" stroke-width="16" fill="none" stroke-linecap="round"/>
+                    <!-- Taproot shadow/depth -->
+                    <path d="M 258,422 Q 256,470 254,520 Q 252,560 250,600"
+                          stroke="#3a1e06" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.4"/>
+
+                    <!-- Left lateral root 1 -->
+                    <path d="M 257,445 Q 220,452 185,462 Q 155,472 125,485 Q 100,497 80,512"
+                          stroke="#6a4218" stroke-width="9" fill="none" stroke-linecap="round"/>
+                    <path d="M 257,445 Q 220,452 185,462 Q 155,472 125,485 Q 100,497 80,512"
+                          stroke="#4a2c0a" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.35"/>
+
+                    <!-- Left lateral root 2 -->
+                    <path d="M 256,478 Q 210,484 168,496 Q 135,507 108,522 Q 85,536 68,550"
+                          stroke="#6a4218" stroke-width="7" fill="none" stroke-linecap="round"/>
+
+                    <!-- Right lateral root 1 -->
+                    <path d="M 263,445 Q 300,452 335,462 Q 365,472 395,485 Q 420,497 440,512"
+                          stroke="#6a4218" stroke-width="9" fill="none" stroke-linecap="round"/>
+                    <path d="M 263,445 Q 300,452 335,462 Q 365,472 395,485 Q 420,497 440,512"
+                          stroke="#4a2c0a" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.35"/>
+
+                    <!-- Right lateral root 2 -->
+                    <path d="M 264,478 Q 310,484 352,496 Q 385,507 412,522 Q 435,536 452,550"
+                          stroke="#6a4218" stroke-width="7" fill="none" stroke-linecap="round"/>
+
+                    <!-- Fine roots - left -->
+                    <path d="M 80,512 Q 60,528 45,548 Q 35,562 28,580"  stroke="#5a3610" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path d="M 80,512 Q 72,532 65,555"  stroke="#5a3610" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M 125,485 Q 110,506 100,530 Q 92,550 88,568" stroke="#5a3610" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path d="M 68,550 Q 55,568 48,588"  stroke="#4a2c0a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 108,522 Q 92,542 82,562 Q 75,580 72,598"  stroke="#4a2c0a" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+                    <!-- Fine roots - right -->
+                    <path d="M 440,512 Q 460,528 475,548 Q 485,562 492,580" stroke="#5a3610" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path d="M 440,512 Q 448,532 455,555" stroke="#5a3610" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M 395,485 Q 410,506 420,530 Q 428,550 432,568" stroke="#5a3610" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path d="M 452,550 Q 465,568 472,588" stroke="#4a2c0a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 412,522 Q 428,542 438,562 Q 445,580 448,598" stroke="#4a2c0a" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+                    <!-- Deepest taproot fine section -->
+                    <path d="M 250,600 Q 248,625 245,650 Q 243,665 242,675" stroke="#3a1e06" stroke-width="5" fill="none" stroke-linecap="round"/>
+                    <path d="M 250,600 Q 240,628 232,652" stroke="#3a1e06" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M 250,600 Q 260,628 268,652" stroke="#3a1e06" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+                    <!-- Root hairs (tiny lines) -->
+                    <g opacity="0.55" stroke="#4a2c0a" stroke-width="1.5" stroke-linecap="round">
+                        <line x1="68"  y1="548" x2="60"  y2="558"/><line x1="68"  y1="548" x2="72"  y2="560"/>
+                        <line x1="82"  y1="562" x2="74"  y2="572"/><line x1="82"  y1="562" x2="88"  y2="574"/>
+                        <line x1="100" y1="530" x2="92"  y2="542"/><line x1="100" y1="530" x2="106" y2="543"/>
+                        <line x1="452" y1="548" x2="460" y2="558"/><line x1="452" y1="548" x2="448" y2="560"/>
+                        <line x1="438" y1="562" x2="446" y2="572"/><line x1="438" y1="562" x2="432" y2="574"/>
+                        <line x1="420" y1="530" x2="428" y2="542"/><line x1="420" y1="530" x2="414" y2="543"/>
+                        <line x1="248" y1="640" x2="238" y2="652"/><line x1="248" y1="640" x2="258" y2="652"/>
+                    </g>
+
+                    <!-- Root label -->
+                    <text x="260" y="670" text-anchor="middle" font-family="'Lato',sans-serif" font-size="11" fill="#a07840" opacity="0.7">Hệ rễ (Root System)</text>
+                </g>
+
+                <!-- ════ TRUNK GROUP ════ -->
+                <g id="part-trunk" class="tree-part" data-part="trunk" data-label="Thân Cây">
+
+                    <!-- Trunk base (root flare) -->
+                    <ellipse cx="260" cy="420" rx="22" ry="8" fill="#7a4a20" opacity="0.8"/>
+
+                    <!-- Main trunk body -->
+                    <path d="M 242,422 Q 238,370 236,310 Q 234,260 234,210 Q 234,175 235,145 Q 236,120 238,100"
+                          stroke="url(#trunkGrad)" stroke-width="36" fill="none" stroke-linecap="round"/>
+                    <!-- Trunk depth/shadow -->
+                    <path d="M 248,422 Q 244,370 242,310 Q 240,260 240,210 Q 240,175 241,145 Q 242,120 244,100"
+                          stroke="#5a2808" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.45"/>
+                    <!-- Trunk highlight -->
+                    <path d="M 268,420 Q 272,370 274,310 Q 276,260 276,210 Q 276,178 274,148"
+                          stroke="#c07840" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.3"/>
+
+                    <!-- Bark crack texture -->
+                    <path d="M 250,400 Q 265,395 268,402" stroke="#4a2008" stroke-width="1.8" fill="none" opacity="0.7"/>
+                    <path d="M 248,375 Q 262,368 266,376" stroke="#4a2008" stroke-width="1.5" fill="none" opacity="0.65"/>
+                    <path d="M 249,348 Q 261,342 265,349" stroke="#4a2008" stroke-width="1.5" fill="none" opacity="0.6"/>
+                    <path d="M 250,320 Q 260,315 263,322" stroke="#4a2008" stroke-width="1.5" fill="none" opacity="0.55"/>
+                    <path d="M 251,294 Q 260,289 262,296" stroke="#4a2008" stroke-width="1.3" fill="none" opacity="0.5"/>
+                    <path d="M 252,268 Q 259,264 261,271" stroke="#4a2008" stroke-width="1.2" fill="none" opacity="0.45"/>
+                    <path d="M 252,244 Q 258,240 260,247" stroke="#4a2008" stroke-width="1.2" fill="none" opacity="0.4"/>
+                    <path d="M 253,220 Q 257,217 259,224" stroke="#4a2008" stroke-width="1.0" fill="none" opacity="0.35"/>
+                    <path d="M 253,196 Q 256,193 258,200" stroke="#4a2008" stroke-width="1.0" fill="none" opacity="0.3"/>
+                    <!-- Vertical bark fissures -->
+                    <path d="M 245,422 Q 244,390 245,355 Q 246,320 244,280"
+                          stroke="#5a2808" stroke-width="1.2" fill="none" opacity="0.35"/>
+                    <path d="M 272,415 Q 273,382 272,345 Q 271,310 273,270"
+                          stroke="#5a2808" stroke-width="1.0" fill="none" opacity="0.3"/>
+
+                    <!-- Annual ring indicator (small callout on trunk) -->
+                    <circle cx="285" cy="340" r="9" fill="white" stroke="#8a4820" stroke-width="1.5" opacity="0.9"/>
+                    <circle cx="285" cy="340" r="5" fill="none" stroke="#8a4820" stroke-width="1" opacity="0.6"/>
+                    <circle cx="285" cy="340" r="2" fill="#8a4820" opacity="0.7"/>
+                </g>
+
+                <!-- ════ BRANCHES GROUP ════ -->
+                <g id="part-branches" class="tree-part" data-part="branches" data-label="Cành Cây">
+
+                    <!-- ── Tier 1 (lowest, y≈340) ── -->
+                    <path d="M 242,345 Q 200,338 158,326 Q 120,315 88,304"
+                          stroke="#7a4020" stroke-width="12" fill="none" stroke-linecap="round"/>
+                    <path d="M 244,345 Q 286,338 328,326 Q 366,315 398,304"
+                          stroke="#7a4020" stroke-width="12" fill="none" stroke-linecap="round"/>
+                    <!-- T1 sub-branches -->
+                    <path d="M 88,304  Q 66,296 50,285 Q 38,278 28,270"  stroke="#8a4828" stroke-width="6" fill="none" stroke-linecap="round"/>
+                    <path d="M 88,304  Q 78,288 72,272 Q 68,260 66,248"  stroke="#8a4828" stroke-width="5" fill="none" stroke-linecap="round"/>
+                    <path d="M 130,315 Q 115,303 102,290 Q 92,280 84,268" stroke="#8a4828" stroke-width="6" fill="none" stroke-linecap="round"/>
+                    <path d="M 398,304 Q 420,296 436,285 Q 448,278 458,270" stroke="#8a4828" stroke-width="6" fill="none" stroke-linecap="round"/>
+                    <path d="M 398,304 Q 408,288 414,272 Q 418,260 420,248" stroke="#8a4828" stroke-width="5" fill="none" stroke-linecap="round"/>
+                    <path d="M 356,315 Q 371,303 384,290 Q 394,280 402,268" stroke="#8a4828" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+                    <!-- ── Tier 2 (y≈288) ── -->
+                    <path d="M 241,292 Q 204,284 166,272 Q 132,262 102,252"
+                          stroke="#7a4020" stroke-width="10" fill="none" stroke-linecap="round"/>
+                    <path d="M 243,292 Q 280,284 318,272 Q 352,262 382,252"
+                          stroke="#7a4020" stroke-width="10" fill="none" stroke-linecap="round"/>
+                    <!-- T2 sub-branches -->
+                    <path d="M 102,252 Q 80,242 64,230 Q 52,221 42,211"  stroke="#8a4828" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 102,252 Q 90,237 82,222 Q 76,210 72,196"  stroke="#8a4828" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 140,264 Q 124,252 112,238 Q 102,227 96,214" stroke="#8a4828" stroke-width="5" fill="none" stroke-linecap="round"/>
+                    <path d="M 382,252 Q 404,242 420,230 Q 432,221 442,211" stroke="#8a4828" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 382,252 Q 394,237 402,222 Q 408,210 412,196" stroke="#8a4828" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 344,264 Q 360,252 372,238 Q 382,227 388,214" stroke="#8a4828" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+                    <!-- ── Tier 3 (y≈240) ── -->
+                    <path d="M 240,244 Q 208,236 175,224 Q 148,214 122,204"
+                          stroke="#7a4020" stroke-width="8.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 242,244 Q 274,236 307,224 Q 334,214 360,204"
+                          stroke="#7a4020" stroke-width="8.5" fill="none" stroke-linecap="round"/>
+                    <!-- T3 sub-branches -->
+                    <path d="M 122,204 Q 100,193 82,180 Q 68,170 56,159" stroke="#8a4828" stroke-width="5" fill="none" stroke-linecap="round"/>
+                    <path d="M 122,204 Q 108,190 98,175 Q 90,163 84,149" stroke="#8a4828" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path d="M 360,204 Q 382,193 400,180 Q 414,170 426,159" stroke="#8a4828" stroke-width="5" fill="none" stroke-linecap="round"/>
+                    <path d="M 360,204 Q 374,190 384,175 Q 392,163 398,149" stroke="#8a4828" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+                    <!-- ── Tier 4 (y≈196) ── -->
+                    <path d="M 239,200 Q 212,191 184,180 Q 162,171 140,162"
+                          stroke="#7a4020" stroke-width="7" fill="none" stroke-linecap="round"/>
+                    <path d="M 241,200 Q 268,191 296,180 Q 318,171 340,162"
+                          stroke="#7a4020" stroke-width="7" fill="none" stroke-linecap="round"/>
+                    <!-- T4 sub-branches -->
+                    <path d="M 140,162 Q 118,150 100,138 Q 86,129 74,118" stroke="#8a4828" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path d="M 340,162 Q 362,150 380,138 Q 394,129 406,118" stroke="#8a4828" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+                    <!-- ── Tier 5 (y≈158) ── -->
+                    <path d="M 238,162 Q 216,152 194,142 Q 176,134 158,126"
+                          stroke="#7a4020" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 240,162 Q 262,152 284,142 Q 302,134 320,126"
+                          stroke="#7a4020" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+                    <!-- T5 sub-branches -->
+                    <path d="M 158,126 Q 140,115 126,104 Q 115,95 104,85" stroke="#8a4828" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 320,126 Q 338,115 352,104 Q 363,95 374,85" stroke="#8a4828" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+                    <!-- ── Tier 6 top (y≈124) ── -->
+                    <path d="M 237,128 Q 220,118 204,108 Q 192,100 180,92"
+                          stroke="#7a4020" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path d="M 239,128 Q 256,118 272,108 Q 284,100 296,92"
+                          stroke="#7a4020" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+                    <!-- Top tip branches -->
+                    <path d="M 237,100 Q 226,90 216,80 Q 208,72 200,64"
+                          stroke="#7a4020" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M 238,100 Q 248,90 257,80 Q 264,72 270,64"
+                          stroke="#7a4020" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M 237,82 Q 230,72 224,62" stroke="#7a4020" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 238,82 Q 244,72 250,62" stroke="#7a4020" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </g>
+
+                <!-- ════ NEEDLES/LEAVES GROUP ════ -->
+                <g id="part-needles" class="tree-part" data-part="needles" data-label="Lá Kim (Lá Thông)">
+
+                    <!-- Helper macro: needle bundle = 3 lines radiating -->
+                    <!-- Tier 1 needle clusters (low, heavy) -->
+                    <!-- Left side T1 -->
+                    <g transform="translate(30,268)" opacity="0.92">
+                        <line x1="0" y1="0" x2="-18" y2="-28" stroke="#1e7032" stroke-width="1.6"/>
+                        <line x1="0" y1="0" x2="2"  y2="-32" stroke="#248a3a" stroke-width="1.6"/>
+                        <line x1="0" y1="0" x2="20" y2="-26" stroke="#1e7032" stroke-width="1.6"/>
+                    </g>
+                    <g transform="translate(50,282)" opacity="0.9">
+                        <line x1="0" y1="0" x2="-20" y2="-30" stroke="#1e7032" stroke-width="1.8"/>
+                        <line x1="0" y1="0" x2="0"  y2="-34" stroke="#2a8840" stroke-width="1.8"/>
+                        <line x1="0" y1="0" x2="22" y2="-28" stroke="#1e7032" stroke-width="1.8"/>
+                    </g>
+                    <g transform="translate(68,250)" opacity="0.88">
+                        <line x1="0" y1="0" x2="-16" y2="-26" stroke="#248a3a" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="2"  y2="-30" stroke="#2a9040" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="18" y2="-24" stroke="#248a3a" stroke-width="1.5"/>
+                    </g>
+                    <g transform="translate(85,268)" opacity="0.9">
+                        <line x1="0" y1="0" x2="-22" y2="-32" stroke="#1e7032" stroke-width="2"/>
+                        <line x1="0" y1="0" x2="0"  y2="-36" stroke="#248a3a" stroke-width="2"/>
+                        <line x1="0" y1="0" x2="24" y2="-30" stroke="#1e7032" stroke-width="2"/>
+                    </g>
+                    <g transform="translate(72,284)" opacity="0.85">
+                        <line x1="0" y1="0" x2="-18" y2="-22" stroke="#2a9040" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="2"  y2="-26" stroke="#30a048" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="20" y2="-20" stroke="#2a9040" stroke-width="1.5"/>
+                    </g>
+                    <g transform="translate(104,288)" opacity="0.88">
+                        <line x1="0" y1="0" x2="-20" y2="-28" stroke="#1e7032" stroke-width="1.7"/>
+                        <line x1="0" y1="0" x2="2"  y2="-32" stroke="#268038" stroke-width="1.7"/>
+                        <line x1="0" y1="0" x2="22" y2="-26" stroke="#1e7032" stroke-width="1.7"/>
+                    </g>
+
+                    <!-- Right side T1 (mirror) -->
+                    <g transform="translate(490,268) scale(-1,1)" opacity="0.92">
+                        <line x1="0" y1="0" x2="-18" y2="-28" stroke="#1e7032" stroke-width="1.6"/>
+                        <line x1="0" y1="0" x2="2"  y2="-32" stroke="#248a3a" stroke-width="1.6"/>
+                        <line x1="0" y1="0" x2="20" y2="-26" stroke="#1e7032" stroke-width="1.6"/>
+                    </g>
+                    <g transform="translate(470,282) scale(-1,1)" opacity="0.9">
+                        <line x1="0" y1="0" x2="-20" y2="-30" stroke="#1e7032" stroke-width="1.8"/>
+                        <line x1="0" y1="0" x2="0"  y2="-34" stroke="#2a8840" stroke-width="1.8"/>
+                        <line x1="0" y1="0" x2="22" y2="-28" stroke="#1e7032" stroke-width="1.8"/>
+                    </g>
+                    <g transform="translate(452,250) scale(-1,1)" opacity="0.88">
+                        <line x1="0" y1="0" x2="-16" y2="-26" stroke="#248a3a" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="2"  y2="-30" stroke="#2a9040" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="18" y2="-24" stroke="#248a3a" stroke-width="1.5"/>
+                    </g>
+                    <g transform="translate(435,268) scale(-1,1)" opacity="0.9">
+                        <line x1="0" y1="0" x2="-22" y2="-32" stroke="#1e7032" stroke-width="2"/>
+                        <line x1="0" y1="0" x2="0"  y2="-36" stroke="#248a3a" stroke-width="2"/>
+                        <line x1="0" y1="0" x2="24" y2="-30" stroke="#1e7032" stroke-width="2"/>
+                    </g>
+                    <g transform="translate(448,284) scale(-1,1)" opacity="0.85">
+                        <line x1="0" y1="0" x2="-18" y2="-22" stroke="#2a9040" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="2"  y2="-26" stroke="#30a048" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="20" y2="-20" stroke="#2a9040" stroke-width="1.5"/>
+                    </g>
+                    <g transform="translate(416,288) scale(-1,1)" opacity="0.88">
+                        <line x1="0" y1="0" x2="-20" y2="-28" stroke="#1e7032" stroke-width="1.7"/>
+                        <line x1="0" y1="0" x2="2"  y2="-32" stroke="#268038" stroke-width="1.7"/>
+                        <line x1="0" y1="0" x2="22" y2="-26" stroke="#1e7032" stroke-width="1.7"/>
+                    </g>
+
+                    <!-- Tier 2 needle clusters -->
+                    <g transform="translate(44,210)" opacity="0.88">
+                        <line x1="0" y1="0" x2="-16" y2="-26" stroke="#1e7032" stroke-width="1.6"/>
+                        <line x1="0" y1="0" x2="2"  y2="-30" stroke="#2a8840" stroke-width="1.6"/>
+                        <line x1="0" y1="0" x2="18" y2="-24" stroke="#1e7032" stroke-width="1.6"/>
+                    </g>
+                    <g transform="translate(64,222)" opacity="0.9">
+                        <line x1="0" y1="0" x2="-18" y2="-28" stroke="#1e7032" stroke-width="1.8"/>
+                        <line x1="0" y1="0" x2="2"  y2="-32" stroke="#248a3a" stroke-width="1.8"/>
+                        <line x1="0" y1="0" x2="20" y2="-26" stroke="#1e7032" stroke-width="1.8"/>
+                    </g>
+                    <g transform="translate(74,196)" opacity="0.87">
+                        <line x1="0" y1="0" x2="-14" y2="-24" stroke="#248a3a" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="2"  y2="-28" stroke="#2a9040" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="16" y2="-22" stroke="#248a3a" stroke-width="1.5"/>
+                    </g>
+                    <g transform="translate(98,214)" opacity="0.88">
+                        <line x1="0" y1="0" x2="-18" y2="-26" stroke="#1e7032" stroke-width="1.7"/>
+                        <line x1="0" y1="0" x2="0"  y2="-30" stroke="#248a3a" stroke-width="1.7"/>
+                        <line x1="0" y1="0" x2="20" y2="-24" stroke="#1e7032" stroke-width="1.7"/>
+                    </g>
+
+                    <g transform="translate(476,210) scale(-1,1)" opacity="0.88">
+                        <line x1="0" y1="0" x2="-16" y2="-26" stroke="#1e7032" stroke-width="1.6"/>
+                        <line x1="0" y1="0" x2="2"  y2="-30" stroke="#2a8840" stroke-width="1.6"/>
+                        <line x1="0" y1="0" x2="18" y2="-24" stroke="#1e7032" stroke-width="1.6"/>
+                    </g>
+                    <g transform="translate(456,222) scale(-1,1)" opacity="0.9">
+                        <line x1="0" y1="0" x2="-18" y2="-28" stroke="#1e7032" stroke-width="1.8"/>
+                        <line x1="0" y1="0" x2="2"  y2="-32" stroke="#248a3a" stroke-width="1.8"/>
+                        <line x1="0" y1="0" x2="20" y2="-26" stroke="#1e7032" stroke-width="1.8"/>
+                    </g>
+                    <g transform="translate(446,196) scale(-1,1)" opacity="0.87">
+                        <line x1="0" y1="0" x2="-14" y2="-24" stroke="#248a3a" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="2"  y2="-28" stroke="#2a9040" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="16" y2="-22" stroke="#248a3a" stroke-width="1.5"/>
+                    </g>
+
+                    <!-- Tier 3 needle clusters -->
+                    <g transform="translate(58,158)" opacity="0.87">
+                        <line x1="0" y1="0" x2="-15" y2="-25" stroke="#1e7032" stroke-width="1.6"/>
+                        <line x1="0" y1="0" x2="2"  y2="-29" stroke="#2a8840" stroke-width="1.6"/>
+                        <line x1="0" y1="0" x2="17" y2="-23" stroke="#1e7032" stroke-width="1.6"/>
+                    </g>
+                    <g transform="translate(80,170)" opacity="0.88">
+                        <line x1="0" y1="0" x2="-16" y2="-26" stroke="#1e7032" stroke-width="1.7"/>
+                        <line x1="0" y1="0" x2="2"  y2="-30" stroke="#248a3a" stroke-width="1.7"/>
+                        <line x1="0" y1="0" x2="18" y2="-24" stroke="#1e7032" stroke-width="1.7"/>
+                    </g>
+                    <g transform="translate(95,148)" opacity="0.86">
+                        <line x1="0" y1="0" x2="-14" y2="-22" stroke="#248a3a" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="1"  y2="-26" stroke="#2a9040" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="15" y2="-20" stroke="#248a3a" stroke-width="1.5"/>
+                    </g>
+                    <g transform="translate(462,158) scale(-1,1)" opacity="0.87">
+                        <line x1="0" y1="0" x2="-15" y2="-25" stroke="#1e7032" stroke-width="1.6"/>
+                        <line x1="0" y1="0" x2="2"  y2="-29" stroke="#2a8840" stroke-width="1.6"/>
+                        <line x1="0" y1="0" x2="17" y2="-23" stroke="#1e7032" stroke-width="1.6"/>
+                    </g>
+                    <g transform="translate(440,170) scale(-1,1)" opacity="0.88">
+                        <line x1="0" y1="0" x2="-16" y2="-26" stroke="#1e7032" stroke-width="1.7"/>
+                        <line x1="0" y1="0" x2="2"  y2="-30" stroke="#248a3a" stroke-width="1.7"/>
+                        <line x1="0" y1="0" x2="18" y2="-24" stroke="#1e7032" stroke-width="1.7"/>
+                    </g>
+
+                    <!-- Tier 4 + 5 needle clusters -->
+                    <g transform="translate(76,117)" opacity="0.86">
+                        <line x1="0" y1="0" x2="-13" y2="-22" stroke="#1e7032" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="1"  y2="-26" stroke="#2a8840" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="15" y2="-20" stroke="#1e7032" stroke-width="1.5"/>
+                    </g>
+                    <g transform="translate(107,106)" opacity="0.85">
+                        <line x1="0" y1="0" x2="-14" y2="-23" stroke="#248a3a" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="1"  y2="-27" stroke="#2a9040" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="16" y2="-21" stroke="#248a3a" stroke-width="1.5"/>
+                    </g>
+                    <g transform="translate(444,117) scale(-1,1)" opacity="0.86">
+                        <line x1="0" y1="0" x2="-13" y2="-22" stroke="#1e7032" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="1"  y2="-26" stroke="#2a8840" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="15" y2="-20" stroke="#1e7032" stroke-width="1.5"/>
+                    </g>
+                    <g transform="translate(413,106) scale(-1,1)" opacity="0.85">
+                        <line x1="0" y1="0" x2="-14" y2="-23" stroke="#248a3a" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="1"  y2="-27" stroke="#2a9040" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="16" y2="-21" stroke="#248a3a" stroke-width="1.5"/>
+                    </g>
+
+                    <!-- Top apex needle clusters -->
+                    <g transform="translate(200,62)" opacity="0.84">
+                        <line x1="0" y1="0" x2="-12" y2="-20" stroke="#1e7032" stroke-width="1.4"/>
+                        <line x1="0" y1="0" x2="1"  y2="-24" stroke="#2a8840" stroke-width="1.4"/>
+                        <line x1="0" y1="0" x2="14" y2="-18" stroke="#1e7032" stroke-width="1.4"/>
+                    </g>
+                    <g transform="translate(225,72)" opacity="0.85">
+                        <line x1="0" y1="0" x2="-14" y2="-22" stroke="#1e7032" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="1"  y2="-26" stroke="#248a3a" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="15" y2="-20" stroke="#1e7032" stroke-width="1.5"/>
+                    </g>
+                    <g transform="translate(237,55)" opacity="0.88">
+                        <line x1="0" y1="0" x2="-12" y2="-22" stroke="#1e7032" stroke-width="1.6"/>
+                        <line x1="0" y1="0" x2="2"  y2="-26" stroke="#2a8840" stroke-width="1.6"/>
+                        <line x1="0" y1="0" x2="14" y2="-20" stroke="#1e7032" stroke-width="1.6"/>
+                    </g>
+                    <g transform="translate(250,42)" opacity="0.9">
+                        <line x1="0" y1="0" x2="-10" y2="-18" stroke="#1e7032" stroke-width="1.4"/>
+                        <line x1="0" y1="0" x2="1"  y2="-22" stroke="#248a3a" stroke-width="1.4"/>
+                        <line x1="0" y1="0" x2="12" y2="-16" stroke="#1e7032" stroke-width="1.4"/>
+                    </g>
+                    <g transform="translate(295,72)" opacity="0.85">
+                        <line x1="0" y1="0" x2="-14" y2="-22" stroke="#1e7032" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="-1" y2="-26" stroke="#248a3a" stroke-width="1.5"/>
+                        <line x1="0" y1="0" x2="-15" y2="-20" stroke="#1e7032" stroke-width="1.5"/>
+                    </g>
+                    <g transform="translate(320,62)" opacity="0.84">
+                        <line x1="0" y1="0" x2="-12" y2="-20" stroke="#1e7032" stroke-width="1.4"/>
+                        <line x1="0" y1="0" x2="-1" y2="-24" stroke="#2a8840" stroke-width="1.4"/>
+                        <line x1="0" y1="0" x2="-14" y2="-18" stroke="#1e7032" stroke-width="1.4"/>
+                    </g>
+
+                    <!-- Dense mid-tier needle mass (silhouette) -->
+                    <!-- Left mid mass -->
+                    <path d="M 55,250 Q 40,235 30,215 Q 22,198 20,180 Q 30,170 50,178 Q 65,185 78,195 Q 92,188 100,175 Q 110,162 120,172 Q 128,180 124,195 Q 135,186 145,192 Q 150,198 148,210"
+                          fill="#1a6830" opacity="0.35" stroke="none"/>
+                    <!-- Right mid mass -->
+                    <path d="M 465,250 Q 480,235 490,215 Q 498,198 500,180 Q 490,170 470,178 Q 455,185 442,195 Q 428,188 420,175 Q 410,162 400,172 Q 392,180 396,195 Q 385,186 375,192 Q 370,198 372,210"
+                          fill="#1a6830" opacity="0.35" stroke="none"/>
+
+                    <!-- Pine cones (3 of them) -->
+                    <!-- Cone 1 - left mid branch -->
+                    <ellipse cx="118" cy="256" rx="7" ry="11" fill="#8b6214" stroke="#6b4a0a" stroke-width="1.2" transform="rotate(-25, 118, 256)"/>
+                    <line x1="111" y1="252" x2="125" y2="260" stroke="#6b4a0a" stroke-width="0.8" opacity="0.7"/>
+                    <line x1="111" y1="256" x2="125" y2="256" stroke="#6b4a0a" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="112" y1="260" x2="124" y2="252" stroke="#6b4a0a" stroke-width="0.7" opacity="0.5"/>
+                    <!-- Cone 2 - right mid branch -->
+                    <ellipse cx="402" cy="256" rx="7" ry="11" fill="#8b6214" stroke="#6b4a0a" stroke-width="1.2" transform="rotate(25, 402, 256)"/>
+                    <line x1="395" y1="252" x2="409" y2="260" stroke="#6b4a0a" stroke-width="0.8" opacity="0.7"/>
+                    <line x1="395" y1="256" x2="409" y2="256" stroke="#6b4a0a" stroke-width="0.8" opacity="0.6"/>
+                    <!-- Cone 3 - upper right -->
+                    <ellipse cx="375" cy="148" rx="6" ry="9" fill="#9a7020" stroke="#6b4a0a" stroke-width="1" transform="rotate(20, 375, 148)"/>
+
+                    <!-- "Lá Kim" label annotation -->
+                    <text x="16" y="235" font-family="'Lato',sans-serif" font-size="10" fill="#1e7032" opacity="0.8">Lá Kim × 3</text>
+                    <line x1="16" y1="237" x2="28" y2="268" stroke="#1e7032" stroke-width="0.8" opacity="0.5" stroke-dasharray="2,2"/>
+                </g>
+
+                <!-- ════ LABELS overlay ════ -->
+                <!-- Trunk label -->
+                <text x="295" y="345" font-family="'Lato',sans-serif" font-size="11" fill="#7a4020" opacity="0.75" font-weight="700">Thân</text>
+                <line x1="293" y1="338" x2="278" y2="320" stroke="#7a4020" stroke-width="0.8" opacity="0.5" stroke-dasharray="2,2"/>
+                <!-- Ground label -->
+                <text x="380" y="416" font-family="'Lato',sans-serif" font-size="10" fill="#5a4010" opacity="0.7" font-style="italic">mặt đất</text>
+                <!-- Scale bar -->
+                <line x1="20" y1="412" x2="60" y2="412" stroke="#6a5020" stroke-width="1.5" opacity="0.6"/>
+                <line x1="20" y1="408" x2="20" y2="416" stroke="#6a5020" stroke-width="1.5" opacity="0.6"/>
+                <line x1="60" y1="408" x2="60" y2="416" stroke="#6a5020" stroke-width="1.5" opacity="0.6"/>
+                <text x="40" y="408" text-anchor="middle" font-family="'Lato',sans-serif" font-size="9" fill="#6a5020" opacity="0.6">~2m</text>
+
+            </svg>
+            <!-- ═══════════════════════════════════ -->
         </div>
 
-        <div class="info-panel">
-            <div class="tab-header">
-                <button class="tab-button active" data-tab="taxonomy">Taxonomy</button>
-                <button class="tab-button" data-tab="morphology">Morphology</button>
-                <button class="tab-button" data-tab="growth">Growth Stages</button>
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item" onclick="selectPart('roots')" title="Nhấp để xem thông tin">
+                <div class="legend-dot" style="background:#7a5020;"></div>
+                <div><div class="legend-label">Hệ Rễ</div><div class="legend-sub">Root System</div></div>
             </div>
-
-            <div class="tab-content active" id="taxonomy">
-                <h2>Taxonomic Classification</h2>
-
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Kingdom:</div>
-                    <div class="taxonomy-value">Plantae</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Clade:</div>
-                    <div class="taxonomy-value">Tracheophytes</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Clade:</div>
-                    <div class="taxonomy-value">Angiosperms</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Clade:</div>
-                    <div class="taxonomy-value">Eudicots</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Clade:</div>
-                    <div class="taxonomy-value">Rosids</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Order:</div>
-                    <div class="taxonomy-value">Brassicales</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Family:</div>
-                    <div class="taxonomy-value">Brassicaceae</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Genus:</div>
-                    <div class="taxonomy-value">Arabidopsis</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Species:</div>
-                    <div class="taxonomy-value">A. thaliana</div>
-                </div>
-
-                <h3>Scientific Significance</h3>
-                <p>
-                    <em>Arabidopsis thaliana</em>, commonly known as thale cress or mouse-ear cress, is a small flowering plant
-                    that has become the most important model organism in plant biology and genetics.
-                </p>
-                <p>
-                    First described by Johannes Thal in the Harz Mountains in the 16th century, this unassuming member of
-                    the mustard family (Brassicaceae) was chosen as a model organism due to its small genome (~125 Mb),
-                    short generation time (6 weeks), prolific seed production, and ease of cultivation in laboratory settings.
-                </p>
-                <p>
-                    In 2000, <em>A. thaliana</em> became the first plant to have its entire genome sequenced, revealing
-                    approximately 27,000 protein-coding genes. This milestone revolutionized our understanding of plant
-                    molecular biology, development, and evolution.
-                </p>
-
-                <h3>Ecological Distribution</h3>
-                <p>
-                    Native to Europe, Asia, and northwestern Africa, <em>A. thaliana</em> has naturalized across temperate
-                    regions worldwide. It thrives in disturbed habitats, roadsides, and waste areas, demonstrating remarkable
-                    adaptability to various environmental conditions.
-                </p>
+            <div class="legend-item" onclick="selectPart('trunk')" title="Nhấp để xem thông tin">
+                <div class="legend-dot" style="background:#8a4820;"></div>
+                <div><div class="legend-label">Thân Cây</div><div class="legend-sub">Trunk / Stem</div></div>
             </div>
-
-            <div class="tab-content" id="morphology">
-                <h2>Morphological Features</h2>
-
-                <div class="morphology-section">
-                    <h3>Root System (PO_0009005)</h3>
-                    <p>
-                        The root system of <em>Arabidopsis</em> consists of a primary taproot with lateral root branches.
-                        The primary root emerges from the embryonic radicle and grows vertically downward (positive gravitropism).
-                    </p>
-                    <ul>
-                        <li><strong>Primary Root:</strong> Typically reaches 5-8 cm in laboratory conditions</li>
-                        <li><strong>Lateral Roots:</strong> Branch from the pericycle tissue at regular intervals</li>
-                        <li><strong>Root Hairs:</strong> Single-cell extensions that increase surface area for water and nutrient absorption</li>
-                        <li><strong>Root Cap:</strong> Protective structure at the root apex containing statocytes for gravity sensing</li>
-                    </ul>
-                    <p>
-                        The root architecture is highly plastic, responding to soil nutrients, water availability, and mechanical impedance.
-                        Root development has been extensively characterized, making it an excellent system for studying cell division,
-                        elongation, and differentiation.
-                    </p>
-                </div>
-
-                <div class="morphology-section">
-                    <h3>Leaves (PO_0025034)</h3>
-                    <p>
-                        <em>Arabidopsis</em> exhibits heteroblasty—producing morphologically distinct juvenile and adult leaves.
-                        The leaves are arranged in a rosette pattern during the vegetative phase.
-                    </p>
-                    <ul>
-                        <li><strong>Cotyledons:</strong> Two embryonic seed leaves, oval-shaped, emerge upon germination</li>
-                        <li><strong>Juvenile Leaves:</strong> Round with smooth margins, lack trichomes on upper surface</li>
-                        <li><strong>Adult Leaves:</strong> Elongated with serrated margins, presence of abaxial and adaxial trichomes</li>
-                        <li><strong>Cauline Leaves:</strong> Smaller leaves on the flowering stem, sessile with clasping bases</li>
-                    </ul>
-                    <p>
-                        Leaf size typically ranges from 0.5-2 cm in length. The transition from juvenile to adult leaf identity is
-                        controlled by microRNAs and transcription factors, representing a well-studied developmental phase change.
-                    </p>
-                </div>
-
-                <div class="morphology-section">
-                    <h3>Flowers (PO_0009046)</h3>
-                    <p>
-                        The flower is a perfect example of the typical eudicot arrangement with four distinct whorls organized
-                        in a cruciform pattern characteristic of Brassicaceae.
-                    </p>
-                    <ul>
-                        <li><strong>Sepals:</strong> 4 green sepals in two whorls (whorl 1)</li>
-                        <li><strong>Petals:</strong> 4 white petals arranged in a cross pattern (whorl 2)</li>
-                        <li><strong>Stamens:</strong> 6 stamens—4 long (median) and 2 short (lateral) (whorls 3)</li>
-                        <li><strong>Carpels:</strong> 2 fused carpels forming a superior ovary (whorl 4)</li>
-                    </ul>
-                    <p>
-                        Flowers are approximately 2-3 mm in diameter and are produced in racemose inflorescences. The ABC model
-                        of flower development was largely elucidated through genetic studies in <em>Arabidopsis</em>, identifying
-                        homeotic genes that specify organ identity in each whorl.
-                    </p>
-                </div>
-
-                <div class="morphology-section">
-                    <h3>Siliques (Fruit)</h3>
-                    <p>
-                        Following successful pollination, the ovary develops into a silique—an elongated, two-chambered fruit
-                        characteristic of the Brassicaceae family.
-                    </p>
-                    <ul>
-                        <li>Length: 10-15 mm</li>
-                        <li>Contains 40-60 seeds arranged in two rows</li>
-                        <li>Dehiscent fruit that splits along two sutures at maturity</li>
-                        <li>Seeds are dispersed explosively when the valves detach</li>
-                    </ul>
-                </div>
+            <div class="legend-item" onclick="selectPart('branches')" title="Nhấp để xem thông tin">
+                <div class="legend-dot" style="background:#9a5828;"></div>
+                <div><div class="legend-label">Cành Cây</div><div class="legend-sub">Branch System</div></div>
             </div>
-
-            <div class="tab-content" id="growth">
-                <h2>Life Cycle & Development</h2>
-
-                <div class="growth-stage">
-                    <div class="stage-number">1</div>
-                    <div class="stage-name">Seed Germination</div>
-                    <div class="stage-duration">Days 0-3</div>
-                    <p>
-                        Germination begins with imbibition (water uptake), followed by radicle emergence. Seeds require
-                        stratification (cold treatment at 4°C for 2-4 days) to break dormancy and synchronize germination.
-                    </p>
-                    <ul>
-                        <li>Seed coat rupture occurs within 24-48 hours under optimal conditions</li>
-                        <li>Primary root (radicle) emerges first, growing downward</li>
-                        <li>Hypocotyl elongates, pulling cotyledons above soil surface</li>
-                        <li>Light triggers photomorphogenesis—hypocotyl elongation slows, cotyledons expand and green</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">2</div>
-                    <div class="stage-name">Vegetative Growth</div>
-                    <div class="stage-duration">Days 3-21 (long days) or Days 3-35 (short days)</div>
-                    <p>
-                        The vegetative phase is characterized by rosette formation—leaves develop from the shoot apical
-                        meristem in a spiral phyllotactic pattern without stem elongation.
-                    </p>
-                    <ul>
-                        <li>Cotyledons photosynthesize and provide initial nutrients</li>
-                        <li>True leaves emerge sequentially from the apical meristem</li>
-                        <li>Juvenile-to-adult vegetative phase transition occurs around leaf 5-8</li>
-                        <li>Root system develops lateral branches, establishing nutrient uptake network</li>
-                        <li>Vegetative phase duration depends on photoperiod—<em>Arabidopsis</em> is a facultative long-day plant</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">3</div>
-                    <div class="stage-name">Flowering Transition</div>
-                    <div class="stage-duration">Days 14-28 (varies by ecotype and photoperiod)</div>
-                    <p>
-                        Floral induction represents a critical developmental transition where the vegetative shoot apical
-                        meristem converts to an inflorescence meristem, irreversibly committing to reproductive development.
-                    </p>
-                    <ul>
-                        <li>Integration of environmental signals (photoperiod, vernalization) and endogenous factors (age, hormones)</li>
-                        <li>Upregulation of floral integrator genes (<em>FT</em>, <em>SOC1</em>, <em>LFY</em>)</li>
-                        <li>Bolting—rapid elongation of the primary inflorescence stem</li>
-                        <li>Conversion of shoot apical meristem to inflorescence meristem</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">4</div>
-                    <div class="stage-name">Flowering & Pollination</div>
-                    <div class="stage-duration">Days 21-35</div>
-                    <p>
-                        Flowers develop acropetally (from bottom to top) on the main stem and secondary branches.
-                        <em>Arabidopsis</em> is predominantly self-pollinating (autogamous).
-                    </p>
-                    <ul>
-                        <li>Flower buds form from floral meristems in a spiral pattern</li>
-                        <li>Each flower takes approximately 3-4 days from initiation to anthesis (opening)</li>
-                        <li>Stamens dehisce (release pollen) shortly before or at flower opening</li>
-                        <li>Self-pollination occurs as stamens contact the stigma</li>
-                        <li>Cross-pollination rate is typically less than 1% in natural populations</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">5</div>
-                    <div class="stage-name">Silique Development</div>
-                    <div class="stage-duration">Days 25-40</div>
-                    <p>
-                        Following fertilization, the ovary develops into a silique while the embryos develop within the seeds.
-                    </p>
-                    <ul>
-                        <li>Silique elongation occurs over 7-10 days post-fertilization</li>
-                        <li>Embryogenesis progresses through defined stages (globular, heart, torpedo, bent cotyledon)</li>
-                        <li>Seeds accumulate storage reserves (proteins, lipids)</li>
-                        <li>Seeds undergo maturation drying, entering dormancy</li>
-                        <li>Siliques turn from green to brown as they mature and desiccate</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">6</div>
-                    <div class="stage-name">Senescence & Seed Dispersal</div>
-                    <div class="stage-duration">Days 35-42</div>
-                    <p>
-                        Plant senescence is a programmed developmental process involving nutrient remobilization and
-                        controlled cell death, culminating in seed dispersal.
-                    </p>
-                    <ul>
-                        <li>Rosette leaves undergo senescence, yellowing as chlorophyll degrades</li>
-                        <li>Nutrients are remobilized from senescing tissues to developing seeds</li>
-                        <li>Mature siliques dehisce explosively, dispersing seeds within a radius of several centimeters</li>
-                        <li>Seeds remain viable for years when stored properly (dry, cool conditions)</li>
-                        <li>Total life cycle: 6 weeks under optimal long-day conditions (16h light/8h dark, 22°C)</li>
-                    </ul>
-                </div>
-
-                <h3>Environmental Influences</h3>
-                <p>
-                    The timing of developmental transitions is highly responsive to environmental cues, allowing
-                    <em>Arabidopsis</em> to optimize reproductive success:
-                </p>
-                <ul>
-                    <li><strong>Photoperiod:</strong> Long days (>14h light) accelerate flowering via the photoperiod pathway</li>
-                    <li><strong>Vernalization:</strong> Prolonged cold exposure (4-6 weeks at 4°C) promotes flowering in winter-annual ecotypes</li>
-                    <li><strong>Temperature:</strong> Warm ambient temperatures (27-29°C) accelerate flowering independent of photoperiod</li>
-                    <li><strong>Nutrient Availability:</strong> Nitrogen and phosphorus availability influence growth rate and flowering time</li>
-                </ul>
+            <div class="legend-item" onclick="selectPart('needles')" title="Nhấp để xem thông tin">
+                <div class="legend-dot" style="background:#248a3a;"></div>
+                <div><div class="legend-label">Lá Kim</div><div class="legend-sub">Pine Needles</div></div>
             </div>
         </div>
     </div>
 
-    <script>
-        // Sound feedback system using Web Audio API
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    <!-- RIGHT: Info Panel -->
+    <div class="info-panel">
 
-        function playOrganicSound(type) {
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
+        <!-- Dynamic part card -->
+        <div class="part-card" id="part-detail-card">
+            <div class="hint-text">
+                <span class="arrow">☝️</span>
+                Nhấp vào bộ phận trên sơ đồ để xem thông tin chi tiết
+            </div>
+        </div>
 
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
+        <!-- Static tabs -->
+        <div class="tabs-panel">
+            <div class="tab-header">
+                <button class="tab-btn active" data-tab="overview">Tổng Quan</button>
+                <button class="tab-btn" data-tab="ecology">Sinh Thái</button>
+                <button class="tab-btn" data-tab="forestry">Lâm Nghiệp</button>
+                <button class="tab-btn" data-tab="about">Phân Loại</button>
+            </div>
 
-            // Organic, natural sound parameters
-            switch(type) {
-                case 'rustle':
-                    // Soft rustling sound
-                    oscillator.type = 'sawtooth';
-                    oscillator.frequency.setValueAtTime(120, audioContext.currentTime);
-                    oscillator.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + 0.1);
-                    gainNode.gain.setValueAtTime(0.03, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-                    break;
-                case 'snap':
-                    // Crisp snapping sound
-                    oscillator.type = 'sine';
-                    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-                    oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.05);
-                    gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
-                    break;
-                case 'hover':
-                    // Gentle hover sound
-                    oscillator.type = 'sine';
-                    oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
-                    gainNode.gain.setValueAtTime(0.02, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.08);
-                    break;
-            }
+            <div class="tab-content active" id="tab-overview">
+                <h3>Pinus kesiya — Thông Ba Lá</h3>
+                <p>Cây thông ba lá là loài cây thân gỗ lá kim bản địa của vùng cao nguyên Việt Nam, đặc biệt phổ biến tại Đà Lạt và Tây Nguyên, ở độ cao 800–2.000m so với mực nước biển.</p>
+                <p>Tên gọi "ba lá" xuất phát từ đặc điểm đặc trưng: lá kim mọc thành bó 3 chiếc (<em>fascicle</em> 3 lá), phân biệt với thông hai lá (<em>P. merkusii</em>) và thông năm lá (<em>P. dalatensis</em>).</p>
+                <h3>Đặc điểm nhận dạng</h3>
+                <ul>
+                    <li>Thân thẳng, vỏ nâu đỏ nứt thành mảng vảy</li>
+                    <li>Lá kim dài 15–25 cm, mọc bó 3, màu xanh đậm</li>
+                    <li>Nón (quả thông) dài 5–9 cm, hơi cong, nâu bóng khi chín</li>
+                    <li>Tán cây hình chóp khi còn nhỏ, trải rộng khi già</li>
+                    <li>Chiều cao trưởng thành: 20–40 m</li>
+                </ul>
+            </div>
 
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.15);
-        }
+            <div class="tab-content" id="tab-ecology">
+                <h3>Môi trường sống</h3>
+                <p>Thông ba lá ưa sáng hoàn toàn, không chịu bóng râm. Phân bố tự nhiên ở độ cao 800–1.800m, trên đất feralit đỏ vàng, chua, thoát nước tốt, pH 4.5–5.5.</p>
+                <h3>Vai trò sinh thái</h3>
+                <ul>
+                    <li>Tán rừng thông che phủ, chống xói mòn đất dốc</li>
+                    <li>Rễ cộng sinh nấm mycorrhiza tăng hấp thu P, N</li>
+                    <li>Lá kim rụng tạo thảm thực vật axit, ảnh hưởng hệ sinh vật đất</li>
+                    <li>Nhựa thông (resin) bảo vệ cây khỏi côn trùng và nấm bệnh</li>
+                    <li>Nón thông là nguồn thức ăn cho chim, sóc trong rừng</li>
+                </ul>
+                <h3>Cộng sinh nấm rễ</h3>
+                <p>Hệ rễ thông ba lá có quan hệ cộng sinh bắt buộc với nấm ectomycorrhiza. Mạng lưới nấm giúp cây hấp thu khoáng chất hiệu quả hơn tới 60%, đặc biệt trên đất nghèo dinh dưỡng.</p>
+            </div>
 
-        // Load and fix SVG
-        async function loadPlantSVG() {
-            const svgUrl = 'arabidopsis_diagram.svg';
+            <div class="tab-content" id="tab-forestry">
+                <h3>Giá trị kinh tế</h3>
+                <ul>
+                    <li><strong>Gỗ xây dựng:</strong> gỗ mềm, thẳng thớ, dễ gia công, dùng đóng đồ nội thất và xây dựng</li>
+                    <li><strong>Nhựa thông:</strong> khai thác nhựa sản xuất colophony (colophan), nhựa thông lỏng dùng trong công nghiệp</li>
+                    <li><strong>Cảnh quan:</strong> cây trồng đường phố, công viên tại Đà Lạt — biểu tượng của thành phố</li>
+                    <li><strong>Carbon tín chỉ:</strong> rừng thông trồng góp phần vào các dự án REDD+</li>
+                </ul>
+                <h3>Kỹ thuật trồng rừng</h3>
+                <ul>
+                    <li>Trồng bằng cây con từ vườn ươm, tuổi 6–12 tháng</li>
+                    <li>Mật độ trồng: 1.000–1.600 cây/ha</li>
+                    <li>Chu kỳ khai thác gỗ: 25–30 năm</li>
+                    <li>Tỉa thưa định kỳ năm 5, 10, 15 để cải thiện chất lượng gỗ</li>
+                </ul>
+                <h3>Nguy cơ & bảo vệ</h3>
+                <p>Rừng thông ba lá đang bị đe dọa bởi khai thác trái phép, chuyển đổi đất nông nghiệp và biến đổi khí hậu làm tăng nguy cơ cháy rừng mùa khô.</p>
+            </div>
 
-            try {
-                const response = await fetch(svgUrl);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const svgText = await response.text();
+            <div class="tab-content" id="tab-about">
+                <h3>Phân loại khoa học</h3>
+                <ul>
+                    <li><strong>Giới (Kingdom):</strong> Plantae</li>
+                    <li><strong>Ngành (Division):</strong> Pinophyta</li>
+                    <li><strong>Lớp (Class):</strong> Pinopsida</li>
+                    <li><strong>Bộ (Order):</strong> Pinales</li>
+                    <li><strong>Họ (Family):</strong> Pinaceae</li>
+                    <li><strong>Chi (Genus):</strong> <em>Pinus</em></li>
+                    <li><strong>Loài (Species):</strong> <em>P. kesiya</em></li>
+                </ul>
+                <h3>Tên gọi khác</h3>
+                <ul>
+                    <li>Tiếng Việt: Thông ba lá, Thông đuôi ngựa</li>
+                    <li>Tiếng Anh: Khasi pine, Benguet pine</li>
+                    <li>Tên đồng nghĩa: <em>Pinus khasya, P. insularis</em></li>
+                </ul>
+                <h3>Phân bố</h3>
+                <p>Tự nhiên: Myanmar, Ấn Độ (Assam), Trung Quốc, Thái Lan, Lào, Việt Nam (Tây Nguyên). Trồng rừng tại nhiều quốc gia nhiệt đới vùng cao.</p>
+            </div>
+        </div>
+    </div>
 
-                // Parse SVG
-                const parser = new DOMParser();
-                const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
-                const svgElement = svgDoc.querySelector('svg');
+</div><!-- /container -->
 
-                // Critical: Remove visibility:hidden and apply default fills/strokes
-                svgElement.style.visibility = 'visible';
-                svgElement.style.display = 'block';
+<script>
+// ── Part Data ──
+const partData = {
+    roots: {
+        label: 'Hệ Rễ',
+        scientific: 'Root System • Rhizome',
+        icon: '🌱',
+        iconBg: '#fef3c7',
+        borderColor: '#a16207',
+        chips: [
+            { text: 'Sâu 2–4m', bg: '#fef9c3', color: '#854d0e' },
+            { text: 'Lan ngang 5–8m', bg: '#fef9c3', color: '#854d0e' },
+            { text: 'Mycorrhiza', bg: '#dcfce7', color: '#166534' },
+        ],
+        desc: 'Hệ rễ thông ba lá gồm rễ cọc chính ăn sâu 2–4m và mạng lưới rễ bên dày đặc lan rộng 5–8m theo chiều ngang, đảm bảo cây trụ vững trên đất dốc và hút nước hiệu quả trong mùa khô.',
+        facts: [
+            '<strong>Rễ cọc (Taproot):</strong> rễ chính thẳng đứng, neo giữ cây và tiếp cận nước ngầm sâu',
+            '<strong>Rễ bên (Lateral roots):</strong> lan ngang, phân nhánh thành mạng lưới dày đặc hút khoáng và nước',
+            '<strong>Lông hút (Root hairs):</strong> tế bào đơn dài 0.1–1mm, tăng diện tích tiếp xúc đất lên 100 lần',
+            '<strong>Cộng sinh nấm (Ectomycorrhiza):</strong> bắt buộc — nấm bao quanh rễ giúp hút P, K, tăng 40–60% dinh dưỡng',
+            '<strong>Gốc phình:</strong> phần chuyển tiếp thân–rễ (root flare) phân bố lực tải trọng cây',
+        ]
+    },
+    trunk: {
+        label: 'Thân Cây',
+        scientific: 'Trunk / Stem • Caulis',
+        icon: '🪵',
+        iconBg: '#fef3c7',
+        borderColor: '#92400e',
+        chips: [
+            { text: 'Cao 20–40m', bg: '#fef9c3', color: '#854d0e' },
+            { text: 'Đường kính 60–80cm', bg: '#fee2e2', color: '#991b1b' },
+            { text: 'Vòng năm', bg: '#e0e7ff', color: '#3730a3' },
+        ],
+        desc: 'Thân thông ba lá thẳng, trụ tròn đều, đây là đặc điểm quý tạo ra gỗ chất lượng. Vỏ nâu đỏ nứt thành mảng vảy dày là dấu hiệu nhận dạng điển hình. Bên trong, vòng gỗ hàng năm ghi lại lịch sử sinh trưởng của cây.',
+        facts: [
+            '<strong>Vỏ cây (Bark):</strong> lớp bảo vệ ngoài cùng — vỏ chết (rhytidome) dày, nâu đỏ, nứt mảng',
+            '<strong>Tầng sinh vỏ (Phloem):</strong> vận chuyển đường quang hợp từ lá xuống rễ',
+            '<strong>Tầng sinh (Cambium):</strong> lớp mỏng tế bào phân chia tạo gỗ và vỏ mới hàng năm',
+            '<strong>Gỗ giác (Sapwood):</strong> gỗ non màu vàng nhạt, chứa ống dẫn (tracheids) vận chuyển nước lên',
+            '<strong>Gỗ lõi (Heartwood):</strong> gỗ già màu nâu đỏ, nhiều nhựa resin, chắc và bền nhất',
+            '<strong>Vòng năm (Annual rings):</strong> mỗi vòng = 1 năm, đếm vòng xác định tuổi cây',
+        ]
+    },
+    branches: {
+        label: 'Cành Cây',
+        scientific: 'Branch System • Ramus',
+        icon: '🌿',
+        iconBg: '#ecfdf5',
+        borderColor: '#065f46',
+        chips: [
+            { text: 'Mọc vòng đốt', bg: '#dcfce7', color: '#166534' },
+            { text: '1 tầng/năm', bg: '#dcfce7', color: '#166534' },
+            { text: 'Tự tỉa', bg: '#fef9c3', color: '#854d0e' },
+        ],
+        desc: 'Cành thông mọc theo kiểu vòng đốt (whorled) rất đặc trưng của cây lá kim — mỗi năm cây tạo thêm 1 tầng cành mới, vì vậy đếm số tầng cành cũng là cách ước tính tuổi cây ngoài thực địa.',
+        facts: [
+            '<strong>Vòng đốt (Whorl):</strong> 3–5 cành mọc cùng một vị trí trên thân, đặc trưng của Pinaceae',
+            '<strong>Cành chính:</strong> dài, nằm ngang hoặc cong nhẹ xuống dưới — mang tán lá chủ yếu',
+            '<strong>Cành thứ cấp:</strong> phân nhánh từ cành chính, mang các chùm lá kim',
+            '<strong>Tự tỉa (Self-pruning):</strong> cành dưới thiếu ánh sáng sẽ chết và rụng tự nhiên theo năm',
+            '<strong>Đỉnh sinh trưởng:</strong> chồi đỉnh (terminal bud) bảo vệ bởi vảy nhựa, tạo tăng trưởng chiều cao',
+            '<strong>Nón (Cones):</strong> xuất hiện trên cành năm 2–3 tuổi, mất 2 năm để nón hạt chín hoàn toàn',
+        ]
+    },
+    needles: {
+        label: 'Lá Kim (Lá Thông)',
+        scientific: 'Pine Needles • Aciculae',
+        icon: '🍃',
+        iconBg: '#dcfce7',
+        borderColor: '#15803d',
+        chips: [
+            { text: 'Bó 3 lá', bg: '#dcfce7', color: '#166534' },
+            { text: 'Dài 15–25cm', bg: '#dcfce7', color: '#166534' },
+            { text: 'Tuổi thọ 3–4 năm', bg: '#fef9c3', color: '#854d0e' },
+        ],
+        desc: 'Lá kim thông ba lá mọc thành bó 3 chiếc (fascicle) — đây là đặc điểm định loại loài. Lá hình trụ dài, mặt cắt hình tam giác, phủ lớp sáp và có khí khổng chìm — thích nghi tuyệt vời với điều kiện khô hạn và gió mạnh vùng cao nguyên.',
+        facts: [
+            '<strong>Bó lá (Fascicle):</strong> 3 lá kim trong 1 bó, bọc bởi vảy mỏng ở gốc — đặc trưng phân loại loài',
+            '<strong>Cấu tạo lá:</strong> hình trụ, tiết diện tam giác, dài 15–25cm, đường kính 1–1.5mm',
+            '<strong>Lớp sáp cutin:</strong> phủ toàn bộ bề mặt lá, giảm thoát hơi nước đến 90% so với lá rộng',
+            '<strong>Khí khổng chìm:</strong> lỗ khí nằm trong rãnh lõm, tạo vùng không khí tĩnh giảm bay hơi',
+            '<strong>Nhựa resin:</strong> ống dẫn nhựa chạy dọc lá, tiết ra khi bị tổn thương — chống côn trùng, nấm',
+            '<strong>Vòng đời lá:</strong> 3–4 năm, rụng từng phần tạo thảm lá thông axit dày trên đất rừng',
+        ]
+    }
+};
 
-                // Set proper dimensions for display
-                svgElement.setAttribute('width', '400');
-                svgElement.setAttribute('height', 'auto');
+// ── Select / Deselect Part ──
+let currentPart = null;
 
-                // Apply default styling to all paths and elements
-                const allElements = svgElement.querySelectorAll('*');
-                allElements.forEach(element => {
-                    // Remove default invisible styling
-                    if (element.style.fill === 'none') {
-                        element.style.fill = '';
-                    }
-                    if (element.style.stroke === 'none') {
-                        element.style.stroke = '';
-                    }
+function selectPart(partId) {
+    const parts = document.querySelectorAll('.tree-part');
 
-                    // Apply organic colors based on PO IDs
-                    const poId = element.id || element.getAttribute('id');
-
-                    if (poId) {
-                        element.classList.add('po-element');
-
-                        // Color coding based on plant parts
-                        if (poId.includes('PO_0025034') || poId.toLowerCase().includes('leaf')) {
-                            // Leaves - sage green
-                            element.style.fill = '#8fbc8f';
-                            element.style.stroke = '#5d7a5f';
-                            element.style.strokeWidth = '1.5';
-                        } else if (poId.includes('PO_0009005') || poId.toLowerCase().includes('root')) {
-                            // Roots - earth brown
-                            element.style.fill = '#8b7355';
-                            element.style.stroke = '#6b5939';
-                            element.style.strokeWidth = '1.5';
-                        } else if (poId.includes('PO_0009046') || poId.toLowerCase().includes('flower')) {
-                            // Flowers - soft yellow
-                            element.style.fill = '#f4d03f';
-                            element.style.stroke = '#d4a404';
-                            element.style.strokeWidth = '1.5';
-                        }
-
-                        // Add interactivity
-                        element.addEventListener('mouseenter', () => {
-                            element.classList.add('highlighted');
-                            playOrganicSound('hover');
-                        });
-
-                        element.addEventListener('mouseleave', () => {
-                            element.classList.remove('highlighted');
-                        });
-
-                        element.addEventListener('click', () => {
-                            playOrganicSound('snap');
-                            console.log('Plant Ontology ID:', poId);
-                        });
-                    }
-                });
-
-                // Also apply default colors to elements without IDs
-                svgElement.querySelectorAll('path, circle, rect, polygon').forEach(element => {
-                    if (!element.id && !element.hasAttribute('id')) {
-                        // Default plant green
-                        if (!element.style.fill || element.style.fill === 'none') {
-                            element.style.fill = '#7a9e7e';
-                        }
-                        if (!element.style.stroke || element.style.stroke === 'none') {
-                            element.style.stroke = '#5d7a5f';
-                            element.style.strokeWidth = '1';
-                        }
-                    }
-                });
-
-                // Insert into container
-                const container = document.getElementById('plant-diagram');
-                container.innerHTML = '';
-                container.appendChild(svgElement);
-
-                console.log('SVG loaded successfully with', allElements.length, 'elements');
-
-            } catch (error) {
-                console.error('Error loading SVG:', error);
-                document.getElementById('plant-diagram').innerHTML =
-                    '<p style="color: var(--terracotta); text-align: center;">Error loading botanical diagram. Please check your connection.</p>';
-            }
-        }
-
-        // Tab switching functionality
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                playOrganicSound('rustle');
-
-                // Remove active class from all
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-
-                // Add active class to clicked tab
-                button.classList.add('active');
-                const tabId = button.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
-            });
+    if (currentPart === partId) {
+        // Deselect
+        parts.forEach(p => {
+            p.classList.remove('active', 'dimmed');
         });
+        currentPart = null;
+        document.getElementById('part-detail-card').innerHTML =
+            '<div class="hint-text"><span class="arrow">☝️</span>Nhấp vào bộ phận trên sơ đồ để xem thông tin chi tiết</div>';
+        return;
+    }
 
-        // Load SVG on page load
-        window.addEventListener('DOMContentLoaded', loadPlantSVG);
-    </script>
+    currentPart = partId;
+
+    // Update SVG highlights
+    parts.forEach(p => {
+        const pid = p.getAttribute('data-part');
+        p.classList.remove('active', 'dimmed');
+        if (pid === partId) p.classList.add('active');
+        else p.classList.add('dimmed');
+    });
+
+    // Update card
+    renderPartCard(partId);
+}
+
+function renderPartCard(partId) {
+    const d = partData[partId];
+    if (!d) return;
+
+    const chips = d.chips.map(c =>
+        `<span class="stat-chip" style="background:${c.bg};color:${c.color};">${c.text}</span>`
+    ).join('');
+
+    const facts = d.facts.map(f => `<li>${f}</li>`).join('');
+
+    document.getElementById('part-detail-card').innerHTML = `
+        <div class="part-card-header" style="border-bottom:2px solid ${d.borderColor}20;">
+            <div class="part-icon" style="background:${d.iconBg}; font-size:1.6rem;">${d.icon}</div>
+            <div class="part-card-title">
+                <h2>${d.label}</h2>
+                <p>${d.scientific}</p>
+            </div>
+        </div>
+        <div class="part-card-body">
+            <div class="stat-row">${chips}</div>
+            <p style="margin-top:0.8rem;">${d.desc}</p>
+            <ul class="fact-list">${facts}</ul>
+        </div>
+    `;
+
+    document.getElementById('part-detail-card').style.borderColor = d.borderColor;
+}
+
+// ── SVG click events ──
+document.querySelectorAll('.tree-part').forEach(el => {
+    el.addEventListener('click', () => {
+        selectPart(el.getAttribute('data-part'));
+    });
+});
+
+// ── Tab switching ──
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+});
+
+// ── Legend clicks ──
+document.querySelectorAll('.legend-item').forEach(item => {
+    item.addEventListener('click', () => {
+        const fn = item.getAttribute('onclick');
+        // already handled by onclick attr
+    });
+});
+</script>
 </body>
 </html>
