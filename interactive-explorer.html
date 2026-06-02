@@ -1,898 +1,839 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Botanical Explorer | Arabidopsis thaliana</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khám Phá Kiến Trúc Cây Thân Gỗ – Pinus kesiya</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #f0f7f0; }
 
-    <!-- Google Fonts - Serif, Sans-serif, and Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    .tree-part { cursor: pointer; transition: filter 0.25s ease, opacity 0.25s ease; }
+    .tree-part:hover { filter: brightness(1.2) saturate(1.3); }
+    .tree-part.active { filter: brightness(1.25) saturate(1.35) drop-shadow(0 0 12px rgba(255,200,50,0.8)); }
+    .tree-part.dimmed { opacity: 0.28; filter: saturate(0.35); }
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    .subpart-chip {
+      padding: 5px 13px; border-radius: 20px; font-size: 12.5px; font-weight: 500;
+      border: 1.5px solid #d1fae5; background: white; color: #374151;
+      cursor: pointer; transition: all 0.18s; white-space: nowrap;
+    }
+    .subpart-chip:hover { border-color: #10b981; background: #f0fdf4; color: #065f46; }
+    .subpart-chip.active { background: #059669; border-color: #059669; color: white; }
 
-        :root {
-            /* Organic, earthy color palette */
-            --sage-green: #7a9e7e;
-            --sage-green-dark: #5d7a5f;
-            --sage-green-light: #a4c4a6;
-            --deep-brown: #4a3428;
-            --terracotta: #c97154;
-            --terracotta-light: #e09176;
-            --parchment: #f4f1ea;
-            --parchment-dark: #e8e3d6;
-            --charcoal: #2d2d2d;
-            --moss-green: #8b9d83;
-            --sepia: #704214;
+    .sp-tab-btn {
+      padding: 6px 14px; font-size: 12px; font-weight: 500;
+      color: #9ca3af; border-bottom: 2px solid transparent;
+      cursor: pointer; transition: all 0.18s; white-space: nowrap;
+    }
+    .sp-tab-btn:hover { color: #374151; }
+    .sp-tab-btn.active { color: #059669; border-bottom-color: #059669; font-weight: 600; }
 
-            /* Typography */
-            --font-serif: 'EB Garamond', serif;
-            --font-sans: 'Lato', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-        }
+    .main-tab-btn {
+      padding: 7px 16px; font-size: 13px; font-weight: 500;
+      border-radius: 8px; cursor: pointer; transition: all 0.18s; color: #6b7280;
+    }
+    .main-tab-btn:hover { background: #f3f4f6; color: #374151; }
+    .main-tab-btn.active { background: #ecfdf5; color: #059669; font-weight: 600; }
 
-        body {
-            font-family: var(--font-sans);
-            background: linear-gradient(135deg, var(--parchment) 0%, var(--parchment-dark) 100%);
-            color: var(--charcoal);
-            min-height: 100vh;
-            background-attachment: fixed;
-        }
+    .info-tab { display: none; }
+    .info-tab.active { display: block; }
 
-        /* Header with navigation */
-        .header {
-            background: linear-gradient(to bottom, rgba(122, 158, 126, 0.95), rgba(122, 158, 126, 0.85));
-            backdrop-filter: blur(10px);
-            border-bottom: 3px solid var(--deep-brown);
-            padding: 1.5rem 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        h1 {
-            font-family: var(--font-serif);
-            font-size: 2.5rem;
-            color: var(--parchment);
-            font-weight: 600;
-            letter-spacing: 0.02em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .subtitle {
-            font-family: var(--font-serif);
-            font-size: 1rem;
-            color: var(--parchment-dark);
-            font-style: italic;
-            margin-top: 0.25rem;
-        }
-
-        .nav-link {
-            color: var(--parchment);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border: 2px solid transparent;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .nav-link:hover {
-            border-color: var(--parchment);
-            background: rgba(244, 241, 234, 0.1);
-        }
-
-        /* Main container */
-        .container {
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 450px;
-            gap: 2rem;
-            align-items: start;
-        }
-
-        /* SVG Container */
-        .svg-container {
-            background: white;
-            border: 4px solid var(--deep-brown);
-            border-radius: 8px;
-            padding: 3rem;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            position: relative;
-            min-height: 600px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .svg-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(122, 158, 126, 0.03) 2px,
-                    rgba(122, 158, 126, 0.03) 4px
-                );
-            pointer-events: none;
-            border-radius: 4px;
-        }
-
-        #plant-diagram {
-            max-width: 100%;
-            height: auto;
-            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Info Panel */
-        .info-panel {
-            background: white;
-            border: 4px solid var(--sage-green-dark);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        .tab-header {
-            display: flex;
-            background: var(--sage-green);
-            border-bottom: 3px solid var(--deep-brown);
-        }
-
-        .tab-button {
-            flex: 1;
-            padding: 1rem;
-            background: transparent;
-            border: none;
-            color: var(--parchment);
-            font-family: var(--font-serif);
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-right: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-        }
-
-        .tab-button:last-child {
-            border-right: none;
-        }
-
-        .tab-button:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .tab-button.active {
-            background: white;
-            color: var(--sage-green-dark);
-            font-weight: 600;
-        }
-
-        .tab-button.active::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--terracotta);
-        }
-
-        .tab-content {
-            display: none;
-            padding: 2rem;
-            max-height: 600px;
-            overflow-y: auto;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .tab-content h2 {
-            font-family: var(--font-serif);
-            font-size: 1.8rem;
-            color: var(--sage-green-dark);
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--terracotta);
-            padding-bottom: 0.5rem;
-        }
-
-        .tab-content h3 {
-            font-family: var(--font-serif);
-            font-size: 1.3rem;
-            color: var(--deep-brown);
-            margin: 1.5rem 0 0.75rem;
-        }
-
-        .tab-content p {
-            line-height: 1.8;
-            margin-bottom: 1rem;
-            color: var(--charcoal);
-        }
-
-        .taxonomy-item {
-            display: grid;
-            grid-template-columns: 140px 1fr;
-            gap: 1rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: var(--parchment);
-            border-left: 3px solid var(--sage-green);
-            border-radius: 4px;
-        }
-
-        .taxonomy-label {
-            font-family: var(--font-serif);
-            font-weight: 600;
-            color: var(--deep-brown);
-        }
-
-        .taxonomy-value {
-            font-family: var(--font-mono);
-            color: var(--charcoal);
-            font-size: 0.95rem;
-        }
-
-        .morphology-section {
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: var(--parchment);
-            border-radius: 6px;
-            border: 1px solid var(--sage-green-light);
-        }
-
-        .growth-stage {
-            background: white;
-            border: 2px solid var(--sage-green);
-            border-radius: 6px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .growth-stage:hover {
-            transform: translateX(5px);
-            box-shadow: -4px 4px 0 var(--terracotta-light);
-        }
-
-        .stage-number {
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            color: var(--terracotta);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .stage-name {
-            font-family: var(--font-serif);
-            font-size: 1.2rem;
-            color: var(--sage-green-dark);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .stage-duration {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--sepia);
-            margin-bottom: 0.75rem;
-        }
-
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        ul li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
-            line-height: 1.6;
-        }
-
-        ul li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--terracotta);
-            font-weight: bold;
-        }
-
-        /* Highlighted elements */
-        .po-element {
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .po-element:hover {
-            filter: brightness(1.2);
-        }
-
-        .po-element.highlighted {
-            filter: brightness(1.3) drop-shadow(0 0 8px var(--terracotta));
-        }
-
-        /* Legend */
-        .legend {
-            background: white;
-            border: 3px solid var(--deep-brown);
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .legend h3 {
-            font-family: var(--font-serif);
-            color: var(--deep-brown);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.75rem;
-            gap: 0.75rem;
-        }
-
-        .legend-color {
-            width: 24px;
-            height: 24px;
-            border-radius: 4px;
-            border: 2px solid var(--deep-brown);
-        }
-
-        .legend-label {
-            font-family: var(--font-sans);
-            color: var(--charcoal);
-        }
-
-        .legend-po {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--sepia);
-            margin-left: auto;
-        }
-
-        /* Scrollbar styling */
-        .tab-content::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .tab-content::-webkit-scrollbar-track {
-            background: var(--parchment);
-        }
-
-        .tab-content::-webkit-scrollbar-thumb {
-            background: var(--sage-green);
-            border-radius: 4px;
-        }
-
-        .tab-content::-webkit-scrollbar-thumb:hover {
-            background: var(--sage-green-dark);
-        }
-
-        /* Responsive design */
-        @media (max-width: 1024px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .container {
-                padding: 0 1rem;
-                margin: 1rem auto;
-            }
-
-            .svg-container {
-                padding: 2rem;
-            }
-
-            .tab-content {
-                padding: 1.5rem;
-            }
-        }
-    </style>
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: #a7f3d0; border-radius: 3px; }
+  </style>
 </head>
-<body>
-    <header class="header">
-        <div class="nav-container">
-            <div>
-                <h1>Interactive Botanical Explorer</h1>
-                <p class="subtitle">Arabidopsis thaliana • Thale Cress</p>
-            </div>
-            <a href="index.html" class="nav-link">← Back to Portfolio</a>
-        </div>
-    </header>
+<body class="min-h-screen">
 
-    <div class="container">
-        <div>
-            <div class="svg-container">
-                <div id="plant-diagram"></div>
-            </div>
-
-            <div class="legend">
-                <h3>Plant Structures</h3>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #8fbc8f;"></div>
-                    <span class="legend-label">Leaf (Foliar Organ)</span>
-                    <span class="legend-po">PO_0025034</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #8b7355;"></div>
-                    <span class="legend-label">Root System</span>
-                    <span class="legend-po">PO_0009005</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #f4d03f;"></div>
-                    <span class="legend-label">Flower</span>
-                    <span class="legend-po">PO_0009046</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="info-panel">
-            <div class="tab-header">
-                <button class="tab-button active" data-tab="taxonomy">Taxonomy</button>
-                <button class="tab-button" data-tab="morphology">Morphology</button>
-                <button class="tab-button" data-tab="growth">Growth Stages</button>
-            </div>
-
-            <div class="tab-content active" id="taxonomy">
-                <h2>Taxonomic Classification</h2>
-
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Kingdom:</div>
-                    <div class="taxonomy-value">Plantae</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Clade:</div>
-                    <div class="taxonomy-value">Tracheophytes</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Clade:</div>
-                    <div class="taxonomy-value">Angiosperms</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Clade:</div>
-                    <div class="taxonomy-value">Eudicots</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Clade:</div>
-                    <div class="taxonomy-value">Rosids</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Order:</div>
-                    <div class="taxonomy-value">Brassicales</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Family:</div>
-                    <div class="taxonomy-value">Brassicaceae</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Genus:</div>
-                    <div class="taxonomy-value">Arabidopsis</div>
-                </div>
-                <div class="taxonomy-item">
-                    <div class="taxonomy-label">Species:</div>
-                    <div class="taxonomy-value">A. thaliana</div>
-                </div>
-
-                <h3>Scientific Significance</h3>
-                <p>
-                    <em>Arabidopsis thaliana</em>, commonly known as thale cress or mouse-ear cress, is a small flowering plant
-                    that has become the most important model organism in plant biology and genetics.
-                </p>
-                <p>
-                    First described by Johannes Thal in the Harz Mountains in the 16th century, this unassuming member of
-                    the mustard family (Brassicaceae) was chosen as a model organism due to its small genome (~125 Mb),
-                    short generation time (6 weeks), prolific seed production, and ease of cultivation in laboratory settings.
-                </p>
-                <p>
-                    In 2000, <em>A. thaliana</em> became the first plant to have its entire genome sequenced, revealing
-                    approximately 27,000 protein-coding genes. This milestone revolutionized our understanding of plant
-                    molecular biology, development, and evolution.
-                </p>
-
-                <h3>Ecological Distribution</h3>
-                <p>
-                    Native to Europe, Asia, and northwestern Africa, <em>A. thaliana</em> has naturalized across temperate
-                    regions worldwide. It thrives in disturbed habitats, roadsides, and waste areas, demonstrating remarkable
-                    adaptability to various environmental conditions.
-                </p>
-            </div>
-
-            <div class="tab-content" id="morphology">
-                <h2>Morphological Features</h2>
-
-                <div class="morphology-section">
-                    <h3>Root System (PO_0009005)</h3>
-                    <p>
-                        The root system of <em>Arabidopsis</em> consists of a primary taproot with lateral root branches.
-                        The primary root emerges from the embryonic radicle and grows vertically downward (positive gravitropism).
-                    </p>
-                    <ul>
-                        <li><strong>Primary Root:</strong> Typically reaches 5-8 cm in laboratory conditions</li>
-                        <li><strong>Lateral Roots:</strong> Branch from the pericycle tissue at regular intervals</li>
-                        <li><strong>Root Hairs:</strong> Single-cell extensions that increase surface area for water and nutrient absorption</li>
-                        <li><strong>Root Cap:</strong> Protective structure at the root apex containing statocytes for gravity sensing</li>
-                    </ul>
-                    <p>
-                        The root architecture is highly plastic, responding to soil nutrients, water availability, and mechanical impedance.
-                        Root development has been extensively characterized, making it an excellent system for studying cell division,
-                        elongation, and differentiation.
-                    </p>
-                </div>
-
-                <div class="morphology-section">
-                    <h3>Leaves (PO_0025034)</h3>
-                    <p>
-                        <em>Arabidopsis</em> exhibits heteroblasty—producing morphologically distinct juvenile and adult leaves.
-                        The leaves are arranged in a rosette pattern during the vegetative phase.
-                    </p>
-                    <ul>
-                        <li><strong>Cotyledons:</strong> Two embryonic seed leaves, oval-shaped, emerge upon germination</li>
-                        <li><strong>Juvenile Leaves:</strong> Round with smooth margins, lack trichomes on upper surface</li>
-                        <li><strong>Adult Leaves:</strong> Elongated with serrated margins, presence of abaxial and adaxial trichomes</li>
-                        <li><strong>Cauline Leaves:</strong> Smaller leaves on the flowering stem, sessile with clasping bases</li>
-                    </ul>
-                    <p>
-                        Leaf size typically ranges from 0.5-2 cm in length. The transition from juvenile to adult leaf identity is
-                        controlled by microRNAs and transcription factors, representing a well-studied developmental phase change.
-                    </p>
-                </div>
-
-                <div class="morphology-section">
-                    <h3>Flowers (PO_0009046)</h3>
-                    <p>
-                        The flower is a perfect example of the typical eudicot arrangement with four distinct whorls organized
-                        in a cruciform pattern characteristic of Brassicaceae.
-                    </p>
-                    <ul>
-                        <li><strong>Sepals:</strong> 4 green sepals in two whorls (whorl 1)</li>
-                        <li><strong>Petals:</strong> 4 white petals arranged in a cross pattern (whorl 2)</li>
-                        <li><strong>Stamens:</strong> 6 stamens—4 long (median) and 2 short (lateral) (whorls 3)</li>
-                        <li><strong>Carpels:</strong> 2 fused carpels forming a superior ovary (whorl 4)</li>
-                    </ul>
-                    <p>
-                        Flowers are approximately 2-3 mm in diameter and are produced in racemose inflorescences. The ABC model
-                        of flower development was largely elucidated through genetic studies in <em>Arabidopsis</em>, identifying
-                        homeotic genes that specify organ identity in each whorl.
-                    </p>
-                </div>
-
-                <div class="morphology-section">
-                    <h3>Siliques (Fruit)</h3>
-                    <p>
-                        Following successful pollination, the ovary develops into a silique—an elongated, two-chambered fruit
-                        characteristic of the Brassicaceae family.
-                    </p>
-                    <ul>
-                        <li>Length: 10-15 mm</li>
-                        <li>Contains 40-60 seeds arranged in two rows</li>
-                        <li>Dehiscent fruit that splits along two sutures at maturity</li>
-                        <li>Seeds are dispersed explosively when the valves detach</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tab-content" id="growth">
-                <h2>Life Cycle & Development</h2>
-
-                <div class="growth-stage">
-                    <div class="stage-number">1</div>
-                    <div class="stage-name">Seed Germination</div>
-                    <div class="stage-duration">Days 0-3</div>
-                    <p>
-                        Germination begins with imbibition (water uptake), followed by radicle emergence. Seeds require
-                        stratification (cold treatment at 4°C for 2-4 days) to break dormancy and synchronize germination.
-                    </p>
-                    <ul>
-                        <li>Seed coat rupture occurs within 24-48 hours under optimal conditions</li>
-                        <li>Primary root (radicle) emerges first, growing downward</li>
-                        <li>Hypocotyl elongates, pulling cotyledons above soil surface</li>
-                        <li>Light triggers photomorphogenesis—hypocotyl elongation slows, cotyledons expand and green</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">2</div>
-                    <div class="stage-name">Vegetative Growth</div>
-                    <div class="stage-duration">Days 3-21 (long days) or Days 3-35 (short days)</div>
-                    <p>
-                        The vegetative phase is characterized by rosette formation—leaves develop from the shoot apical
-                        meristem in a spiral phyllotactic pattern without stem elongation.
-                    </p>
-                    <ul>
-                        <li>Cotyledons photosynthesize and provide initial nutrients</li>
-                        <li>True leaves emerge sequentially from the apical meristem</li>
-                        <li>Juvenile-to-adult vegetative phase transition occurs around leaf 5-8</li>
-                        <li>Root system develops lateral branches, establishing nutrient uptake network</li>
-                        <li>Vegetative phase duration depends on photoperiod—<em>Arabidopsis</em> is a facultative long-day plant</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">3</div>
-                    <div class="stage-name">Flowering Transition</div>
-                    <div class="stage-duration">Days 14-28 (varies by ecotype and photoperiod)</div>
-                    <p>
-                        Floral induction represents a critical developmental transition where the vegetative shoot apical
-                        meristem converts to an inflorescence meristem, irreversibly committing to reproductive development.
-                    </p>
-                    <ul>
-                        <li>Integration of environmental signals (photoperiod, vernalization) and endogenous factors (age, hormones)</li>
-                        <li>Upregulation of floral integrator genes (<em>FT</em>, <em>SOC1</em>, <em>LFY</em>)</li>
-                        <li>Bolting—rapid elongation of the primary inflorescence stem</li>
-                        <li>Conversion of shoot apical meristem to inflorescence meristem</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">4</div>
-                    <div class="stage-name">Flowering & Pollination</div>
-                    <div class="stage-duration">Days 21-35</div>
-                    <p>
-                        Flowers develop acropetally (from bottom to top) on the main stem and secondary branches.
-                        <em>Arabidopsis</em> is predominantly self-pollinating (autogamous).
-                    </p>
-                    <ul>
-                        <li>Flower buds form from floral meristems in a spiral pattern</li>
-                        <li>Each flower takes approximately 3-4 days from initiation to anthesis (opening)</li>
-                        <li>Stamens dehisce (release pollen) shortly before or at flower opening</li>
-                        <li>Self-pollination occurs as stamens contact the stigma</li>
-                        <li>Cross-pollination rate is typically less than 1% in natural populations</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">5</div>
-                    <div class="stage-name">Silique Development</div>
-                    <div class="stage-duration">Days 25-40</div>
-                    <p>
-                        Following fertilization, the ovary develops into a silique while the embryos develop within the seeds.
-                    </p>
-                    <ul>
-                        <li>Silique elongation occurs over 7-10 days post-fertilization</li>
-                        <li>Embryogenesis progresses through defined stages (globular, heart, torpedo, bent cotyledon)</li>
-                        <li>Seeds accumulate storage reserves (proteins, lipids)</li>
-                        <li>Seeds undergo maturation drying, entering dormancy</li>
-                        <li>Siliques turn from green to brown as they mature and desiccate</li>
-                    </ul>
-                </div>
-
-                <div class="growth-stage">
-                    <div class="stage-number">6</div>
-                    <div class="stage-name">Senescence & Seed Dispersal</div>
-                    <div class="stage-duration">Days 35-42</div>
-                    <p>
-                        Plant senescence is a programmed developmental process involving nutrient remobilization and
-                        controlled cell death, culminating in seed dispersal.
-                    </p>
-                    <ul>
-                        <li>Rosette leaves undergo senescence, yellowing as chlorophyll degrades</li>
-                        <li>Nutrients are remobilized from senescing tissues to developing seeds</li>
-                        <li>Mature siliques dehisce explosively, dispersing seeds within a radius of several centimeters</li>
-                        <li>Seeds remain viable for years when stored properly (dry, cool conditions)</li>
-                        <li>Total life cycle: 6 weeks under optimal long-day conditions (16h light/8h dark, 22°C)</li>
-                    </ul>
-                </div>
-
-                <h3>Environmental Influences</h3>
-                <p>
-                    The timing of developmental transitions is highly responsive to environmental cues, allowing
-                    <em>Arabidopsis</em> to optimize reproductive success:
-                </p>
-                <ul>
-                    <li><strong>Photoperiod:</strong> Long days (>14h light) accelerate flowering via the photoperiod pathway</li>
-                    <li><strong>Vernalization:</strong> Prolonged cold exposure (4-6 weeks at 4°C) promotes flowering in winter-annual ecotypes</li>
-                    <li><strong>Temperature:</strong> Warm ambient temperatures (27-29°C) accelerate flowering independent of photoperiod</li>
-                    <li><strong>Nutrient Availability:</strong> Nitrogen and phosphorus availability influence growth rate and flowering time</li>
-                </ul>
-            </div>
-        </div>
+  <!-- Nav -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 text-gray-500 hover:text-emerald-600 transition-colors text-sm font-medium">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Portfolio
+      </a>
+      <div class="text-center">
+        <h1 class="text-sm font-bold text-gray-800">Khám Phá Kiến Trúc Cây Thân Gỗ</h1>
+        <p class="text-xs text-gray-400 italic" style="font-family:'EB Garamond',serif">Pinus kesiya Royle ex Gordon — Thông Ba Lá</p>
+      </div>
+      <div class="w-24"></div>
     </div>
+  </nav>
 
-    <script>
-        // Sound feedback system using Web Audio API
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  <!-- Main -->
+  <div class="max-w-7xl mx-auto px-3 py-4">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-4" style="min-height: calc(100vh - 120px);">
 
-        function playOrganicSound(type) {
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
+      <!-- Left: SVG + Legend -->
+      <div class="lg:col-span-2 flex flex-col gap-3">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 flex-1">
+          <p class="text-xs text-gray-400 text-center mb-2 font-medium tracking-wide uppercase">Nhấp vào bộ phận để khám phá</p>
 
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
+          <svg id="tree-svg" viewBox="0 0 520 680" width="100%" xmlns="http://www.w3.org/2000/svg" style="max-height:480px;display:block;margin:0 auto;">
+            <defs>
+              <linearGradient id="skyG" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#87CEEB"/>
+                <stop offset="100%" style="stop-color:#E8F4FD"/>
+              </linearGradient>
+              <linearGradient id="groundG" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#8B7355"/>
+                <stop offset="50%" style="stop-color:#6B5530"/>
+                <stop offset="100%" style="stop-color:#4A3820"/>
+              </linearGradient>
+              <linearGradient id="trunkG" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#7B3A0D"/>
+                <stop offset="45%" style="stop-color:#9C4E20"/>
+                <stop offset="100%" style="stop-color:#6B3210"/>
+              </linearGradient>
+            </defs>
 
-            // Organic, natural sound parameters
-            switch(type) {
-                case 'rustle':
-                    // Soft rustling sound
-                    oscillator.type = 'sawtooth';
-                    oscillator.frequency.setValueAtTime(120, audioContext.currentTime);
-                    oscillator.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + 0.1);
-                    gainNode.gain.setValueAtTime(0.03, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-                    break;
-                case 'snap':
-                    // Crisp snapping sound
-                    oscillator.type = 'sine';
-                    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-                    oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.05);
-                    gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.05);
-                    break;
-                case 'hover':
-                    // Gentle hover sound
-                    oscillator.type = 'sine';
-                    oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
-                    gainNode.gain.setValueAtTime(0.02, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.08);
-                    break;
-            }
+            <!-- Sky & background -->
+            <rect width="520" height="680" fill="url(#skyG)"/>
+            <circle cx="448" cy="58" r="34" fill="#FFE87C" opacity="0.85"/>
+            <ellipse cx="82" cy="428" rx="125" ry="42" fill="#5a8a5a" opacity="0.55"/>
+            <ellipse cx="422" cy="432" rx="135" ry="38" fill="#6a9a6a" opacity="0.48"/>
+            <rect x="0" y="420" width="520" height="260" fill="url(#groundG)"/>
+            <path d="M0,420 Q130,412 260,420 Q390,428 520,420" fill="#9aaa7a"/>
 
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.15);
+            <!-- ===== ROOTS ===== -->
+            <g id="part-roots" class="tree-part" onclick="selectGroup('roots')">
+              <line x1="260" y1="420" x2="260" y2="602" stroke="#8B6914" stroke-width="10" stroke-linecap="round"/>
+              <line x1="260" y1="582" x2="228" y2="622" stroke="#8B6914" stroke-width="6" stroke-linecap="round"/>
+              <line x1="260" y1="582" x2="292" y2="626" stroke="#8B6914" stroke-width="5" stroke-linecap="round"/>
+              <line x1="260" y1="444" x2="155" y2="490" stroke="#9B7A2A" stroke-width="7" stroke-linecap="round"/>
+              <line x1="260" y1="444" x2="365" y2="488" stroke="#9B7A2A" stroke-width="7" stroke-linecap="round"/>
+              <line x1="260" y1="472" x2="138" y2="534" stroke="#9B7A2A" stroke-width="5" stroke-linecap="round"/>
+              <line x1="260" y1="472" x2="383" y2="530" stroke="#9B7A2A" stroke-width="5" stroke-linecap="round"/>
+              <line x1="200" y1="468" x2="152" y2="502" stroke="#AB8A3A" stroke-width="3" stroke-linecap="round"/>
+              <line x1="200" y1="468" x2="168" y2="514" stroke="#AB8A3A" stroke-width="3" stroke-linecap="round"/>
+              <line x1="320" y1="466" x2="360" y2="500" stroke="#AB8A3A" stroke-width="3" stroke-linecap="round"/>
+              <line x1="320" y1="466" x2="347" y2="514" stroke="#AB8A3A" stroke-width="3" stroke-linecap="round"/>
+              <line x1="152" y1="502" x2="127" y2="520" stroke="#C8A96A" stroke-width="1.8"/>
+              <line x1="152" y1="502" x2="145" y2="526" stroke="#C8A96A" stroke-width="1.8"/>
+              <line x1="360" y1="500" x2="390" y2="517" stroke="#C8A96A" stroke-width="1.8"/>
+              <line x1="360" y1="500" x2="374" y2="527" stroke="#C8A96A" stroke-width="1.8"/>
+              <circle cx="127" cy="520" r="4" fill="#D4A96A" opacity="0.75"/>
+              <circle cx="145" cy="526" r="3.5" fill="#D4A96A" opacity="0.75"/>
+              <circle cx="390" cy="517" r="4" fill="#D4A96A" opacity="0.75"/>
+              <circle cx="374" cy="527" r="3.5" fill="#D4A96A" opacity="0.75"/>
+              <text x="408" y="548" font-size="11" fill="#B8940A" font-family="Inter" font-weight="500" opacity="0.9">Hệ rễ</text>
+            </g>
+
+            <!-- ===== TRUNK ===== -->
+            <g id="part-trunk" class="tree-part" onclick="selectGroup('trunk')">
+              <rect x="238" y="198" width="44" height="222" rx="4" fill="url(#trunkG)"/>
+              <line x1="243" y1="238" x2="278" y2="244" stroke="#5B2A08" stroke-width="1.5" opacity="0.45"/>
+              <line x1="241" y1="268" x2="277" y2="264" stroke="#5B2A08" stroke-width="1.5" opacity="0.45"/>
+              <line x1="244" y1="298" x2="279" y2="304" stroke="#5B2A08" stroke-width="1.5" opacity="0.45"/>
+              <line x1="241" y1="328" x2="276" y2="324" stroke="#5B2A08" stroke-width="1.5" opacity="0.45"/>
+              <line x1="243" y1="358" x2="280" y2="362" stroke="#5B2A08" stroke-width="1.5" opacity="0.45"/>
+              <line x1="241" y1="390" x2="278" y2="387" stroke="#5B2A08" stroke-width="1.5" opacity="0.45"/>
+              <text x="292" y="318" font-size="11" fill="#9C4E20" font-family="Inter" font-weight="500" opacity="0.9">Thân</text>
+            </g>
+
+            <!-- ===== BRANCHES ===== -->
+            <g id="part-branches" class="tree-part" onclick="selectGroup('branches')">
+              <!-- Whorl 1 (bottom) -->
+              <line x1="260" y1="382" x2="96" y2="350" stroke="#5C3212" stroke-width="7" stroke-linecap="round"/>
+              <line x1="260" y1="382" x2="424" y2="350" stroke="#5C3212" stroke-width="7" stroke-linecap="round"/>
+              <line x1="96" y1="350" x2="56" y2="338" stroke="#6B3A18" stroke-width="4" stroke-linecap="round"/>
+              <line x1="424" y1="350" x2="464" y2="338" stroke="#6B3A18" stroke-width="4" stroke-linecap="round"/>
+              <line x1="96" y1="350" x2="75" y2="372" stroke="#6B3A18" stroke-width="3" stroke-linecap="round"/>
+              <line x1="424" y1="350" x2="445" y2="370" stroke="#6B3A18" stroke-width="3" stroke-linecap="round"/>
+              <!-- Whorl 2 -->
+              <line x1="260" y1="332" x2="116" y2="307" stroke="#5C3212" stroke-width="6" stroke-linecap="round"/>
+              <line x1="260" y1="332" x2="404" y2="307" stroke="#5C3212" stroke-width="6" stroke-linecap="round"/>
+              <line x1="116" y1="307" x2="78" y2="296" stroke="#6B3A18" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="404" y1="307" x2="442" y2="294" stroke="#6B3A18" stroke-width="3.5" stroke-linecap="round"/>
+              <!-- Whorl 3 -->
+              <line x1="260" y1="287" x2="138" y2="266" stroke="#5C3212" stroke-width="5" stroke-linecap="round"/>
+              <line x1="260" y1="287" x2="382" y2="265" stroke="#5C3212" stroke-width="5" stroke-linecap="round"/>
+              <line x1="138" y1="266" x2="102" y2="255" stroke="#6B3A18" stroke-width="3" stroke-linecap="round"/>
+              <line x1="382" y1="265" x2="418" y2="253" stroke="#6B3A18" stroke-width="3" stroke-linecap="round"/>
+              <!-- Whorl 4 -->
+              <line x1="260" y1="250" x2="163" y2="234" stroke="#5C3212" stroke-width="4" stroke-linecap="round"/>
+              <line x1="260" y1="250" x2="357" y2="232" stroke="#5C3212" stroke-width="4" stroke-linecap="round"/>
+              <!-- Whorl 5 -->
+              <line x1="260" y1="220" x2="193" y2="210" stroke="#5C3212" stroke-width="3" stroke-linecap="round"/>
+              <line x1="260" y1="220" x2="327" y2="208" stroke="#5C3212" stroke-width="3" stroke-linecap="round"/>
+              <!-- Whorl 6 top -->
+              <line x1="260" y1="200" x2="232" y2="193" stroke="#5C3212" stroke-width="2" stroke-linecap="round"/>
+              <line x1="260" y1="200" x2="288" y2="191" stroke="#5C3212" stroke-width="2" stroke-linecap="round"/>
+            </g>
+
+            <!-- ===== NEEDLES ===== -->
+            <g id="part-needles" class="tree-part" onclick="selectGroup('needles')">
+              <!-- Whorl 1 tips -->
+              <g transform="translate(57,337)">
+                <line x1="0" y1="0" x2="-13" y2="-19" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-5" y2="-21" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="4" y2="-20" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-16" y2="-11" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="9" y2="-15" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-9" y2="-23" stroke="#1E5E1E" stroke-width="1.6"/>
+              </g>
+              <g transform="translate(75,372)">
+                <line x1="0" y1="0" x2="-11" y2="-17" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-3" y2="-19" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="6" y2="-18" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-14" y2="-8" stroke="#1E5E1E" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="10" y2="-13" stroke="#2B7E2B" stroke-width="1.6"/>
+              </g>
+              <g transform="translate(463,337)">
+                <line x1="0" y1="0" x2="13" y2="-19" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="5" y2="-21" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-4" y2="-20" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="16" y2="-11" stroke="#1E5E1E" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-9" y2="-15" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="9" y2="-23" stroke="#236B23" stroke-width="1.6"/>
+              </g>
+              <g transform="translate(445,370)">
+                <line x1="0" y1="0" x2="11" y2="-17" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="3" y2="-19" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-6" y2="-18" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="14" y2="-8" stroke="#1E5E1E" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-10" y2="-13" stroke="#2B7E2B" stroke-width="1.6"/>
+              </g>
+              <!-- Whorl 2 tips -->
+              <g transform="translate(79,296)">
+                <line x1="0" y1="0" x2="-11" y2="-18" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-4" y2="-20" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="5" y2="-19" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-14" y2="-9" stroke="#1E5E1E" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="9" y2="-14" stroke="#2B7E2B" stroke-width="1.6"/>
+              </g>
+              <g transform="translate(440,294)">
+                <line x1="0" y1="0" x2="11" y2="-18" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="4" y2="-20" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-5" y2="-19" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="14" y2="-9" stroke="#1E5E1E" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-9" y2="-14" stroke="#2B7E2B" stroke-width="1.6"/>
+              </g>
+              <!-- Whorl 3 -->
+              <g transform="translate(103,255)">
+                <line x1="0" y1="0" x2="-9" y2="-16" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-3" y2="-18" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="5" y2="-17" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-12" y2="-7" stroke="#1E5E1E" stroke-width="1.6"/>
+              </g>
+              <g transform="translate(416,253)">
+                <line x1="0" y1="0" x2="9" y2="-16" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="3" y2="-18" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-5" y2="-17" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="12" y2="-7" stroke="#1E5E1E" stroke-width="1.6"/>
+              </g>
+              <!-- Whorl 4 -->
+              <g transform="translate(165,234)">
+                <line x1="0" y1="0" x2="-7" y2="-14" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-2" y2="-16" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="6" y2="-15" stroke="#2B7E2B" stroke-width="1.6"/>
+              </g>
+              <g transform="translate(355,232)">
+                <line x1="0" y1="0" x2="7" y2="-14" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="2" y2="-16" stroke="#236B23" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-6" y2="-15" stroke="#2B7E2B" stroke-width="1.6"/>
+              </g>
+              <!-- Upper whorls -->
+              <g transform="translate(195,210)">
+                <line x1="0" y1="0" x2="-6" y2="-12" stroke="#3A8A3A" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-1" y2="-14" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="5" y2="-13" stroke="#3A8A3A" stroke-width="1.6"/>
+              </g>
+              <g transform="translate(325,208)">
+                <line x1="0" y1="0" x2="6" y2="-12" stroke="#3A8A3A" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="1" y2="-14" stroke="#2B7E2B" stroke-width="1.6"/>
+                <line x1="0" y1="0" x2="-5" y2="-13" stroke="#3A8A3A" stroke-width="1.6"/>
+              </g>
+              <!-- Crown top -->
+              <g transform="translate(260,184)">
+                <line x1="0" y1="0" x2="-9" y2="-19" stroke="#3A8A3A" stroke-width="1.8"/>
+                <line x1="0" y1="0" x2="-3" y2="-21" stroke="#2B7E2B" stroke-width="1.8"/>
+                <line x1="0" y1="0" x2="3" y2="-21" stroke="#2B7E2B" stroke-width="1.8"/>
+                <line x1="0" y1="0" x2="9" y2="-19" stroke="#3A8A3A" stroke-width="1.8"/>
+                <line x1="0" y1="0" x2="-13" y2="-13" stroke="#236B23" stroke-width="1.8"/>
+                <line x1="0" y1="0" x2="13" y2="-13" stroke="#236B23" stroke-width="1.8"/>
+                <line x1="0" y1="0" x2="0" y2="-24" stroke="#1E5E1E" stroke-width="2"/>
+              </g>
+              <text x="28" y="268" font-size="11" fill="#236B23" font-family="Inter" font-weight="500" opacity="0.9">Lá kim</text>
+            </g>
+
+            <!-- ===== CONES ===== -->
+            <g id="part-cones" class="tree-part" onclick="selectGroup('cones')">
+              <!-- Cone 1 – whorl 2 left -->
+              <g transform="translate(150,318)">
+                <ellipse cx="0" cy="0" rx="7" ry="11" fill="#8B6510"/>
+                <line x1="-6" y1="-4" x2="6" y2="-4" stroke="#6A4D0C" stroke-width="1.5"/>
+                <line x1="-7" y1="-1" x2="7" y2="-1" stroke="#6A4D0C" stroke-width="1.5"/>
+                <line x1="-7" y1="2" x2="7" y2="2" stroke="#6A4D0C" stroke-width="1.5"/>
+                <line x1="-6" y1="5" x2="6" y2="5" stroke="#6A4D0C" stroke-width="1.5"/>
+                <line x1="-4" y1="8" x2="4" y2="8" stroke="#6A4D0C" stroke-width="1.5"/>
+              </g>
+              <!-- Cone 2 – whorl 2 right -->
+              <g transform="translate(377,316)">
+                <ellipse cx="0" cy="0" rx="7" ry="11" fill="#8B6510"/>
+                <line x1="-6" y1="-4" x2="6" y2="-4" stroke="#6A4D0C" stroke-width="1.5"/>
+                <line x1="-7" y1="-1" x2="7" y2="-1" stroke="#6A4D0C" stroke-width="1.5"/>
+                <line x1="-7" y1="2" x2="7" y2="2" stroke="#6A4D0C" stroke-width="1.5"/>
+                <line x1="-6" y1="5" x2="6" y2="5" stroke="#6A4D0C" stroke-width="1.5"/>
+                <line x1="-4" y1="8" x2="4" y2="8" stroke="#6A4D0C" stroke-width="1.5"/>
+              </g>
+              <!-- Cone 3 – whorl 3 left (smaller, younger) -->
+              <g transform="translate(178,274)">
+                <ellipse cx="0" cy="0" rx="5" ry="8" fill="#9B7A25"/>
+                <line x1="-4" y1="-3" x2="4" y2="-3" stroke="#7A5E1A" stroke-width="1.2"/>
+                <line x1="-5" y1="0" x2="5" y2="0" stroke="#7A5E1A" stroke-width="1.2"/>
+                <line x1="-4" y1="3" x2="4" y2="3" stroke="#7A5E1A" stroke-width="1.2"/>
+                <line x1="-3" y1="6" x2="3" y2="6" stroke="#7A5E1A" stroke-width="1.2"/>
+              </g>
+              <!-- Male cone cluster – whorl 1 base -->
+              <ellipse cx="260" cy="386" rx="6" ry="4" fill="#CDA828" opacity="0.9"/>
+              <ellipse cx="250" cy="388" rx="5" ry="3.5" fill="#CDA828" opacity="0.8"/>
+              <ellipse cx="270" cy="385" rx="5" ry="3.5" fill="#BFA020" opacity="0.8"/>
+              <text x="393" y="292" font-size="11" fill="#8B6510" font-family="Inter" font-weight="500" opacity="0.9">Nón thông</text>
+            </g>
+
+          </svg>
+
+          <!-- Legend -->
+          <div class="flex flex-wrap gap-2 justify-center mt-3">
+            <button onclick="selectGroup('roots')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200 hover:border-amber-400 transition-all">
+              <span class="w-2 h-2 rounded-full bg-amber-600 inline-block"></span>Hệ Rễ
+            </button>
+            <button onclick="selectGroup('trunk')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-orange-50 text-orange-800 border border-orange-200 hover:border-orange-400 transition-all">
+              <span class="w-2 h-2 rounded-full bg-orange-700 inline-block"></span>Thân Cây
+            </button>
+            <button onclick="selectGroup('branches')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-stone-50 text-stone-700 border border-stone-200 hover:border-stone-400 transition-all">
+              <span class="w-2 h-2 rounded-full bg-stone-600 inline-block"></span>Hệ Cành
+            </button>
+            <button onclick="selectGroup('needles')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-green-50 text-green-800 border border-green-200 hover:border-green-400 transition-all">
+              <span class="w-2 h-2 rounded-full bg-green-700 inline-block"></span>Lá Kim
+            </button>
+            <button onclick="selectGroup('cones')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-yellow-50 text-yellow-800 border border-yellow-200 hover:border-yellow-400 transition-all">
+              <span class="w-2 h-2 rounded-full bg-yellow-700 inline-block"></span>Nón Thông
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Detail panel -->
+      <div class="lg:col-span-3 flex flex-col gap-3">
+
+        <!-- Dynamic card -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex-1 flex flex-col" style="min-height:420px;">
+
+          <!-- Default state -->
+          <div id="default-state" class="flex flex-col items-center justify-center flex-1 text-center">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mb-3">
+              <svg class="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/>
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-gray-700 mb-1.5">Chọn bộ phận để khám phá</h3>
+            <p class="text-sm text-gray-400 max-w-xs leading-relaxed">Nhấp vào hình SVG hoặc các nút legend để xem cấu trúc, đặc điểm và lý do tiến hóa của từng bộ phận cây thông.</p>
+            <div class="mt-5 flex flex-wrap gap-2 justify-center">
+              <span class="px-3 py-1 bg-gray-50 text-gray-400 text-xs rounded-full border border-gray-100">5 nhóm bộ phận</span>
+              <span class="px-3 py-1 bg-gray-50 text-gray-400 text-xs rounded-full border border-gray-100">22 thành phần chi tiết</span>
+              <span class="px-3 py-1 bg-gray-50 text-gray-400 text-xs rounded-full border border-gray-100">Mô tả · Đặc điểm · Lý do cấu tạo</span>
+            </div>
+          </div>
+
+          <!-- Active state -->
+          <div id="active-state" class="hidden flex-col flex-1 overflow-hidden">
+
+            <!-- Group header -->
+            <div id="group-header" class="flex items-start gap-3 pb-3 mb-3 border-b border-gray-100 flex-shrink-0">
+              <div id="group-icon" class="w-11 h-11 rounded-xl flex items-center justify-center text-xl flex-shrink-0"></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-baseline gap-2 flex-wrap">
+                  <h2 id="group-label" class="text-lg font-bold text-gray-800"></h2>
+                  <span id="group-scientific" class="text-xs text-gray-400 italic" style="font-family:'EB Garamond',serif"></span>
+                </div>
+                <p id="group-desc" class="text-sm text-gray-500 mt-1 leading-relaxed"></p>
+              </div>
+            </div>
+
+            <!-- Sub-part chips -->
+            <div class="flex-shrink-0 mb-3">
+              <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Thành phần — nhấp để xem chi tiết</p>
+              <div id="subpart-chips" class="flex flex-wrap gap-1.5"></div>
+            </div>
+
+            <!-- Sub-part detail -->
+            <div class="flex-1 overflow-y-auto min-h-0">
+              <div id="subpart-default" class="flex flex-col items-center justify-center h-32 text-gray-400 text-sm">
+                <span class="text-2xl mb-2">☝️</span>
+                Chọn một thành phần phía trên
+              </div>
+
+              <div id="subpart-content" class="hidden">
+                <div class="flex items-center gap-2 mb-3">
+                  <span id="sp-icon" class="text-lg"></span>
+                  <h3 id="sp-label" class="text-sm font-bold text-gray-800"></h3>
+                </div>
+
+                <!-- Sub-tabs -->
+                <div class="flex gap-0 border-b border-gray-100 mb-3">
+                  <button class="sp-tab-btn active" data-tab="desc" onclick="switchSubTab('desc')">Mô tả</button>
+                  <button class="sp-tab-btn" data-tab="features" onclick="switchSubTab('features')">Đặc điểm</button>
+                  <button class="sp-tab-btn" data-tab="reason" onclick="switchSubTab('reason')">Lý do cấu tạo</button>
+                </div>
+
+                <div id="sp-tab-desc" class="sp-tab-content text-sm text-gray-600 leading-relaxed"></div>
+
+                <div id="sp-tab-features" class="sp-tab-content hidden">
+                  <ul id="sp-features-list" class="space-y-2.5"></ul>
+                </div>
+
+                <div id="sp-tab-reason" class="sp-tab-content hidden">
+                  <div id="sp-reason-text" class="bg-amber-50 border border-amber-100 rounded-xl p-4 text-sm text-amber-900 leading-relaxed"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Static info tabs -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
+          <div class="flex gap-1 mb-3 overflow-x-auto pb-0.5">
+            <button class="main-tab-btn active" onclick="switchMainTab('overview')">Tổng Quan</button>
+            <button class="main-tab-btn" onclick="switchMainTab('ecology')">Sinh Thái</button>
+            <button class="main-tab-btn" onclick="switchMainTab('forestry')">Lâm Nghiệp</button>
+            <button class="main-tab-btn" onclick="switchMainTab('taxonomy')">Phân Loại</button>
+          </div>
+
+          <div id="tab-overview" class="info-tab active text-sm text-gray-600 leading-relaxed space-y-2">
+            <p><strong class="text-gray-800">Thông ba lá</strong> (<em>Pinus kesiya</em>) là loài thông đặc trưng của vùng núi cao Đông Nam Á và Nam Á, phân bố từ Ấn Độ, Myanmar, Thái Lan đến Lào, Campuchia và Việt Nam.</p>
+            <p>Cây cao 35–40m, đường kính thân 60–80cm. Đặc điểm định danh: <strong>lá kim mọc thành bó 3 chiếc</strong> — khác biệt với thông 2 lá (<em>P. merkusii</em>) hay thông 5 lá (<em>P. strobus</em>).</p>
+            <p>Tại Việt Nam tập trung ở <strong>Tây Nguyên</strong> (Lâm Đồng, Đắk Lắk) ở độ cao 1.000–2.000m, tạo nên cảnh quan đặc trưng của Đà Lạt.</p>
+          </div>
+
+          <div id="tab-ecology" class="info-tab text-sm text-gray-600 leading-relaxed space-y-2">
+            <p>Sinh trưởng tốt ở <strong>độ cao 700–2.500m</strong>, nhiệt độ 16–22°C. Chịu hạn nhờ lá kim giảm thiểu thoát hơi nước. Ưa sáng hoàn toàn, không chịu bóng.</p>
+            <p>Đất thích hợp: feralit vàng đỏ, thoát nước tốt, pH 5–6,5. Mùa khô rõ rệt (tháng 11–4) và mùa mưa tập trung (tháng 5–10).</p>
+            <p>Vai trò sinh thái: <strong>điều tiết nguồn nước</strong>, chống xói mòn đất dốc, tạo môi trường sống cho nhiều loài động thực vật và nấm đặc hữu.</p>
+          </div>
+
+          <div id="tab-forestry" class="info-tab text-sm text-gray-600 leading-relaxed space-y-2">
+            <p>Chu kỳ khai thác <strong>40–80 năm</strong>. Gỗ nhẹ, thẳng thớ, dùng xây dựng, đồ mộc, sản xuất bột giấy.</p>
+            <p><strong>Nhựa thông</strong> là sản phẩm kinh tế quan trọng: chiết tinh dầu thông (turpentine) và nhựa (rosin) dùng trong công nghiệp sơn, mực in, dược phẩm. Sản lượng 1–3 kg/cây/năm khi khai thác đúng kỹ thuật.</p>
+            <p>Rừng thông Tây Nguyên đang chịu áp lực từ <strong>phá rừng, khoan nhựa quá mức</strong> và biến đổi khí hậu — cần quản lý rừng bền vững.</p>
+          </div>
+
+          <div id="tab-taxonomy" class="info-tab">
+            <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
+              <span class="text-gray-400">Giới</span><span class="text-gray-700 font-mono text-xs">Plantae</span>
+              <span class="text-gray-400">Ngành</span><span class="text-gray-700 font-mono text-xs">Pinophyta</span>
+              <span class="text-gray-400">Lớp</span><span class="text-gray-700 font-mono text-xs">Pinopsida</span>
+              <span class="text-gray-400">Bộ</span><span class="text-gray-700 font-mono text-xs">Pinales</span>
+              <span class="text-gray-400">Họ</span><span class="text-gray-700 font-mono text-xs">Pinaceae</span>
+              <span class="text-gray-400">Chi</span><span class="text-gray-700 font-mono text-xs italic">Pinus</span>
+              <span class="text-gray-400">Loài</span><span class="text-gray-700 font-mono text-xs italic">P. kesiya</span>
+              <span class="text-gray-400">Tác giả</span><span class="text-gray-700 font-mono text-xs">Royle ex Gordon</span>
+              <span class="text-gray-400">Tên khác</span><span class="text-gray-700 text-xs">Khasi Pine, Benguet Pine</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // ─── DATA ───────────────────────────────────────────────────────────────────
+  const treeData = {
+    roots: {
+      label: "Hệ Rễ", scientific: "Radix — Root System",
+      icon: "🌿", iconBg: "bg-amber-50",
+      desc: "Hệ thống rễ phức tạp giúp thông ba lá bám chặt vào đất đồi núi dốc, hút nước và khoáng chất, đồng thời cộng sinh với nấm để tối ưu hóa dinh dưỡng.",
+      subparts: [
+        {
+          id: "taproot", label: "Rễ cọc", icon: "⬇️",
+          desc: "Rễ cọc là trục rễ chính mọc thẳng đứng xuống sâu, có thể đâm sâu 1–3m tùy điều kiện đất đai. Đây là neo giữ chính giúp cây đứng vững trên sườn đồi dốc, chịu được gió mạnh thường xuyên ở vùng cao nguyên.",
+          features: [
+            "Dài 1–3m ở cây trưởng thành trên đất tơi xốp sâu",
+            "Đường kính gốc có thể đạt 5–8cm",
+            "Mọc thẳng đứng, ít phân nhánh ở phần trên",
+            "Đầu rễ có chóp rễ bảo vệ vùng phân sinh đang hoạt động"
+          ],
+          reason: "Rễ cọc ăn sâu là thích nghi với đất đồi dốc dễ xói mòn và mùa khô khắc nghiệt (tháng 11–4) ở Tây Nguyên. Khi lớp đất mặt khô cạn, rễ cọc vẫn tiếp cận được mạch nước ngầm sâu hơn, đảm bảo cây sống sót qua hạn hán."
+        },
+        {
+          id: "lateral", label: "Rễ bên", icon: "↔️",
+          desc: "Rễ bên (rễ ngang) mọc từ rễ cọc và lan rộng theo chiều ngang trong tầng đất 20–80cm. Chúng tạo mạng lưới neo giữ diện rộng và là nguồn hút nước, khoáng chất chính trong mùa mưa khi đất mặt đủ ẩm.",
+          features: [
+            "Lan rộng gấp 1,5–2 lần tán cây theo chiều ngang",
+            "Tập trung ở độ sâu 20–60cm nơi có nhiều chất hữu cơ",
+            "Phân nhánh thành rễ cấp 2, cấp 3 ngày càng nhỏ hơn",
+            "Có khả năng mọc thêm lông hút khi thiếu nước nhẹ"
+          ],
+          reason: "Hệ rễ bên lan rộng tối đa hóa diện tích hút nước và khoáng chất từ tầng đất mặt màu mỡ. Trên đất feralit nghèo dinh dưỡng của Tây Nguyên, chất hữu cơ tập trung ở tầng mặt, nên chiến lược này hiệu quả hơn rễ sâu."
+        },
+        {
+          id: "fineroots", label: "Rễ hút (rễ mao)", icon: "〰️",
+          desc: "Rễ hút là các rễ nhỏ li ti đường kính 0,5–2mm ở tận cùng hệ rễ — bộ phận trực tiếp hút nước và ion khoáng qua thẩm thấu và vận chuyển tích cực. Tuổi thọ ngắn nhưng liên tục được tái sinh.",
+          features: [
+            "Đường kính 0,5–2mm, dài vài cm",
+            "Tuổi thọ 2–8 tuần, thay mới liên tục trong mùa sinh trưởng",
+            "Chiếm ~90% tổng diện tích bề mặt rễ dù chỉ ~5% khối lượng",
+            "Tốc độ sinh trưởng tăng mạnh sau các trận mưa đầu mùa"
+          ],
+          reason: "Chiến lược đầu tư vào rễ hút ngắn ngày thay vì rễ lâu bền phản ánh điều kiện đất xốp, thoáng khí. Thay vì duy trì rễ lớn tốn năng lượng, cây liên tục tái tạo rễ mao mới để theo kịp nguồn nước và dinh dưỡng di chuyển theo từng trận mưa."
+        },
+        {
+          id: "mycorrhiza", label: "Nấm rễ cộng sinh", icon: "🍄",
+          desc: "Nấm rễ (mycorrhiza) là cộng sinh giữa rễ thông và nấm đất — sợi nấm bao quanh rễ và mở rộng đáng kể diện tích hút dinh dưỡng. Đây là một trong những quan hệ sinh thái quan trọng nhất của rừng thông.",
+          features: [
+            "Chủ yếu là nấm rễ ngoại cộng sinh (ectomycorrhiza)",
+            "Hơn 100 loài nấm ghi nhận cộng sinh với thông",
+            "Sợi nấm tăng diện tích hút dinh dưỡng lên 100–1.000 lần",
+            "Nấm cung cấp P, N, vi lượng; cây cung cấp đường quang hợp"
+          ],
+          reason: "Đất feralit Tây Nguyên nghèo phốt pho (P). Enzyme phosphatase của nấm giải phóng P từ dạng hữu cơ không tan mà rễ cây không thể hấp thụ trực tiếp. Đây là lý do rừng thông tự nhiên khỏe mạnh hơn rừng trồng thuần loài thiếu nấm bản địa."
         }
+      ]
+    },
 
-        // Load and fix SVG
-        async function loadPlantSVG() {
-            const svgUrl = 'arabidopsis_diagram.svg';
-
-            try {
-                const response = await fetch(svgUrl);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const svgText = await response.text();
-
-                // Parse SVG
-                const parser = new DOMParser();
-                const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
-                const svgElement = svgDoc.querySelector('svg');
-
-                // Critical: Remove visibility:hidden and apply default fills/strokes
-                svgElement.style.visibility = 'visible';
-                svgElement.style.display = 'block';
-
-                // Set proper dimensions for display
-                svgElement.setAttribute('width', '400');
-                svgElement.setAttribute('height', 'auto');
-
-                // Apply default styling to all paths and elements
-                const allElements = svgElement.querySelectorAll('*');
-                allElements.forEach(element => {
-                    // Remove default invisible styling
-                    if (element.style.fill === 'none') {
-                        element.style.fill = '';
-                    }
-                    if (element.style.stroke === 'none') {
-                        element.style.stroke = '';
-                    }
-
-                    // Apply organic colors based on PO IDs
-                    const poId = element.id || element.getAttribute('id');
-
-                    if (poId) {
-                        element.classList.add('po-element');
-
-                        // Color coding based on plant parts
-                        if (poId.includes('PO_0025034') || poId.toLowerCase().includes('leaf')) {
-                            // Leaves - sage green
-                            element.style.fill = '#8fbc8f';
-                            element.style.stroke = '#5d7a5f';
-                            element.style.strokeWidth = '1.5';
-                        } else if (poId.includes('PO_0009005') || poId.toLowerCase().includes('root')) {
-                            // Roots - earth brown
-                            element.style.fill = '#8b7355';
-                            element.style.stroke = '#6b5939';
-                            element.style.strokeWidth = '1.5';
-                        } else if (poId.includes('PO_0009046') || poId.toLowerCase().includes('flower')) {
-                            // Flowers - soft yellow
-                            element.style.fill = '#f4d03f';
-                            element.style.stroke = '#d4a404';
-                            element.style.strokeWidth = '1.5';
-                        }
-
-                        // Add interactivity
-                        element.addEventListener('mouseenter', () => {
-                            element.classList.add('highlighted');
-                            playOrganicSound('hover');
-                        });
-
-                        element.addEventListener('mouseleave', () => {
-                            element.classList.remove('highlighted');
-                        });
-
-                        element.addEventListener('click', () => {
-                            playOrganicSound('snap');
-                            console.log('Plant Ontology ID:', poId);
-                        });
-                    }
-                });
-
-                // Also apply default colors to elements without IDs
-                svgElement.querySelectorAll('path, circle, rect, polygon').forEach(element => {
-                    if (!element.id && !element.hasAttribute('id')) {
-                        // Default plant green
-                        if (!element.style.fill || element.style.fill === 'none') {
-                            element.style.fill = '#7a9e7e';
-                        }
-                        if (!element.style.stroke || element.style.stroke === 'none') {
-                            element.style.stroke = '#5d7a5f';
-                            element.style.strokeWidth = '1';
-                        }
-                    }
-                });
-
-                // Insert into container
-                const container = document.getElementById('plant-diagram');
-                container.innerHTML = '';
-                container.appendChild(svgElement);
-
-                console.log('SVG loaded successfully with', allElements.length, 'elements');
-
-            } catch (error) {
-                console.error('Error loading SVG:', error);
-                document.getElementById('plant-diagram').innerHTML =
-                    '<p style="color: var(--terracotta); text-align: center;">Error loading botanical diagram. Please check your connection.</p>';
-            }
+    trunk: {
+      label: "Thân Cây", scientific: "Caulis — Trunk Anatomy",
+      icon: "🪵", iconBg: "bg-orange-50",
+      desc: "Thân cây vừa là cột đỡ kết cấu, vừa là hệ thống dẫn truyền nước và chất hữu cơ. Gỗ thông ghi lại lịch sử tăng trưởng hàng chục năm qua các vòng năm.",
+      subparts: [
+        {
+          id: "bark", label: "Vỏ cây", icon: "🟫",
+          desc: "Vỏ gồm vỏ ngoài (rhytidome) chết bảo vệ, và vỏ trong (phloem/libe) sống vận chuyển đường từ lá xuống rễ. Vỏ thông ba lá có màu nâu xám, nứt thành mảng vẩy đặc trưng theo tuổi.",
+          features: [
+            "Vỏ ngoài dày 1–3cm ở cây trưởng thành",
+            "Màu nâu xám, nứt thành các mảng vẩy cá đặc trưng",
+            "Vỏ trong (phloem) mỏng hơn, màu cam-nâu, chứa ống nhựa",
+            "Lớp bần (cork) cách nhiệt, giảm thiệt hại khi cháy rừng nhẹ"
+          ],
+          reason: "Vỏ dày và nứt vẩy là thích nghi với lửa rừng định kỳ — lớp vỏ cách nhiệt bảo vệ tầng cambium sống bên trong. Rừng thông tự nhiên là hệ sinh thái thích nghi với lửa (fire-adapted), và thông ba lá đã tiến hóa để sống sót qua các đám cháy thảm thực vật thấp."
+        },
+        {
+          id: "cambium", label: "Tầng sinh gỗ", icon: "🔄",
+          desc: "Tầng sinh gỗ (vascular cambium) là lớp tế bào mô phân sinh mỏng nằm giữa gỗ và libe — mỗi năm tạo ra một vòng gỗ mới (về phía trong) và libe mới (về phía ngoài), là cơ chế cây tăng đường kính.",
+          features: [
+            "Chỉ dày vài tế bào (~50–200 µm) nhưng tạo ra toàn bộ gỗ và libe",
+            "Hoạt động mạnh nhất đầu mùa mưa (tháng 5–8 tại Tây Nguyên)",
+            "Tạo gỗ mùa xuân (tế bào lớn, vách mỏng) và gỗ mùa thu (tế bào nhỏ, vách dày)",
+            "Tổn thương tầng cambium do khoan nhựa để lại sẹo gỗ vĩnh viễn"
+          ],
+          reason: "Hoạt động tầng sinh gỗ theo mùa tạo ra vòng năm — bản ghi tăng trưởng hàng năm phản ánh khí hậu mùa rõ rệt: mùa mưa (gỗ sáng, tế bào lớn) và mùa khô (gỗ tối, tế bào nhỏ). Khoa học đo vòng năm (dendrochronology) dùng dữ liệu này tái dựng lịch sử khí hậu hàng trăm năm."
+        },
+        {
+          id: "sapwood", label: "Gỗ giác", icon: "🌊",
+          desc: "Gỗ giác (sapwood) là phần gỗ sống sát tầng cambium, màu vàng nhạt đến trắng — con đường vận chuyển nước và khoáng chất từ rễ lên lá qua hệ thống mạch xylem.",
+          features: [
+            "Dày 3–6cm tùy tuổi cây và điều kiện sinh trưởng",
+            "Màu vàng nhạt đến trắng kem, phân biệt rõ với gỗ lõi",
+            "Chứa nhiều nước (đến 75% khối lượng tươi)",
+            "Hàm lượng nhựa thấp hơn gỗ lõi, dễ bị nấm mục hơn"
+          ],
+          reason: "Gỗ giác duy trì tế bào nhu mô sống (tia gỗ) để dự trữ carbohydrate qua mùa khô. Khi cây lớn tuổi, gỗ giác bên trong từng bước biến đổi thành gỗ lõi khi tế bào chết dần và nhựa tích tụ — quá trình tự nhiên nâng cao sức bền gỗ theo tuổi cây."
+        },
+        {
+          id: "heartwood", label: "Gỗ lõi & Vòng năm", icon: "⭕",
+          desc: "Gỗ lõi (heartwood) là phần trung tâm đã chết, màu nâu đậm do nhựa và tannin tích tụ. Vòng năm rõ ràng trong gỗ lõi: mỗi vòng gồm gỗ mùa xuân (sáng, rộng) và gỗ mùa hè-thu (tối, hẹp).",
+          features: [
+            "Màu nâu đậm đến nâu đỏ, cứng và bền hơn gỗ giác",
+            "Giàu nhựa, kháng nấm và mối mọt tự nhiên",
+            "Số vòng năm đếm được ≈ tuổi cây (sai số ±1–2 năm)",
+            "Gỗ lõi thông ba lá thẳng thớ, có giá trị thương mại cao"
+          ],
+          reason: "Tích lũy nhựa và tannin trong gỗ lõi là cơ chế phòng thủ hóa học chống nấm mục và côn trùng đục thân. Đây là lý do gỗ thông lõi bền hơn nhiều so với gỗ giác — và là mục tiêu khai thác ưu tiên trong lâm nghiệp thương mại."
+        },
+        {
+          id: "resinduct", label: "Ống dẫn nhựa", icon: "💧",
+          desc: "Ống dẫn nhựa (resin ducts) là các kênh dạng ống chạy dọc thân và ngang qua tia gỗ, chứa oleoresin — hỗn hợp axit nhựa (rosin) và tinh dầu terpene tạo mùi thơm đặc trưng của rừng thông.",
+          features: [
+            "Đường kính ống 50–150 µm, chạy dọc và ngang trong gỗ",
+            "Tế bào biểu mô tiết nhựa bao quanh kênh ống",
+            "Nhựa gồm ~80% axit nhựa (rosin) và ~20% tinh dầu (turpentine)",
+            "Sản lượng 1–3 kg/cây/năm khi cạo vỏ đúng kỹ thuật"
+          ],
+          reason: "Nhựa thông là vũ khí phòng thủ đa năng: làm kín vết thương (ngăn nấm, vi khuẩn), xua đuổi côn trùng đục thân bằng terpene, và hàn gắn tổn thương cơ học. Khi bị tấn công, cây tăng tiết nhựa tự phát — phản ứng phòng thủ chủ động có thể đẩy lui sâu hại trong vài giờ."
         }
+      ]
+    },
 
-        // Tab switching functionality
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
+    branches: {
+      label: "Hệ Cành", scientific: "Rami — Branch System",
+      icon: "🌿", iconBg: "bg-stone-50",
+      desc: "Cành thông ba lá mọc theo kiểu vòng (whorled) đặc trưng của họ Thông, tạo tán hình tháp ở cây non và hình ô dù ở cây già. Mỗi năm, đỉnh tăng trưởng tạo một tầng vòng cành mới.",
+      subparts: [
+        {
+          id: "whorl", label: "Cành vòng", icon: "⭕",
+          desc: "Cành vòng là nhóm cành mọc tỏa ra từ một điểm trên thân theo vòng tròn — đặc điểm phân nhánh điển hình của tất cả loài thông. Mỗi năm một tầng vòng cành mới được tạo ra từ chồi đỉnh.",
+          features: [
+            "3–7 cành mọc cùng tầng, tỏa đều theo mặt phẳng ngang",
+            "Khoảng cách giữa tầng vòng = tốc độ tăng trưởng năm đó (30–60cm)",
+            "Cành dưới dài hơn cành trên, tạo hình tháp (cây non) hay ô dù (cây già)",
+            "Đếm số tầng vòng cành ≈ xác định tuổi cây tương đối"
+          ],
+          reason: "Cành vòng tỏa đều tối ưu hóa không tự che bóng: mỗi cành trong cùng tầng nhận ánh sáng từ hướng khác nhau. Cấu trúc phân tầng từ rộng dưới lên hẹp trên đảm bảo ngay cả cành dưới vẫn nhận ánh sáng chiếu nghiêng từ chân trời."
+        },
+        {
+          id: "branchlet", label: "Cành nhỏ & thứ cấp", icon: "〰️",
+          desc: "Cành nhỏ (branchlets) là cành cấp 2, 3 mọc từ cành vòng chính — mang bó lá kim và nón thông. Tổng diện tích hàng nghìn cành nhỏ mới đủ để mang bộ lá kim hiệu quả cho quang hợp.",
+          features: [
+            "Dài 10–40cm, phân nhánh 2–3 lần từ cành vòng chính",
+            "Màu xanh lục sẫm, có nhựa và lá vảy nhỏ thoái hóa",
+            "Mang 20–50 bó lá kim phân bố đều",
+            "Vỏ cành nhỏ tham gia quang hợp bổ sung qua chlorophyll"
+          ],
+          reason: "Phân nhánh thứ cấp tăng diện tích đặt lá kim mà không cần thân cành lớn và nặng — một cành vòng đơn có thể mang hàng trăm bó lá kim qua hệ thống cành con. Đây là chiến lược tối ưu hóa không gian 3D đặc trưng của thực vật hạt trần."
+        },
+        {
+          id: "apicalbud", label: "Chồi đỉnh", icon: "🌱",
+          desc: "Chồi đỉnh (apical bud) là điểm tăng trưởng chính ở đầu mỗi cành và trục thân — vùng tế bào phân sinh đỉnh (apical meristem) phân chia liên tục để kéo dài thân và cành mỗi mùa sinh trưởng.",
+          features: [
+            "Được bảo vệ bởi nhiều lớp vảy chồi dày và nhựa",
+            "Ngủ trong mùa khô lạnh, bùng phát đầu mùa mưa",
+            "Chồi đỉnh thân chính tiết auxin ức chế chồi bên (ưu thế đỉnh)",
+            "Phá hủy chồi đỉnh kích thích phân nhánh (dùng trong trồng rừng)"
+          ],
+          reason: "Ưu thế đỉnh (apical dominance) do auxin giải thích hình dạng tháp của cây thông non: chồi đỉnh thân chính phát triển mạnh hơn cành bên. Khi cây già, tỉ lệ auxin/cytokinin thay đổi, cành ngang mạnh dần tạo tán ô dù — hình thái đặc trưng của thông già Đà Lạt."
+        },
+        {
+          id: "budscales", label: "Vảy chồi & chồi bên", icon: "🛡️",
+          desc: "Vảy chồi là các lá biến đổi bảo vệ chồi non qua mùa khô. Chồi bên (lateral buds) nằm ở nách vảy chồi, có thể phát triển thành cành mới nếu chồi đỉnh bị tổn thương.",
+          features: [
+            "5–15 vảy xếp chồng, thấm nhựa chống khô và côn trùng",
+            "Màu nâu đỏ, dài 1–2cm ở chồi thân chính",
+            "Chồi bên tiềm sinh có thể sống nhiều năm dưới vỏ",
+            "Sau cháy rừng, chồi bên tiềm sinh giúp cây tái sinh nhanh"
+          ],
+          reason: "Nhựa thấm vào vảy chồi tạo lớp chống thấm và kháng khuẩn-nấm bảo vệ mô phân sinh mỏng manh qua 5–6 tháng mùa khô khi độ ẩm không khí xuống dưới 60% ở Tây Nguyên — thích nghi sinh tử với khí hậu mùa khô rõ rệt."
+        }
+      ]
+    },
 
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                playOrganicSound('rustle');
+    needles: {
+      label: "Lá Kim", scientific: "Acus — Needle Leaves",
+      icon: "🌲", iconBg: "bg-green-50",
+      desc: "Lá kim thông ba lá luôn mọc thành bó 3 chiếc — đặc điểm định danh loài. Cấu trúc lá kim là thích nghi tinh vi với ánh sáng mạnh, gió lớn và mùa khô kéo dài của vùng núi.",
+      subparts: [
+        {
+          id: "fascicle", label: "Bó lá kim 3 chiếc", icon: "🔢",
+          desc: "Bó lá kim (fascicle) gồm đúng 3 lá kim mọc chung từ một điểm, bao bởi bẹ lá ở gốc. Số lá trong bó là đặc điểm phân loại ổn định nhất của chi Pinus: P. kesiya = 3 lá/bó, P. merkusii = 2 lá/bó, P. strobus = 5 lá/bó.",
+          features: [
+            "Đúng 3 lá kim/bó — ít biến dị, đặc điểm phân loại tin cậy",
+            "Chiều dài 15–25cm, đường kính 1–1,5mm",
+            "Tiết diện ngang: hình tam giác — 3 lá ghép tạo hình tròn",
+            "Màu xanh lục đậm, bóng nhẹ, mọc dày đặc ở đầu cành"
+          ],
+          reason: "Ba lá/bó tạo tiết diện tam giác đặc biệt: mỗi lá là 1/3 hình tròn, 3 lá ghép thành trụ tròn khí động học. So với 2 lá/bó (dạng dẹt), bó 3 lá ổn định hơn trong gió và phân bố đều ánh sáng từ mọi góc độ — quan trọng với thực vật ưa sáng hoàn toàn."
+        },
+        {
+          id: "sheath", label: "Bẹ lá (Fascicle sheath)", icon: "🔗",
+          desc: "Bẹ lá là cấu trúc vảy bao quanh gốc 3 lá kim trong bó. Ở P. kesiya, bẹ lá tồn tại lâu dài (persistent sheath), dài 10–20mm, màu nâu nhạt đến bạc, bám chắc suốt tuổi thọ lá 2–3 năm.",
+          features: [
+            "Dài 10–20mm, bền vững trong suốt tuổi thọ lá",
+            "Gồm 6–12 vảy xếp ống, màu trắng bạc đến nâu nhạt",
+            "Gắn với cành tại điểm nhỏ với mô gỗ (pulvinus)",
+            "Cấu trúc bẹ lá dùng để phân biệt các nhóm loài trong chi Pinus"
+          ],
+          reason: "Bẹ lá dai bền bảo vệ mô phân sinh gốc lá kim — nơi lá tiếp tục tăng trưởng từ gốc. Bẹ lá cũng tăng cường cơ học cho điểm gắn kết với cành khi lá kim phải chịu lực gió lớn mà không gãy rời khỏi cành."
+        },
+        {
+          id: "crosssection", label: "Cấu trúc tiết diện", icon: "🔬",
+          desc: "Tiết diện ngang lá kim có hình bán nguyệt. Từ ngoài vào trong: epidermis → hypodermis → mô mềm quang hợp gấp nếp → bó mạch đôi (xylem + phloem) → tế bào truyền trung tâm.",
+          features: [
+            "Epidermis một tế bào dày, vách cellulose-lignin cứng chống tia UV",
+            "Hypodermis 1–3 lớp tế bào vách dày — lớp áo giáp cơ học",
+            "Mô mềm quang hợp (mesophyll) gấp nếp tăng diện tích tiếp xúc CO₂",
+            "Hai bó mạch riêng biệt dẫn nước và đường — dự phòng nếu một bó hỏng"
+          ],
+          reason: "Cấu trúc lá kim 'pháo đài hóa' là thích nghi đa mục tiêu: epidermis + hypodermis dày chống mất nước và UV cực mạnh ở độ cao 1.500m; mô mềm gấp nếp tăng quang hợp dù diện tích bề mặt nhỏ; hai bó mạch đảm bảo dự phòng nếu một bó bị tổn thương."
+        },
+        {
+          id: "stomata", label: "Khí khổng lõm", icon: "🫁",
+          desc: "Khí khổng nằm lõm sâu trong các rãnh dọc theo lá, không lộ thiên như lá rộng. Mỗi lá kim có khoảng 80–120 khí khổng/mm², tập trung trong 2 dải trắng nhạt dọc chiều dài lá.",
+          features: [
+            "Nằm trong rãnh sâu 50–100 µm dưới bề mặt lá",
+            "Mật độ 80–120 cái/mm², tạo 2 dải trắng nhạt nhìn thấy bằng mắt",
+            "Đóng hoàn toàn lúc hạn hán, ban đêm và khi CO₂ đủ",
+            "Lớp sáp epicuticular phủ miệng khí khổng giảm thêm 30–40% thoát hơi"
+          ],
+          reason: "Khí khổng lõm tạo 'buồng ẩm' vi khí hậu — không khí trong rãnh ẩm hơn bên ngoài, giảm gradient ẩm và tốc độ khuếch tán hơi nước ra ngoài. Ở vùng có gió khô và mùa khô 5–6 tháng của Tây Nguyên, đây là thích nghi sinh tử giúp cây duy trì quang hợp ngay cả khi khan nước."
+        },
+        {
+          id: "resincanal", label: "Ống nhựa trong lá", icon: "💧",
+          desc: "Mỗi lá kim chứa 2–4 ống dẫn nhựa chạy dọc theo chiều dài lá, nằm gần mặt ngoài (vị trí ngoại vi). Nhựa trong lá bảo vệ lá khỏi côn trùng ăn lá và là kết nối với hệ thống nhựa toàn thân.",
+          features: [
+            "2–4 ống/lá, vị trí ngoại vi — gần epidermis, không ở trung tâm",
+            "Đường kính ống 20–80 µm",
+            "Nhựa tiết ra tức thì khi lá bị tổn thương cơ học hoặc côn trùng cắn",
+            "Terpene trong nhựa lá là nguồn gốc mùi thơm đặc trưng của rừng thông"
+          ],
+          reason: "Vị trí ngoại vi của ống nhựa cho phép nhựa tiết ra ngay khi côn trùng cắn bề mặt lá, trước khi côn trùng đến được mô quang hợp bên trong. Đây là phòng thủ 'lớp ngoài' — chiến lược phòng thủ sâu theo nhiều lớp: sáp bề mặt → ống nhựa → hypodermis cứng."
+        }
+      ]
+    },
 
-                // Remove active class from all
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
+    cones: {
+      label: "Nón Thông", scientific: "Strobilus — Pine Cones",
+      icon: "🌰", iconBg: "bg-yellow-50",
+      desc: "Nón thông là cơ quan sinh sản của cây thông, gồm nón đực (phấn hoa) và nón cái (chứa hạt). P. kesiya thụ phấn nhờ gió, nón cái mất 2 năm để hoàn thiện và phát tán hạt.",
+      subparts: [
+        {
+          id: "malecone", label: "Nón đực (Pollen cone)", icon: "💛",
+          desc: "Nón đực (microsporangiate strobilus) nhỏ, hình trứng, dài 1–2cm, màu vàng nhạt đến cam, mọc thành cụm ở gốc cành non. Mỗi nón đực sản xuất hàng triệu hạt phấn có túi khí giúp bay xa theo gió.",
+          features: [
+            "Nhỏ: dài 1–2cm, rộng 0,5–1cm — mọc thành cụm 5–20 cái",
+            "Tồn tại 1–2 tuần, rụng ngay sau khi phát tán phấn",
+            "Mỗi nón tạo 1–3 triệu hạt phấn",
+            "Mỗi hạt phấn có 2 túi khí — có thể bay xa 100–300km theo gió"
+          ],
+          reason: "Kích thước nhỏ + số lượng khổng lồ + túi khí là chiến lược thụ phấn nhờ gió (anemophily): thay vì đầu tư vào cánh hoa và mật hoa thu hút côn trùng, thông đầu tư vào sản xuất phấn hoa đại trà và thiết kế khí động học để tối đa cơ hội thụ phấn thụ động — hiệu quả cao ở vùng rừng mở, nhiều gió."
+        },
+        {
+          id: "femalecone", label: "Nón cái non (năm 1)", icon: "🔴",
+          desc: "Nón cái non (năm thứ 1) nhỏ, màu đỏ tím đến xanh lam, dài 1–2cm, mọc đứng ở đỉnh cành non. Đây là giai đoạn thụ phấn — hạt phấn bắt được trong giọt nhầy tiết ra giữa các vảy nón.",
+          features: [
+            "Kích thước nhỏ: 1–2cm, màu đỏ tím đặc trưng — dễ nhận biết",
+            "Vảy nón hé mở để nhận phấn, đóng lại sau khi thụ phấn",
+            "Phấn nảy mầm chậm trong ống phấn, thụ tinh thực sự xảy ra ~12 tháng sau",
+            "Mọc đứng ở đỉnh cành — vị trí tiếp xúc phấn tốt nhất với gió"
+          ],
+          reason: "Vị trí đỉnh cành + tư thế đứng của nón cái non tối đa hóa tiếp xúc với phấn hoa rơi xuống từ các cây cao hoặc gió thổi ngang. Sau thụ phấn, nón quay xuống và gỗ hóa dần để bảo vệ phôi đang phát triển trong suốt 18–24 tháng tiếp theo."
+        },
+        {
+          id: "maturecone", label: "Nón cái già (năm 2–3)", icon: "🟤",
+          desc: "Nón cái già sau thụ tinh trở thành nón gỗ quen thuộc: hình trứng-nón, dài 5–10cm, màu nâu gỗ. P. kesiya mất 18–24 tháng từ thụ phấn đến phát tán hạt. Vảy nón mở khi thời tiết khô nóng.",
+          features: [
+            "Kích thước trưởng thành: dài 5–10cm, đường kính 4–6cm",
+            "80–120 vảy gỗ, mỗi vảy mang 2 hạt có cánh",
+            "Mở vảy theo cơ chế hygroscopic — mở khi khô, đóng khi ẩm",
+            "Có thể tồn tại trên cây 2–3 năm sau khi phát tán hết hạt"
+          ],
+          reason: "Cơ chế mở vảy hygroscopic là thiên tài tiến hóa: vảy mở ra đúng vào mùa khô nóng (đầu tháng 3–4 tại Tây Nguyên) khi gió mạnh nhất và hạt dễ bay xa nhất. Đây là đồng bộ hóa hoàn hảo giữa cơ học đơn giản và cơ hội phát tán tối ưu — không cần 'quyết định' sinh học phức tạp nào."
+        },
+        {
+          id: "seeds", label: "Hạt & cánh hạt", icon: "🌬️",
+          desc: "Mỗi hạt gắn với một cánh mỏng dài cấu tạo từ mô vảy nón. Khi hạt rơi, cánh tạo chuyển động xoay trôn ốc (autorotation) làm chậm quá trình rơi và cho phép gió đưa hạt xa cây mẹ.",
+          features: [
+            "Hạt dài 5–7mm, cánh dài 15–25mm, màu nâu sáng",
+            "Tốc độ rơi 0,5–1,5 m/s (so với lá rụng 2–4 m/s) nhờ cánh tạo lực nâng",
+            "Nội nhũ giàu protein và béo (pinolene) — thức ăn của chim, sóc",
+            "Tỉ lệ nảy mầm 60–80%, yêu cầu đất khoáng trống (không thảm mục)"
+          ],
+          reason: "Cánh hạt không dùng cơ chế phức tạp (vọt, nổ, móc bám) mà đơn giản tạo lực cản không khí giúp hạt ở lâu trong không khí hơn. Kết hợp với mùa phát tán vào mùa gió, chiến lược đơn giản này đủ đưa hạt xa 100–200m — khoảng cách thoát khỏi bóng cây mẹ và giảm cạnh tranh."
+        }
+      ]
+    }
+  };
 
-                // Add active class to clicked tab
-                button.classList.add('active');
-                const tabId = button.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
+  // ─── STATE ──────────────────────────────────────────────────────────────────
+  let currentGroup = null;
+  let currentSubpart = null;
 
-        // Load SVG on page load
-        window.addEventListener('DOMContentLoaded', loadPlantSVG);
-    </script>
+  // ─── FUNCTIONS ──────────────────────────────────────────────────────────────
+  function selectGroup(groupId) {
+    const parts = document.querySelectorAll('.tree-part');
+
+    if (currentGroup === groupId) {
+      currentGroup = null;
+      currentSubpart = null;
+      parts.forEach(p => p.classList.remove('active', 'dimmed'));
+      document.getElementById('default-state').classList.remove('hidden');
+      document.getElementById('active-state').classList.add('hidden');
+      return;
+    }
+
+    currentGroup = groupId;
+    currentSubpart = null;
+
+    parts.forEach(p => {
+      const pid = p.id.replace('part-', '');
+      if (pid === groupId) {
+        p.classList.add('active');
+        p.classList.remove('dimmed');
+      } else {
+        p.classList.remove('active');
+        p.classList.add('dimmed');
+      }
+    });
+
+    document.getElementById('default-state').classList.add('hidden');
+    const activeEl = document.getElementById('active-state');
+    activeEl.classList.remove('hidden');
+    activeEl.style.display = 'flex';
+
+    const data = treeData[groupId];
+
+    const iconEl = document.getElementById('group-icon');
+    iconEl.textContent = data.icon;
+    iconEl.className = `w-11 h-11 rounded-xl flex items-center justify-center text-xl flex-shrink-0 ${data.iconBg}`;
+    document.getElementById('group-label').textContent = data.label;
+    document.getElementById('group-scientific').textContent = data.scientific;
+    document.getElementById('group-desc').textContent = data.desc;
+
+    const chipsEl = document.getElementById('subpart-chips');
+    chipsEl.innerHTML = '';
+    data.subparts.forEach(sp => {
+      const btn = document.createElement('button');
+      btn.className = 'subpart-chip';
+      btn.id = 'chip-' + sp.id;
+      btn.innerHTML = sp.icon + ' ' + sp.label;
+      btn.onclick = () => selectSubpart(groupId, sp.id);
+      chipsEl.appendChild(btn);
+    });
+
+    document.getElementById('subpart-default').classList.remove('hidden');
+    document.getElementById('subpart-content').classList.add('hidden');
+  }
+
+  function selectSubpart(groupId, subpartId) {
+    currentSubpart = subpartId;
+
+    document.querySelectorAll('.subpart-chip').forEach(c => c.classList.remove('active'));
+    const chip = document.getElementById('chip-' + subpartId);
+    if (chip) chip.classList.add('active');
+
+    const sp = treeData[groupId].subparts.find(s => s.id === subpartId);
+    if (!sp) return;
+
+    document.getElementById('subpart-default').classList.add('hidden');
+    document.getElementById('subpart-content').classList.remove('hidden');
+
+    document.getElementById('sp-icon').textContent = sp.icon;
+    document.getElementById('sp-label').textContent = sp.label;
+
+    document.getElementById('sp-tab-desc').textContent = sp.desc;
+
+    document.getElementById('sp-features-list').innerHTML = sp.features.map(f =>
+      `<li class="flex items-start gap-2 text-sm text-gray-600">
+        <span class="text-emerald-500 mt-0.5 flex-shrink-0 font-bold">✓</span>
+        <span>${f}</span>
+      </li>`
+    ).join('');
+
+    document.getElementById('sp-reason-text').textContent = sp.reason;
+
+    switchSubTab('desc');
+  }
+
+  function switchSubTab(tab) {
+    document.querySelectorAll('.sp-tab-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.tab === tab);
+    });
+    document.querySelectorAll('.sp-tab-content').forEach(c => c.classList.add('hidden'));
+    document.getElementById('sp-tab-' + tab).classList.remove('hidden');
+  }
+
+  function switchMainTab(tab) {
+    document.querySelectorAll('.main-tab-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('onclick') === `switchMainTab('${tab}')`);
+    });
+    document.querySelectorAll('.info-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+  }
+  </script>
 </body>
 </html>
