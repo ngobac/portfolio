@@ -1,898 +1,3351 @@
+ 
+
 <!DOCTYPE html>
+
 <html lang="en" class="scroll-smooth">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bac Ngo | GIS &amp; Forestry</title>
-  <meta name="description" content="GIS Specialist &amp; Forestry Researcher — interactive maps, spatial analysis, and data-driven environmental storytelling.">
 
-  <!-- CDN Tech Stack (pinned) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/framer-motion@11.11.17/dist/framer-motion.js"></script>
-  <script>window.Motion = window.FramerMotion;</script>
+    <meta charset="UTF-8">
 
-  <!-- Supporting libraries -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <meta name="description" content="GIS Specialist & Data Storyteller - Portfolio showcasing interactive maps, geospatial projects, and code snippets">
 
-  <!-- Tailwind config -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            heading: ['Instrument Serif', 'serif'],
-            body:    ['Barlow', 'sans-serif'],
-          },
-          borderRadius: { DEFAULT: '9999px' },
+    <title>Bac Ngo | GIS & Forestry</title>
+
+ 
+
+    <!-- Tailwind CSS CDN -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+ 
+
+    <!-- Font Awesome for Icons -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+ 
+
+    <!-- Highlight.js for Code Syntax Highlighting -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+
+ 
+
+    <!-- Google Fonts - Inter -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+ 
+
+    <script>
+
+        // Tailwind Configuration
+
+        tailwind.config = {
+
+            theme: {
+
+                extend: {
+
+                    colors: {
+
+                        'emerald': {
+
+                            50: '#ecfdf5',
+
+                            100: '#d1fae5',
+
+                            200: '#a7f3d0',
+
+                            300: '#6ee7b7',
+
+                            400: '#34d399',
+
+                            500: '#10b981',
+
+                            600: '#059669',
+
+                            700: '#047857',
+
+                            800: '#065f46',
+
+                            900: '#064e3b',
+
+                        },
+
+                    },
+
+                    fontFamily: {
+
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+
+                        'mono': ['JetBrains Mono', 'monospace'],
+
+                    },
+
+                    animation: {
+
+                        'float': 'float 6s ease-in-out infinite',
+
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+
+                    },
+
+                    keyframes: {
+
+                        float: {
+
+                            '0%, 100%': { transform: 'translateY(0px)' },
+
+                            '50%': { transform: 'translateY(-20px)' },
+
+                        },
+
+                        glow: {
+
+                            '0%': { boxShadow: '0 0 5px rgba(16, 185, 129, 0.5)' },
+
+                            '100%': { boxShadow: '0 0 20px rgba(16, 185, 129, 0.8)' },
+
+                        }
+
+                    }
+
+                }
+
+            }
+
         }
-      }
-    };
-  </script>
 
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #000;
-      font-family: 'Barlow', sans-serif;
-      color: #fff;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+    </script>
 
-    /* ── Liquid Glass ── */
-    .liquid-glass {
-      background: rgba(255,255,255,0.01);
-      background-blend-mode: luminosity;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      border: none;
-      box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
-      position: relative;
-      overflow: hidden;
-    }
-    .liquid-glass::before {
-      content: "";
-      position: absolute; inset: 0;
-      border-radius: inherit;
-      padding: 1.4px;
-      background: linear-gradient(180deg,
-        rgba(255,255,255,0.45) 0%,  rgba(255,255,255,0.15) 20%,
-        rgba(255,255,255,0)    40%, rgba(255,255,255,0)    60%,
-        rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-    }
-    .liquid-glass-strong {
-      background: rgba(255,255,255,0.01);
-      background-blend-mode: luminosity;
-      backdrop-filter: blur(50px);
-      -webkit-backdrop-filter: blur(50px);
-      border: none;
-      box-shadow: 4px 4px 4px rgba(0,0,0,0.05), inset 0 1px 1px rgba(255,255,255,0.15);
-      position: relative;
-      overflow: hidden;
-    }
-    .liquid-glass-strong::before {
-      content: "";
-      position: absolute; inset: 0;
-      border-radius: inherit;
-      padding: 1.4px;
-      background: linear-gradient(180deg,
-        rgba(255,255,255,0.5) 0%,  rgba(255,255,255,0.2) 20%,
-        rgba(255,255,255,0)   40%, rgba(255,255,255,0)   60%,
-        rgba(255,255,255,0.2) 80%, rgba(255,255,255,0.5) 100%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-    }
+ 
 
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: #0a0a0a; }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+    <style>
 
-    .sec-rule { border-top: 1px solid rgba(255,255,255,0.07); }
-    .hljs { background: transparent !important; padding: 0 !important; }
-  </style>
+        /* Global Styles */
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+ 
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            background: #f8fafc;
+
+            color: #1e293b;
+
+            -webkit-font-smoothing: antialiased;
+
+            -moz-osx-font-smoothing: grayscale;
+
+        }
+
+ 
+
+        /* Glassmorphism Effect */
+
+        .glass {
+
+            background: rgba(255, 255, 255, 0.95);
+
+            backdrop-filter: blur(10px);
+
+            -webkit-backdrop-filter: blur(10px);
+
+            border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+
+        }
+
+        /* Liquid Glass */
+        .liquid-glass {
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .liquid-glass::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.4px;
+            background: linear-gradient(180deg,
+                rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 20%,
+                rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+                rgba(255,255,255,0.1) 80%, rgba(255,255,255,0.3) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* Nav states */
+        #main-nav { transition: background 0.35s ease, box-shadow 0.35s ease; }
+        #main-nav .nav-link { color: rgba(255,255,255,0.82); transition: color 0.2s; font-weight: 500; }
+        #main-nav .nav-link:hover { color: #fff; }
+        #main-nav .nav-link.nav-active { color: #fff; font-weight: 600; }
+        #main-nav .nav-logo { color: #fff; transition: color 0.2s; }
+        #main-nav .nav-link-explorer { border-color: rgba(255,255,255,0.28); }
+        #main-nav.nav-scrolled {
+            background: rgba(255,255,255,0.97) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            box-shadow: 0 1px 16px rgba(0,0,0,0.07);
+        }
+        #main-nav.nav-scrolled .nav-link { color: #4b5563; }
+        #main-nav.nav-scrolled .nav-link:hover { color: #059669; }
+        #main-nav.nav-scrolled .nav-link.nav-active { color: #059669; }
+        #main-nav.nav-scrolled .nav-logo { color: #059669; }
+        #main-nav.nav-scrolled .nav-link-explorer { border-color: rgba(5,150,105,0.35); color: #059669; }
+        #main-nav.nav-scrolled .nav-cta { background: #10b981 !important; color: #fff !important; }
+
+        /* Hero video */
+        #hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+
+
+
+        /* Custom Scrollbar */
+
+        ::-webkit-scrollbar {
+
+            width: 10px;
+
+        }
+
+ 
+
+        ::-webkit-scrollbar-track {
+
+            background: #e2e8f0;
+
+        }
+
+ 
+
+        ::-webkit-scrollbar-thumb {
+
+            background: #10b981;
+
+            border-radius: 5px;
+
+        }
+
+ 
+
+        ::-webkit-scrollbar-thumb:hover {
+
+            background: #059669;
+
+        }
+
+ 
+
+        /* Code Block Styling */
+
+        .code-container {
+
+            position: relative;
+
+        }
+
+ 
+
+        .copy-btn {
+
+            position: absolute;
+
+            top: 10px;
+
+            right: 10px;
+
+            background: rgba(16, 185, 129, 0.8);
+
+            color: white;
+
+            padding: 6px 12px;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+
+            border: none;
+
+            z-index: 10;
+
+        }
+
+ 
+
+        .copy-btn:hover {
+
+            background: rgba(16, 185, 129, 1);
+
+            transform: scale(1.05);
+
+        }
+
+ 
+
+        .copy-btn.copied {
+
+            background: #059669;
+
+        }
+
+ 
+
+        /* Responsive iframe container */
+
+        .iframe-container {
+
+            position: relative;
+
+            width: 100%;
+
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+
+            height: 0;
+
+            overflow: hidden;
+
+            background: #f0fdf4;
+
+            border-radius: 12px;
+
+            border: 1px solid rgba(16, 185, 129, 0.3);
+
+        }
+
+ 
+
+        .iframe-container iframe {
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            border: none;
+
+            border-radius: 12px;
+
+        }
+
+ 
+
+        .iframe-loading {
+
+            position: absolute;
+
+            top: 50%;
+
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            color: #10b981;
+
+            font-size: 18px;
+
+        }
+
+ 
+
+        /* Tab Navigation */
+
+        .tab-content {
+
+            display: none;
+
+        }
+
+ 
+
+        .tab-content.active {
+
+            display: block;
+
+            animation: fadeIn 0.5s ease;
+
+        }
+
+ 
+
+        @keyframes fadeIn {
+
+            from { opacity: 0; transform: translateY(10px); }
+
+            to { opacity: 1; transform: translateY(0); }
+
+        }
+
+ 
+
+        /* Bento Grid Layout */
+
+        .bento-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+            gap: 1.5rem;
+
+        }
+
+ 
+
+        /* Smooth transitions */
+
+        .transition-all {
+
+            transition: all 0.3s ease;
+
+        }
+
+    </style>
+
 </head>
-<body>
-  <div id="root"></div>
 
-  <!-- ════════════════════════════════════════════════════════
-       FadingVideo — rAF crossfade, no CSS transitions
-  ════════════════════════════════════════════════════════ -->
-  <script type="text/babel">
-  window.FadingVideo = function FadingVideo({ src, className, style }) {
-    const vRef = React.useRef(null);
-    const rafRef = React.useRef(null);
-    const fadingOut = React.useRef(false);
-    const FADE_MS = 500, LEAD = 0.55;
+ 
 
-    const fadeTo = React.useCallback((target) => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      const v = vRef.current; if (!v) return;
-      const t0 = performance.now();
-      const from = parseFloat(v.style.opacity) || 0;
-      const step = (now) => {
-        const p = Math.min((now - t0) / FADE_MS, 1);
-        v.style.opacity = (from + (target - from) * p).toString();
-        if (p < 1) rafRef.current = requestAnimationFrame(step);
-      };
-      rafRef.current = requestAnimationFrame(step);
-    }, []);
+<body class="antialiased">
 
-    React.useEffect(() => {
-      const v = vRef.current; if (!v) return;
-      const onData = () => { v.style.opacity = '0'; v.play().catch(() => {}); fadeTo(1); };
-      const onTime = () => {
-        if (!fadingOut.current && v.duration &&
-            v.duration - v.currentTime <= LEAD && v.duration - v.currentTime > 0) {
-          fadingOut.current = true; fadeTo(0);
-        }
-      };
-      const onEnd = () => {
-        v.style.opacity = '0';
-        setTimeout(() => {
-          v.currentTime = 0; v.play().catch(() => {});
-          fadingOut.current = false; fadeTo(1);
-        }, 100);
-      };
-      v.addEventListener('loadeddata', onData);
-      v.addEventListener('timeupdate', onTime);
-      v.addEventListener('ended',      onEnd);
-      return () => {
-        if (rafRef.current) cancelAnimationFrame(rafRef.current);
-        v.removeEventListener('loadeddata', onData);
-        v.removeEventListener('timeupdate', onTime);
-        v.removeEventListener('ended',      onEnd);
-      };
-    }, [fadeTo]);
+ 
 
-    return (
-      <video ref={vRef} src={src} autoPlay muted playsInline preload="auto"
-             className={className} style={{ opacity: 0, ...style }} />
-    );
-  };
-  </script>
+    <!-- Navigation -->
 
-  <!-- ════════════════════════════════════════════════════════
-       BlurText — word-by-word entrance animation
-  ════════════════════════════════════════════════════════ -->
-  <script type="text/babel">
-  window.BlurText = function BlurText({ text, className }) {
-    const { motion, useInView } = window.Motion;
-    const ref = React.useRef(null);
-    const inView = useInView(ref, { amount: 0.1, once: true });
-    return (
-      <p ref={ref}
-         style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', rowGap: '0.1em' }}
-         className={className}>
-        {text.split(' ').map((w, i) => (
-          <motion.span key={i}
-            initial={{ filter: 'blur(10px)', opacity: 0, y: 50 }}
-            animate={inView ? {
-              filter:  ['blur(10px)', 'blur(5px)', 'blur(0px)'],
-              opacity: [0, 0.5, 1],
-              y:       [50, -5, 0],
-            } : {}}
-            transition={{ duration: 0.7, delay: i * 0.1, ease: 'easeOut', times: [0, 0.5, 1] }}
-            style={{ display: 'inline-block', marginRight: '0.28em' }}>
-            {w}
-          </motion.span>
-        ))}
-      </p>
-    );
-  };
-  </script>
-
-  <!-- ════════════════════════════════════════════════════════
-       Shared SVG Icons
-  ════════════════════════════════════════════════════════ -->
-  <script type="text/babel">
-  window.IconArrow = () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-         stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M7 17L17 7"/><path d="M7 7h10v10"/>
-    </svg>
-  );
-  window.IconPlay = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-      <polygon points="6 4 20 12 6 20 6 4"/>
-    </svg>
-  );
-  </script>
-
-  <!-- ════════════════════════════════════════════════════════
-       Navbar
-  ════════════════════════════════════════════════════════ -->
-  <script type="text/babel">
-  window.Navbar = function Navbar() {
-    const [open, setOpen] = React.useState(false);
-    const links = [
-      ['Home', '#hero'], ['Gallery', '#gallery'], ['Maps', '#maps'],
-      ['Code Lab', '#codelab'], ['Projects', '#projects'],
-    ];
-    return (
-      <nav className="fixed top-4 left-0 right-0 z-50 px-8 lg:px-16">
-        <div className="flex items-center justify-between">
-          <a href="#hero"
-             className="liquid-glass w-12 h-12 rounded-full flex items-center justify-center font-heading italic text-white text-xl flex-shrink-0">
-            B
-          </a>
-          <div className="hidden md:flex">
-            <div className="liquid-glass rounded-full px-1.5 py-1.5 flex items-center gap-0.5">
-              {links.map(([l, h]) => (
-                <a key={l} href={h}
-                   className="px-3 py-2 text-sm font-medium font-body text-white/90 hover:text-white transition-colors whitespace-nowrap">
-                  {l}
+    <nav id="main-nav" class="liquid-glass fixed w-full top-0 z-50">
+        <div class="px-6 md:px-12 lg:px-16 py-3">
+            <div class="flex items-center justify-between">
+                <a href="#hero" class="nav-logo font-semibold text-xl tracking-tight flex items-center gap-2">
+                    <i class="fas fa-map-marked-alt text-base"></i> Bac Ngo
                 </a>
-              ))}
-              <a href="interactive-explorer.html"
-                 className="px-3 py-2 text-sm font-medium font-body text-white/90 hover:text-white transition-colors whitespace-nowrap">
-                🌿 Explorer
-              </a>
-              <a href="mailto:bacngo7877@gmail.com"
-                 className="bg-white text-black px-4 py-2 text-sm font-medium font-body rounded-full whitespace-nowrap hover:bg-gray-100 transition-colors ml-1">
-                Get in Touch
-              </a>
-            </div>
-          </div>
-          <div className="hidden md:block w-12 h-12 flex-shrink-0" />
-          <button className="md:hidden liquid-glass w-12 h-12 rounded-full flex items-center justify-center text-white"
-                  onClick={() => setOpen(v => !v)}>
-            <i className={`fas ${open ? 'fa-times' : 'fa-bars'} text-lg`}></i>
-          </button>
-        </div>
-        {open && (
-          <div className="mt-3 liquid-glass rounded-2xl p-4 md:hidden">
-            {[...links, ['🌿 Explorer', 'interactive-explorer.html']].map(([l, h]) => (
-              <a key={l} href={h} onClick={() => setOpen(false)}
-                 className="block px-3 py-2.5 text-sm font-medium font-body text-white/80 hover:text-white border-b border-white/5 last:border-0">
-                {l}
-              </a>
-            ))}
-            <a href="mailto:bacngo7877@gmail.com"
-               className="block mt-3 text-center bg-white text-black px-4 py-2 text-sm font-medium font-body rounded-full hover:bg-gray-100">
-              Get in Touch
-            </a>
-          </div>
-        )}
-      </nav>
-    );
-  };
-  </script>
-
-  <!-- ════════════════════════════════════════════════════════
-       Section 1 — Hero
-  ════════════════════════════════════════════════════════ -->
-  <script type="text/babel">
-  window.HeroSection = function HeroSection() {
-    const { motion } = window.Motion;
-    const up = (delay) => ({
-      initial:    { filter: 'blur(10px)', opacity: 0, y: 20 },
-      animate:    { filter: 'blur(0px)',  opacity: 1, y: 0  },
-      transition: { delay, duration: 0.7, ease: 'easeOut'   },
-    });
-    const stats = [
-      {
-        icon: (
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
-               stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
-          </svg>
-        ),
-        value: '5+ Years', label: 'GIS & Forestry Research',
-      },
-      {
-        icon: (
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
-               stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-          </svg>
-        ),
-        value: '50+ Spatial', label: 'Datasets Analyzed',
-      },
-    ];
-    return (
-      <section id="hero" className="relative min-h-screen flex flex-col overflow-hidden bg-black">
-        <FadingVideo
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4"
-          className="absolute left-1/2 top-0 -translate-x-1/2 object-cover object-top z-0"
-          style={{ width: '120%', height: '120%' }}
-        />
-        <div className="relative z-10 flex flex-col min-h-screen">
-          <div className="flex-1 flex flex-col items-center justify-center pt-24 px-4 text-center">
-            <motion.div {...up(0.4)}
-              className="inline-flex items-center gap-2 liquid-glass rounded-full px-3 py-1.5 mb-8">
-              <span className="bg-white text-black px-3 py-1 text-xs font-semibold rounded-full font-body">New</span>
-              <span className="text-sm text-white/90 font-body pr-3">
-                Forest &amp; GIS Research — Open to Collaboration
-              </span>
-            </motion.div>
-
-            <BlurText
-              text="Mapping Nature Through Data and Science"
-              className="text-6xl md:text-7xl lg:text-[5.5rem] font-heading italic text-white leading-[0.88] max-w-3xl tracking-[-4px]"
-            />
-
-            <motion.p {...up(0.8)}
-              className="mt-5 text-sm md:text-base text-white/75 max-w-xl font-body font-light leading-snug">
-              Specializing in forest management and environmental analysis. I transform geospatial data
-              into actionable insights through interactive maps, spatial analysis, and data-driven storytelling.
-            </motion.p>
-
-            <motion.div {...up(1.1)} className="flex items-center gap-6 mt-6 flex-wrap justify-center">
-              <a href="#projects"
-                 className="liquid-glass-strong rounded-full px-5 py-2.5 text-sm font-medium font-body text-white flex items-center gap-2">
-                View My Work <IconArrow />
-              </a>
-              <a href="interactive-explorer.html"
-                 className="flex items-center gap-2 text-sm font-medium font-body text-white/85 hover:text-white transition-colors">
-                🌿 Forest Explorer <IconPlay />
-              </a>
-            </motion.div>
-
-            <motion.div {...up(1.3)} className="flex items-stretch gap-4 mt-8 flex-wrap justify-center">
-              {stats.map(({ icon, value, label }) => (
-                <div key={label} className="liquid-glass p-5 w-[220px] rounded-[1.25rem] flex flex-col gap-3">
-                  {icon}
-                  <div>
-                    <div className="text-4xl font-heading italic text-white tracking-[-1px] leading-none">{value}</div>
-                    <div className="text-xs text-white/55 font-body font-light mt-2">{label}</div>
-                  </div>
+                <div class="hidden md:flex items-center gap-7">
+                    <a href="#hero"              class="nav-link text-sm">Home</a>
+                    <a href="#gallery"           class="nav-link text-sm">Gallery</a>
+                    <a href="#maps"              class="nav-link text-sm">Maps</a>
+                    <a href="#codelab"           class="nav-link text-sm">Code Lab</a>
+                    <a href="#projects"          class="nav-link text-sm">Projects</a>
+                    <a href="interactive-explorer.html" class="nav-link nav-link-explorer text-sm border rounded-md px-2 py-1">🌿 Explorer</a>
                 </div>
-              ))}
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ filter: 'blur(10px)', opacity: 0, y: 20 }}
-            animate={{ filter: 'blur(0px)',  opacity: 1, y: 0  }}
-            transition={{ delay: 1.4, duration: 0.7, ease: 'easeOut' }}
-            className="flex flex-col items-center gap-4 pb-8">
-            <div className="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium font-body text-white/70">
-              Tools &amp; Platforms in Active Use
-            </div>
-            <div className="flex items-center gap-10 md:gap-16 flex-wrap justify-center px-4">
-              {['QGIS', 'Python', 'ArcGIS', 'PostGIS', 'Leaflet'].map(t => (
-                <span key={t} className="font-heading italic text-white text-2xl md:text-3xl tracking-tight">{t}</span>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-    );
-  };
-  </script>
-
-  <!-- ════════════════════════════════════════════════════════
-       Section 2 — Capabilities
-  ════════════════════════════════════════════════════════ -->
-  <script type="text/babel">
-  window.CapabilitiesSection = function CapabilitiesSection() {
-    const { motion, useInView } = window.Motion;
-    const ref = React.useRef(null);
-    const inView = useInView(ref, { amount: 0.08, once: true });
-    const cards = [
-      {
-        icon: (
-          <svg viewBox="0 0 24 24" className="h-6 w-6 text-white" fill="currentColor">
-            <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
-          </svg>
-        ),
-        tags:  ['Field Survey', 'Remote Sensing', 'Terrain Analysis', 'Accuracy'],
-        title: 'Spatial Analysis',
-        body:  'Advanced GIS techniques transform raw spatial data into actionable forest management insights — from canopy cover mapping to biodiversity assessment.',
-      },
-      {
-        icon: (
-          <svg viewBox="0 0 24 24" className="h-6 w-6 text-white" fill="currentColor">
-            <path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/>
-          </svg>
-        ),
-        tags:  ['Drone Mapping', 'NDVI Index', 'Change Detection', 'Time Series'],
-        title: 'Forest Monitoring',
-        body:  'Track forest health and land-cover change using multi-spectral imagery, NDVI analysis, and machine-learning classification over time.',
-      },
-      {
-        icon: (
-          <svg viewBox="0 0 24 24" className="h-6 w-6 text-white" fill="currentColor">
-            <path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99l1.5 1.5z"/>
-          </svg>
-        ),
-        tags:  ['Interactive Maps', 'Dashboards', 'Storytelling', 'Web GIS'],
-        title: 'Data Visualization',
-        body:  'Complex geospatial datasets become compelling visual narratives — interactive maps, dashboards, and web GIS tools that communicate environmental change.',
-      },
-    ];
-    return (
-      <section id="capabilities" className="relative min-h-screen bg-black sec-rule">
-        <FadingVideo
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_094631_d30ab262-45ee-4b7d-99f3-5d5848c8ef13.mp4"
-          className="absolute inset-0 w-full h-full object-cover z-0"
-        />
-        <div ref={ref} className="relative z-10 px-8 md:px-16 lg:px-20 pt-24 pb-10 flex flex-col min-h-screen">
-          <div className="mb-auto">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-sm font-body text-white/70 mb-6">
-              // Capabilities
-            </motion.p>
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
-              className="font-heading italic text-white text-6xl md:text-7xl lg:text-[6rem] leading-[0.9] tracking-[-3px]">
-              Forest science<br />evolved
-            </motion.h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-            {cards.map((c, i) => (
-              <motion.div key={c.title}
-                initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 + i * 0.12, ease: 'easeOut' }}
-                className="liquid-glass rounded-[1.25rem] p-6 min-h-[360px] flex flex-col">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="liquid-glass w-11 h-11 rounded-[0.75rem] flex items-center justify-center flex-shrink-0">
-                    {c.icon}
-                  </div>
-                  <div className="flex flex-wrap justify-end gap-1.5 max-w-[70%]">
-                    {c.tags.map(t => (
-                      <span key={t} className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/85 font-body whitespace-nowrap">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="flex-1" />
-                <div className="mt-6">
-                  <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-none">{c.title}</h3>
-                  <p className="mt-3 text-sm text-white/75 font-body font-light leading-snug max-w-[32ch]">{c.body}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  };
-  </script>
-
-  <!-- ════════════════════════════════════════════════════════
-       Section 3 — Gallery
-  ════════════════════════════════════════════════════════ -->
-  <script type="text/babel">
-  window.GallerySection = function GallerySection() {
-    const { motion, useInView } = window.Motion;
-    const ref = React.useRef(null);
-    const inView = useInView(ref, { amount: 0.05, once: true });
-    const photos = [
-      { src: 'images/field-work.jpg',   label: 'Field Survey',   icon: 'fa-map-marker-alt'  },
-      { src: 'images/drone-work.jpg',   label: 'Drone Mapping',  icon: 'fa-satellite-dish'  },
-      { src: 'images/gis-work.jpg',     label: 'GIS Analysis',   icon: 'fa-desktop'         },
-      { src: 'images/mangrove.jpg',     label: 'Mangrove Study', icon: 'fa-leaf'            },
-      { src: 'images/team.jpg',         label: 'Field Team',     icon: 'fa-users'           },
-      { src: 'images/lab-analysis.jpg', label: 'Lab Analysis',   icon: 'fa-flask'           },
-    ];
-    return (
-      <section id="gallery" className="bg-black sec-rule py-24 px-8 md:px-16 lg:px-20">
-        <div ref={ref}>
-          <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5 }}
-            className="text-sm font-body text-white/45 mb-2">// In The Field</motion.p>
-          <motion.h2 initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-heading italic text-white text-5xl md:text-6xl tracking-[-2px] leading-none mb-12">
-            Professional Gallery
-          </motion.h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {photos.map((p, i) => (
-              <motion.div key={p.label}
-                initial={{ opacity: 0, scale: 0.95 }} animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.07, ease: 'easeOut' }}
-                className="relative aspect-[4/3] rounded-[1.25rem] overflow-hidden liquid-glass group">
-                <img src={p.src} alt={p.label}
-                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                     onError={e => { e.target.style.display = 'none'; e.target.nextElementSibling.style.display = 'flex'; }} />
-                <div className="absolute inset-0 flex-col items-center justify-center" style={{ display: 'none' }}>
-                  <i className={`fas ${p.icon} text-4xl text-white/18 mb-2`}></i>
-                  <p className="text-white/35 text-sm font-body">{p.label}</p>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
-                  <span className="text-white text-sm font-body font-medium">{p.label}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  };
-  </script>
-
-  <!-- ════════════════════════════════════════════════════════
-       Section 4 — Maps
-  ════════════════════════════════════════════════════════ -->
-  <script type="text/babel">
-  window.MapsSection = function MapsSection() {
-    const { motion, useInView } = window.Motion;
-    const ref = React.useRef(null);
-    const inView = useInView(ref, { amount: 0.05, once: true });
-    const [active, setActive] = React.useState(0);
-    const maps = [
-      {
-        label: 'ArcGIS Story Map',
-        desc:  'Forest cover analysis and land-use change mapping, Central Highlands Vietnam',
-        src:   'https://arcg.is/1HjPD12',
-      },
-      {
-        label: 'Earth Engine App',
-        desc:  'Pinus kesiya forest monitoring — NDVI time series via Google Earth Engine',
-        src:   'https://ee-bacngo7877.projects.earthengine.app/view/ngobacqlkt',
-      },
-      {
-        label: 'Google My Maps',
-        desc:  'Field survey sites and forest plot locations across Tây Nguyên plateau',
-        src:   'https://www.google.com/maps/d/embed?mid=1s3i6MG4bDs86jnbfUwoo11YOdqeJe9jb&hl=vi&ehbc=2E312F',
-      },
-    ];
-    return (
-      <section id="maps" className="bg-black sec-rule py-24 px-8 md:px-16 lg:px-20">
-        <div ref={ref}>
-          <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5 }}
-            className="text-sm font-body text-white/45 mb-2">// Geospatial Work</motion.p>
-          <motion.h2 initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-heading italic text-white text-5xl md:text-6xl tracking-[-2px] leading-none mb-8">
-            Interactive Maps
-          </motion.h2>
-          <div className="flex gap-2 mb-6 flex-wrap">
-            {maps.map((m, i) => (
-              <button key={m.label} onClick={() => setActive(i)}
-                className={`liquid-glass px-4 py-2 text-sm font-body font-medium rounded-full transition-all ${active === i ? 'bg-white/15 text-white' : 'text-white/45 hover:text-white/80'}`}>
-                {m.label}
-              </button>
-            ))}
-          </div>
-          <motion.div key={active} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35 }}
-            className="liquid-glass rounded-[1.25rem] overflow-hidden">
-            <p className="px-5 py-3 text-sm text-white/45 font-body border-b border-white/5">{maps[active].desc}</p>
-            <iframe src={maps[active].src} className="w-full"
-                    style={{ height: '480px', border: 'none', display: 'block' }}
-                    title={maps[active].label} loading="lazy" allowFullScreen />
-          </motion.div>
-        </div>
-      </section>
-    );
-  };
-  </script>
-
-  <!-- ════════════════════════════════════════════════════════
-       Section 5 — Code Lab
-  ════════════════════════════════════════════════════════ -->
-  <script type="text/babel">
-  const CODE_DATA = {
-    python: [
-      {
-        title: 'NDVI Analysis with Rasterio', lang: 'python',
-        code: `import rasterio\nimport numpy as np\n\ndef calculate_ndvi(red_path, nir_path):\n    """Calculate NDVI from Red and Near-Infrared bands."""\n    with rasterio.open(red_path) as src:\n        red = src.read(1).astype(float)\n    with rasterio.open(nir_path) as src:\n        nir = src.read(1).astype(float)\n\n    np.seterr(divide='ignore', invalid='ignore')\n    ndvi = np.where(\n        (nir + red) == 0, 0,\n        (nir - red) / (nir + red)\n    )\n    return np.clip(ndvi, -1, 1)\n\nndvi = calculate_ndvi('red.tif', 'nir.tif')\nprint(f"Mean NDVI: {ndvi.mean():.3f}")\nprint(f"Healthy vegetation (>0.6): {(ndvi > 0.6).sum()} pixels")`,
-      },
-      {
-        title: 'Forest Change Detection', lang: 'python',
-        code: `import geopandas as gpd\nimport pandas as pd\n\ndef detect_change(gdf_before, gdf_after, threshold=5.0):\n    """Detect significant forest cover changes."""\n    merged = gdf_before.merge(\n        gdf_after[['plot_id', 'cover_pct']],\n        on='plot_id', suffixes=('_t1', '_t2')\n    )\n    merged['delta'] = merged['cover_pct_t2'] - merged['cover_pct_t1']\n    merged['class'] = pd.cut(\n        merged['delta'],\n        bins=[-float('inf'), -threshold, threshold, float('inf')],\n        labels=['Deforestation', 'Stable', 'Reforestation']\n    )\n    return merged\n\nresults = detect_change(gdf_2020, gdf_2024)\nprint(results['class'].value_counts())`,
-      },
-    ],
-    sql: [
-      {
-        title: 'Spatial Query — High-NDVI Forest Plots', lang: 'sql',
-        code: `-- Forest plots within 5 km of rivers, NDVI > 0.6\nSELECT\n    fp.plot_id,\n    fp.species_name,\n    fp.area_ha,\n    fp.ndvi_mean,\n    ROUND(\n        ST_Distance(fp.geom::geography, r.geom::geography) / 1000.0, 2\n    ) AS dist_river_km,\n    r.river_name\nFROM forest_plots fp\nCROSS JOIN LATERAL (\n    SELECT river_name, geom\n    FROM rivers\n    ORDER BY fp.geom <-> geom\n    LIMIT 1\n) r\nWHERE\n    ST_DWithin(fp.geom::geography, r.geom::geography, 5000)\n    AND fp.ndvi_mean > 0.6\n    AND fp.survey_year = 2024\nORDER BY fp.ndvi_mean DESC\nLIMIT 50;`,
-      },
-      {
-        title: 'Watershed Forest Metrics', lang: 'sql',
-        code: `SELECT\n    w.watershed_name,\n    COUNT(fp.plot_id)                        AS plot_count,\n    ROUND(SUM(fp.area_ha)::numeric, 2)       AS total_ha,\n    ROUND(AVG(fp.ndvi_mean)::numeric, 3)     AS avg_ndvi,\n    ROUND(AVG(fp.canopy_height)::numeric, 2) AS avg_canopy_m,\n    SUM(CASE WHEN fp.species = 'Pinus kesiya'\n             THEN fp.area_ha ELSE 0 END)     AS pine_ha\nFROM watersheds w\nLEFT JOIN forest_plots fp\n       ON ST_Within(fp.geom, w.geom)\n      AND fp.survey_year = 2024\nGROUP BY w.watershed_id, w.watershed_name\nHAVING COUNT(fp.plot_id) > 0\nORDER BY total_ha DESC;`,
-      },
-    ],
-    js: [
-      {
-        title: 'Leaflet Forest Layer with NDVI Styling', lang: 'javascript',
-        code: `const map = L.map('map').setView([12.0, 108.0], 8);\n\nL.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {\n    attribution: '© OpenStreetMap contributors'\n}).addTo(map);\n\nconst ndviColor = (v) =>\n    v > 0.7 ? '#1a6b1a' : v > 0.5 ? '#4caf50' :\n    v > 0.3 ? '#8bc34a' : v > 0.1 ? '#cddc39' : '#f44336';\n\nfetch('forest_plots.geojson')\n    .then(r => r.json())\n    .then(data => {\n        L.geoJSON(data, {\n            style: f => ({\n                fillColor:   ndviColor(f.properties.ndvi_mean),\n                weight:      1, opacity: 0.8,\n                color:       'white', fillOpacity: 0.75,\n            }),\n            onEachFeature: (f, l) => l.bindPopup(\n                \`<b>\${f.properties.species}</b><br>\` +\n                \`NDVI: \${f.properties.ndvi_mean.toFixed(3)}<br>\` +\n                \`Area: \${f.properties.area_ha} ha\`\n            ),\n        }).addTo(map);\n    });`,
-      },
-    ],
-  };
-
-  window.CodeLabSection = function CodeLabSection() {
-    const { motion, useInView } = window.Motion;
-    const ref = React.useRef(null);
-    const inView = useInView(ref, { amount: 0.05, once: true });
-    const [lang, setLang] = React.useState('python');
-    const [idx,  setIdx]  = React.useState(0);
-
-    const snippets = CODE_DATA[lang] || [];
-    const snippet  = snippets[Math.min(idx, snippets.length - 1)];
-
-    const highlighted = React.useMemo(() => {
-      if (!snippet || typeof hljs === 'undefined') return snippet?.code || '';
-      try { return hljs.highlight(snippet.code, { language: snippet.lang }).value; }
-      catch { return snippet.code; }
-    }, [snippet]);
-
-    const langs = [
-      { key: 'python', fab: 'fa-python',   label: 'Python'     },
-      { key: 'sql',    fab: 'fa-database',  label: 'SQL'        },
-      { key: 'js',     fab: 'fa-js',        label: 'JavaScript' },
-    ];
-
-    return (
-      <section id="codelab" className="bg-black sec-rule py-24 px-8 md:px-16 lg:px-20">
-        <div ref={ref}>
-          <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5 }}
-            className="text-sm font-body text-white/45 mb-2">// Scripts &amp; Tools</motion.p>
-          <motion.h2 initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-heading italic text-white text-5xl md:text-6xl tracking-[-2px] leading-none mb-8">
-            Code Laboratory
-          </motion.h2>
-
-          <div className="flex gap-2 mb-4 flex-wrap">
-            {langs.map(l => (
-              <button key={l.key} onClick={() => { setLang(l.key); setIdx(0); }}
-                className={`liquid-glass px-4 py-2 text-sm font-body font-medium rounded-full flex items-center gap-2 transition-all ${lang === l.key ? 'bg-white/15 text-white' : 'text-white/45 hover:text-white/80'}`}>
-                <i className={`fab ${l.fab}`}></i> {l.label}
-              </button>
-            ))}
-          </div>
-
-          {snippets.length > 1 && (
-            <div className="flex gap-2 mb-5 flex-wrap">
-              {snippets.map((s, i) => (
-                <button key={s.title} onClick={() => setIdx(i)}
-                  className={`text-xs font-body px-3 py-1.5 rounded-full border transition-all ${idx === i ? 'bg-white/12 border-white/25 text-white' : 'border-transparent text-white/35 hover:text-white/70'}`}>
-                  {s.title}
+                <a href="mailto:bacngo7877@gmail.com" class="nav-cta hidden md:inline-block bg-white text-black px-5 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors">
+                    Get in Touch
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden nav-link p-1">
+                    <i class="fas fa-bars text-xl"></i>
                 </button>
-              ))}
             </div>
-          )}
-
-          <motion.div key={lang + idx} initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.3 }}
-            className="liquid-glass rounded-[1.25rem] overflow-hidden">
-            <div className="flex items-center justify-between px-5 py-3 border-b border-white/5">
-              <span className="text-sm text-white/65 font-body font-medium">{snippet?.title}</span>
-              <div className="flex gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-red-500/50"></span>
-                <span className="w-3 h-3 rounded-full bg-yellow-500/50"></span>
-                <span className="w-3 h-3 rounded-full bg-green-500/50"></span>
-              </div>
-            </div>
-            <div className="overflow-x-auto" style={{ background: 'rgba(255,255,255,0.02)' }}>
-              <pre style={{ margin: 0, padding: '1.25rem' }}>
-                <code className={`hljs language-${snippet?.lang}`}
-                      style={{ fontSize: '0.8rem', lineHeight: '1.65' }}
-                      dangerouslySetInnerHTML={{ __html: highlighted }} />
-              </pre>
-            </div>
-          </motion.div>
         </div>
-      </section>
-    );
-  };
-  </script>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/10">
+            <div class="px-6 py-3 space-y-1 bg-black/60 backdrop-blur-md">
+                <a href="#hero"              class="block text-white/80 hover:text-white px-3 py-2 text-sm rounded-md">Home</a>
+                <a href="#gallery"           class="block text-white/80 hover:text-white px-3 py-2 text-sm rounded-md">Gallery</a>
+                <a href="#maps"              class="block text-white/80 hover:text-white px-3 py-2 text-sm rounded-md">Maps</a>
+                <a href="#codelab"           class="block text-white/80 hover:text-white px-3 py-2 text-sm rounded-md">Code Lab</a>
+                <a href="#projects"          class="block text-white/80 hover:text-white px-3 py-2 text-sm rounded-md">Projects</a>
+                <a href="interactive-explorer.html" class="block text-emerald-300 hover:text-emerald-200 px-3 py-2 text-sm rounded-md">🌿 Explorer</a>
+            </div>
+        </div>
+    </nav>
 
-  <!-- ════════════════════════════════════════════════════════
-       Section 6 — Projects
-  ════════════════════════════════════════════════════════ -->
-  <script type="text/babel">
-  window.ProjectsSection = function ProjectsSection() {
-    const { motion, useInView } = window.Motion;
-    const ref = React.useRef(null);
-    const inView = useInView(ref, { amount: 0.05, once: true });
-    const projects = [
-      {
-        icon: 'fa-satellite',
-        title: 'Forest Cover Change Detection',
-        desc: 'Multi-temporal analysis of forest cover in Tây Nguyên using Landsat and Sentinel-2 imagery.',
-        tags: ['Remote Sensing', 'Python', 'Rasterio', 'GEE'],
-        links: [{ icon: 'fa-github', href: 'https://github.com/ngobac', ext: true }],
-      },
-      {
-        icon: 'fa-map',
-        title: 'Interactive WebGIS Platform',
-        desc: 'Web GIS for visualising forest inventory data with real-time spatial queries and analytics.',
-        tags: ['Leaflet.js', 'PostGIS', 'Django', 'GeoJSON'],
-        links: [
-          { icon: 'fa-arrow-up-right-from-square', href: 'https://ngobac.github.io/WebGISmap/', ext: true },
-          { icon: 'fa-github', href: 'https://github.com/ngobac', ext: true },
-        ],
-      },
-      {
-        icon: 'fa-tree',
-        title: 'Pinus kesiya Distribution Model',
-        desc: 'Species distribution modelling for Thông Ba Lá across Central Highlands using MaxEnt.',
-        tags: ['R', 'MaxEnt', 'QGIS', 'SDM'],
-        links: [{ icon: 'fa-leaf', href: 'interactive-explorer.html', ext: false }],
-      },
-      {
-        icon: 'fa-water',
-        title: 'Mangrove Ecosystem Mapping',
-        desc: 'High-resolution mangrove extent and biomass mapping using SAR and optical fusion.',
-        tags: ['SAR', 'SNAP', 'Python', 'ML'],
-        links: [{ icon: 'fa-github', href: 'https://github.com/ngobac', ext: true }],
-      },
-      {
-        icon: 'fa-database',
-        title: 'Spatial Forest Inventory DB',
-        desc: 'PostgreSQL/PostGIS database design managing 10,000+ forest plot records with spatial queries.',
-        tags: ['PostgreSQL', 'PostGIS', 'SQL', 'Data Engineering'],
-        links: [{ icon: 'fa-github', href: 'https://github.com/ngobac', ext: true }],
-      },
-      {
-        icon: 'fa-chart-line',
-        title: 'Drone Canopy Height Model',
-        desc: 'Processing UAV LiDAR data for high-resolution canopy height models and forest structure.',
-        tags: ['LiDAR', 'CloudCompare', 'Python', 'UAV'],
-        links: [{ icon: 'fa-github', href: 'https://github.com/ngobac', ext: true }],
-      },
-    ];
-    return (
-      <section id="projects" className="bg-black sec-rule py-24 px-8 md:px-16 lg:px-20">
-        <div ref={ref}>
-          <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5 }}
-            className="text-sm font-body text-white/45 mb-2">// Portfolio</motion.p>
-          <motion.h2 initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-heading italic text-white text-5xl md:text-6xl tracking-[-2px] leading-none mb-12">
-            Selected Projects
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {projects.map((p, i) => (
-              <motion.div key={p.title}
-                initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease: 'easeOut' }}
-                className="liquid-glass rounded-[1.25rem] p-6 flex flex-col gap-4 hover:bg-white/5 transition-colors">
-                <div className="flex items-start justify-between">
-                  <div className="liquid-glass w-10 h-10 rounded-[0.75rem] flex items-center justify-center">
-                    <i className={`fas ${p.icon} text-white text-sm`}></i>
-                  </div>
-                  <div className="flex gap-2">
-                    {p.links.map(l => (
-                      <a key={l.href} href={l.href}
-                         target={l.ext ? '_blank' : '_self'} rel="noopener noreferrer"
-                         className="liquid-glass w-8 h-8 rounded-full flex items-center justify-center text-white/55 hover:text-white transition-colors text-xs">
-                        <i className={`fas ${l.icon}`}></i>
-                      </a>
-                    ))}
-                  </div>
-                </div>
+ 
+
+    <!-- Hero Section -->
+
+    <section id="hero" class="relative min-h-screen flex flex-col overflow-hidden bg-black">
+
+        <!-- Full-screen video background – no overlay -->
+        <video id="hero-video" autoplay loop muted playsinline>
+            <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4" type="video/mp4">
+        </video>
+
+        <!-- Content sits above the video -->
+        <div class="relative z-10 px-6 md:px-12 lg:px-16 flex-1 flex flex-col justify-end pb-12 lg:pb-16">
+            <div class="lg:grid lg:grid-cols-2 lg:items-end gap-8">
+
+                <!-- Left column -->
                 <div>
-                  <h3 className="font-body font-semibold text-white text-sm leading-snug mb-1.5">{p.title}</h3>
-                  <p className="text-xs text-white/45 font-body font-light leading-snug">{p.desc}</p>
+                    <h1 id="hero-heading"
+                        class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal text-white mb-4"
+                        style="letter-spacing:-0.04em; line-height:1.08;"></h1>
+
+                    <p id="hero-sub"
+                       class="text-base md:text-lg text-gray-300 mb-6"
+                       style="opacity:0; transition:opacity 1000ms ease;">
+                        GIS specialist focused on forest management and environmental analysis —
+                        transforming geospatial data into actionable insights and visual stories.
+                    </p>
+
+                    <div id="hero-btns" class="flex flex-wrap gap-4" style="opacity:0; transition:opacity 1000ms ease;">
+                        <a href="#projects"
+                           class="bg-white text-black px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                            View My Work
+                        </a>
+                        <a href="interactive-explorer.html"
+                           class="liquid-glass border border-white/20 text-white px-8 py-3 rounded-lg font-medium hover:bg-white hover:text-black transition-all">
+                            🌿 Explore
+                        </a>
+                    </div>
                 </div>
-                <div className="flex flex-wrap gap-1.5 mt-auto">
-                  {p.tags.map(t => (
-                    <span key={t} className="liquid-glass px-2.5 py-0.5 text-[11px] text-white/55 font-body rounded-full">{t}</span>
-                  ))}
+
+                <!-- Right column: tag card -->
+                <div id="hero-tag" class="flex items-end justify-start lg:justify-end mt-8 lg:mt-0"
+                     style="opacity:0; transition:opacity 1000ms ease;">
+                    <div class="liquid-glass border border-white/20 px-6 py-3 rounded-xl">
+                        <span class="text-lg md:text-xl lg:text-2xl font-light text-white tracking-wide">
+                            GIS.&nbsp; Forestry.&nbsp; Analytics.
+                        </span>
+                    </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  };
-  </script>
 
-  <!-- ════════════════════════════════════════════════════════
-       Footer
-  ════════════════════════════════════════════════════════ -->
-  <script type="text/babel">
-  window.FooterSection = function FooterSection() {
-    const socials = [
-      { cls: 'fa-brands fa-github',   href: 'https://github.com/ngobac',          label: 'GitHub'   },
-      { cls: 'fa-brands fa-linkedin', href: 'https://linkedin.com/in/bacngo7877', label: 'LinkedIn' },
-      { cls: 'fa-solid fa-envelope',  href: 'mailto:bacngo7877@gmail.com',         label: 'Email'    },
-    ];
-    const nav = [
-      ['Gallery', '#gallery'], ['Interactive Maps', '#maps'],
-      ['Code Lab', '#codelab'], ['Projects', '#projects'],
-      ['🌿 Tree Explorer', 'interactive-explorer.html'],
-    ];
-    const skills = ['QGIS', 'ArcGIS', 'Python', 'R', 'PostGIS', 'Leaflet', 'Google Earth Engine', 'UAV/Drone', 'Remote Sensing'];
-    return (
-      <footer className="bg-black sec-rule py-16 px-8 md:px-16 lg:px-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-10">
-          <div>
-            <div className="font-heading italic text-white text-3xl tracking-[-1px] mb-4">Bac Ngo</div>
-            <p className="text-sm text-white/35 font-body font-light leading-relaxed max-w-xs">
-              GIS Specialist &amp; Forestry Researcher based in Vietnam.
-              Open to research collaboration and freelance GIS projects.
-            </p>
-            <div className="flex gap-3 mt-5">
-              {socials.map(s => (
-                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
-                   className="liquid-glass w-9 h-9 rounded-full flex items-center justify-center text-white/55 hover:text-white transition-colors">
-                  <i className={`${s.cls} text-sm`}></i>
-                </a>
-              ))}
             </div>
-          </div>
-          <div>
-            <h4 className="text-white/50 font-body font-semibold text-xs mb-4 tracking-widest uppercase">Navigation</h4>
-            <div className="space-y-2">
-              {nav.map(([l, h]) => (
-                <a key={l} href={h} className="block text-sm text-white/35 hover:text-white/75 font-body transition-colors">{l}</a>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h4 className="text-white/50 font-body font-semibold text-xs mb-4 tracking-widest uppercase">Tools &amp; Skills</h4>
-            <div className="flex flex-wrap gap-2">
-              {skills.map(s => (
-                <span key={s} className="liquid-glass px-3 py-1 text-xs text-white/45 font-body rounded-full">{s}</span>
-              ))}
-            </div>
-          </div>
         </div>
-        <div className="border-t border-white/5 pt-6 flex items-center justify-between flex-wrap gap-4">
-          <p className="text-xs text-white/20 font-body">© 2024 Bac Ngo · GIS &amp; Forestry Portfolio</p>
-          <p className="text-xs text-white/20 font-body">bacngo7877@gmail.com</p>
+
+    </section>
+
+ 
+
+
+    <!-- Professional Gallery Section -->
+    <section id="gallery" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-2 bg-emerald-100 text-emerald-700 text-sm font-semibold rounded-full mb-4 tracking-wide uppercase">In The Field</span>
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+                    <i class="fas fa-images text-emerald-600 mr-3"></i>
+                    Professional Gallery
+                </h2>
+                <p class="text-xl text-gray-500 max-w-3xl mx-auto">
+                    Moments from fieldwork, GIS projects, and environmental research activities
+                </p>
+            </div>
+
+            <!-- Gallery Grid: 3 columns -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+
+                <!-- Photo 1: Field Work -->
+                <div class="group relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" style="aspect-ratio:4/3;">
+                    <img src="images/field-work.jpg" alt="Field Work"
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-emerald-50 to-emerald-100" style="display:none;">
+                        <i class="fas fa-tree text-5xl text-emerald-400 mb-3"></i>
+                        <p class="font-semibold text-gray-700 text-sm">Field Work</p>
+                        <p class="text-xs text-gray-400 mt-1 font-mono">images/field-work.jpg</p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <p class="text-white font-semibold text-sm">Forest Field Survey</p>
+                        <p class="text-white/80 text-xs">Biomass & carbon stock analysis</p>
+                    </div>
+                </div>
+
+                <!-- Photo 2: Drone/UAV -->
+                <div class="group relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" style="aspect-ratio:4/3;">
+                    <img src="images/drone-work.jpg" alt="Drone Work"
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-cyan-50 to-cyan-100" style="display:none;">
+                        <i class="fas fa-helicopter text-5xl text-cyan-500 mb-3"></i>
+                        <p class="font-semibold text-gray-700 text-sm">UAV / Drone Operations</p>
+                        <p class="text-xs text-gray-400 mt-1 font-mono">images/drone-work.jpg</p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <p class="text-white font-semibold text-sm">Mavic Drone Operations</p>
+                        <p class="text-white/80 text-xs">Image data collection (Rocky mountains).</p>
+                    </div>
+                </div>
+
+                <!-- Photo 3: GIS / Office -->
+                <div class="group relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" style="aspect-ratio:4/3;">
+                    <img src="images/gis-work.jpg" alt="GIS Work"
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 to-purple-100" style="display:none;">
+                        <i class="fas fa-map text-5xl text-purple-400 mb-3"></i>
+                        <p class="font-semibold text-gray-700 text-sm">GIS Analysis</p>
+                        <p class="text-xs text-gray-400 mt-1 font-mono">images/gis-work.jpg</p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <p class="text-white font-semibold text-sm">Mavic Drone Operations</p>
+                        <p class="text-white/80 text-xs">Image data collection (Swamp)</p>
+                    </div>
+                </div>
+
+                <!-- Photo 4: Mangrove Project -->
+                <div class="group relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" style="aspect-ratio:4/3;">
+                    <img src="images/mangrove.jpg" alt="Mangrove Project"
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-green-100" style="display:none;">
+                        <i class="fas fa-seedling text-5xl text-green-500 mb-3"></i>
+                        <p class="font-semibold text-gray-700 text-sm">Mangrove Project</p>
+                        <p class="text-xs text-gray-400 mt-1 font-mono">images/mangrove.jpg</p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <p class="text-white font-semibold text-sm">Mangrove Planting & Monitoring</p>
+                        <p class="text-white/80 text-xs">On-site data collection & sampling</p>
+                    </div>
+                </div>
+
+                <!-- Photo 5: Team / Community -->
+                <div class="group relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" style="aspect-ratio:4/3;">
+                    <img src="images/team.jpg" alt="Team Work"
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-orange-50 to-orange-100" style="display:none;">
+                        <i class="fas fa-users text-5xl text-orange-400 mb-3"></i>
+                        <p class="font-semibold text-gray-700 text-sm">Team & Community</p>
+                        <p class="text-xs text-gray-400 mt-1 font-mono">images/team.jpg</p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <p class="text-white font-semibold text-sm">Graduation photos</p>
+                        <p class="text-white/80 text-xs">Forest Resource Management Engineer</p>
+                    </div>
+                </div>
+
+                <!-- Photo 6: Laboratory -->
+                <div class="group relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1" style="aspect-ratio:4/3;">
+                    <img src="images/lab-analysis.jpg" alt="Lab Analysis"
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100" style="display:none;">
+                        <i class="fas fa-flask text-5xl text-blue-400 mb-3"></i>
+                        <p class="font-semibold text-gray-700 text-sm">Lab Analysis</p>
+                        <p class="text-xs text-gray-400 mt-1 font-mono">images/lab-analysis.jpg</p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <p class="text-white font-semibold text-sm">Graduation photos</p>
+                        <p class="text-white/80 text-xs">Master of Forestry</p>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-      </footer>
-    );
-  };
-  </script>
+    </section>
 
-  <!-- ════════════════════════════════════════════════════════
-       App Root
-  ════════════════════════════════════════════════════════ -->
-  <script type="text/babel">
-  const _ce = console.error;
-  console.error = (...a) => {
-    if (typeof a[0] === 'string' && a[0].includes('Each child in a list')) return;
-    _ce(...a);
-  };
+    <!-- Map Gallery Section -->
 
-  function App() {
-    return (
-      <React.Fragment>
-        <Navbar />
-        <HeroSection />
-        <CapabilitiesSection />
-        <GallerySection />
-        <MapsSection />
-        <CodeLabSection />
-        <ProjectsSection />
-        <FooterSection />
-      </React.Fragment>
-    );
+    <section id="maps" class="py-20 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100">
+
+        <div class="max-w-7xl mx-auto">
+
+            <div class="text-center mb-16">
+
+                <span class="inline-block px-4 py-2 bg-emerald-100 text-emerald-700 text-sm font-semibold rounded-full mb-4 tracking-wide uppercase">Geospatial Work</span>
+
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+
+                    <i class="fas fa-map text-emerald-600 mr-3"></i>
+
+                    Interactive Map Gallery
+
+                </h2>
+
+                <p class="text-xl text-gray-500 max-w-3xl mx-auto">
+
+                    Explore my collection of interactive maps and geospatial visualizations
+
+                </p>
+
+            </div>
+
+ 
+
+            <!-- Map Categories Tabs -->
+
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+
+                <button onclick="switchMapTab('all')"
+
+                        class="map-tab active glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-50 hover:border-emerald-500 bg-emerald-100 border-emerald-500 text-emerald-600"
+
+                        data-tab="all">
+
+                    All Maps
+
+                </button>
+
+                <button onclick="switchMapTab('arcgis')"
+
+                        class="map-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-50 hover:border-emerald-500"
+
+                        data-tab="arcgis">
+
+                    ArcGIS Online
+
+                </button>
+
+                <button onclick="switchMapTab('gee')"
+
+                        class="map-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-50 hover:border-emerald-500"
+
+                        data-tab="gee">
+
+                    Google Earth Engine
+
+                </button>
+
+                <button onclick="switchMapTab('custom')"
+
+                        class="map-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-50 hover:border-emerald-500"
+
+                        data-tab="custom">
+
+                    Custom Apps
+
+                </button>
+
+            </div>
+
+ 
+
+            <!-- Map Content -->
+
+            <div id="map-all" class="tab-content active">
+
+                <div class="bento-grid">
+
+                    <!-- Map Card 1 - ArcGIS Online Example -->
+
+                    <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all">
+
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+
+                            <i class="fas fa-tree text-emerald-600"></i>
+
+                            Scene Map
+
+                        </h3>
+
+                        <p class="text-gray-500 mb-4"></p>
+
+                        <div class="iframe-container">
+
+                            <div class="iframe-loading">
+
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+
+                                Loading map...
+
+                            </div>
+
+                            <!-- Replace with your actual ArcGIS Online embed URL -->
+
+                            <iframe width="800" height="600" frameborder="0" allowfullscreen src="https://arcg.is/1HjPD12"></iframe>
+
+                        </div>
+
+                        <div class="mt-4 flex gap-2">
+
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">ArcGIS Online</span>
+
+                            <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">Remote Sensing</span>
+
+                        </div>
+
+                    </div>
+
+ 
+
+                    <!-- Map Card 2 - Google Earth Engine Example -->
+
+                    <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all">
+
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+
+                            <i class="fas fa-satellite-dish text-cyan-700"></i>
+
+                            Google Earth Engine App
+
+                        </h3>
+
+                        <p class="text-gray-500 mb-4">Upload Geojson and compare between Sentinel 2A vs Hansen Global Forest Loss</p>
+
+                        <div class="iframe-container">
+
+                            <div class="iframe-loading">
+
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+
+                                Loading map...
+
+                            </div>
+
+                            <!-- Replace with your actual GEE App URL -->
+
+                            <iframe src="https://ee-bacngo7877.projects.earthengine.app/view/ngobacqlkt"></iframe>
+
+                        </div>
+
+                        <div class="mt-4 flex gap-2">
+
+                            <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">Google Earth Engine</span>
+
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">Sentinel</span>
+
+                        </div>
+
+                    </div>
+
+ 
+
+                    <!-- Map Card 3 - Custom Web Map -->
+
+                    <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all">
+
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+
+                            <i class="fas fa-layer-group text-purple-700"></i>
+
+                            Google My Maps
+
+                        </h3>
+
+                        <p class="text-gray-500 mb-4"></p>
+
+                        <div class="iframe-container">
+
+                            <div class="iframe-loading">
+
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+
+                                Loading map...
+
+                            </div>
+
+                            <!-- Replace with your actual custom map URL -->
+
+                            <iframe src="https://www.google.com/maps/d/embed?mid=1s3i6MG4bDs86jnbfUwoo11YOdqeJe9jb&hl=vi&ehbc=2E312F" width="640" height="480"></iframe>
+
+                        </div>
+
+                        <div class="mt-4 flex gap-2">
+
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Google</span>
+
+                            <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">MyMaps</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+ 
+
+            <!-- ArcGIS Tab Content -->
+
+            <div id="map-arcgis" class="tab-content">
+
+                <div class="bento-grid">
+
+                    <div class="glass rounded-xl p-6">
+
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Scene Map</h3>
+
+                        <p class="text-gray-500 mb-4"></p>
+
+                        <div class="iframe-container">
+
+                            <div class="iframe-loading">
+
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+
+                                Loading map...
+
+                            </div>
+                            <iframe width="800" height="600" frameborder="0" allowfullscreen src="https://arcg.is/1HjPD12"></iframe>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+ 
+
+            <!-- GEE Tab Content -->
+
+            <div id="map-gee" class="tab-content">
+
+                <div class="bento-grid">
+
+                    <div class="glass rounded-xl p-6">
+
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Google Earth Engine App</h3>
+
+                        <p class="text-gray-500 mb-4">Upload Geojson and compare between Sentinel 2A vs Hansen Global Forest Loss</p>
+
+                        <div class="iframe-container">
+
+                            <div class="iframe-loading">
+
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+
+                                Loading map...
+
+                            </div>
+                            <iframe src="https://ee-bacngo7877.projects.earthengine.app/view/ngobacqlkt"></iframe>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+ 
+
+            <!-- Custom Tab Content -->
+
+            <div id="map-custom" class="tab-content">
+
+                <div class="bento-grid">
+
+                    <div class="glass rounded-xl p-6">
+
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Google My Maps</h3>
+
+                        <p class="text-gray-500 mb-4"></p>
+
+                        <div class="iframe-container">
+
+                            <div class="iframe-loading">
+
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+
+                                Loading map...
+
+                            </div>
+                            <iframe src="https://www.google.com/maps/d/embed?mid=1s3i6MG4bDs86jnbfUwoo11YOdqeJe9jb&hl=vi&ehbc=2E312F" width="640" height="480"></iframe>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+ 
+
+    <!-- Code Lab Section -->
+
+    <section id="codelab" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 border-t border-gray-100">
+
+        <div class="max-w-7xl mx-auto">
+
+            <div class="text-center mb-16">
+
+                <span class="inline-block px-4 py-2 bg-emerald-100 text-emerald-700 text-sm font-semibold rounded-full mb-4 tracking-wide uppercase">Scripts & Tools</span>
+
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+
+                    <i class="fas fa-code text-emerald-600 mr-3"></i>
+
+                    Code Lab
+
+                </h2>
+
+                <p class="text-xl text-gray-500 max-w-3xl mx-auto">
+
+                    Useful code snippets and tools I've developed for geospatial analysis
+
+                </p>
+
+            </div>
+
+ 
+
+            <!-- Code Category Tabs -->
+
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+
+                <button onclick="switchCodeTab('python')"
+
+                        class="code-tab active glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-50 hover:border-emerald-500 bg-emerald-100 border-emerald-500 text-emerald-600"
+
+                        data-tab="python">
+
+                    <i class="fab fa-python mr-2"></i> Python
+
+                </button>
+
+                <button onclick="switchCodeTab('javascript')"
+
+                        class="code-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-50 hover:border-emerald-500"
+
+                        data-tab="javascript">
+
+                    <i class="fab fa-js-square mr-2"></i> JavaScript
+
+                </button>
+
+                <button onclick="switchCodeTab('sql')"
+
+                        class="code-tab glass px-6 py-3 rounded-lg font-semibold transition-all hover:bg-emerald-50 hover:border-emerald-500"
+
+                        data-tab="sql">
+
+                    <i class="fas fa-database mr-2"></i> SQL
+
+                </button>
+
+            </div>
+
+ 
+
+            <!-- Python Code Snippets -->
+
+            <div id="code-python" class="tab-content active space-y-8">
+
+                <!-- Snippet 1: NDVI Calculation -->
+
+                <div class="glass rounded-xl p-6">
+
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+
+                        <i class="fas fa-leaf text-emerald-600"></i>
+
+                        Automatically get Global Forest Watch link
+
+                    </h3>
+
+                    <p class="text-gray-500 mb-4">Python script using Selenium to automate geojson upload and get Global Forest Watch link.</p>
+
+                    <div class="code-container">
+
+                        <button class="copy-btn" onclick="copyCode(this)">
+
+                            <i class="fas fa-copy mr-1"></i> Copy
+
+                        </button>
+
+                        <pre><code class="language-python">
+"""
+GFW Automation - Một phần trong app desktop GEOJSON WORK
+"""
+
+import os
+import time
+import pandas as pd
+from datetime import datetime
+from pathlib import Path
+import traceback
+import threading
+import requests
+
+try:
+    from selenium import webdriver
+    from selenium.webdriver.chrome.service import Service
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.common.exceptions import (
+        TimeoutException, NoSuchElementException, 
+        ElementClickInterceptedException, StaleElementReferenceException,
+        WebDriverException
+    )
+    SELENIUM_AVAILABLE = True
+except ImportError:
+    SELENIUM_AVAILABLE = False
+
+# OPTIMIZED TIMING CONSTANTS
+TIMING = {
+    'PAGE_LOAD': 8,           # Truy cập link -> 8s
+    'POPUP_CLOSE': 5,         # Đóng popup -> 5s  
+    'FIND_UPLOAD_ZONE': 5,    # Tìm upload zone -> 5s
+    'FILE_UPLOAD_ZOOM': 20,   # Load file + zoom -> 15s (FIXED)
+    'FIND_SHARE_BUTTON': 5,   # Tìm nút Share -> 5s
+    'SHARE_MODAL_LOAD': 5,    # Modal load -> 5s
+    'COPY_LINK': 5,           # Copy link -> 5s
+    'MODAL_CLOSE': 3,         # Đóng modal -> 3s
+}
+
+class GFWAutomatorOptimized:
+    def __init__(self):
+        self.driver = None
+        self.cancelled = False
+        self.paused = False
+        
+        # Thread safety
+        self.pause_lock = threading.Lock()
+        
+        # Callbacks
+        self.progress_callback = None
+        self.log_callback = None
+        self.stats_callback = None
+        
+        # Statistics
+        self.stats = {
+            'total': 0,
+            'processed': 0,
+            'success': 0,
+            'failed': 0,
+            'network_errors': 0,
+            'retry_count': 0,
+            'step_timings': {}  # Track timing cho mỗi step
+        }
+        
+        # Excel handling
+        self.excel_file = None
+        self.pending_results = []
+        self.save_frequency = 3
+        
+    def set_callbacks(self, progress_callback=None, log_callback=None, stats_callback=None):
+        """Thiết lập callback functions"""
+        self.progress_callback = progress_callback
+        self.log_callback = log_callback
+        self.stats_callback = stats_callback
+        
+    def cancel(self):
+        """Hủy bỏ quá trình"""
+        self.cancelled = True
+        self.log("Đã nhận lệnh hủy bỏ...")
+        
+        if self.pending_results:
+            self.save_pending_results()
+        
+        if self.driver:
+            try:
+                self.driver.quit()
+                self.log("Đã đóng ChromeDriver")
+            except:
+                pass
+                
+    def pause(self):
+        """Tạm dừng"""
+        with self.pause_lock:
+            self.paused = True
+            self.log("Automation đã tạm dừng")
+        
+    def resume(self):
+        """Tiếp tục"""
+        with self.pause_lock:
+            self.paused = False
+            self.log("Automation tiếp tục")
+        
+    def is_paused(self):
+        """Kiểm tra có đang tạm dừng không"""
+        with self.pause_lock:
+            return self.paused
+        
+    def log(self, message):
+        """Ghi log"""
+        if self.log_callback:
+            self.log_callback(message)
+        else:
+            print(message)
+            
+    def update_progress(self, current, total, message="Đang xử lý..."):
+        """Cập nhật tiến trình"""
+        if self.progress_callback:
+            self.progress_callback(current, total, message)
+            
+    def update_stats(self):
+        """Cập nhật thống kê"""
+        if self.stats_callback:
+            self.stats_callback(self.stats)
+    
+    def check_internet_connection(self):
+        """Kiểm tra kết nối internet"""
+        try:
+            response = requests.get('https://www.globalforestwatch.org', timeout=10)
+            return response.status_code == 200
+        except:
+            return False
+    
+    def wait_for_network_recovery(self, max_wait_time=60):
+        """Đợi mạng phục hồi - giảm timeout"""
+        self.log("Kiểm tra kết nối mạng...")
+        
+        start_time = time.time()
+        while time.time() - start_time < max_wait_time:
+            if self.cancelled:
+                return False
+                
+            if self.check_internet_connection():
+                self.log("Kết nối mạng đã khôi phục")
+                return True
+                
+            self.log("⏳ Chờ kết nối mạng... (thử lại sau 5s)")
+            time.sleep(5)  # Giảm từ 10s xuống 5s
+            
+        self.log("Timeout chờ kết nối mạng")
+        return False
+            
+    def wait_for_pause(self):
+        """Chờ khi bị tạm dừng"""
+        while True:
+            if self.cancelled:
+                break
+                
+            with self.pause_lock:
+                if not self.paused:
+                    break
+                    
+            self.log("Đang tạm dừng...")
+            time.sleep(1)
+            
+    def time_step(self, step_name, target_time, func, *args, **kwargs):
+        """Execute function với timing tracking"""
+        start_time = time.time()
+        self.log(f"{step_name} (target: {target_time}s)")
+        
+        try:
+            result = func(*args, **kwargs)
+            duration = time.time() - start_time
+            
+            # Track timing
+            if step_name not in self.stats['step_timings']:
+                self.stats['step_timings'][step_name] = []
+            self.stats['step_timings'][step_name].append(duration)
+            
+            status = "O" if duration <= target_time * 1.2 else "X"
+            self.log(f"{status} {step_name} completed in {duration:.1f}s")
+            
+            return result
+            
+        except Exception as e:
+            duration = time.time() - start_time
+            self.log(f"{step_name} failed after {duration:.1f}s: {str(e)}")
+            raise
+            
+    def setup_driver(self, chromedriver_path, headless=False):
+        """Thiết lập Chrome WebDriver tối ưu tốc độ"""
+        if not SELENIUM_AVAILABLE:
+            return {'success': False, 'error': 'Selenium không có sẵn'}
+            
+        try:
+            service = Service(chromedriver_path)
+            options = Options()
+            
+            # SPEED OPTIMIZED OPTIONS
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-gpu')
+            options.add_argument('--disable-extensions')
+            options.add_argument('--disable-plugins')
+            options.add_argument('--disable-images')           # Tắt ảnh
+            options.add_argument('--disable-javascript')       # Tắt JS không cần thiết
+            options.add_argument('--disable-css')             # Tắt CSS không cần thiết
+            options.add_argument('--aggressive-cache-discard')
+            options.add_argument('--memory-pressure-off')
+            options.add_argument('--disable-background-timer-throttling')
+            options.add_argument('--disable-backgrounding-occluded-windows')
+            options.add_argument('--disable-renderer-backgrounding')
+            
+            # Network optimization
+            options.add_argument('--disable-background-networking')
+            options.add_argument('--disable-default-apps')
+            options.add_argument('--disable-sync')
+            
+            if headless:
+                options.add_argument('--headless')
+                
+            # Shorter timeouts
+            self.driver = webdriver.Chrome(service=service, options=options)
+            self.driver.set_page_load_timeout(30)  # Giảm từ 120s xuống 30s
+            self.driver.implicitly_wait(3)         # Giảm từ 10s xuống 3s
+            
+            return {'success': True, 'message': 'ChromeDriver khởi động thành công'}
+            
+        except Exception as e:
+            return {'success': False, 'error': f'Lỗi khởi động ChromeDriver: {str(e)}'}
+            
+    def step1_navigate_to_gfw(self):
+        """BƯỚC 1: Truy cập link chỉ định (8s)"""
+        gfw_url = 'https://www.globalforestwatch.org/map/?analysis=eyJzaG93RHJhdyI6dHJ1ZX0%3D&mainMap=eyJzaG93QW5hbHlzaXMiOnRydWV9&map=eyJjZW50ZXIiOnsibGF0IjoxMC45MjA4NTAzODQ0OTQwMzUsImxuZyI6MTA3LjMwMjQ1MjkwMDgwNTYyfSwiem9vbSI6OS40MjQ1ODkzMTYzMjQ0MTcsImRhdGFzZXRzIjpbeyJkYXRhc2V0IjoicG9saXRpY2FsLWJvdW5kYXJpZXMiLCJsYXllcnMiOlsiZGlzcHV0ZWQtcG9saXRpY2FsLWJvdW5kYXJpZXMiLCJwb2xpdGljYWwtYm91bmRhcmllcyJdLCJvcGFjaXR5IjoxLCJ2aXNpYmlsaXR5Ijp0cnVlfSx7ImRhdGFzZXQiOiJ0cmVlLWNvdmVyLWxvc3MiLCJvcGFjaXR5IjowLjU1LCJ2aXNpYmlsaXR5Ijp0cnVlLCJsYXllcnMiOlsidHJlZS1jb3Zlci1sb3NzIl0sInRpbWVsaW5lUGFyYW1zIjp7InN0YXJ0RGF0ZSI6IjIwMjEtMDEtMDEiLCJlbmREYXRlIjoiMjAyNC0xMi0zMSIsInRyaW1FbmREYXRlIjoiMjAyNC0xMi0zMSJ9fSx7ImRhdGFzZXQiOiJ0cmVlLXBsYW50YXRpb25zIiwib3BhY2l0eSI6MSwidmlzaWJpbGl0eSI6dHJ1ZSwibGF5ZXJzIjpbInRyZWUtcGxhbnRhdGlvbnMiXX1dfQ%3D%3D&mapPrompts=eyJvcGVuIjp0cnVlLCJzdGVwc0tleSI6InN1YnNjcmliZVRvQXJlYSJ9'
+        
+        self.driver.get(gfw_url)
+        time.sleep(TIMING['PAGE_LOAD'])
+        return True
+        
+    def step2_close_popup(self):
+        """BƯỚC 2: Đóng popup (5s)"""
+        close_selectors = [
+            "//button[contains(@aria-label, 'close')]",
+            "//button[contains(@aria-label, 'Close')]", 
+            "//button[contains(@class, 'close')]",
+            "//button[contains(text(), '×')]",
+            "//div[contains(@class, 'close')][@role='button']"
+        ]
+        
+        for selector in close_selectors:
+            try:
+                close_button = WebDriverWait(self.driver, 2).until(
+                    EC.element_to_be_clickable((By.XPATH, selector))
+                )
+                self.driver.execute_script("arguments[0].click();", close_button)
+                time.sleep(1)  # Quick wait after close
+                return True
+            except:
+                continue
+                
+        # ESC fallback
+        try:
+            from selenium.webdriver.common.keys import Keys
+            self.driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.ESCAPE)
+            time.sleep(1)
+            return True
+        except:
+            pass
+            
+        return True  # Continue even if no popup
+        
+    def step3_find_upload_zone(self):
+        """BƯỚC 3: Tìm upload zone (5s)"""
+        upload_selectors = [
+            (By.ID, "upload-dropzone"),
+            (By.XPATH, "//div[contains(@class, 'draw-menu-input')][@id='upload-dropzone']"),
+            (By.XPATH, "//div[contains(@class, 'upload-dropzone')]"),
+            (By.XPATH, "//div[contains(@class, 'dropzone')]")
+        ]
+        
+        for selector_type, selector_value in upload_selectors:
+            try:
+                upload_element = WebDriverWait(self.driver, 2).until(
+                    EC.presence_of_element_located((selector_type, selector_value))
+                )
+                return upload_element
+            except:
+                continue
+                
+        raise Exception("Không tìm thấy upload zone")
+        
+    def step4_upload_and_wait_zoom(self, file_path, upload_element):
+        """BƯỚC 4: Upload file và chờ zoom (15s cố định)"""
+        # Find file input
+        file_input = upload_element.find_element(By.CSS_SELECTOR, 'input[type="file"]')
+        
+        # Upload file
+        file_input.send_keys(file_path)
+        self.log(f"File uploaded: {os.path.basename(file_path)}")
+        
+        # FIXED 15 SECOND WAIT - không check gì cả, chỉ đợi
+        self.log("Chờ cố định 15s để GFW load và zoom...")
+        for i in range(15):
+            if self.cancelled:
+                return False
+            self.wait_for_pause()
+            time.sleep(1)
+            
+        return True
+        
+    def step5_find_share_button(self):
+        """BƯỚC 5: Tìm nút Share (5s)"""
+        share_selectors = [
+            "//*[@id='map-share-button']/div",
+            "//button[contains(@class, 'share')]",
+            "//div[contains(@class, 'share-button')]",
+            "//button[contains(text(), 'Share')]"
+        ]
+        
+        for selector in share_selectors:
+            try:
+                share_button = WebDriverWait(self.driver, 2).until(
+                    EC.element_to_be_clickable((By.XPATH, selector))
+                )
+                return share_button
+            except:
+                continue
+                
+        raise Exception("Không tìm thấy nút Share")
+        
+    def step6_get_share_link(self, share_button):
+        """BƯỚC 6: Click Share, đợi modal, copy link (10s total)"""
+        # Click share button
+        self.driver.execute_script("arguments[0].click();", share_button)
+        
+        # Wait for modal - 5s
+        modal_selectors = [
+            "//div[contains(@class, 'modal-content')]//div[contains(@class, 'c-share')]",
+            "//div[contains(@class, 'share-modal')]"
+        ]
+        
+        modal_found = False
+        for selector in modal_selectors:
+            try:
+                WebDriverWait(self.driver, 2).until(
+                    EC.visibility_of_element_located((By.XPATH, selector))
+                )
+                modal_found = True
+                break
+            except:
+                continue
+                
+        if not modal_found:
+            raise Exception("Share modal không xuất hiện")
+            
+        # Wait for modal content to load
+        time.sleep(TIMING['SHARE_MODAL_LOAD'])
+        
+        # Get share link - 5s
+        input_selectors = [
+            "//div[contains(@class, 'input-container')]//input[@type='text']",
+            "//input[contains(@class, 'share-input')]",
+            "//input[contains(@value, 'gfw.global')]"
+        ]
+        
+        share_link = None
+        for selector in input_selectors:
+            try:
+                share_input = WebDriverWait(self.driver, 2).until(
+                    EC.presence_of_element_located((By.XPATH, selector))
+                )
+                share_link = share_input.get_attribute('value')
+                if share_link and share_link.startswith("https://gfw.global/"):
+                    break
+            except:
+                continue
+                
+        if not share_link:
+            raise Exception("Không lấy được share link")
+            
+        # Optional: Click copy button
+        try:
+            copy_button = WebDriverWait(self.driver, 2).until(
+                EC.element_to_be_clickable((By.XPATH, "//button[@id='button']//div[contains(text(), 'COPY')]"))
+            )
+            self.driver.execute_script("arguments[0].click();", copy_button)
+        except:
+            pass  # Not critical
+            
+        return share_link
+        
+    def step7_close_modal(self):
+        """BƯỚC 7: Đóng modal (3s)"""
+        close_selectors = [
+            "//button[@aria-label='close']",
+            "//button[contains(@class, 'close')]",
+            "//div[contains(@class, 'close')][@role='button']"
+        ]
+        
+        for selector in close_selectors:
+            try:
+                close_button = WebDriverWait(self.driver, 1).until(
+                    EC.element_to_be_clickable((By.XPATH, selector))
+                )
+                self.driver.execute_script("arguments[0].click();", close_button)
+                time.sleep(1)
+                return True
+            except:
+                continue
+                
+        return True  # Continue even if can't close
+        
+    def upload_geojson_and_get_link_optimized(self, file_path, max_retries=2):
+        """Optimized upload với fixed timing cho mỗi bước"""
+        
+        for attempt in range(max_retries):
+            if self.cancelled:
+                return None
+                
+            try:
+                self.log(f"📄 Attempt {attempt + 1}/{max_retries}: {os.path.basename(file_path)}")
+                
+                # BƯỚC 1: Navigate (8s)
+                self.time_step("Navigate to GFW", TIMING['PAGE_LOAD'], 
+                              self.step1_navigate_to_gfw)
+                
+                self.wait_for_pause()
+                
+                # BƯỚC 2: Close popup (5s)
+                self.time_step("Close Popup", TIMING['POPUP_CLOSE'], 
+                              self.step2_close_popup)
+                
+                # BƯỚC 3: Find upload zone (5s)
+                upload_element = self.time_step("Find Upload Zone", TIMING['FIND_UPLOAD_ZONE'], 
+                                               self.step3_find_upload_zone)
+                
+                # BƯỚC 4: Upload + zoom wait (15s cố định)
+                self.time_step("Upload and Zoom Wait", TIMING['FILE_UPLOAD_ZOOM'], 
+                              self.step4_upload_and_wait_zoom, file_path, upload_element)
+                
+                self.wait_for_pause()
+                
+                # BƯỚC 5: Find share button (5s)
+                share_button = self.time_step("Find Share Button", TIMING['FIND_SHARE_BUTTON'], 
+                                             self.step5_find_share_button)
+                
+                # BƯỚC 6: Get share link (10s total)
+                share_link = self.time_step("Get Share Link", TIMING['SHARE_MODAL_LOAD'] + TIMING['COPY_LINK'], 
+                                           self.step6_get_share_link, share_button)
+                
+                # BƯỚC 7: Close modal (3s)
+                self.time_step("Close Modal", TIMING['MODAL_CLOSE'], 
+                              self.step7_close_modal)
+                
+                self.log(f"Success: {share_link}")
+                return share_link
+                
+            except WebDriverException as e:
+                if "net::" in str(e):
+                    self.log(f"Network error: {str(e)}")
+                    if self.wait_for_network_recovery(30):  # Shorter recovery time
+                        continue
+                    else:
+                        return None
+                else:
+                    self.log(f"WebDriver error attempt {attempt + 1}: {str(e)}")
+                    
+            except Exception as e:
+                self.log(f"Error attempt {attempt + 1}: {str(e)}")
+                
+            if attempt < max_retries - 1:
+                self.log(f"Waiting 5s before retry...")
+                time.sleep(5)  # Shorter retry delay
+                
+        return None
+        
+    def save_pending_results(self):
+        """Lưu kết quả vào Excel - simplified"""
+        if not self.pending_results or not self.excel_file:
+            return
+            
+        try:
+            if os.path.exists(self.excel_file):
+                existing_df = pd.read_excel(self.excel_file)
+            else:
+                existing_df = pd.DataFrame(columns=['GEOJSON Filename', 'Share Link', 'Timestamp', 'Status'])
+                
+            new_df = pd.DataFrame(self.pending_results)
+            combined_df = pd.concat([existing_df, new_df], ignore_index=True)
+            
+            os.makedirs(os.path.dirname(self.excel_file), exist_ok=True)
+            combined_df.to_excel(self.excel_file, index=False)
+            
+            self.log(f"Đã lưu {len(combined_df)} records")
+            self.pending_results.clear()
+            
+        except Exception as e:
+            self.log(f"Lỗi lưu Excel: {str(e)}")
+            
+    def add_result(self, filename, share_link, status):
+        """Thêm kết quả"""
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        result = {
+            'GEOJSON Filename': filename,
+            'Share Link': share_link,
+            'Timestamp': timestamp,
+            'Status': status
+        }
+        
+        self.pending_results.append(result)
+        
+        if len(self.pending_results) >= self.save_frequency:
+            self.save_pending_results()
+            
+    def process_geojson_folder(self, geojson_folder, excel_file, chromedriver_path, headless=False, timeout=30, retry_failed=True):
+        """Process folder với optimized timing"""
+        if not SELENIUM_AVAILABLE:
+            return {'success': False, 'error': 'Selenium không có sẵn'}
+            
+        self.cancelled = False
+        self.paused = False
+        self.excel_file = excel_file
+        self.pending_results = []
+        
+        result = {
+            'success': False,
+            'total_processed': 0,
+            'success_count': 0,
+            'failed_count': 0,
+            'excel_file': excel_file,
+            'error': None,
+            'average_time_per_file': 0
+        }
+        
+        try:
+            # Check network
+            if not self.check_internet_connection():
+                result['error'] = 'Không có kết nối internet'
+                return result
+            
+            # Setup driver
+            self.log("Đang khởi động ChromeDriver...")
+            driver_result = self.setup_driver(chromedriver_path, headless)
+            if not driver_result['success']:
+                result['error'] = driver_result['error']
+                return result
+                
+            self.log("ChromeDriver sẵn sàng")
+            
+            # Find files
+            geojson_files = list(Path(geojson_folder).glob("*.geojson"))
+            if not geojson_files:
+                result['error'] = "Không tìm thấy file GeoJSON"
+                return result
+                
+            total_files = len(geojson_files)
+            self.stats['total'] = total_files
+            self.log(f"Tìm thấy {total_files} file GeoJSON")
+            
+            start_time = time.time()
+            
+            # Process files
+            for i, geojson_file in enumerate(geojson_files):
+                if self.cancelled:
+                    break
+                    
+                self.wait_for_pause()
+                
+                filename = geojson_file.name
+                self.update_progress(i, total_files, f"Đang xử lý: {filename}")
+                
+                file_start_time = time.time()
+                
+                try:
+                    share_link = self.upload_geojson_and_get_link_optimized(str(geojson_file))
+                    
+                    if share_link:
+                        status = "SUCCESS"
+                        self.stats['success'] += 1
+                        self.add_result(filename, share_link, status)
+                        
+                        file_duration = time.time() - file_start_time
+                        self.log(f"{filename}: THÀNH CÔNG ({file_duration:.1f}s)")
+                    else:
+                        status = "FAILED"
+                        self.stats['failed'] += 1
+                        self.add_result(filename, "Failed to get link", status)
+                        self.log(f"{filename}: THẤT BẠI")
+                        
+                    self.stats['processed'] += 1
+                    self.update_stats()
+                        
+                except Exception as e:
+                    self.log(f"Lỗi {filename}: {str(e)}")
+                    self.add_result(filename, f"Error: {str(e)}", "ERROR")
+                    self.stats['failed'] += 1
+                    self.stats['processed'] += 1
+                    self.update_stats()
+                    
+                # Minimal delay between files
+                if not self.cancelled and i < total_files - 1:
+                    time.sleep(2)  # Very short delay
+                    
+            # Save remaining results
+            if self.pending_results:
+                self.save_pending_results()
+                
+            # Calculate stats
+            total_time = time.time() - start_time
+            avg_time = total_time / self.stats['processed'] if self.stats['processed'] > 0 else 0
+            
+            result['success'] = True
+            result['total_processed'] = self.stats['processed']
+            result['success_count'] = self.stats['success']
+            result['failed_count'] = self.stats['failed']
+            result['average_time_per_file'] = avg_time
+            
+            self.log(f"\nTHỐNG KÊ CUỐI:")
+            self.log(f"Thành công: {self.stats['success']}/{total_files}")
+            self.log(f"⏱Thời gian trung bình: {avg_time:.1f}s/file")
+            self.log(f"Tổng thời gian: {total_time:.1f}s")
+            
+            if not self.cancelled:
+                self.update_progress(total_files, total_files, "Hoàn thành!")
+                
+        except Exception as e:
+            result['error'] = f"Lỗi: {str(e)}"
+            self.log(f" {result['error']}")
+            
+            if self.pending_results:
+                self.save_pending_results()
+                
+        finally:
+            if self.driver:
+                try:
+                    self.driver.quit()
+                    self.log("Đã đóng ChromeDriver")
+                except:
+                    pass
+                    
+        return result
+
+GFWAutomator = GFWAutomatorOptimized
+
+                        </code></pre>
+
+                    </div>
+
+                    <div class="mt-4 flex gap-2">
+
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">Selenium</span>
+
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">ChromeDriver</span>
+
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Python</span>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Snippet 2: GeoDataFrame Processing -->
+
+                <div class="glass rounded-xl p-6">
+
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+
+                        <i class="fas fa-map-marked-alt text-cyan-700"></i>
+
+                        Computer Vision
+
+                    </h3>
+
+                    <p class="text-gray-500 mb-4">Camera AI with YOLO Ultralytics Code sample</p>
+
+                    <div class="code-container">
+
+                        <button class="copy-btn" onclick="copyCode(this)">
+
+                            <i class="fas fa-copy mr-1"></i> Copy
+
+                        </button>
+
+                        <pre><code class="language-python">//Dev
+</code></pre>
+
+                    </div>
+
+                    <div class="mt-4 flex gap-2">
+
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">DL</span>
+
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">CV</span>
+
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">AI</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+ 
+
+            <!-- JavaScript Code Snippets -->
+
+            <div id="code-javascript" class="tab-content space-y-8">
+
+                <!-- Snippet 1: Leaflet Map Initialization -->
+
+                <div class="glass rounded-xl p-6">
+
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+
+                        <i class="fas fa-map text-emerald-600"></i>
+
+                        Visualizing geojson and Hansen's deforestation data
+
+                    </h3>
+
+                    <p class="text-gray-500 mb-4">Visual comparison of data according to the latest Sentinel 2A image and detected deforestation areas</p>
+
+                    <div class="code-container">
+
+                        <button class="copy-btn" onclick="copyCode(this)">
+
+                            <i class="fas fa-copy mr-1"></i> Copy
+
+                        </button>
+
+                        <pre><code class="language-javascript">// ỨNG DỤNG GEE: SWIPE SENTINEL-2 vs HANSEN FOREST LOSS 2021-2024
+// Tác giả: Ngô Văn Bắc
+// Mô tả: So sánh ảnh vệ tinh Sentinel-2 và mất rừng Hansen 2021-2024
+
+var app = {};
+app.SENTINEL_COLLECTION = 'COPERNICUS/S2_SR_HARMONIZED';
+app.HANSEN_IMAGE = 'UMD/hansen/global_forest_change_2024_v1_12';
+
+app.SENTINEL_VIS = {
+  bands: ['B4', 'B3', 'B2'],
+  min: 0,
+  max: 3000,
+  gamma: 1.4
+};
+
+app.HANSEN_VIS = {
+  lossYear: {
+    bands: ['lossyear'],
+    min: 21,
+    max: 24,
+    palette: ['yellow', 'orange', 'red', 'darkred']
+  }
+};
+
+app.DEFAULT_CENTER = {lon: 107.191026, lat: 10.939236, zoom: 10};
+
+app.state = {
+  geojson: null,
+  geojsonBounds: null,
+  startDate: '2025-01-01',
+  endDate: '2025-05-31',
+  maxCloud: 30,
+  imageIds: [],
+  hansenPeriod: '2021-2024'
+};
+
+app.HANSEN_PERIODS = {
+  '2000-2020': {min: 0, max: 20, label: '2000-2020 (Lịch sử)'},
+  '2021-2024': {min: 21, max: 24, label: '2021-2024 (Gần đây)'},
+  '2021': {min: 21, max: 21, label: '2021'},
+  '2022': {min: 22, max: 22, label: '2022'},
+  '2023': {min: 23, max: 23, label: '2023'},
+  '2024': {min: 24, max: 24, label: '2024'}
+};
+
+app.removeLayerByName = function(map, name) {
+  var layers = map.layers();
+  for (var i = layers.length() - 1; i >= 0; i--) {
+    var layer = layers.get(i);
+    if (layer.getName() === name) {
+      layers.remove(layer);
+    }
+  }
+};
+
+app.parseDateFromImageId = function(imageId) {
+  // imageId format: "20250106T031121_20250106T032301_T48PYT"
+  // Lấy phần đầu: YYYYMMDD
+  
+  if (!imageId || imageId.length < 8) return 'N/A';
+  
+  try {
+    // Extract YYYYMMDD from start of imageId
+    var dateStr = imageId.substring(0, 8);
+    
+    var year = dateStr.substring(0, 4);
+    var month = dateStr.substring(4, 6);
+    var day = dateStr.substring(6, 8);
+    
+    // Return format: YYYY-MM-DD
+    return year + '-' + month + '-' + day;
+    
+  } catch (e) {
+    return 'N/A';
+  }
+};
+
+app.displayImageMetadata = function(image, isComposite, imageId) {
+  if (isComposite) {
+    // Composite metadata
+    var info = 'Ảnh tổng hợp (Composite)\n' +
+               'Kỳ: ' + app.state.startDate + ' đến ' + app.state.endDate + '\n' +
+               'Số ảnh: ' + app.state.imageIds.length + ' ảnh\n' +
+               'Mây: < ' + app.state.maxCloud + '%\n' +
+               'Phương pháp: Median (giảm mây/nhiễu)';
+    
+    app.imageMetadataLabel.setValue(info);
+    app.imageMetadataLabel.style().set({shown: true, color: '333'});
+    
+  } else {
+    // Single image metadata
+    app.imageMetadataLabel.setValue('⏳ Đang tải thông tin ảnh...');
+    app.imageMetadataLabel.style().set({shown: true, color: 'blue'});
+    
+    // Parse date from imageId first (synchronous)
+    var captureDate = app.parseDateFromImageId(imageId);
+    
+    // Get other properties (asynchronous)
+    var props = image.toDictionary();
+    
+    props.evaluate(function(p) {
+      if (!p) {
+        // Nếu không lấy được properties, vẫn hiển thị ngày từ imageId
+        var info = 'Ảnh vệ tinh đơn lẻ\n' +
+                   'Vệ tinh: Sentinel-2\n' +
+                   'Ngày chụp: ' + captureDate + '\n' +
+                   'Mây: N/A\n' +
+                   'Tile: N/A\n' +
+                   'Ảnh thực (không tổng hợp)';
+        
+        app.imageMetadataLabel.setValue(info);
+        app.imageMetadataLabel.style().set({shown: true, color: '333'});
+        return;
+      }
+      
+      // Extract other info
+      var cloudPct = p['CLOUDY_PIXEL_PERCENTAGE'];
+      var spacecraft = p['SPACECRAFT_NAME'] || 'Sentinel-2';
+      var mgrs = p['MGRS_TILE'] || imageId.split('_')[2] || 'N/A';
+      
+      // Format display with parsed date
+      var info = 'Ảnh vệ tinh đơn lẻ\n' +
+                 'Vệ tinh: ' + spacecraft + '\n' +
+                 'Ngày chụp: ' + captureDate + '\n' +
+                 'Mây: ' + (cloudPct ? cloudPct.toFixed(1) + '%' : 'N/A') + '\n' +
+                 'Tile: ' + mgrs + '\n' +
+                 'Ảnh thực (không tổng hợp)';
+      
+      app.imageMetadataLabel.setValue(info);
+      app.imageMetadataLabel.style().set({shown: true, color: '333'});
+    });
+  }
+};
+
+app.createMaps = function() {
+  app.leftMap = ui.Map();
+  app.leftMap.setControlVisibility({all: false, zoomControl: true});
+  app.leftMap.setOptions('HYBRID');
+  
+  app.rightMap = ui.Map();
+  app.rightMap.setControlVisibility({all: true});
+  app.rightMap.setOptions('SATELLITE');
+  
+  app.mapLinker = ui.Map.Linker([app.leftMap, app.rightMap]);
+  
+  app.leftMap.setCenter(
+    app.DEFAULT_CENTER.lon, 
+    app.DEFAULT_CENTER.lat, 
+    app.DEFAULT_CENTER.zoom
+  );
+  
+  app.leftMap.add(ui.Label({
+    value: '◄ Sentinel-2 (Toàn cảnh)',
+    style: {
+      position: 'top-center',
+      padding: '5px',
+      backgroundColor: 'rgba(255,255,255,0.8)',
+      fontWeight: 'bold'
+    }
+  }));
+  
+  app.rightMap.add(ui.Label({
+    value: 'Hansen Mất Rừng (Toàn cảnh) ►',
+    style: {
+      position: 'top-center',
+      padding: '5px',
+      backgroundColor: 'rgba(255,255,255,0.8)',
+      fontWeight: 'bold'
+    }
+  }));
+};
+
+app.addGeoJSONBoundary = function() {
+  if (!app.state.geojson) return;
+  
+  app.removeLayerByName(app.leftMap, 'GeoJSON Boundary');
+  app.removeLayerByName(app.rightMap, 'GeoJSON Boundary');
+  
+  var outline = ee.Image().byte().paint({
+    featureCollection: app.state.geojson,
+    color: 1,
+    width: 1
+  });
+  
+  app.leftMap.addLayer(outline, {palette: ['00FFFF']}, 'GeoJSON Boundary');
+  app.rightMap.addLayer(outline, {palette: ['00FFFF']}, 'GeoJSON Boundary');
+};
+
+app.loadGeoJSON = function() {
+  var jsonText = app.geojsonTextbox.getValue();
+  if (!jsonText || jsonText.trim() === '') {
+    app.geojsonStatus.setValue('⚠️ Vui lòng dán GeoJSON');
+    app.geojsonStatus.style().set('color', 'orange');
+    return;
+  }
+  
+  try {
+    var geojsonObj = JSON.parse(jsonText);
+    
+    if (geojsonObj.features) {
+      geojsonObj.features = geojsonObj.features.map(function(feature, index) {
+        var props = feature.properties || {};
+        delete props['system:index'];
+        delete feature.id;
+        props.featureId = 'feature_' + index;
+        feature.properties = props;
+        return feature;
+      });
+    }
+    
+    app.state.geojson = ee.FeatureCollection(geojsonObj);
+    app.state.geojsonBounds = app.state.geojson.geometry().bounds();
+    
+    app.addGeoJSONBoundary();
+    app.leftMap.centerObject(app.state.geojson, 12);
+    
+    app.geojsonStatus.setValue('✓ Đã tải ' + 
+      app.state.geojson.size().getInfo() + ' đối tượng');
+    app.geojsonStatus.style().set('color', 'green');
+    
+    app.geojsonClearBtn.setDisabled(false);
+    
+  } catch (e) {
+    app.geojsonStatus.setValue('✗ Lỗi: ' + e.message);
+    app.geojsonStatus.style().set('color', 'red');
+  }
+};
+
+app.clearGeoJSON = function() {
+  app.state.geojson = null;
+  app.state.geojsonBounds = null;
+  app.geojsonTextbox.setValue('');
+  app.geojsonStatus.setValue('');
+  app.geojsonClearBtn.setDisabled(true);
+  
+  app.removeLayerByName(app.leftMap, 'GeoJSON Boundary');
+  app.removeLayerByName(app.rightMap, 'GeoJSON Boundary');
+};
+
+app.loadSentinel = function() {
+  app.sentinelStatus.setValue('⏳ Đang tìm ảnh...');
+  app.sentinelStatus.style().set('color', 'blue');
+  
+  app.state.startDate = app.startDateBox.getValue();
+  app.state.endDate = app.endDateBox.getValue();
+  
+  var collection = ee.ImageCollection(app.SENTINEL_COLLECTION)
+    .filterDate(app.state.startDate, app.state.endDate)
+    .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', app.state.maxCloud));
+  
+  if (app.state.geojson) {
+    collection = collection.filterBounds(app.state.geojson);
+  } else {
+    collection = collection.filterBounds(app.leftMap.getBounds(true));
+  }
+  
+  var computedIds = collection.limit(50)
+    .reduceColumns(ee.Reducer.toList(), ['system:index'])
+    .get('list');
+  
+  computedIds.evaluate(function(ids) {
+    if (!ids || ids.length === 0) {
+      app.sentinelStatus.setValue('⚠️ Không tìm thấy ảnh. Thử mở rộng thời gian hoặc tăng % mây.');
+      app.sentinelStatus.style().set('color', 'orange');
+      
+      app.imageSelector.items().reset([]);
+      app.imageSelector.setPlaceholder('Không có ảnh');
+      app.imageMetadataLabel.style().set('shown', false);
+      
+      return;
+    }
+    
+    app.state.imageIds = ids;
+    
+    var composite = collection.median();
+    
+    app.removeLayerByName(app.leftMap, 'Sentinel-2');
+    app.leftMap.addLayer(composite, app.SENTINEL_VIS, 'Sentinel-2');
+    
+    app.addGeoJSONBoundary();
+    
+    app.sentinelStatus.setValue('✓ Đã tải composite từ ' + ids.length + ' ảnh');
+    app.sentinelStatus.style().set('color', 'green');
+    
+    app.imageSelector.items().reset(['[Composite từ ' + ids.length + ' ảnh]'].concat(ids));
+    app.imageSelector.setPlaceholder('Chọn ảnh...');
+    app.imageSelector.setValue('[Composite từ ' + ids.length + ' ảnh]', true);
+    
+    // Show composite metadata
+    app.displayImageMetadata(composite, true, null);
+  });
+};
+
+app.onImageSelect = function(imageId) {
+  if (!imageId) return;
+  
+  if (imageId.indexOf('Composite') > -1) {
+    var collection = ee.ImageCollection(app.SENTINEL_COLLECTION)
+      .filterDate(app.state.startDate, app.state.endDate)
+      .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', app.state.maxCloud));
+    
+    if (app.state.geojson) {
+      collection = collection.filterBounds(app.state.geojson);
+    } else {
+      collection = collection.filterBounds(app.leftMap.getBounds(true));
+    }
+    
+    var composite = collection.median();
+    
+    app.removeLayerByName(app.leftMap, 'Sentinel-2');
+    app.leftMap.addLayer(composite, app.SENTINEL_VIS, 'Sentinel-2');
+    app.addGeoJSONBoundary();
+    
+    // Show composite metadata
+    app.displayImageMetadata(composite, true, null);
+    
+    return;
   }
 
-  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-  </script>
+  var image = ee.Image(app.SENTINEL_COLLECTION + '/' + imageId);
+  
+  app.removeLayerByName(app.leftMap, 'Sentinel-2');
+  app.leftMap.addLayer(image, app.SENTINEL_VIS, 'Sentinel-2');
+  app.addGeoJSONBoundary();
+  
+  app.leftMap.centerObject(image.geometry(), 12);
 
-  <!--Start of Tawk.to Script-->
-  <script type="text/javascript">
-  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-  (function(){
-  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-  s1.async=true;
-  s1.src='https://embed.tawk.to/692a6762a85543195777b268/1jb6q7mvd';
-  s1.charset='UTF-8';
-  s1.setAttribute('crossorigin','*');
-  s0.parentNode.insertBefore(s1,s0);
-  })();
-  </script>
-  <!--End of Tawk.to Script-->
+  app.displayImageMetadata(image, false, imageId);
+};
+
+app.loadHansen = function() {
+  var hansen = ee.Image(app.HANSEN_IMAGE);
+  var lossYear = hansen.select('lossyear');
+  
+  var period = app.HANSEN_PERIODS[app.state.hansenPeriod];
+  var minYear = period.min;
+  var maxYear = period.max;
+  
+  var lossMask = lossYear.gte(minYear).and(lossYear.lte(maxYear));
+  var hansenFiltered = hansen.updateMask(lossMask);
+  
+  var palette;
+  if (maxYear - minYear > 3) {
+    palette = ['yellow', 'orange', 'orangered', 'red', 'darkred'];
+  } else {
+    palette = ['yellow', 'orange', 'red', 'darkred'];
+  }
+  
+  var visParams = {
+    bands: ['lossyear'],
+    min: minYear,
+    max: maxYear,
+    palette: palette
+  };
+  
+  app.removeLayerByName(app.rightMap, 'Hansen Loss');
+  app.rightMap.addLayer(hansenFiltered, visParams, 'Hansen Loss ' + app.state.hansenPeriod);
+  
+  app.addGeoJSONBoundary();
+  
+  var mapLabel = app.rightMap.widgets().get(0);
+  if (mapLabel) {
+    mapLabel.setValue('Hansen Mất Rừng ' + period.label + ' ►');
+  }
+};
+
+app.onHansenPeriodChange = function(period) {
+  app.state.hansenPeriod = period;
+  app.loadHansen();
+};
+
+app.createControlPanel = function() {
+  var header = ui.Panel([
+    ui.Label({
+      value: 'Sentinel-2 vs Hansen Forest Loss',
+      style: {fontSize: '18px', fontWeight: 'bold', margin: '10px 0'}
+    }),
+    ui.Label('Swipe để so sánh ảnh vệ tinh và mất rừng')
+  ]);
+  
+  // GeoJSON Section
+  app.geojsonTextbox = ui.Textbox({
+    placeholder: 'Dán GeoJSON minified (tùy chọn)...',
+    style: {stretch: 'horizontal', height: '60px'}
+  });
+  
+  app.geojsonLoadBtn = ui.Button({
+    label: '📥 Tải GeoJSON',
+    onClick: app.loadGeoJSON,
+    style: {stretch: 'horizontal'}
+  });
+  
+  app.geojsonClearBtn = ui.Button({
+    label: '🗑️ Xóa GeoJSON',
+    onClick: app.clearGeoJSON,
+    disabled: true,
+    style: {stretch: 'horizontal'}
+  });
+  
+  app.geojsonStatus = ui.Label({
+    value: '',
+    style: {fontSize: '11px', margin: '5px 0'}
+  });
+  
+  var geojsonSection = ui.Panel({
+    widgets: [
+      ui.Label('1. Tải GeoJSON (tùy chọn)', {fontWeight: 'bold', fontSize: '13px', margin: '10px 0 3px 0'}),
+      ui.Label('Border 1px cyan, không clip dữ liệu', {fontSize: '10px', color: 'gray'}),
+      app.geojsonTextbox,
+      ui.Panel([app.geojsonLoadBtn, app.geojsonClearBtn], ui.Panel.Layout.flow('horizontal')),
+      app.geojsonStatus
+    ]
+  });
+  
+  // Sentinel-2 Section
+  app.startDateBox = ui.Textbox({
+    value: app.state.startDate,
+    placeholder: 'YYYY-MM-DD',
+    style: {stretch: 'horizontal'}
+  });
+  
+  app.endDateBox = ui.Textbox({
+    value: app.state.endDate,
+    placeholder: 'YYYY-MM-DD',
+    style: {stretch: 'horizontal'}
+  });
+  
+  app.cloudLabel = ui.Label('Mây tối đa: ' + app.state.maxCloud + '%', {fontSize: '11px'});
+  
+  app.cloudSlider = ui.Slider({
+    min: 0,
+    max: 100,
+    value: app.state.maxCloud,
+    step: 5,
+    style: {stretch: 'horizontal'},
+    onChange: function(value) {
+      app.state.maxCloud = value;
+      app.cloudLabel.setValue('Mây tối đa: ' + value + '%');
+    }
+  });
+  
+  app.sentinelApplyBtn = ui.Button({
+    label: 'Tìm & Hiển thị Sentinel-2',
+    onClick: app.loadSentinel,
+    style: {stretch: 'horizontal', fontWeight: 'bold'}
+  });
+  
+  app.sentinelStatus = ui.Label({
+    value: '',
+    style: {fontSize: '11px', margin: '5px 0'}
+  });
+  
+  app.imageSelector = ui.Select({
+    items: [],
+    placeholder: 'Chọn ảnh sau khi tìm kiếm...',
+    onChange: app.onImageSelect,
+    style: {stretch: 'horizontal'}
+  });
+  
+  // Image Metadata Label
+  app.imageMetadataLabel = ui.Label({
+    value: '',
+    style: {
+      fontSize: '11px',
+      margin: '8px 5px',
+      padding: '8px',
+      backgroundColor: 'rgba(240,248,255,0.9)',
+      border: '1px solid #ccc',
+      whiteSpace: 'pre',
+      fontFamily: 'monospace',
+      shown: false
+    }
+  });
+  
+  var sentinelSection = ui.Panel({
+    widgets: [
+      ui.Label('2. Lọc Sentinel-2', {fontWeight: 'bold', fontSize: '13px', margin: '10px 0 3px 0'}),
+      ui.Label('Ngày bắt đầu:', {fontSize: '10px', color: 'gray'}),
+      app.startDateBox,
+      ui.Label('Ngày kết thúc:', {fontSize: '10px', color: 'gray'}),
+      app.endDateBox,
+      app.cloudLabel,
+      app.cloudSlider,
+      app.sentinelApplyBtn,
+      app.sentinelStatus,
+      ui.Label('Chọn ảnh hiển thị:', {fontSize: '10px', color: 'gray', margin: '5px 0 0 0'}),
+      app.imageSelector,
+      app.imageMetadataLabel
+    ]
+  });
+  
+  // Hansen Section
+  app.hansenPeriodSelector = ui.Select({
+    items: Object.keys(app.HANSEN_PERIODS).map(function(key) {
+      return {label: app.HANSEN_PERIODS[key].label, value: key};
+    }),
+    value: app.state.hansenPeriod,
+    placeholder: 'Chọn thời gian...',
+    onChange: app.onHansenPeriodChange,
+    style: {stretch: 'horizontal'}
+  });
+  
+  var hansenSection = ui.Panel({
+    widgets: [
+      ui.Label('3. Hansen Mất Rừng', {fontWeight: 'bold', fontSize: '13px', margin: '10px 0 3px 0'}),
+      ui.Label('Chọn thời gian mất rừng:', {fontSize: '10px', color: 'gray'}),
+      app.hansenPeriodSelector,
+      ui.Label('Đỏ đậm = Gần đây hơn', {fontSize: '10px', color: 'darkred', margin: '5px 0 0 0'}),
+      ui.Label('Vàng = Cũ hơn', {fontSize: '10px', color: 'orange'}),
+      ui.Label('Hiển thị toàn cảnh, không clip', {fontSize: '9px', color: 'blue', margin: '3px 0'})
+    ]
+  });
+  
+  var mainContent = ui.Panel({
+    widgets: [header, geojsonSection, sentinelSection, hansenSection],
+    layout: ui.Panel.Layout.flow('vertical'),
+    style: {
+      padding: '5px',
+      stretch: 'vertical'
+    }
+  });
+  
+  app.controlPanel = ui.Panel({
+    widgets: [mainContent],
+    style: {
+      width: '320px',
+      maxHeight: '95%',
+      padding: '0px',
+      position: 'top-left',
+      shown: true
+    }
+  });
+};
+
+app.boot = function() {
+  ui.root.clear();
+  
+  app.createMaps();
+  
+  app.splitPanel = ui.SplitPanel({
+    firstPanel: app.leftMap,
+    secondPanel: app.rightMap,
+    wipe: true,
+    style: {stretch: 'both'}
+  });
+  
+  app.createControlPanel();
+  app.leftMap.add(app.controlPanel);
+  
+  ui.root.add(app.splitPanel);
+  
+  app.loadHansen();
+  
+  print('Ứng dụng đã khởi động');
+  print('Swipe để so sánh Sentinel-2 (trái) và Hansen (phải)');
+  print('GeoJSON: Border 1px cyan, không clip dữ liệu');
+  print('Sentinel-2: Chọn ảnh → Xem metadata (ngày YYYY-MM-DD)');
+  print('Hansen: Dropdown chọn thời gian mất rừng');
+};
+
+app.boot();
+</code></pre>
+
+                    </div>
+
+                    <div class="mt-4 flex gap-2">
+
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">GEE</span>
+
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">GeoJSON</span>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Snippet 2: Chart.js Visualization -->
+
+                <div class="glass rounded-xl p-6">
+
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+
+                        <i class="fas fa-chart-line text-cyan-700"></i>
+
+                        Rubber tree disease warning map with GEE
+
+                    </h3>
+
+                    <p class="text-gray-500 mb-4">Create Rubber tree disease warning map.</p>
+
+                    <div class="code-container">
+
+                        <button class="copy-btn" onclick="copyCode(this)">
+
+                            <i class="fas fa-copy mr-1"></i> Copy
+
+                        </button>
+
+                        <pre><code class="language-javascript">//Dev
+
+</code></pre>
+
+                    </div>
+
+                    <div class="mt-4 flex gap-2">
+
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">GEE</span>
+
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">Remote Sensing</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+ 
+
+            <!-- SQL Code Snippets -->
+
+            <div id="code-sql" class="tab-content space-y-8">
+
+                <!-- Snippet 1: PostGIS Spatial Query -->
+
+                <div class="glass rounded-xl p-6">
+
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+
+                        <i class="fas fa-database text-emerald-600"></i>
+
+                        SQL Superbase for AI Chatbot
+
+                    </h3>
+
+                    <p class="text-gray-500 mb-4">SQL in vector database.</p>
+
+                    <div class="code-container">
+
+                        <button class="copy-btn" onclick="copyCode(this)">
+
+                            <i class="fas fa-copy mr-1"></i> Copy
+
+                        </button>
+
+                        <pre><code class="language-sql">//Dev</code></pre>
+
+                    </div>
+
+                    <div class="mt-4 flex gap-2">
+
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">VDB</span>
+
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">PostgreSQL</span>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Snippet 2: Aggregate Statistics -->
+
+                <div class="glass rounded-xl p-6">
+
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+
+                        <i class="fas fa-chart-bar text-cyan-700"></i>
+
+                        Spatial Aggregation and Statistics
+
+                    </h3>
+
+                    <p class="text-gray-500 mb-4">Calculate spatial statistics and aggregations for forest management reporting.</p>
+
+                    <div class="code-container">
+
+                        <button class="copy-btn" onclick="copyCode(this)">
+
+                            <i class="fas fa-copy mr-1"></i> Copy
+
+                        </button>
+
+                        <pre><code class="language-sql">//Dev</code></pre>
+
+                    </div>
+
+                    <div class="mt-4 flex gap-2">
+
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">SQL</span>
+
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">Analytics</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+ 
+
+    <!-- Projects Section -->
+
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100">
+
+        <div class="max-w-7xl mx-auto">
+
+            <div class="text-center mb-16">
+
+                <span class="inline-block px-4 py-2 bg-emerald-100 text-emerald-700 text-sm font-semibold rounded-full mb-4 tracking-wide uppercase">Portfolio</span>
+
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+
+                    <i class="fas fa-project-diagram text-emerald-600 mr-3"></i>
+
+                    Featured Projects
+
+                </h2>
+
+                <p class="text-xl text-gray-500 max-w-3xl mx-auto">
+
+                    A showcase of my recent work in GIS, remote sensing, and geospatial development
+
+                </p>
+
+            </div>
+
+ 
+
+            <!-- Projects Grid -->
+
+            <div class="bento-grid">
+
+                <!-- Project Card 1 -->
+
+                <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all transform hover:-translate-y-2">
+
+                    <div class="mb-4">
+
+                        <div class="text-4xl mb-4">
+
+                            <i class="fas fa-tree text-emerald-600"></i>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Forest Change Detection System</h3>
+
+                        <p class="text-gray-500 mb-4">
+
+                            Using Planet and ArcGIS Pro images to analyze images at 02 points in time to identify
+
+                            and warn of risks of forest loss detection for specific planting areas.
+
+                        </p>
+
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">Planet</span>
+
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">ArcGIS</span>
+
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Machine Learning</span>
+
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">ArcPy</span>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
+
+                            <i class="fab fa-github mr-1"></i> Docs
+
+                        </a>
+
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
+
+                            <i class="fas fa-external-link-alt mr-1"></i> Demo
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Project Card 2 -->
+
+                <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all transform hover:-translate-y-2">
+
+                    <div class="mb-4">
+
+                        <div class="text-4xl mb-4">
+
+                            <i class="fas fa-satellite text-cyan-700"></i>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Processing, working with Mavic 3M drone images</h3>
+
+                        <p class="text-gray-500 mb-4">
+
+                            Survey, plan flight routes, set up parameters to collect multispectral image data.
+
+                            Use specialized software to build DEM, DTM, CHM to estimate biomass and accumulated carbon stocks.
+
+                        </p>
+
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">UAV</span>
+
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">ArcGIS</span>
+
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Mavic3M</span>
+
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">Carbon</span>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
+
+                            <i class="fab fa-github mr-1"></i> Code
+
+                        </a>
+
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
+
+                            <i class="fas fa-external-link-alt mr-1"></i> Demo
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Project Card 3 -->
+
+                <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all transform hover:-translate-y-2">
+
+                    <div class="mb-4">
+
+                        <div class="text-4xl mb-4">
+
+                            <i class="fas fa-map-marked-alt text-purple-700"></i>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Normalize Geojson data</h3>
+
+                        <p class="text-gray-500 mb-4">
+
+                            Using GIS software and Python to detect.
+
+                            and clean potential errors in GEOJSON data.
+
+                        </p>
+
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">Python</span>
+
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">ArcPy</span>
+
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">GDAL</span>
+
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">ArcGIS</span>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
+
+                            <i class="fab fa-github mr-1"></i> Code
+
+                        </a>
+
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
+
+                            <i class="fas fa-external-link-alt mr-1"></i> Demo
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Project Card 4 -->
+
+                <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all transform hover:-translate-y-2">
+
+                    <div class="mb-4">
+
+                        <div class="text-4xl mb-4">
+
+                            <i class="fas fa-route text-orange-700"></i>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Coordination of Mangrove Planting Project</h3>
+
+                        <p class="text-gray-500 mb-4">
+
+                            Use Survey123 XLS Form, Field Maps, ArcGIS Online
+
+                            and Google App Script to deploy and manage Project tasks.
+
+                        </p>
+
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">Survey123</span>
+
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">FieldMapsX</span>
+
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">ESRI</span>
+
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">Mangrove</span>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
+
+                            <i class="fab fa-github mr-1"></i> Code
+
+                        </a>
+
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
+
+                            <i class="fas fa-external-link-alt mr-1"></i> Demo
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Project Card 5 -->
+
+                <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all transform hover:-translate-y-2">
+
+                    <div class="mb-4">
+
+                        <div class="text-4xl mb-4">
+
+                            <i class="fas fa-fire text-red-700"></i>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Mangrove tree analysis to calculate biomass and carbon accumulation.</h3>
+
+                        <p class="text-gray-500 mb-4">
+
+                            Select plots, collect field samples, preserve samples
+
+                            and process them before bringing them to the TOC analysis laboratory
+
+                        </p>
+
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">Carbon</span>
+
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">TOC</span>
+
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Avicenniaalba</span>
+
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">Mangrove</span>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
+
+                            <i class="fab fa-github mr-1"></i> Code
+
+                        </a>
+
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
+
+                            <i class="fas fa-external-link-alt mr-1"></i> Demo
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+ 
+
+                <!-- Project Card 6 -->
+
+                <div class="glass rounded-xl p-6 hover:border-emerald-500 transition-all transform hover:-translate-y-2">
+
+                    <div class="mb-4">
+
+                        <div class="text-4xl mb-4">
+
+                            <i class="fas fa-cloud text-blue-700"></i>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Create apps to process and automate repetitive tasks using AI Coding</h3>
+
+                        <p class="text-gray-500 mb-4">
+
+                            Use Python to automate tasks like downloading and getting the link to share each geojson
+
+                            on Global Forest Watch. Set up UX/UI and perform testing and tweaking of AI-generated code to ensure it works well.
+
+                        </p>
+
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm">Python</span>
+
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm">Portable</span>
+
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Winpython</span>
+
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm">AI</span>
+
+                    </div>
+
+                    <div class="flex gap-3">
+
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
+
+                            <i class="fab fa-github mr-1"></i> Code
+
+                        </a>
+
+                        <a href="#" class="text-emerald-600 hover:text-emerald-700 transition-all">
+
+                            <i class="fas fa-file-alt mr-1"></i> Docs
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+ 
+
+    <!-- Footer -->
+
+    <footer class="bg-gray-900 border-t border-gray-800 py-12 px-4 sm:px-6 lg:px-8">
+
+        <div class="max-w-7xl mx-auto">
+
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+
+                <div>
+
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+
+                        <i class="fas fa-map-marked-alt text-emerald-400"></i>
+
+                        Bac Ngo
+
+                    </h3>
+
+                    <p class="text-gray-400">
+
+                        GIS & Forestry.
+
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+
+                    <ul class="space-y-2">
+
+                        <li><a href="#hero" class="text-gray-400 hover:text-emerald-400 transition-all">Home</a></li>
+
+                        <li><a href="#gallery" class="text-gray-400 hover:text-emerald-400 transition-all">Gallery</a></li>
+
+                        <li><a href="#maps" class="text-gray-400 hover:text-emerald-400 transition-all">Map Gallery</a></li>
+
+                        <li><a href="#codelab" class="text-gray-400 hover:text-emerald-400 transition-all">Code Lab</a></li>
+
+                        <li><a href="#projects" class="text-gray-400 hover:text-emerald-400 transition-all">Projects</a></li>
+
+                    </ul>
+
+                </div>
+
+                <div>
+
+                    <h3 class="text-xl font-bold text-white mb-4">Connect</h3>
+
+                    <div class="flex gap-4">
+
+                        <a href="https://github.com/ngobac" target="_blank"
+
+                           class="text-gray-400 hover:text-emerald-400 text-2xl transition-all">
+
+                            <i class="fab fa-github"></i>
+
+                        </a>
+
+                        <a href="https://linkedin.com/in/bacngo7877" target="_blank"
+
+                           class="text-gray-400 hover:text-emerald-400 text-2xl transition-all">
+
+                            <i class="fab fa-linkedin"></i>
+
+                        </a>
+
+                        <a href="mailto:bacngo7877@gmail.com"
+
+                           class="text-gray-400 hover:text-emerald-400 text-2xl transition-all">
+
+                            <i class="fas fa-envelope"></i>
+
+                        </a>
+
+                        <a href="https://twitter.com/" target="_blank"
+
+                           class="text-gray-400 hover:text-emerald-400 text-2xl transition-all">
+
+                            <i class="fab fa-twitter"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center">
+
+                <p class="text-gray-500">
+
+                    © 2025 Bac Ngo. Built with <i class="fas fa-heart text-emerald-400"></i> Claude AI
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+ 
+
+    <!-- JavaScript -->
+
+    <script>
+
+        // Initialize Highlight.js
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            hljs.highlightAll();
+
+        });
+
+ 
+
+        // Mobile Menu Toggle
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+
+        const mobileMenu = document.getElementById('mobile-menu');
+
+ 
+
+        mobileMenuBtn.addEventListener('click', function() {
+
+            mobileMenu.classList.toggle('hidden');
+
+        });
+
+ 
+
+        // Close mobile menu when clicking a link
+
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+
+        mobileLinks.forEach(link => {
+
+            link.addEventListener('click', function() {
+
+                mobileMenu.classList.add('hidden');
+
+            });
+
+        });
+
+ 
+
+        // Map Tab Switching
+
+        function switchMapTab(tabName) {
+
+            // Hide all map content
+
+            const mapContents = document.querySelectorAll('[id^="map-"]');
+
+            mapContents.forEach(content => {
+
+                content.classList.remove('active');
+
+            });
+
+ 
+
+            // Remove active class from all tabs
+
+            const mapTabs = document.querySelectorAll('.map-tab');
+
+            mapTabs.forEach(tab => {
+
+                tab.classList.remove('active', 'bg-emerald-100', 'border-emerald-500', 'text-emerald-600');
+
+            });
+
+ 
+
+            // Show selected content
+
+            const selectedContent = document.getElementById('map-' + tabName);
+
+            if (selectedContent) {
+
+                selectedContent.classList.add('active');
+
+            }
+
+ 
+
+            // Highlight active tab
+
+            const activeTab = document.querySelector(`[data-tab="${tabName}"].map-tab`);
+
+            if (activeTab) {
+
+                activeTab.classList.add('active', 'bg-emerald-100', 'border-emerald-500', 'text-emerald-600');
+
+            }
+
+        }
+
+ 
+
+        // Code Tab Switching
+
+        function switchCodeTab(tabName) {
+
+            // Hide all code content
+
+            const codeContents = document.querySelectorAll('[id^="code-"]');
+
+            codeContents.forEach(content => {
+
+                content.classList.remove('active');
+
+            });
+
+ 
+
+            // Remove active class from all tabs
+
+            const codeTabs = document.querySelectorAll('.code-tab');
+
+            codeTabs.forEach(tab => {
+
+                tab.classList.remove('active', 'bg-emerald-100', 'border-emerald-500', 'text-emerald-600');
+
+            });
+
+ 
+
+            // Show selected content
+
+            const selectedContent = document.getElementById('code-' + tabName);
+
+            if (selectedContent) {
+
+                selectedContent.classList.add('active');
+
+            }
+
+ 
+
+            // Highlight active tab
+
+            const activeTab = document.querySelector(`[data-tab="${tabName}"].code-tab`);
+
+            if (activeTab) {
+
+                activeTab.classList.add('active', 'bg-emerald-100', 'border-emerald-500', 'text-emerald-600');
+
+            }
+
+        }
+
+ 
+
+        // Copy Code to Clipboard
+
+        function copyCode(button) {
+
+            const codeContainer = button.parentElement;
+
+            const codeBlock = codeContainer.querySelector('code');
+
+            const textToCopy = codeBlock.innerText;
+
+ 
+
+            navigator.clipboard.writeText(textToCopy).then(function() {
+
+                // Change button text and style
+
+                const originalHTML = button.innerHTML;
+
+                button.innerHTML = '<i class="fas fa-check mr-1"></i> Copied!';
+
+                button.classList.add('copied');
+
+ 
+
+                // Reset after 2 seconds
+
+                setTimeout(function() {
+
+                    button.innerHTML = originalHTML;
+
+                    button.classList.remove('copied');
+
+                }, 2000);
+
+            }).catch(function(err) {
+
+                console.error('Failed to copy code: ', err);
+
+                button.innerHTML = '<i class="fas fa-times mr-1"></i> Error';
+
+                setTimeout(function() {
+
+                    button.innerHTML = '<i class="fas fa-copy mr-1"></i> Copy';
+
+                }, 2000);
+
+            });
+
+        }
+
+ 
+
+        // Smooth Scroll for Navigation Links
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+            anchor.addEventListener('click', function (e) {
+
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+
+                const targetElement = document.querySelector(targetId);
+
+ 
+
+                if (targetElement) {
+
+                    const navHeight = 64; // Height of fixed nav
+
+                    const targetPosition = targetElement.offsetTop - navHeight;
+
+ 
+
+                    window.scrollTo({
+
+                        top: targetPosition,
+
+                        behavior: 'smooth'
+
+                    });
+
+                }
+
+            });
+
+        });
+
+ 
+
+        // Navigation scroll behavior + active link highlight
+        window.addEventListener('scroll', function() {
+            const mainNav = document.getElementById('main-nav');
+            const hero = document.getElementById('hero');
+            const heroBottom = hero ? hero.offsetTop + hero.offsetHeight : 600;
+
+            // Switch nav style at hero boundary
+            if (window.pageYOffset > heroBottom - 80) {
+                mainNav.classList.add('nav-scrolled');
+            } else {
+                mainNav.classList.remove('nav-scrolled');
+            }
+
+            // Active link
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            let current = '';
+            sections.forEach(s => {
+                if (window.pageYOffset >= s.offsetTop - 100) current = s.getAttribute('id');
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('nav-active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('nav-active');
+            });
+        });
+
+ 
+
+            navLinks.forEach(link => {
+
+                link.classList.remove('text-emerald-600');
+
+                link.classList.add('text-gray-600');
+
+                if (link.getAttribute('href') === '#' + current) {
+
+                    link.classList.remove('text-gray-600');
+
+                    link.classList.add('text-emerald-600');
+
+                }
+
+            });
+
+        });
+
+ 
+
+        // Add loading animation to iframes
+
+        document.querySelectorAll('.iframe-container').forEach(container => {
+
+            const iframe = container.querySelector('iframe');
+
+            if (iframe) {
+
+                iframe.addEventListener('load', function() {
+
+                    const loading = container.querySelector('.iframe-loading');
+
+                    if (loading) {
+
+                        loading.style.display = 'none';
+
+                    }
+
+                });
+
+            }
+
+        });
+
+
+        // ── Hero entrance animations ──────────────────────────────────
+        (function heroAnim() {
+            const el = document.getElementById('hero-heading');
+            if (!el) return;
+            const lines = ['GIS & Forestry', 'Specialist.'];
+            const charDelay = 30, initDelay = 200;
+            let totalChars = 0;
+            lines.forEach((line, li) => {
+                const lineEl = document.createElement('span');
+                lineEl.style.display = 'block';
+                line.split('').forEach((ch, ci) => {
+                    const s = document.createElement('span');
+                    s.style.cssText = 'display:inline-block;opacity:0;transform:translateX(-18px);transition:opacity 500ms ease,transform 500ms ease';
+                    s.textContent = ch === ' ' ? '\u00A0' : ch;
+                    setTimeout(() => { s.style.opacity = '1'; s.style.transform = 'none'; },
+                               initDelay + (totalChars + ci) * charDelay);
+                    lineEl.appendChild(s);
+                });
+                totalChars += line.length;
+                el.appendChild(lineEl);
+            });
+            function fadeIn(id, delay) {
+                const e = document.getElementById(id);
+                if (e) setTimeout(() => { e.style.opacity = '1'; }, delay);
+            }
+            fadeIn('hero-sub',  800);
+            fadeIn('hero-btns', 1200);
+            fadeIn('hero-tag',  1400);
+        })();
+
+    </script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/692a6762a85543195777b268/1jb6q7mvd';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 </body>
+
 </html>
