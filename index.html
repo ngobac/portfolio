@@ -94,54 +94,131 @@ nav#nav.scrolled{
 ════════════════════════════════════════════════════════ */
 #hero{
   position:relative;min-height:100svh;
-  display:flex;flex-direction:column;justify-content:flex-end;
+  display:flex;align-items:center;
   overflow:hidden;background:#020502;
 }
-#hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
+#hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4}
 .hero-grad{
   position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(6,10,6,.25) 0%,rgba(6,10,6,0) 35%,rgba(6,10,6,.88) 100%)
+  background:linear-gradient(135deg,rgba(6,10,6,.85) 0%,rgba(6,10,6,.6) 50%,rgba(6,10,6,.5) 100%)
 }
-.hero-body{position:relative;z-index:2;padding:0 2rem 4.5rem}
-@media(min-width:1024px){.hero-body{padding:0 3rem 5.5rem}}
+.hero-body{position:relative;z-index:2;padding:6rem 2rem 4rem;width:100%}
+@media(min-width:1024px){.hero-body{padding:7rem 3rem 4rem}}
 
-.hero-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.75rem}
-.hero-tag{
-  font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--accent);border:1px solid var(--accent-border);
-  padding:.28rem .75rem;border-radius:100px;background:rgba(74,222,128,.06);
+/* hero 2-col grid */
+.hero-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:3rem;align-items:center;
+  max-width:var(--max);margin:0 auto;
 }
-.hero-h1{
+@media(max-width:767px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-photo-wrap{order:-1;margin-bottom:.5rem}
+}
+
+/* text side */
+.hero-greeting{
+  font-size:.9rem;font-weight:300;letter-spacing:.1em;
+  color:rgba(255,255,255,.45);margin-bottom:.3rem;
+}
+.hero-name{
   font-family:var(--serif);
-  font-size:clamp(3.2rem,8vw,7.5rem);
-  font-weight:400;line-height:1.03;letter-spacing:-.03em;
-  color:#fff;margin-bottom:1.5rem;
+  font-size:clamp(2.6rem,5.5vw,5rem);
+  font-weight:400;line-height:1.07;letter-spacing:-.025em;
+  color:#fff;margin-bottom:.35rem;
 }
-.hero-h1 em{font-style:italic;color:var(--accent)}
-.hero-sub{
-  font-size:clamp(.95rem,1.8vw,1.15rem);font-weight:300;
-  color:rgba(255,255,255,.58);max-width:34rem;line-height:1.7;margin-bottom:2.5rem;
+.hero-name em{font-style:italic;color:var(--accent)}
+.hero-role{
+  font-size:clamp(.95rem,1.6vw,1.15rem);
+  font-weight:300;color:rgba(255,255,255,.5);margin-bottom:1.4rem;
 }
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.6rem}
+.hero-tag{
+  font-size:.65rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--accent);border:1px solid var(--accent-border);
+  padding:.25rem .7rem;border-radius:100px;background:rgba(74,222,128,.06);
+}
+.hero-bio{
+  font-size:.88rem;font-weight:300;
+  color:rgba(255,255,255,.42);line-height:1.75;
+  max-width:28rem;margin-bottom:1.8rem;
+}
+.hero-social{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.75rem}
+.social-link{
+  display:flex;align-items:center;gap:.45rem;
+  font-size:.73rem;font-weight:500;
+  color:rgba(255,255,255,.58);
+  border:1px solid rgba(255,255,255,.14);
+  padding:.4rem .85rem;border-radius:100px;
+  background:rgba(255,255,255,.04);
+  transition:all .2s;
+}
+.social-link:hover{color:#fff;border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.08)}
+.hero-btns{display:flex;gap:.85rem;flex-wrap:wrap;align-items:center}
 .btn-fill{
-  font-size:.82rem;font-weight:600;letter-spacing:.04em;
-  color:#000;background:var(--accent);padding:.72rem 1.7rem;border-radius:100px;
+  font-size:.8rem;font-weight:600;letter-spacing:.04em;
+  color:#000;background:var(--accent);padding:.68rem 1.6rem;border-radius:100px;
   transition:opacity .2s,transform .2s;
 }
 .btn-fill:hover{opacity:.85;transform:translateY(-1px)}
 .btn-line{
-  font-size:.82rem;font-weight:500;color:rgba(255,255,255,.65);
+  font-size:.8rem;font-weight:500;color:rgba(255,255,255,.6);
   display:flex;align-items:center;gap:.4rem;transition:color .2s;
 }
 .btn-line:hover{color:#fff}
+
+/* photo side */
+.hero-photo-wrap{display:flex;justify-content:center;align-items:center}
+.hero-photo-ring{
+  position:relative;
+  width:min(300px,72vw);height:min(300px,72vw);
+}
+.hero-photo-ring::before{
+  content:'';position:absolute;inset:-3px;border-radius:50%;
+  background:conic-gradient(var(--accent) 0deg,transparent 200deg,rgba(74,222,128,.25) 360deg);
+  animation:ringRotate 8s linear infinite;opacity:.55;
+}
+@keyframes ringRotate{to{transform:rotate(360deg)}}
+.hero-photo{
+  position:relative;width:100%;height:100%;
+  border-radius:50%;overflow:hidden;
+  background:var(--surface);border:4px solid var(--bg2);
+}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.hero-photo-fb{
+  position:absolute;inset:0;display:none;
+  flex-direction:column;align-items:center;justify-content:center;
+  color:var(--text3);gap:.4rem;text-align:center;padding:1rem;
+}
+.hero-photo-fb .fb-ico{font-size:3.5rem;opacity:.5}
+.hero-photo-fb .fb-txt{font-size:.7rem;font-family:var(--mono);color:var(--text3)}
+
+/* floating badges */
+.hbadge{
+  position:absolute;
+  background:rgba(15,22,15,.9);
+  backdrop-filter:blur(8px);
+  border:1px solid var(--accent-border);
+  border-radius:100px;padding:.42rem .8rem;
+  font-size:.68rem;font-weight:500;color:var(--accent);
+  display:flex;align-items:center;gap:.35rem;
+  white-space:nowrap;
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
+}
+.hb1{top:8%;right:-5%;animation:hfloat 5s ease-in-out infinite}
+.hb2{bottom:18%;left:-8%;animation:hfloat 5s ease-in-out infinite .9s}
+.hb3{bottom:4%;right:2%;animation:hfloat 5s ease-in-out infinite 1.7s}
+@media(max-width:480px){.hb2,.hb3{display:none}}
+@keyframes hfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
 .scroll-cue{
   position:absolute;bottom:2rem;right:2.5rem;z-index:2;
   display:flex;flex-direction:column;align-items:center;gap:.35rem;
-  font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.28);
+  font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);
 }
 .scroll-cue-line{
   width:1px;height:44px;
-  background:linear-gradient(to bottom,rgba(74,222,128,.5),transparent);
+  background:linear-gradient(to bottom,rgba(74,222,128,.45),transparent);
   animation:linePulse 2s ease-in-out infinite;
 }
 @keyframes linePulse{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
@@ -339,26 +416,65 @@ footer{padding:5rem 0 3rem;background:var(--bg2);border-top:1px solid var(--bord
   <div class="hero-grad"></div>
 
   <div class="hero-body">
-    <div class="hero-tags" id="hero-tags">
-      <span class="hero-tag">GIS</span>
-      <span class="hero-tag">Remote Sensing</span>
-      <span class="hero-tag">Digital Transformation</span>
-      <span class="hero-tag">Green Transition</span>
-    </div>
-    <h1 class="hero-h1" id="hero-h1">
-      GIS &amp; Forestry<br><em>Specialist</em>
-    </h1>
-    <p class="hero-sub" id="hero-sub">
-      Transforming geospatial data into actionable intelligence —
-      mapping ecosystems, quantifying carbon, and building decision tools
-      for a sustainable future.
-    </p>
-    <div class="hero-btns" id="hero-btns">
-      <a href="#projects" class="btn-fill">View Projects</a>
-      <a href="interactive-explorer.html" class="btn-line">
-        <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="2.5"/></svg>
-        Tree Explorer
-      </a>
+    <div class="hero-grid">
+
+      <!-- ── Left: personal intro ── -->
+      <div>
+        <div class="hero-greeting" id="hero-greeting">Hi, I'm</div>
+        <h1 class="hero-name" id="hero-name">Bac Ngo<br><em>GIS Specialist</em></h1>
+        <p class="hero-role" id="hero-role">Forest Management &amp; Environmental Analysis</p>
+
+        <div class="hero-tags" id="hero-tags">
+          <span class="hero-tag">GIS</span>
+          <span class="hero-tag">Remote Sensing</span>
+          <span class="hero-tag">Digital Transformation</span>
+          <span class="hero-tag">Green Transition</span>
+        </div>
+
+        <p class="hero-bio" id="hero-bio">
+          Specializing in transforming geospatial data into actionable insights —
+          from satellite imagery and drone surveys to spatial databases and automation tools.
+          Passionate about building technology that supports a sustainable future.
+        </p>
+
+        <div class="hero-social" id="hero-social">
+          <a href="https://github.com/ngobac" target="_blank" class="social-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://linkedin.com/in/bacngo7877" target="_blank" class="social-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a href="mailto:bacngo7877@gmail.com" class="social-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Email
+          </a>
+        </div>
+
+        <div class="hero-btns" id="hero-btns">
+          <a href="#projects" class="btn-fill">View Projects</a>
+          <a href="interactive-explorer.html" class="btn-line">🌿 Tree Explorer</a>
+        </div>
+      </div>
+
+      <!-- ── Right: profile photo ── -->
+      <div class="hero-photo-wrap" id="hero-photo">
+        <div class="hero-photo-ring">
+          <div class="hero-photo">
+            <img src="images/profile.jpg" alt="Bac Ngo — GIS Specialist"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="hero-photo-fb">
+              <span class="fb-ico">👤</span>
+              <span class="fb-txt">images/profile.jpg</span>
+            </div>
+          </div>
+          <div class="hbadge hb1">🛰️ Remote Sensing</div>
+          <div class="hbadge hb2">🗺️ GIS Expert</div>
+          <div class="hbadge hb3">🌿 Carbon &amp; Forest</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1091,15 +1207,19 @@ function cpSnip(btn) {
 /* ── Hero entrance ───────────────────────────────────── */
 (function() {
   const items = [
-    {id:'hero-tags', delay:200},
-    {id:'hero-h1',   delay:400},
-    {id:'hero-sub',  delay:700},
-    {id:'hero-btns', delay:950},
+    {id:'hero-greeting', delay:150},
+    {id:'hero-name',     delay:300},
+    {id:'hero-role',     delay:480},
+    {id:'hero-tags',     delay:620},
+    {id:'hero-bio',      delay:780},
+    {id:'hero-social',   delay:920},
+    {id:'hero-btns',     delay:1050},
+    {id:'hero-photo',    delay:200},
   ];
   items.forEach(({id, delay}) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.style.cssText = 'opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease';
+    el.style.cssText = 'opacity:0;transform:translateY(16px);transition:opacity .75s ease,transform .75s ease';
     setTimeout(() => { el.style.opacity='1'; el.style.transform='none'; }, delay);
   });
 })();
